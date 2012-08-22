@@ -7,14 +7,14 @@
 		body {margin:0;padding:0;}
 		* {color:#333;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;}
 
-		#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu {padding:10px;}
-		#wrapper-site-header, #wrapper-site-footer {clear:both;}
+		#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu, #wrapper-logo {padding:10px;}
+		#wrapper-site-header, #wrapper-site-footer, #wrapper-logo {clear:both;}
 
 		#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;}
 		#wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;}
 
 		#wrapper-blog-posts {float:left;max-width:75%}
-		#wrapper-blog-post-menu {float:right;max-width:20%;border-left:1px solid #bcc;background-color:#dee;}
+		#wrapper-sidebar {float:right;max-width:20%;border-left:1px solid #bcc;background-color:#dee;}
 
 		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
 
@@ -22,7 +22,11 @@
 
 		.post-screenshot img {border:0;margin:10px;}
 
+		 {}
+		#wrapper-logo .logo {display: block;margin-left: auto;margin-right: auto;}
+
 		#wrapper-blog-post-menu .menu-header {}
+
 
 	</style>
 
@@ -31,7 +35,7 @@
 <div id='wrapper-body'>
 
 	<div id='wrapper-site-header'>
-		Aaron Murray's blog
+		<span class='title'>Aaron Murray's blog</span>
 	</div>
 
 	<div id='wrapper-blog-posts'>
@@ -191,14 +195,22 @@
 -->
 	</div>
 
+	<div id='wrapper-sidebar'>
 
-	<div id='wrapper-blog-post-menu'>
-		<div class='menu-header'>Posts</div>
-		<ul>
-			<li><a href='#blog-post-1'>Post 1: The Plan</a></li>
-			<li><a href='#blog-post-2'>Post 2: Deploying new posts</a></li>
-			<li><a href='#blog-post-3'>Post 3: Basic visual cleanup</a></li>
-		<ul>
+		<div id='wrapper-logo'>
+			<img src='img/blog/logo/logo-1.gif' class='logo' />
+		</div>
+
+
+		<div id='wrapper-blog-post-menu'>
+			<div class='menu-header'>Posts</div>
+			<ul>
+				<li><a href='#blog-post-1'>Post 1: The Plan</a></li>
+				<li><a href='#blog-post-2'>Post 2: Deploying new posts</a></li>
+				<li><a href='#blog-post-3'>Post 3: Basic visual cleanup</a></li>
+			<ul>
+		</div>
+
 	</div>
 
 	<div id='wrapper-site-footer'>
