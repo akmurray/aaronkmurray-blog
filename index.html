@@ -12,9 +12,52 @@
 
 	<div id='wrapper-blog-posts'>
 		
+
 		<div class='blog-post'>
 			<div class='blog-post-header'>
-				Post #1: The Plan
+				<span>Post #2: Deploying new posts</span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Already there is pain. Currently, my brand new process when I want to write a new post is:
+					<ul>
+						<li>Open up my <a href='http://www.editplus.com/' target='_blank'>text editor</a> of choice</li>
+						<li>Copy and paste the HTML for a post from my previous post</li>
+						<li>Edit the old HTML</li>
+						<li>Save and preview the file (testing testing testing)</li>
+						<li>Fix my bugs (remember to edit the timestamp, post tags, etc)</li>
+						<li>Commit the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a></li>
+						<li>Remote into the webserver hosting this site</li>
+						<li>Pull the changes from gitbut</li>
+						<li>Copy the files to my IIS folder</li>
+					</ul>
+				<p>Ugh. No fun already. I know we can do better than that. First up, let's automate a couple of those steps.
+				<ul>
+					<li>Install <a href='http://msysgit.github.com/' target='_blank'>Git for Windows</a> (<a href='http://www.thegeekstuff.com/2012/02/git-for-windows/' target='_blank'>how-to</a>)</li>
+					<li>Select the option for "Run Git from the Windows Command Prompt" so that we can write scripts to do our work</li>
+					<li>Make sure that worked (open a Command Prompt, type in "git" and hit Enter</li>
+					<li>Clone the github repo to a local directory. <span class='code'>c:\code\git>git clone https://github.com/akmurray/aaronkmurray-blog c:\code\git\aaronkmurray-blog</span></li>
+					<li>Make a new Windows .bat file that will download latest code and copy to local website folder:
+						<ul>
+							<li><span class='code'>cd c:\code\git\aaronkmurray-blog</span></li>
+							<li><span class='code'>git pull https://github.com/akmurray/aaronkmurray-blog</span></li>
+							<li><span class='code'>xcopy /Y /E /R /V /I "c:\code\git\aaronkmurray-blog" "C:\inetpub\wwwroot\aaronkmurray"</span></li>
+							<li><span class='code'>REM pause</span></li>
+						</ul>
+					</li>
+				</ul>
+				<p>Now we can just run that file on the webserver and it'll fetch the latest source from github and push it to the website's folder. Far from perfect, but we're taking baby steps here ;)
+				<p>Article on <a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'>git fetch vs pull</a>
+
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'><span class='post-tag'>git</span>, <span class='post-tag'>command-line</span></span>
+				<span class='post-timestamp'>Posted on August 22, 2012 @ 4:00pm</span>
+			</div>
+		</div>
+
+		<div class='blog-post'>
+			<div class='blog-post-header'>
+				<span>Post #1: The Plan</span>
 			</div>
 			<div class='blog-post-body'>
 				<p>This has been a long time coming. 
@@ -59,16 +102,21 @@
 
 			</div>
 			<div class='blog-post-footer'>
+				<span class='post-tags'><span class='post-tag'>site-story</span>, <span class='post-tag'>insomnia</span>, <span class='post-tag'>plan</span>, <span class='post-tag'>twitter</span>, <span class='post-tag'>git</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
 			</div>
 		</div>
 <!--		
 		<div class='blog-post'>
 			<div class='blog-post-header'>
+				<span></span>
 			</div>
 			<div class='blog-post-body'>
+				<p>
 			</div>
 			<div class='blog-post-footer'>
+				<span class='post-tags'><span class='post-tag'></span>, <span class='post-tag'></span></span>
+				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
 			</div>
 		</div>
 -->
