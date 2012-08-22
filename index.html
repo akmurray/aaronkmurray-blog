@@ -2,6 +2,30 @@
 <html>
 <head>
 	<title>AaronKMurray.com : Blog | Twitter @aaronkmurray</title>
+
+	<style>
+		body {margin:0;padding:0;}
+		* {color:#333;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;}
+
+		#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu {padding:10px;}
+		#wrapper-site-header, #wrapper-site-footer {clear:both;}
+
+		#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;}
+		#wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;}
+
+		#wrapper-blog-posts {float:left;max-width:75%}
+		#wrapper-blog-post-menu {float:right;max-width:20%;border-left:1px solid #bcc;background-color:#dee;}
+
+		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
+
+		.blog-post-footer .post-timestamp, .blog-post-footer .post-tags {display:block;clear:both;}
+
+		.post-screenshot img {border:0;margin:10px;}
+
+		#wrapper-blog-post-menu .menu-header {}
+
+	</style>
+
 </head>
 <body>
 <div id='wrapper-body'>
@@ -12,8 +36,42 @@
 
 	<div id='wrapper-blog-posts'>
 		
+		<div class='blog-post'>
+			<a name='blog-post-3'>
+			<div class='blog-post-header'>
+				<span>Post #3: Basic visual cleanup</span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Alrighty, so we have a plan, we've got the code up on <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
+				<p>Despite my guts screaming out for functionality, something has to be done about the visuals around here. The look is way too 1994, and not in a cool 1994 sort of way.
+				<p>I'm going to start attaching a screenshot of the site with each post so that in the future we can easily view the visual progress that is being made. This will be easier than checking out snapshot from the <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master/' target='_blank'>github commit history</a> and running the site locally. In the future this will be harder for folks to do once we get distributed and have various databases powering the content. Fun stuff!
+				<p>Back to reality - let's spruce this place up. For all of the newbs out there, the best way to fancy up the visuals on a web page is to sprinkle a little <a href='http://www.w3schools.com/css/' target='_blank'>CSS</a> love around. Quickly you'll learn about one of the most loved (hated) aspects of web development: browser differences. Luckily there are <a href='http://www.alistapart.com/' target='_blank'>resources</a> out there to help. For now we won't get into the weeds, but let's just say that for nearly 2 decades we've been struggling with browser differences and there is no end in sight, but at least there is a lot of <a href='http://html5.org/' target='_blank'>hope</a> that things will get better over the next decade as <a href='http://www.ie6countdown.com/' target='_blank'>older browsers start to die off</a>.
+				<p>Step 1: very basic <a href='http://en.wikipedia.org/wiki/User_interface' target='_blank'>UI</a>/<a href='http://en.wikipedia.org/wiki/User_experience_design' target='_blank'>UX</a> stuff:
+				<ul>
+					<li>Visually split up the site header from the posts</li>
+					<li>Split up the post from each other</li>
+					<li>Format certain types of text (<span>like code</span>)</li>
+					<li>Enable a way to link directly to a specific post</li>
+					<li>Add some content to the footer area of the page</li>
+				</ul>
+				<p>Let's assume that we'll use <span class='code'>&lt;div&gt;</span> tags for HTML structure/grouping, and that text should be in either a <span class='code'>&lt;span&gt;</span> or a <span class='code'>&lt;p&gt;</span> tag.
+				<p>Using css, we can add some a style for blog posts that have a <span class='code'>&lt;span&gt;</span> tag with a css class of <span class='code'>&lt;code&gt;</span>. These matching tags will be in a different monospace font to make look them more computery. Easy.
+				<ul>
+					<li><span class='code'>&lt;style&gt; .blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; } &lt;/style&gt;</span></li>
+				</ul>
+				<p>To enabling linking directly to a post, we're going to use the old-school method of using <span class='code'>name</span> attributes and <span class='code'>#</span> links. I know this is absurd in the days of <a href='http://www.bloggingbasics101.com/2008/11/what-is-a-permalink/' target='_blank'>permalinks</a> and SEO friendliness, but we haven't written the permalink code yet, so we suffer for now. I'm doing this for your own benefit here folks - it's my <a href='http://en.wikipedia.org/wiki/PageRank' target='_blank'>PageRank</a> that will suffer. When we fix this later, it'll also be a great time to talk about the joys of <a href='http://en.wikipedia.org/wiki/Code_refactoring' target='_blank'>refactoring</a> and <a href='http://en.wikipedia.org/wiki/Brownfield_(software_development)' target='_blank'>brown-field</a> upgrades.
+
+
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>css</span>, <span class='post-tag'>html</span></span>
+				<span class='post-timestamp'>Posted on August 22, 2012 @ 6:10pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-3.png' target='_blank'><img src='img/blog/screenshots/post-3.png' title='Screenshot of site after post #3' width=100 /></a></span>
+			</div>
+		</div>
 
 		<div class='blog-post'>
+			<a name='blog-post-2'>
 			<div class='blog-post-header'>
 				<span>Post #2: Deploying new posts</span>
 			</div>
@@ -53,12 +111,14 @@
 
 			</div>
 			<div class='blog-post-footer'>
-				<span class='post-tags'><span class='post-tag'>git</span>, <span class='post-tag'>command-line</span></span>
+				<span class='post-tags'>Tags: <span class='post-tag'>git</span>, <span class='post-tag'>command-line</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 4:00pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-2.png' target='_blank'><img src='img/blog/screenshots/post-2.png' title='Screenshot of site after post #2' width=100 /></a></span>
 			</div>
 		</div>
 
 		<div class='blog-post'>
+			<a name='blog-post-1'>
 			<div class='blog-post-header'>
 				<span>Post #1: The Plan</span>
 			</div>
@@ -67,8 +127,8 @@
 				<p>I've been wanting to start blogging for about a year now, but have been struggling with figuring out where to start.
 				<p>There have been tons of questions swirling around in my head, like: 
 				<ul>
-					<li>Blog: Roll my <a href='http://www.tandemgames.com/' target='_blank'>own</a> <a href='http://www.domainofheroes.com/' target='_blank'>site</a> <a href='http://www.aliensandrobots.com/' target='_blank'>again</a>? or use seasoned blog software with <a href='http://wordpress.org/' target='_blank'>heavy community support</a>?</li>
-					<li>Host: Use a <a href='https://appharbor.com' target='_blank'>cloud</a> <a href='http://www.heroku.com/' target='_blank'>application</a>  <a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'>host</a>? Use a cheap host that <a href='http://bluehost.com/' target='_blank'>supports simple scripts</a> for common apps? Host out of the <a href='img/posts/aarons_server_rack.jpg' target='_blank'>server rack in my house</a>?</li>
+					<li>Blog: Roll my <a href='http://www.tandemgames.com/' target='_blank'>own</a> <a href='http://www.domainofheroes.com/' target='_blank'>site</a> <a href='http://www.aliensandrobots.com/' target='_blank'>again</a>? or use seasoned blog <a href='http://dasblog.codeplex.com/' target='_blank'>software</a> with <a href='http://wordpress.org/' target='_blank'>heavy community support</a>?</li>
+					<li>Host: Use a <a href='https://appharbor.com' target='_blank'>cloud</a> <a href='http://www.heroku.com/' target='_blank'>application</a>  <a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'>host</a>? Use a cheap host that <a href='http://bluehost.com/' target='_blank'>supports simple scripts</a> for common apps? Host out of the <a href='img/blog/posts/aarons_server_rack.jpg' target='_blank'>server rack in my house</a>?</li>
 					<li>Platform: Java? .NET? "pure" HTML/JS? <a href='http://expect.sourceforge.net/cgi.tcl/'>TCL/CGI</a>? Something more <a href='http://rubyonrails.org/' target='_target'>hip</a>?</li>
 					<li>Audience: Should I be connecting with <a href='http://lostechies.com/' target='_blank'>other developers</a>? Other small-business owners? Friends? Family? </li>
 					<li>Content: Is this going to be a personal activity log? Professional journal? Or just another tech experiement?</li>
@@ -105,29 +165,45 @@
 
 			</div>
 			<div class='blog-post-footer'>
-				<span class='post-tags'><span class='post-tag'>site-story</span>, <span class='post-tag'>insomnia</span>, <span class='post-tag'>plan</span>, <span class='post-tag'>twitter</span>, <span class='post-tag'>git</span></span>
+				<span class='post-tags'>Tags: <span class='post-tag'>site-story</span>, <span class='post-tag'>insomnia</span>, <span class='post-tag'>plan</span>, <span class='post-tag'>twitter</span>, <span class='post-tag'>git</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-1.png' target='_blank'><img src='img/blog/screenshots/post-1.png' title='Screenshot of site after first post' width=100 /></a></span>
 			</div>
 		</div>
+
+
+<!--	Someday we'll have a database for these posts and I won't need this copy/paste template :)      -->
 <!--		
-		<div class='blog-post'>
+
+		<div class='blog-post' name='blog-post-'>
 			<div class='blog-post-header'>
-				<span></span>
+				<span>Post #: </span>
 			</div>
 			<div class='blog-post-body'>
 				<p>
 			</div>
 			<div class='blog-post-footer'>
-				<span class='post-tags'><span class='post-tag'></span>, <span class='post-tag'></span></span>
+				<span class='post-tags'>Tags: <span class='post-tag'></span>, <span class='post-tag'></span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
+				<span class='post-screenshot'><img src='img/blog/screenshots/post-.png' title='Screenshot of site after post #2' width=100 /></span>
 			</div>
 		</div>
 -->
 	</div>
 
+
+	<div id='wrapper-blog-post-menu'>
+		<div class='menu-header'>Posts</div>
+		<ul>
+			<li><a href='#blog-post-1'>Post 1: The Plan</a></li>
+			<li><a href='#blog-post-2'>Post 2: Deploying new posts</a></li>
+			<li><a href='#blog-post-3'>Post 3: Basic visual cleanup</a></li>
+		<ul>
+	</div>
+
 	<div id='wrapper-site-footer'>
 
-		
+		<span class='copyright'>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span>
 
 	</div>
 
