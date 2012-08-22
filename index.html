@@ -25,10 +25,11 @@
 						<li>Edit the old HTML</li>
 						<li>Save and preview the file (testing testing testing)</li>
 						<li>Fix my bugs (remember to edit the timestamp, post tags, etc)</li>
-						<li>Commit the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a></li>
+						<li>Commit the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> using <a href='http://code.google.com/p/tortoisegit/' target='_blank'>TortoiseGit</a></li>
+						<li>Push the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> using <a href='http://code.google.com/p/tortoisegit/' target='_blank'>TortoiseGit</a> (Manually enter username and password each time in the prompt boxes)</li>
 						<li>Remote into the webserver hosting this site</li>
-						<li>Pull the changes from gitbut</li>
-						<li>Copy the files to my IIS folder</li>
+						<li>Pull the changes from github to a local folder</li>
+						<li>Copy the files to the IIS folder hosting the site</li>
 					</ul>
 				<p>Ugh. No fun already. I know we can do better than that. First up, let's automate a couple of those steps.
 				<ul>
@@ -45,7 +46,9 @@
 						</ul>
 					</li>
 				</ul>
-				<p>Now we can just run that file on the webserver and it'll fetch the latest source from github and push it to the website's folder. Far from perfect, but we're taking baby steps here ;)
+				<p>Now we can just run that file on the webserver and it'll fetch the latest source from github and push it to the website's folder. 
+				<p>Next up, let's take out the step of entering a username/password each time when doing the <span class='code'>git push</span>. <a href='http://www.programmoria.com/2012/02/saving-tortoisegit-password.html' target='_blank'>Here is an article</a> that describes the simple step of creating a batch file, and then running it, enter your username and password, and it creates the file that TortoiseGit needs so that you don't have to enter those manually anymore.
+				<p>Far from perfect, but we're taking baby steps here ;)
 				<p>Article on <a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'>git fetch vs pull</a>
 
 			</div>
