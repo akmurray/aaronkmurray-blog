@@ -1,7 +1,12 @@
 <!doctype html>
 <html>
 <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>AaronKMurray.com : Blog | Twitter @aaronkmurray</title>
+	<meta name="author" content="Aaron Murray, akmurray@gmail.com">
+	<meta name="description" content="Aaron Murray's Blog on technology, developer life, and the Internet">
+    <meta name="viewport" content="width=device-width">
 
 	<style>
 		body {margin:0;padding:0;}
@@ -16,13 +21,17 @@
 		#wrapper-blog-posts {float:left;max-width:75%}
 		#wrapper-sidebar {float:right;max-width:20%;border-left:1px solid #bcc;background-color:#dee;}
 
+		.blog-post-header {padding:10px;border-bottom:1px solid #cdd;background-color:#eff;}
+		.blog-post-header span {font-weight:bold;}
+
+		.blog-post-body {padding:10px;}
 		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
 
 		.blog-post-footer .post-timestamp, .blog-post-footer .post-tags {display:block;clear:both;}
 
 		.post-screenshot img {border:0;margin:10px;}
 
-		 {}
+
 		#wrapper-logo .logo {display: block;margin-left: auto;margin-right: auto;}
 
 		#wrapper-blog-post-menu .menu-header {}
@@ -39,11 +48,73 @@
 	</div>
 
 	<div id='wrapper-blog-posts'>
+
+		<div class='blog-post' name='blog-post-4'>
+			<div class='blog-post-header'>
+				<span>Post #4: For the Machines</span>
+			</div>
+			<div class='blog-post-body'>
+				<p>The purpose of this post is to assist the machines that will be "reading" the site. 
+				<p>There are a couple of simple things that we need to do:
+				<ul>
+					<li>Create a <a href='http://www.robotstxt.org/robotstxt.html' target='_blank'>robots.txt</a> file for communicating instructions with web crawlers</li>
+					<li>Add <span class='code'>&lt;meta&gt;</span> tags to help browsers and search engines</li>
+				</ul>
+				<p>You'll notice that this site's <a href='robots.txt' target='_blank'>robots.txt file</a> is fairly empty. One interesting note is the line <span class='code'>Disallow: /BadBotHoneyPot/</span>
+				<p>I'll go over that in the future, but for now, I'll just say that we'll use that as a trap to identify "bad" crawlers so that we can automatically block them should we choose.
+				<p>As for the <span class='code'>&lt;meta&gt;</span> tags:
+				<ul>
+					<li><span class='code'>&lt;meta charset="utf-8"&gt;</span>
+						<ul>
+							<li>This meta tag needs to be near the top of the HTML file (before any text).</li>
+							<li>If it is not, or it is missing, then the browser will just try to figure out the character encoding set on it's own.</li>
+							<li>You will typically only run across the need to include this once you start dealing with localization of your site.</li>
+							<li>More info <a href='http://code.google.com/p/doctype-mirror/wiki/MetaCharsetAttribute' target='_blank'>here</a>
+						</ul>
+					</li>
+					<li><span class='code'>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;</span>
+						<ul>
+							<li>This tag basically does two things.</li>
+							<li>#1: Tell Internet Explorer to use it's <a href='http://msdn.microsoft.com/en-us/library/cc288325(v=vs.85).aspx' target='_blank'>most modern mode available</a> (as opposed to IE trying to determine which mode it should run in for best compatibility)</li>
+							<li>#2: Tells browsers with <a href='http://www.chromium.org/developers/how-tos/chrome-frame-getting-started' target='_blank'>Google Chrome Frame</a> installed to render using GCF instead of their native renderer (Uncommon, mostly to help old slow browsers)</li>
+							<li></li>
+						</ul>
+					</li>
+					<li><span class='code'>&lt;meta name="author" content="Aaron Murray, akmurray@gmail.com"&gt;</span>
+						<ul>
+							<li>Tell the crawler who authored this page</li>
+							<li>Tell any users who view your source how to contact you if needed</li>
+							<li>This is more uncommon for sites that have multiple contributors</li>
+						</ul>
+					</li>
+					<li><span class='code'>&lt;meta name="description" content="..."&gt;</span>
+						<ul>
+							<li>This is a spot where you can describe your site</li>
+							<li>Some search engines will use this text as preview content</li>
+							<li>Adds some <a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target='_blank'>SEO</a> value to your site</li>
+						</ul>
+					</li>
+					<li><span class='code'>&lt;meta name="viewport" content="width=device-width"&gt;</span>
+						<ul>
+							<li><a href='https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html' target='_blank'>This tag</a> is largely useful once you start wanting to have your site look nice on <a href='http://www.nokia.com/gb-en/products/phone/700/' target='_blank'>small handheld</a> or <a href='http://arstechnica.com/gadgets/2011/11/microsofts-table-sized-tablet-surfaces-in-pre-order/' target='_blank'>giant surface devices</a></li>
+							<li>We'll dive deeper into this in the future, but we've got too many bigger fish to fry at the moment</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>robots</span>, <span class='post-tag'>meta</span>, <span class='post-tag'>crawlers</span>, <span class='post-tag'>seo</span></span>
+				<span class='post-timestamp'>Posted on August 23, 2012 @ 11:15am</span>
+				<span class='post-screenshot'><img src='img/blog/screenshots/post-.png' title='Screenshot of site after post #4' width=100 /></span>
+			</div>
+		</div>
+
+
 		
 		<div class='blog-post'>
 			<a name='blog-post-3'>
 			<div class='blog-post-header'>
-				<span>Post #3: Basic visual cleanup</span>
+				<span>Post #3: Basic Visual Cleanup</span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty, so we have a plan, we've got the code up on <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -77,7 +148,7 @@
 		<div class='blog-post'>
 			<a name='blog-post-2'>
 			<div class='blog-post-header'>
-				<span>Post #2: Deploying new posts</span>
+				<span>Post #2: Deploying New Posts</span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -179,9 +250,9 @@
 <!--	Someday we'll have a database for these posts and I won't need this copy/paste template :)      -->
 <!--		
 
-		<div class='blog-post' name='blog-post-'>
+		<div class='blog-post' name='blog-post-?????'>
 			<div class='blog-post-header'>
-				<span>Post #: </span>
+				<span>Post #?????: </span>
 			</div>
 			<div class='blog-post-body'>
 				<p>
@@ -189,7 +260,7 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'></span>, <span class='post-tag'></span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
-				<span class='post-screenshot'><img src='img/blog/screenshots/post-.png' title='Screenshot of site after post #2' width=100 /></span>
+				<span class='post-screenshot'><img src='img/blog/screenshots/post-?????.png' title='Screenshot of site after post #?????' width=100 /></span>
 			</div>
 		</div>
 -->
@@ -206,8 +277,9 @@
 			<div class='menu-header'>Posts</div>
 			<ul>
 				<li><a href='#blog-post-1'>Post 1: The Plan</a></li>
-				<li><a href='#blog-post-2'>Post 2: Deploying new posts</a></li>
-				<li><a href='#blog-post-3'>Post 3: Basic visual cleanup</a></li>
+				<li><a href='#blog-post-2'>Post 2: Deploying New Posts</a></li>
+				<li><a href='#blog-post-3'>Post 3: Basic Visual Cleanup</a></li>
+				<li><a href='#blog-post-4'>Post 4: For the Machines</a></li>
 			<ul>
 		</div>
 
