@@ -7,6 +7,20 @@
         <description />
         <language>en-us</language>
         <item>
+            <title>Post #6: Traffic Analytics</title>
+            <description>
+				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
+				&lt;p&gt;After you sign up for a free/basic Quantcast account, you can "start quantifying" your traffic by entering your domain name and generating a snippet of html/js that will ping their servers each time someone loads up your page. Simply slap that down at the bottom of your page for now, and we can start getting a rough idea of traffic stats. 
+				&lt;p&gt;That snippet is polite because it does 2 things:
+				&lt;ul&gt;
+					&lt;li&gt;Try to load the tracking script using the &lt;a href='http://davidwalsh.name/html5-async' target="_blank"&gt;async attribute&lt;/a&gt;, which &lt;a href='http://www.stevesouders.com/blog/2012/01/13/javascript-performance/' target="_blank"&gt;speeds&lt;/a&gt; up the responsiveness of the site&lt;/li&gt;
+					&lt;li&gt;Fallback to &lt;a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target="_blank"&gt;pixel tracking image&lt;/a&gt; when javascript is unavailable&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Simple, effective, and good enough for now.
+			</description>
+            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+        </item>
+        <item>
             <title>Post #5: RSS, Atom, and Build Tools</title>
             <description>
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -24,7 +38,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
         </item>
         <item>
             <title>Post #4: For the Machines</title>
@@ -77,7 +91,7 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
         </item>
         <item>
             <title>Post #3: Basic Visual Cleanup</title>
@@ -103,7 +117,7 @@
 
 
 			</description>
-            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
         </item>
         <item>
             <title>Post #2: Deploying New Posts</title>
@@ -142,7 +156,7 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
         </item>
         <item>
             <title>Post #1: The Plan</title>
@@ -188,7 +202,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
         </item>
     </channel>
 </rss>

@@ -57,6 +57,28 @@
 
 	<div id='wrapper-blog-posts'>
 
+		<div class='blog-post' name='blog-post-6'>
+			<a name='blog-post-6'></a>
+			<div class='blog-post-header'>
+				<span>Post #6: Traffic Analytics</span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using <a href='https://www.quantcast.com/aaronkmurray.com' target=_blank>Quantcast</a>. 
+				<p>After you sign up for a free/basic Quantcast account, you can "start quantifying" your traffic by entering your domain name and generating a snippet of html/js that will ping their servers each time someone loads up your page. Simply slap that down at the bottom of your page for now, and we can start getting a rough idea of traffic stats. 
+				<p>That snippet is polite because it does 2 things:
+				<ul>
+					<li>Try to load the tracking script using the <a href='http://davidwalsh.name/html5-async' target=_blank>async attribute</a>, which <a href='http://www.stevesouders.com/blog/2012/01/13/javascript-performance/' target=_blank>speeds</a> up the responsiveness of the site</li>
+					<li>Fallback to <a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target=_blank>pixel tracking image</a> when javascript is unavailable</li>
+				</ul>
+				<p>Simple, effective, and good enough for now.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>quantcast</span>, <span class='post-tag'>tracking</span>, <span class='post-tag'>traffic</span>, <span class='post-tag'>async</span></span>
+				<span class='post-timestamp'>Posted on September 7, 2012 @ 5:00pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-6.png' target='_blank'><img src='img/blog/screenshots/post-6.png' title='Screenshot of site after post #6' width=100 /></a></span>
+			</div>
+		</div>
+
 		<div class='blog-post' name='blog-post-5'>
 			<a name='blog-post-5'></a>
 			<div class='blog-post-header'>
@@ -294,6 +316,8 @@
 			</div>
 			<div class='blog-post-body'>
 				<p>
+				<p>
+				<p>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'></span>, <span class='post-tag'></span></span>
@@ -301,6 +325,7 @@
 				<span class='post-screenshot'><a href='img/blog/screenshots/post-?????.png' target='_blank'><img src='img/blog/screenshots/post-?????.png' title='Screenshot of site after post #?????' width=100 /></a></span>
 			</div>
 		</div>
+		????? REMINDER for Mr. No Database: Add an entry to the Posts section of the menu on the right
 -->
 	</div>
 
@@ -318,6 +343,7 @@
 				<li><a href='#blog-post-3'>Post 3: Basic Visual Cleanup</a></li>
 				<li><a href='#blog-post-4'>Post 4: For the Machines</a></li>
 				<li><a href='#blog-post-5'>Post 5: RSS, Atom, and Build Tools</a></li>
+				<li><a href='#blog-post-6'>Post 6: Traffic Analytics</a></li>
 			<ul>
 		</div>
 
@@ -333,6 +359,27 @@
 		</div>
 
 	</div>
+
+	<!-- Quantcast Tag -->
+	<script type="text/javascript">
+	var _qevents = _qevents || [];
+
+	(function() {
+	var elem = document.createElement('script');
+	elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+	elem.async = true;
+	elem.type = "text/javascript";
+	var scpt = document.getElementsByTagName('script')[0];
+	scpt.parentNode.insertBefore(elem, scpt);
+	})();
+
+	_qevents.push({ qacct:"p-M_hV8wgLbE9k_" });
+	</script>
+
+	<noscript>
+	<div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif" border="0" height="1" width="1" alt="Quantcast"/></div>
+	</noscript>
+	<!-- End Quantcast tag -->
 
 </div>
 </body>

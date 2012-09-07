@@ -4,14 +4,32 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:f7852636-22db-44f6-a682-0522a1de7fbf;id=1</id>
-    <updated>2012-09-07T21:36:37Z</updated>
+    <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=1</id>
+    <updated>2012-09-07T22:00:09Z</updated>
     <entry>
-        <id>uuid:f7852636-22db-44f6-a682-0522a1de7fbf;id=2</id>
+        <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=2</id>
+        <title
+            type="text">Post #6: Traffic Analytics</title>
+        <published>2012-09-07T17:00:09-05:00</published>
+        <updated>2012-09-07T22:00:09Z</updated>
+        <content
+            type="text">
+				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
+				&lt;p&gt;After you sign up for a free/basic Quantcast account, you can "start quantifying" your traffic by entering your domain name and generating a snippet of html/js that will ping their servers each time someone loads up your page. Simply slap that down at the bottom of your page for now, and we can start getting a rough idea of traffic stats. 
+				&lt;p&gt;That snippet is polite because it does 2 things:
+				&lt;ul&gt;
+					&lt;li&gt;Try to load the tracking script using the &lt;a href='http://davidwalsh.name/html5-async' target="_blank"&gt;async attribute&lt;/a&gt;, which &lt;a href='http://www.stevesouders.com/blog/2012/01/13/javascript-performance/' target="_blank"&gt;speeds&lt;/a&gt; up the responsiveness of the site&lt;/li&gt;
+					&lt;li&gt;Fallback to &lt;a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target="_blank"&gt;pixel tracking image&lt;/a&gt; when javascript is unavailable&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Simple, effective, and good enough for now.
+			</content>
+    </entry>
+    <entry>
+        <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=3</id>
         <title
             type="text">Post #5: RSS, Atom, and Build Tools</title>
-        <published>2012-09-07T16:36:37-05:00</published>
-        <updated>2012-09-07T21:36:37Z</updated>
+        <published>2012-09-07T17:00:09-05:00</published>
+        <updated>2012-09-07T22:00:09Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -31,11 +49,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:f7852636-22db-44f6-a682-0522a1de7fbf;id=3</id>
+        <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=4</id>
         <title
             type="text">Post #4: For the Machines</title>
-        <published>2012-09-07T16:36:37-05:00</published>
-        <updated>2012-09-07T21:36:37Z</updated>
+        <published>2012-09-07T17:00:09-05:00</published>
+        <updated>2012-09-07T22:00:09Z</updated>
         <content
             type="text">
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -88,11 +106,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:f7852636-22db-44f6-a682-0522a1de7fbf;id=4</id>
+        <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=5</id>
         <title
             type="text">Post #3: Basic Visual Cleanup</title>
-        <published>2012-09-07T16:36:37-05:00</published>
-        <updated>2012-09-07T21:36:37Z</updated>
+        <published>2012-09-07T17:00:09-05:00</published>
+        <updated>2012-09-07T22:00:09Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -118,11 +136,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:f7852636-22db-44f6-a682-0522a1de7fbf;id=5</id>
+        <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=6</id>
         <title
             type="text">Post #2: Deploying New Posts</title>
-        <published>2012-09-07T16:36:37-05:00</published>
-        <updated>2012-09-07T21:36:37Z</updated>
+        <published>2012-09-07T17:00:09-05:00</published>
+        <updated>2012-09-07T22:00:09Z</updated>
         <content
             type="text">
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -161,11 +179,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:f7852636-22db-44f6-a682-0522a1de7fbf;id=6</id>
+        <id>uuid:d131c037-4987-4130-81cc-a6bef1c611ec;id=7</id>
         <title
             type="text">Post #1: The Plan</title>
-        <published>2012-09-07T16:36:37-05:00</published>
-        <updated>2012-09-07T21:36:37Z</updated>
+        <published>2012-09-07T17:00:09-05:00</published>
+        <updated>2012-09-07T22:00:09Z</updated>
         <content
             type="text">
 				&lt;p&gt;This has been a long time coming. 
