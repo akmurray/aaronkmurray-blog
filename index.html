@@ -15,8 +15,10 @@
 		#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu, #wrapper-logo {padding:10px;}
 		#wrapper-site-header, #wrapper-site-footer, #wrapper-logo {clear:both;}
 
-		#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;}
+		#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:32px;font-size:20px;}
 		#wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;}
+
+		#wrapper-site-header-icons, #wrapper-site-footer-icons {float:right;}
 
 		#wrapper-blog-posts {float:left;max-width:75%}
 		#wrapper-sidebar {float:right;max-width:20%;border-left:1px solid #bcc;background-color:#dee;}
@@ -28,6 +30,7 @@
 		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
 
 		.blog-post-footer .post-timestamp, .blog-post-footer .post-tags {display:block;clear:both;}
+		.blog-post-footer {padding:10px;border-bottom:1px solid #cdd;background-color:#f9f9f9;} 
 
 		.post-screenshot img {border:0;margin:10px;}
 
@@ -45,11 +48,45 @@
 
 	<div id='wrapper-site-header'>
 		<span class='title'>Aaron Murray's blog</span>
+		<div id='wrapper-site-header-icons'>
+			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-32.png' /></a>
+			<a href='https://twitter.com/aaronkmurray' target=_blank title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-32.png' /></a>
+			<a href='https://github.com/akmurray' target=_blank title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-32.png' /></a>
+		</div>
 	</div>
 
 	<div id='wrapper-blog-posts'>
 
+		<div class='blog-post' name='blog-post-5'>
+			<a name='blog-post-5'></a>
+			<div class='blog-post-header'>
+				<span>Post #5: RSS, Atom, and Build Tools</span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Alrighty - creating a new blog these days pratically assumes that readers will be provided with an <a href='http://en.wikipedia.org/wiki/RSS' target=_blank>RSS</a> or <a href='http://en.wikipedia.org/wiki/Atom_(standard)' target=_blank>Atom</a> feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
+				<p>Ironically, in the interest of starting from absolute square 1, this blog lacked an <a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank>RSS feed</a>. That was one of the more challenging pieces that I had to get over mentally when considering doing a blog this way. Fortunately, the thought of losing potential followers was ultimately outweighed by the principle of the project.
+				<p>That said, getting an RSS feed up ASAP was <em>very important</em> to me...even more important than other basics like choosing a database. This leads to an interesting chicken/egg problem however. How will I provide an RSS feed without a database? Am I going to copy/paste even more HTML into an XML file for a RSS feed? What about the Atom feed? Should that be another set of copying/pasting/formatting? Should I just buck up, pick a db, but not mention it until later? 
+				<p>Well, given that this site is a fairly unique project, I'm open to fairly unique solutions as we trod down this path. So what is the solution to the feed problem? Parsing.
+				<p>Considering my disdain for copying and pasting, and the lack of a database to draw from, I wrote a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen/rssgen' target=_blank>little parser</a> that would read the HTML from this site and produce <a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank>RSS</a> and <a href='http://aaronkmurray.com/feeds/feed-atom.xml' target=_blank>Atom</a> feeds automatically.
+				<p>Running that tool now becomes the first step in the "build" process for this site. That means that the current process for making and releasing a change to this site is now:
+				<ul>
+					<li>Edit this index.html file</li>
+					<li>Run my new <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat'>build script</a></li>
+					<li>Commit and Push the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a></li>
+					<li>Remote into the webserver hosting this site</li>
+					<li>Run my new <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/release/release-aaronkmurray-site.bat'>release script</a></li>
+				</ul>
+				<p>While still far from ideal, this is better than <a href='#blog-post-1'>the original</a> process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>rss</span>, <span class='post-tag'>atom</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>command line</span>, <span class='post-tag'>build</span>, <span class='post-tag'>release</span></span>
+				<span class='post-timestamp'>Posted on September 7, 2012 @ 4:40pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-5.png' target='_blank'><img src='img/blog/screenshots/post-5.png' title='Screenshot of site after post #5' width=100 /></a></span>
+			</div>
+		</div>
+
 		<div class='blog-post' name='blog-post-4'>
+			<a name='blog-post-4'></a>
 			<div class='blog-post-header'>
 				<span>Post #4: For the Machines</span>
 			</div>
@@ -105,14 +142,14 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>robots</span>, <span class='post-tag'>meta</span>, <span class='post-tag'>crawlers</span>, <span class='post-tag'>seo</span></span>
 				<span class='post-timestamp'>Posted on August 23, 2012 @ 11:15am</span>
-				<span class='post-screenshot'><img src='img/blog/screenshots/post-4.png' title='Screenshot of site after post #4' width=100 /></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-4.png' target='_blank'><img src='img/blog/screenshots/post-4.png' title='Screenshot of site after post #4' width=100 /></a></span>
 			</div>
 		</div>
 
 
 		
 		<div class='blog-post'>
-			<a name='blog-post-3'>
+			<a name='blog-post-3'></a>
 			<div class='blog-post-header'>
 				<span>Post #3: Basic Visual Cleanup</span>
 			</div>
@@ -146,7 +183,7 @@
 		</div>
 
 		<div class='blog-post'>
-			<a name='blog-post-2'>
+			<a name='blog-post-2'></a>
 			<div class='blog-post-header'>
 				<span>Post #2: Deploying New Posts</span>
 			</div>
@@ -193,7 +230,7 @@
 		</div>
 
 		<div class='blog-post'>
-			<a name='blog-post-1'>
+			<a name='blog-post-1'></a>
 			<div class='blog-post-header'>
 				<span>Post #1: The Plan</span>
 			</div>
@@ -251,6 +288,7 @@
 <!--		
 
 		<div class='blog-post' name='blog-post-?????'>
+			<a name='blog-post-?????'></a>
 			<div class='blog-post-header'>
 				<span>Post #?????: </span>
 			</div>
@@ -260,7 +298,7 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'></span>, <span class='post-tag'></span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
-				<span class='post-screenshot'><img src='img/blog/screenshots/post-?????.png' title='Screenshot of site after post #?????' width=100 /></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-?????.png' target='_blank'><img src='img/blog/screenshots/post-?????.png' title='Screenshot of site after post #?????' width=100 /></a></span>
 			</div>
 		</div>
 -->
@@ -272,7 +310,6 @@
 			<img src='img/blog/logo/logo-1.gif' class='logo' />
 		</div>
 
-
 		<div id='wrapper-blog-post-menu'>
 			<div class='menu-header'>Posts</div>
 			<ul>
@@ -280,6 +317,7 @@
 				<li><a href='#blog-post-2'>Post 2: Deploying New Posts</a></li>
 				<li><a href='#blog-post-3'>Post 3: Basic Visual Cleanup</a></li>
 				<li><a href='#blog-post-4'>Post 4: For the Machines</a></li>
+				<li><a href='#blog-post-5'>Post 5: RSS, Atom, and Build Tools</a></li>
 			<ul>
 		</div>
 
@@ -288,6 +326,11 @@
 	<div id='wrapper-site-footer'>
 
 		<span class='copyright'>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span>
+		<div id='wrapper-site-footer-icons'>
+			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-16.png' /></a>
+			<a href='https://twitter.com/aaronkmurray' target=_blank title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-16.png' /></a>
+			<a href='https://github.com/akmurray' target=_blank title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-16.png' /></a>
+		</div>
 
 	</div>
 

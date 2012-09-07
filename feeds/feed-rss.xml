@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-16"?>
+<rss xmlns:a10="http://www.w3.org/2005/Atom"
+    version="2.0">
+    <channel
+        xml:base="http://aaronkmurray.com/">
+        <title>aaronkmurray.com | Aaron Murray's Blog Feed</title>
+        <description />
+        <language>en-us</language>
+        <item>
+            <title>Post #5: RSS, Atom, and Build Tools</title>
+            <description>
+				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
+				&lt;p&gt;Ironically, in the interest of starting from absolute square 1, this blog lacked an &lt;a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank"&gt;RSS feed&lt;/a&gt;. That was one of the more challenging pieces that I had to get over mentally when considering doing a blog this way. Fortunately, the thought of losing potential followers was ultimately outweighed by the principle of the project.
+				&lt;p&gt;That said, getting an RSS feed up ASAP was &lt;em&gt;very important&lt;/em&gt; to me...even more important than other basics like choosing a database. This leads to an interesting chicken/egg problem however. How will I provide an RSS feed without a database? Am I going to copy/paste even more HTML into an XML file for a RSS feed? What about the Atom feed? Should that be another set of copying/pasting/formatting? Should I just buck up, pick a db, but not mention it until later? 
+				&lt;p&gt;Well, given that this site is a fairly unique project, I'm open to fairly unique solutions as we trod down this path. So what is the solution to the feed problem? Parsing.
+				&lt;p&gt;Considering my disdain for copying and pasting, and the lack of a database to draw from, I wrote a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen/rssgen' target="_blank"&gt;little parser&lt;/a&gt; that would read the HTML from this site and produce &lt;a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank"&gt;RSS&lt;/a&gt; and &lt;a href='http://aaronkmurray.com/feeds/feed-atom.xml' target="_blank"&gt;Atom&lt;/a&gt; feeds automatically.
+				&lt;p&gt;Running that tool now becomes the first step in the "build" process for this site. That means that the current process for making and releasing a change to this site is now:
+				&lt;ul&gt;
+					&lt;li&gt;Edit this index.html file&lt;/li&gt;
+					&lt;li&gt;Run my new &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat'&gt;build script&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Commit and Push the changes to &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Remote into the webserver hosting this site&lt;/li&gt;
+					&lt;li&gt;Run my new &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/release/release-aaronkmurray-site.bat'&gt;release script&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
+			</description>
+            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+        </item>
+        <item>
+            <title>Post #4: For the Machines</title>
+            <description>
+				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
+				&lt;p&gt;There are a couple of simple things that we need to do:
+				&lt;ul&gt;
+					&lt;li&gt;Create a &lt;a href='http://www.robotstxt.org/robotstxt.html' target='_blank'&gt;robots.txt&lt;/a&gt; file for communicating instructions with web crawlers&lt;/li&gt;
+					&lt;li&gt;Add &lt;span class='code'&gt;&amp;lt;meta&amp;gt;&lt;/span&gt; tags to help browsers and search engines&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;You'll notice that this site's &lt;a href='robots.txt' target='_blank'&gt;robots.txt file&lt;/a&gt; is fairly empty. One interesting note is the line &lt;span class='code'&gt;Disallow: /BadBotHoneyPot/&lt;/span&gt;
+				&lt;p&gt;I'll go over that in the future, but for now, I'll just say that we'll use that as a trap to identify "bad" crawlers so that we can automatically block them should we choose.
+				&lt;p&gt;As for the &lt;span class='code'&gt;&amp;lt;meta&amp;gt;&lt;/span&gt; tags:
+				&lt;ul&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;meta charset="utf-8"&amp;gt;&lt;/span&gt;
+						&lt;ul&gt;
+							&lt;li&gt;This meta tag needs to be near the top of the HTML file (before any text).&lt;/li&gt;
+							&lt;li&gt;If it is not, or it is missing, then the browser will just try to figure out the character encoding set on it's own.&lt;/li&gt;
+							&lt;li&gt;You will typically only run across the need to include this once you start dealing with localization of your site.&lt;/li&gt;
+							&lt;li&gt;More info &lt;a href='http://code.google.com/p/doctype-mirror/wiki/MetaCharsetAttribute' target='_blank'&gt;here&lt;/a&gt;
+						&lt;/li&gt;&lt;/ul&gt;
+					
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&amp;gt;&lt;/span&gt;
+						&lt;ul&gt;
+							&lt;li&gt;This tag basically does two things.&lt;/li&gt;
+							&lt;li&gt;#1: Tell Internet Explorer to use it's &lt;a href='http://msdn.microsoft.com/en-us/library/cc288325(v=vs.85).aspx' target='_blank'&gt;most modern mode available&lt;/a&gt; (as opposed to IE trying to determine which mode it should run in for best compatibility)&lt;/li&gt;
+							&lt;li&gt;#2: Tells browsers with &lt;a href='http://www.chromium.org/developers/how-tos/chrome-frame-getting-started' target='_blank'&gt;Google Chrome Frame&lt;/a&gt; installed to render using GCF instead of their native renderer (Uncommon, mostly to help old slow browsers)&lt;/li&gt;
+							&lt;li&gt;&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;meta name="author" content="Aaron Murray, akmurray@gmail.com"&amp;gt;&lt;/span&gt;
+						&lt;ul&gt;
+							&lt;li&gt;Tell the crawler who authored this page&lt;/li&gt;
+							&lt;li&gt;Tell any users who view your source how to contact you if needed&lt;/li&gt;
+							&lt;li&gt;This is more uncommon for sites that have multiple contributors&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;meta name="description" content="..."&amp;gt;&lt;/span&gt;
+						&lt;ul&gt;
+							&lt;li&gt;This is a spot where you can describe your site&lt;/li&gt;
+							&lt;li&gt;Some search engines will use this text as preview content&lt;/li&gt;
+							&lt;li&gt;Adds some &lt;a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target='_blank'&gt;SEO&lt;/a&gt; value to your site&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;meta name="viewport" content="width=device-width"&amp;gt;&lt;/span&gt;
+						&lt;ul&gt;
+							&lt;li&gt;&lt;a href='https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html' target='_blank'&gt;This tag&lt;/a&gt; is largely useful once you start wanting to have your site look nice on &lt;a href='http://www.nokia.com/gb-en/products/phone/700/' target='_blank'&gt;small handheld&lt;/a&gt; or &lt;a href='http://arstechnica.com/gadgets/2011/11/microsofts-table-sized-tablet-surfaces-in-pre-order/' target='_blank'&gt;giant surface devices&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;We'll dive deeper into this in the future, but we've got too many bigger fish to fry at the moment&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+				&lt;/li&gt;&lt;/ul&gt;
+			</description>
+            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+        </item>
+        <item>
+            <title>Post #3: Basic Visual Cleanup</title>
+            <description>
+				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
+				&lt;p&gt;Despite my guts screaming out for functionality, something has to be done about the visuals around here. The look is way too 1994, and not in a cool 1994 sort of way.
+				&lt;p&gt;I'm going to start attaching a screenshot of the site with each post so that in the future we can easily view the visual progress that is being made. This will be easier than checking out snapshot from the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master/' target='_blank'&gt;github commit history&lt;/a&gt; and running the site locally. In the future this will be harder for folks to do once we get distributed and have various databases powering the content. Fun stuff!
+				&lt;p&gt;Back to reality - let's spruce this place up. For all of the newbs out there, the best way to fancy up the visuals on a web page is to sprinkle a little &lt;a href='http://www.w3schools.com/css/' target='_blank'&gt;CSS&lt;/a&gt; love around. Quickly you'll learn about one of the most loved (hated) aspects of web development: browser differences. Luckily there are &lt;a href='http://www.alistapart.com/' target='_blank'&gt;resources&lt;/a&gt; out there to help. For now we won't get into the weeds, but let's just say that for nearly 2 decades we've been struggling with browser differences and there is no end in sight, but at least there is a lot of &lt;a href='http://html5.org/' target='_blank'&gt;hope&lt;/a&gt; that things will get better over the next decade as &lt;a href='http://www.ie6countdown.com/' target='_blank'&gt;older browsers start to die off&lt;/a&gt;.
+				&lt;p&gt;Step 1: very basic &lt;a href='http://en.wikipedia.org/wiki/User_interface' target='_blank'&gt;UI&lt;/a&gt;/&lt;a href='http://en.wikipedia.org/wiki/User_experience_design' target='_blank'&gt;UX&lt;/a&gt; stuff:
+				&lt;ul&gt;
+					&lt;li&gt;Visually split up the site header from the posts&lt;/li&gt;
+					&lt;li&gt;Split up the post from each other&lt;/li&gt;
+					&lt;li&gt;Format certain types of text (&lt;span&gt;like code&lt;/span&gt;)&lt;/li&gt;
+					&lt;li&gt;Enable a way to link directly to a specific post&lt;/li&gt;
+					&lt;li&gt;Add some content to the footer area of the page&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Let's assume that we'll use &lt;span class='code'&gt;&amp;lt;div&amp;gt;&lt;/span&gt; tags for HTML structure/grouping, and that text should be in either a &lt;span class='code'&gt;&amp;lt;span&amp;gt;&lt;/span&gt; or a &lt;span class='code'&gt;&amp;lt;p&amp;gt;&lt;/span&gt; tag.
+				&lt;p&gt;Using css, we can add some a style for blog posts that have a &lt;span class='code'&gt;&amp;lt;span&amp;gt;&lt;/span&gt; tag with a css class of &lt;span class='code'&gt;&amp;lt;code&amp;gt;&lt;/span&gt;. These matching tags will be in a different monospace font to make look them more computery. Easy.
+				&lt;ul&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;style&amp;gt; .blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; } &amp;lt;/style&amp;gt;&lt;/span&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;To enabling linking directly to a post, we're going to use the old-school method of using &lt;span class='code'&gt;name&lt;/span&gt; attributes and &lt;span class='code'&gt;#&lt;/span&gt; links. I know this is absurd in the days of &lt;a href='http://www.bloggingbasics101.com/2008/11/what-is-a-permalink/' target='_blank'&gt;permalinks&lt;/a&gt; and SEO friendliness, but we haven't written the permalink code yet, so we suffer for now. I'm doing this for your own benefit here folks - it's my &lt;a href='http://en.wikipedia.org/wiki/PageRank' target='_blank'&gt;PageRank&lt;/a&gt; that will suffer. When we fix this later, it'll also be a great time to talk about the joys of &lt;a href='http://en.wikipedia.org/wiki/Code_refactoring' target='_blank'&gt;refactoring&lt;/a&gt; and &lt;a href='http://en.wikipedia.org/wiki/Brownfield_(software_development)' target='_blank'&gt;brown-field&lt;/a&gt; upgrades.
+
+
+			</description>
+            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+        </item>
+        <item>
+            <title>Post #2: Deploying New Posts</title>
+            <description>
+				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
+					&lt;ul&gt;
+						&lt;li&gt;Open up my &lt;a href='http://www.editplus.com/' target='_blank'&gt;text editor&lt;/a&gt; of choice&lt;/li&gt;
+						&lt;li&gt;Copy and paste the HTML for a post from my previous post&lt;/li&gt;
+						&lt;li&gt;Edit the old HTML&lt;/li&gt;
+						&lt;li&gt;Save and preview the file (testing testing testing)&lt;/li&gt;
+						&lt;li&gt;Fix my bugs (remember to edit the timestamp, post tags, etc)&lt;/li&gt;
+						&lt;li&gt;Commit the changes to &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; using &lt;a href='http://code.google.com/p/tortoisegit/' target='_blank'&gt;TortoiseGit&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;Push the changes to &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; using &lt;a href='http://code.google.com/p/tortoisegit/' target='_blank'&gt;TortoiseGit&lt;/a&gt; (Manually enter username and password each time in the prompt boxes)&lt;/li&gt;
+						&lt;li&gt;Remote into the webserver hosting this site&lt;/li&gt;
+						&lt;li&gt;Pull the changes from github to a local folder&lt;/li&gt;
+						&lt;li&gt;Copy the files to the IIS folder hosting the site&lt;/li&gt;
+					&lt;/ul&gt;
+				&lt;p&gt;Ugh. No fun already. I know we can do better than that. First up, let's automate a couple of those steps.
+				&lt;ul&gt;
+					&lt;li&gt;Install &lt;a href='http://msysgit.github.com/' target='_blank'&gt;Git for Windows&lt;/a&gt; (&lt;a href='http://www.thegeekstuff.com/2012/02/git-for-windows/' target='_blank'&gt;how-to&lt;/a&gt;)&lt;/li&gt;
+					&lt;li&gt;Select the option for "Run Git from the Windows Command Prompt" so that we can write scripts to do our work&lt;/li&gt;
+					&lt;li&gt;Make sure that worked (open a Command Prompt, type in "git" and hit Enter&lt;/li&gt;
+					&lt;li&gt;Clone the github repo to a local directory. &lt;span class='code'&gt;c:\code\git&gt;git clone https://github.com/akmurray/aaronkmurray-blog c:\code\git\aaronkmurray-blog&lt;/span&gt;&lt;/li&gt;
+					&lt;li&gt;Make a new Windows .bat file that will download latest code and copy to local website folder:
+						&lt;ul&gt;
+							&lt;li&gt;&lt;span class='code'&gt;cd c:\code\git\aaronkmurray-blog&lt;/span&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;span class='code'&gt;git pull https://github.com/akmurray/aaronkmurray-blog&lt;/span&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;span class='code'&gt;xcopy /Y /E /R /V /I "c:\code\git\aaronkmurray-blog" "C:\inetpub\wwwroot\aaronkmurray"&lt;/span&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;span class='code'&gt;REM pause&lt;/span&gt;&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Now we can just run that file on the webserver and it'll fetch the latest source from github and push it to the website's folder. 
+				&lt;p&gt;Next up, let's take out the step of entering a username/password each time when doing the &lt;span class='code'&gt;git push&lt;/span&gt;. &lt;a href='http://www.programmoria.com/2012/02/saving-tortoisegit-password.html' target='_blank'&gt;Here is an article&lt;/a&gt; that describes the simple step of creating a batch file, and then running it, enter your username and password, and it creates the file that TortoiseGit needs so that you don't have to enter those manually anymore.
+				&lt;p&gt;Far from perfect, but we're taking baby steps here ;)
+				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
+
+			</description>
+            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+        </item>
+        <item>
+            <title>Post #1: The Plan</title>
+            <description>
+				&lt;p&gt;This has been a long time coming. 
+				&lt;p&gt;I've been wanting to start blogging for about a year now, but have been struggling with figuring out where to start.
+				&lt;p&gt;There have been tons of questions swirling around in my head, like: 
+				&lt;ul&gt;
+					&lt;li&gt;Blog: Roll my &lt;a href='http://www.tandemgames.com/' target='_blank'&gt;own&lt;/a&gt; &lt;a href='http://www.domainofheroes.com/' target='_blank'&gt;site&lt;/a&gt; &lt;a href='http://www.aliensandrobots.com/' target='_blank'&gt;again&lt;/a&gt;? or use seasoned blog &lt;a href='http://dasblog.codeplex.com/' target='_blank'&gt;software&lt;/a&gt; with &lt;a href='http://wordpress.org/' target='_blank'&gt;heavy community support&lt;/a&gt;?&lt;/li&gt;
+					&lt;li&gt;Host: Use a &lt;a href='https://appharbor.com' target='_blank'&gt;cloud&lt;/a&gt; &lt;a href='http://www.heroku.com/' target='_blank'&gt;application&lt;/a&gt;  &lt;a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'&gt;host&lt;/a&gt;? Use a cheap host that &lt;a href='http://bluehost.com/' target='_blank'&gt;supports simple scripts&lt;/a&gt; for common apps? Host out of the &lt;a href='img/blog/posts/aarons_server_rack.jpg' target='_blank'&gt;server rack in my house&lt;/a&gt;?&lt;/li&gt;
+					&lt;li&gt;Platform: Java? .NET? "pure" HTML/JS? &lt;a href='http://expect.sourceforge.net/cgi.tcl/'&gt;TCL/CGI&lt;/a&gt;? Something more &lt;a href='http://rubyonrails.org/' target='_target'&gt;hip&lt;/a&gt;?&lt;/li&gt;
+					&lt;li&gt;Audience: Should I be connecting with &lt;a href='http://lostechies.com/' target='_blank'&gt;other developers&lt;/a&gt;? Other small-business owners? Friends? Family? &lt;/li&gt;
+					&lt;li&gt;Content: Is this going to be a personal activity log? Professional journal? Or just another tech experiement?&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;As I poured through ideas and wrote down reams of notes, one thing was apparent: &lt;span class='callout'&gt;I was spending a lot of time and effort on the blog but not actually blogging.&lt;/span&gt;
+				&lt;p&gt;Last night I couldn't sleep. The kid's toy keyboard was "cleaned up" in a way that a key was being pressed repeatedly whenever the air conditioning changed the pressure in the play room. I finally got up to address the situation, and then found myself unable to fall back to sleep. 
+				&lt;p&gt;After laying in bed for a couple of hours thinking about the blog, I finally got up to write down my ideas on paper so that I could actually fall asleep. This is common for me: the fear of forgetting an idea keeping me from drifting off into sleepytown.
+				&lt;p&gt;This morning I get into work and checked on my RSS feed folder for .NET development. It's been a few days since I checked it, but &lt;a href='http://www.hanselman.com/blog/YourWordsAreWasted.aspx' target="_blank"&gt;this call-to-action from Scott Hanselman&lt;/a&gt; was the final straw. The answer is simply to start blogging now and sort out the details later.
+				&lt;p&gt;So what's the plan? Well, the plan is:
+				&lt;ul&gt;
+					&lt;li&gt;Roll my own site/blog from the ground up&lt;/li&gt;
+					&lt;li&gt;Hosted at my house in my server rack&lt;/li&gt;
+					&lt;li&gt;Post about all of the changes and more importantly, show the intention behind them&lt;/li&gt;
+					&lt;li&gt;Make this site &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;publicly available on github&lt;/a&gt; so that everyone can see how it works and see it progress&lt;/li&gt;
+					&lt;li&gt;Start with a single index.html file and advance the site it all the way through to a scalable, distributed system, from the ground up&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Ultimately, I'd like to think that someone new to the web development craft will be able to use this site, the posts, and the source code history as a guide to seeing what goes on behind the scenes for how to create modern web software. I'm going to start at absolute step 1, and advance steadily through the growth of a real application. 
+				&lt;p&gt;I'd love it if you followed me on this journey. It'd be great if you could sign up for an RSS feed to get auto-notifications when I make new posts, but since this is just an index.html file at the moment, you can't. Looks like we've got a lot of work to do. Get ready for a fun ride.
+				&lt;p&gt;For now, you can reach me on &lt;a href='https://twitter.com/aaronkmurray' target='_blank'&gt;Twitter @aaronkmurray&lt;/a&gt;. Let me know what you think about this project and what features you'd like to see implemented. Here's a sample of what I have planned already:
+				&lt;ul&gt;
+					&lt;li&gt;Basics: CSS reset, JS framework, Cloud/CDN hosting&lt;/li&gt;
+					&lt;li&gt;Javascript: organizing your JS files (custom and 3rd-party), creating your own framework patterns, debugging&lt;/li&gt;
+					&lt;li&gt;CSS: responsive design, image bundling/sprites&lt;/li&gt;
+					&lt;li&gt;Build/Deploy: tools for building, bundling, and deploying the site and assets&lt;/li&gt;
+					&lt;li&gt;Performance: optimizing response time, payload, client-side caching, server-side caching, web-server and load balancer config&lt;/li&gt;
+					&lt;li&gt;Debugging: client-side debugging, server-side debugging, error logging, pro-active notifications, self-healing services, system health dashboards and reports&lt;/li&gt;
+					&lt;li&gt;Testing: js unit testing, server-side testing, integration testing&lt;/li&gt;
+					&lt;li&gt;Database: choosing a DB, using an ORM (like Entity Framework), writing your own ORM&lt;/li&gt;
+					&lt;li&gt;Marketing: strategy, considerations, tracking and mining your own site data&lt;/li&gt;
+					&lt;li&gt;Social: integration with the Majors (Facebook, Twitter, Instagram, Pinterest, etc.), API usage, tracking&lt;/li&gt;
+					&lt;li&gt;Advanced: client-side MVC, new JS paradigms and protocols for server communication, custom DBMS!&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
+
+			</description>
+            <pubDate>Fri, 07 Sep 2012 16:36:37 -0500</pubDate>
+        </item>
+    </channel>
+</rss>
