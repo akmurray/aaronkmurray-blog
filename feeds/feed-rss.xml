@@ -7,6 +7,15 @@
         <description />
         <language>en-us</language>
         <item>
+            <title>Post #7: Links to GitHub</title>
+            <description>
+				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
+				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
+				&lt;p&gt;
+			</description>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
+        </item>
+        <item>
             <title>Post #6: Traffic Analytics</title>
             <description>
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
@@ -17,8 +26,10 @@
 					&lt;li&gt;Fallback to &lt;a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target="_blank"&gt;pixel tracking image&lt;/a&gt; when javascript is unavailable&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;p&gt;Simple, effective, and good enough for now.
+				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
+				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
         </item>
         <item>
             <title>Post #5: RSS, Atom, and Build Tools</title>
@@ -38,7 +49,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
         </item>
         <item>
             <title>Post #4: For the Machines</title>
@@ -91,7 +102,7 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
         </item>
         <item>
             <title>Post #3: Basic Visual Cleanup</title>
@@ -117,7 +128,7 @@
 
 
 			</description>
-            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
         </item>
         <item>
             <title>Post #2: Deploying New Posts</title>
@@ -156,7 +167,7 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
         </item>
         <item>
             <title>Post #1: The Plan</title>
@@ -202,7 +213,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Fri, 07 Sep 2012 17:00:08 -0500</pubDate>
+            <pubDate>Sat, 08 Sep 2012 14:08:06 -0500</pubDate>
         </item>
     </channel>
 </rss>
