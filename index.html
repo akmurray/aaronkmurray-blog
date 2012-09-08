@@ -25,6 +25,8 @@
 
 		.blog-post-header {padding:10px;border-bottom:1px solid #cdd;background-color:#eff;}
 		.blog-post-header span {font-weight:bold;}
+		.blog-post-header .commit-link {float:right}
+		.blog-post-header .commit-link img {border:0;}
 
 		.blog-post-body {padding:10px;}
 		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
@@ -57,10 +59,29 @@
 
 	<div id='wrapper-blog-posts'>
 
+		<div class='blog-post' name='blog-post-7'>
+			<a name='blog-post-7'></a>
+			<div class='blog-post-header'>
+				<span>Post #7: Links to GitHub</span>
+				<span class='commit-link'><a href='?????' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Quick post here - I just added links to <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target=_blank>each Post's main commit on github</a> in the post header. Just click on the <a href='?????' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a> icon to see what was changed.
+				<p>The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
+				<p>
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>github</span>, <span class='post-tag'>commit</span></span>
+				<span class='post-timestamp'>Posted on September 7, 2012 @ 2:00pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-7.png' target='_blank'><img src='img/blog/screenshots/post-7.png' title='Screenshot of site after post #7' width=100 /></a></span>
+			</div>
+		</div>
+
 		<div class='blog-post' name='blog-post-6'>
 			<a name='blog-post-6'></a>
 			<div class='blog-post-header'>
 				<span>Post #6: Traffic Analytics</span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/f61bdfc72b758ae365f73d4c108f44628fcbd34a' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using <a href='https://www.quantcast.com/aaronkmurray.com' target=_blank>Quantcast</a>. 
@@ -71,6 +92,8 @@
 					<li>Fallback to <a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target=_blank>pixel tracking image</a> when javascript is unavailable</li>
 				</ul>
 				<p>Simple, effective, and good enough for now.
+				<p>Note: it will take a few days before the stats for this site show up on Quantcast. 
+				<p><script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"></script>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>quantcast</span>, <span class='post-tag'>tracking</span>, <span class='post-tag'>traffic</span>, <span class='post-tag'>async</span></span>
@@ -83,6 +106,7 @@
 			<a name='blog-post-5'></a>
 			<div class='blog-post-header'>
 				<span>Post #5: RSS, Atom, and Build Tools</span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/5eb387dd03581340da8bfd120200f0666123c6d2' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty - creating a new blog these days pratically assumes that readers will be provided with an <a href='http://en.wikipedia.org/wiki/RSS' target=_blank>RSS</a> or <a href='http://en.wikipedia.org/wiki/Atom_(standard)' target=_blank>Atom</a> feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -111,6 +135,7 @@
 			<a name='blog-post-4'></a>
 			<div class='blog-post-header'>
 				<span>Post #4: For the Machines</span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/978f856970e0d2bd911583a61db4883f24e63cb1' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -174,6 +199,7 @@
 			<a name='blog-post-3'></a>
 			<div class='blog-post-header'>
 				<span>Post #3: Basic Visual Cleanup</span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/480dc9d7c9073ec3e91b12c26b6c157cc11143d6' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty, so we have a plan, we've got the code up on <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -208,6 +234,7 @@
 			<a name='blog-post-2'></a>
 			<div class='blog-post-header'>
 				<span>Post #2: Deploying New Posts</span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d1cbce99a47e5b5e37f46c98293d5ab5821715d' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -255,6 +282,7 @@
 			<a name='blog-post-1'></a>
 			<div class='blog-post-header'>
 				<span>Post #1: The Plan</span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/be3aa221316ebdab153ab31f43d9c03b9df65fc3' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>This has been a long time coming. 
@@ -313,6 +341,7 @@
 			<a name='blog-post-?????'></a>
 			<div class='blog-post-header'>
 				<span>Post #?????: </span>
+				<span class='commit-link'><a href='#' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>
@@ -321,7 +350,7 @@
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'></span>, <span class='post-tag'></span></span>
-				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
+				<span class='post-timestamp'>Posted on MONTH DD, 2012 @ 3:00pm</span>
 				<span class='post-screenshot'><a href='img/blog/screenshots/post-?????.png' target='_blank'><img src='img/blog/screenshots/post-?????.png' title='Screenshot of site after post #?????' width=100 /></a></span>
 			</div>
 		</div>
@@ -344,6 +373,7 @@
 				<li><a href='#blog-post-4'>Post 4: For the Machines</a></li>
 				<li><a href='#blog-post-5'>Post 5: RSS, Atom, and Build Tools</a></li>
 				<li><a href='#blog-post-6'>Post 6: Traffic Analytics</a></li>
+				<li><a href='#blog-post-7'>Post 7: Links to GitHub</a></li>
 			<ul>
 		</div>
 
