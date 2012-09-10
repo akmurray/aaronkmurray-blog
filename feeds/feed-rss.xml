@@ -7,6 +7,29 @@
         <description />
         <language>en-us</language>
         <item>
+            <title>Post 9: IIS Static File Compression in web.config</title>
+            <description>
+				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
+				&lt;ol&gt;
+					&lt;li&gt;Removing the useless Response Header "X-Powered-By" that gets added by IIS&lt;/li&gt;
+					&lt;li&gt;Configure text (html, css) and javascript (js, json) files to be gzip'd automatically when the browser can handle it (ex: Accept-Encoding:gzip)&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;div class='callout'&gt;
+					&lt;img src='img/blog/posts/post-9-request-sniff-1.png' alt='Request details before web.config changes'&gt;
+					&lt;span class='citation'&gt;Request details before web.config changes (inspected using Chrome Developer Tools)&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;First of all - the Response Header "X-Powered-By" is a waste of 20 incompressible bytes (because they are in the header and the older HTTP protocol &lt;a href='http://stackoverflow.com/questions/5333367/http-header-compression' target="_blank"&gt;does not support header compression&lt;/a&gt; like the &lt;a href='http://en.wikipedia.org/wiki/SPDY' target="_blank"&gt;SPDY protocol&lt;/a&gt; does). From now on, every response sent from webserver will be 20 bytes lighter. Sweet!
+				&lt;p&gt;Secondly, we want to make sure that text files get compressed before they are sent to the client. Typically you can expect gzip'd files to be fully 2/3rds smaller than their uncompressed bretheren. In the case of this home page (index.html), the payload went from a hearty 39.67KB to a relatively svelte 12.83KB - a 67.7% savings!
+				&lt;div class='callout'&gt;
+					&lt;img src='img/blog/posts/post-9-request-sniff-2.png' alt='Request details after web.config changes'&gt;
+					&lt;span class='citation'&gt;Request details after web.config changes: gzip'd index.html payload is 67.7% smaller&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;Put this code in your web.config file and enjoy.
+				&lt;p&gt;&lt;script src="https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com"&gt;&lt;/script&gt;
+			</description>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+        </item>
+        <item>
             <title>Post #8: Automatic Image Compression</title>
             <description>
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
@@ -45,7 +68,7 @@
 				&lt;p&gt;Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #7: Links to GitHub</title>
@@ -54,7 +77,7 @@
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				&lt;p&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #6: Traffic Analytics</title>
@@ -70,7 +93,7 @@
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
 				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #5: RSS, Atom, and Build Tools</title>
@@ -90,7 +113,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #4: For the Machines</title>
@@ -143,7 +166,7 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #3: Basic Visual Cleanup</title>
@@ -169,7 +192,7 @@
 
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #2: Deploying New Posts</title>
@@ -208,7 +231,7 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #1: The Plan</title>
@@ -254,7 +277,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
         </item>
     </channel>
 </rss>

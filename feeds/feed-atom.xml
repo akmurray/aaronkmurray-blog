@@ -4,14 +4,41 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=1</id>
-    <updated>2012-09-10T22:10:20Z</updated>
+    <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=1</id>
+    <updated>2012-09-10T23:23:11Z</updated>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=2</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=2</id>
+        <title
+            type="text">Post 9: IIS Static File Compression in web.config</title>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
+        <content
+            type="text">
+				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
+				&lt;ol&gt;
+					&lt;li&gt;Removing the useless Response Header "X-Powered-By" that gets added by IIS&lt;/li&gt;
+					&lt;li&gt;Configure text (html, css) and javascript (js, json) files to be gzip'd automatically when the browser can handle it (ex: Accept-Encoding:gzip)&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;div class='callout'&gt;
+					&lt;img src='img/blog/posts/post-9-request-sniff-1.png' alt='Request details before web.config changes'&gt;
+					&lt;span class='citation'&gt;Request details before web.config changes (inspected using Chrome Developer Tools)&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;First of all - the Response Header "X-Powered-By" is a waste of 20 incompressible bytes (because they are in the header and the older HTTP protocol &lt;a href='http://stackoverflow.com/questions/5333367/http-header-compression' target="_blank"&gt;does not support header compression&lt;/a&gt; like the &lt;a href='http://en.wikipedia.org/wiki/SPDY' target="_blank"&gt;SPDY protocol&lt;/a&gt; does). From now on, every response sent from webserver will be 20 bytes lighter. Sweet!
+				&lt;p&gt;Secondly, we want to make sure that text files get compressed before they are sent to the client. Typically you can expect gzip'd files to be fully 2/3rds smaller than their uncompressed bretheren. In the case of this home page (index.html), the payload went from a hearty 39.67KB to a relatively svelte 12.83KB - a 67.7% savings!
+				&lt;div class='callout'&gt;
+					&lt;img src='img/blog/posts/post-9-request-sniff-2.png' alt='Request details after web.config changes'&gt;
+					&lt;span class='citation'&gt;Request details after web.config changes: gzip'd index.html payload is 67.7% smaller&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;Put this code in your web.config file and enjoy.
+				&lt;p&gt;&lt;script src="https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com"&gt;&lt;/script&gt;
+			</content>
+    </entry>
+    <entry>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=3</id>
         <title
             type="text">Post #8: Automatic Image Compression</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
@@ -52,11 +79,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=3</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=4</id>
         <title
             type="text">Post #7: Links to GitHub</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
@@ -65,11 +92,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=4</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=5</id>
         <title
             type="text">Post #6: Traffic Analytics</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
@@ -85,11 +112,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=5</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=6</id>
         <title
             type="text">Post #5: RSS, Atom, and Build Tools</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -109,11 +136,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=6</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=7</id>
         <title
             type="text">Post #4: For the Machines</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -166,11 +193,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=7</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=8</id>
         <title
             type="text">Post #3: Basic Visual Cleanup</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -196,11 +223,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=8</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=9</id>
         <title
             type="text">Post #2: Deploying New Posts</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -239,11 +266,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:37a43e97-e342-4969-b4ae-a24c01f91e8b;id=9</id>
+        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=10</id>
         <title
             type="text">Post #1: The Plan</title>
-        <published>2012-09-10T17:10:20-05:00</published>
-        <updated>2012-09-10T22:10:20Z</updated>
+        <published>2012-09-10T18:23:11-05:00</published>
+        <updated>2012-09-10T23:23:11Z</updated>
         <content
             type="text">
 				&lt;p&gt;This has been a long time coming. 

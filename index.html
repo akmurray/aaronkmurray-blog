@@ -70,6 +70,39 @@
 
 	<div id='wrapper-blog-posts'>
 
+
+		<div class='blog-post' name='blog-post-9'>
+			<a name='blog-post-9'></a>
+			<div class='blog-post-header'>
+				<span>Post 9: IIS Static File Compression in web.config</span>
+				<span class='commit-link'><a href='#' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
+				<ol>
+					<li>Removing the useless Response Header "X-Powered-By" that gets added by IIS</li>
+					<li>Configure text (html, css) and javascript (js, json) files to be gzip'd automatically when the browser can handle it (ex: Accept-Encoding:gzip)</li>
+				</ol>
+				<div class='callout'>
+					<img src='img/blog/posts/post-9-request-sniff-1.png' alt='Request details before web.config changes' />
+					<span class='citation'>Request details before web.config changes (inspected using Chrome Developer Tools)</span>
+				</div>
+				<p>First of all - the Response Header "X-Powered-By" is a waste of 20 incompressible bytes (because they are in the header and the older HTTP protocol <a href='http://stackoverflow.com/questions/5333367/http-header-compression' target=_blank>does not support header compression</a> like the <a href='http://en.wikipedia.org/wiki/SPDY' target=_blank>SPDY protocol</a> does). From now on, every response sent from webserver will be 20 bytes lighter. Sweet!
+				<p>Secondly, we want to make sure that text files get compressed before they are sent to the client. Typically you can expect gzip'd files to be fully 2/3rds smaller than their uncompressed bretheren. In the case of this home page (index.html), the payload went from a hearty 39.67KB to a relatively svelte 12.83KB - a 67.7% savings!
+				<div class='callout'>
+					<img src='img/blog/posts/post-9-request-sniff-2.png' alt='Request details after web.config changes' />
+					<span class='citation'>Request details after web.config changes: gzip'd index.html payload is 67.7% smaller</span>
+				</div>
+				<p>Put this code in your web.config file and enjoy.
+				<p><script src="https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com"></script>
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>web.config</span>, <span class='post-tag'>IIS</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>headers</span></span>
+				<span class='post-timestamp'>Posted on September 10, 2012 @ 6:30pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-9.png' target='_blank'><img src='img/blog/screenshots/post-9.png' title='Screenshot of site after post #9' width=100 /></a></span>
+			</div>
+		</div>
+
 		<div class='blog-post' name='blog-post-8'>
 			<a name='blog-post-8'></a>
 			<div class='blog-post-header'>
@@ -436,6 +469,7 @@
 				<li><a href='#blog-post-6'>Post 6: Traffic Analytics</a></li>
 				<li><a href='#blog-post-7'>Post 7: Links to GitHub</a></li>
 				<li><a href='#blog-post-8'>Post 8: Automatic Image Compression</a></li>
+				<li><a href='#blog-post-9'>Post 9: IIS Static File Compression in web.config</a></li>
 			<ul>
 		</div>
 
