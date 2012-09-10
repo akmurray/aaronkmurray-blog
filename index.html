@@ -30,6 +30,8 @@
 
 		.blog-post-body {padding:10px;}
 		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
+		.blog-post-body div.callout {margin:10px;text-align:center;}
+		.blog-post-body div.callout span.citation {text-align:center;color:#555;clear:both;display:block;font-size:smaller;}
 
 		.blog-post-footer .post-timestamp, .blog-post-footer .post-tags {display:block;clear:both;}
 		.blog-post-footer {padding:10px;border-bottom:1px solid #cdd;background-color:#f9f9f9;} 
@@ -40,6 +42,15 @@
 		#wrapper-logo .logo {display: block;margin-left: auto;margin-right: auto;}
 
 		#wrapper-blog-post-menu .menu-header {}
+
+		#table-png-compression-results {
+			border-collapse:collapse;
+		}
+
+		#table-png-compression-results th, #table-png-compression-results td {
+			padding:10px;
+			border:1px solid #888;
+		}
 
 
 	</style>
@@ -58,6 +69,56 @@
 	</div>
 
 	<div id='wrapper-blog-posts'>
+
+		<div class='blog-post' name='blog-post-8'>
+			<a name='blog-post-8'></a>
+			<div class='blog-post-header'>
+				<span>Post #8: Automatic Image Compression</span>
+				<span class='commit-link'><a href='#' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the <a href='https://github.com/akmurray/aaronkmurray-blog' target=_blank>code from github</a> at a certain point in time and view the site locally.
+				<p>These images are saved as <a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target=_blank>PNG</a> files, which is a lossless image format meaning that all of the original image data is still intact. Unlike <a href='http://en.wikipedia.org/wiki/JPEG' target=_blank>JPEG</a> files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
+				<div class='callout'>
+					<img src='img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk' />
+					<span class='citation'>Image comparing PNG (left) vs JPEG (right) detail</span>
+				</div>
+				<p>The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
+				<p>So there are two main actions that should be taken here:
+				<ol>
+					<li>Reduce the filesize via compression utilities</li>
+					<li>Create separate thumbnail images and reference those for the previews</li>
+				</ol>
+				<p>For this post, I decided to tackle the compression issue first, even though creating thumbnails would have a bigger effect, simply because the utility that I wrote is more useful universally.
+				<p>The utility I just created, called <a href='https://github.com/akmurray/aaronkmurray-blog-tools/imgsqz' target=_blank>imgsqz</a> (image squeeze for lack of creativity), has the following purpose:
+				<ul>
+					<li>Be executed as part of the "Build" process for this site</li>
+					<li>Batch process entire folders full of images to compress them</li>
+					<li>Not waste time try to recompress images that have already been compressed (because compression can take a long time)</li>
+				</ul>
+				<p>I've checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
+				<p><span class='code'>imgsqz.exe -s=c:\FolderWithImages</span>
+				<p>It's now part of the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target=_blank>build script for this site</a>, so that all PNG images from now on will be optimized before they hit the internet for consumption.
+				<p>Here are the results for some of the files on this site:
+				<table id='table-png-compression-results'>
+					<tr><th>File</th><th>Original Size</th><th>New Size</th><th>% Saved</th></tr>
+					<tr><td><a href='img/blog/screenshots/post-1.png' target=_blank>img/blog/screenshots/post-1.png</a></td><td>103 KB</td><td>86 KB</td><td>16.4%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-2.png' target=_blank>img/blog/screenshots/post-2.png</a></td><td>90 KB</td><td>74 KB</td><td>17.7%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-3.png' target=_blank>img/blog/screenshots/post-3.png</a></td><td>97 KB</td><td>68 KB</td><td>30.2%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-4.png' target=_blank>img/blog/screenshots/post-4.png</a></td><td>88 KB</td><td>49 KB</td><td>44.8%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-5.png' target=_blank>img/blog/screenshots/post-5.png</a></td><td>122 KB</td><td>104 KB</td><td>13.3%</td></tr>
+					<tr><td><a href='img/blog/icons/icon-rss-32.png' target=_blank>img/blog/icons/icon-rss-32.png</a></td><td>1,659 bytes</td><td>1,571 bytes</td><td>5.3%</td></tr>
+					<tr><td><a href='img/blog/logo/logo-1.png' target=_blank>img/blog/logo/logo-1.png</a></td><td>5,025 bytes</td><td>3,181 bytes</td><td>36.7%</td></tr>
+				</table>
+				<p>Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
+
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>images</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>bandwidth</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>imgsqz</span></span>
+				<span class='post-timestamp'>Posted on September 10, 2012 @ 5:05pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-8.png' target='_blank'><img src='img/blog/screenshots/post-8.png' title='Screenshot of site after post #8' width=100 /></a></span>
+			</div>
+		</div>
 
 		<div class='blog-post' name='blog-post-7'>
 			<a name='blog-post-7'></a>
@@ -361,7 +422,7 @@
 	<div id='wrapper-sidebar'>
 
 		<div id='wrapper-logo'>
-			<img src='img/blog/logo/logo-1.gif' class='logo' />
+			<img src='img/blog/logo/logo-1.png' class='logo' />
 		</div>
 
 		<div id='wrapper-blog-post-menu'>
@@ -374,6 +435,7 @@
 				<li><a href='#blog-post-5'>Post 5: RSS, Atom, and Build Tools</a></li>
 				<li><a href='#blog-post-6'>Post 6: Traffic Analytics</a></li>
 				<li><a href='#blog-post-7'>Post 7: Links to GitHub</a></li>
+				<li><a href='#blog-post-8'>Post 8: Automatic Image Compression</a></li>
 			<ul>
 		</div>
 

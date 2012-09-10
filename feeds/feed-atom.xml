@@ -4,14 +4,59 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=1</id>
-    <updated>2012-09-08T19:13:33Z</updated>
+    <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=1</id>
+    <updated>2012-09-10T22:03:05Z</updated>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=2</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=2</id>
+        <title
+            type="text">Post #8: Automatic Image Compression</title>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
+        <content
+            type="text">
+				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
+				&lt;p&gt;These images are saved as &lt;a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target="_blank"&gt;PNG&lt;/a&gt; files, which is a lossless image format meaning that all of the original image data is still intact. Unlike &lt;a href='http://en.wikipedia.org/wiki/JPEG' target="_blank"&gt;JPEG&lt;/a&gt; files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
+				&lt;div class='callout'&gt;
+					&lt;img src='img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
+					&lt;span class='citation'&gt;Image comparing PNG (left) vs JPEG (right) detail&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
+				&lt;p&gt;So there are two main actions that should be taken here:
+				&lt;ol&gt;
+					&lt;li&gt;Reduce the filesize via compression utilities&lt;/li&gt;
+					&lt;li&gt;Create separate thumbnail images and reference those for the previews&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;p&gt;For this post, I decided to tackle the compression issue first, even though creating thumbnails would have a bigger effect, simply because the utility that I wrote is more useful universally.
+				&lt;p&gt;The utility I just created, called &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/imgsqz' target="_blank"&gt;imgsqz&lt;/a&gt; (image squeeze for lack of creativity), has the following purpose:
+				&lt;ul&gt;
+					&lt;li&gt;Be executed as part of the "Build" process for this site&lt;/li&gt;
+					&lt;li&gt;Batch process entire folders full of images to compress them&lt;/li&gt;
+					&lt;li&gt;Not waste time try to recompress images that have already been compressed (because compression can take a long time)&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;I've checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
+				&lt;p&gt;&lt;span class='code'&gt;imgsqz.exe -s=c:\FolderWithImages&lt;/span&gt;
+				&lt;p&gt;It's now part of the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt;, so that all PNG images from now on will be optimized before they hit the internet for consumption.
+				&lt;p&gt;Here are the results for some of the files on this site:
+				&lt;table id='table-png-compression-results'&gt;
+					&lt;tr&gt;&lt;th&gt;File&lt;/th&gt;&lt;th&gt;Original Size&lt;/th&gt;&lt;th&gt;New Size&lt;/th&gt;&lt;th&gt;% Saved&lt;/th&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-1.png' target="_blank"&gt;img/blog/screenshots/post-1.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;103 KB&lt;/td&gt;&lt;td&gt;86 KB&lt;/td&gt;&lt;td&gt;16.4%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-2.png' target="_blank"&gt;img/blog/screenshots/post-2.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;90 KB&lt;/td&gt;&lt;td&gt;74 KB&lt;/td&gt;&lt;td&gt;17.7%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-3.png' target="_blank"&gt;img/blog/screenshots/post-3.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;97 KB&lt;/td&gt;&lt;td&gt;68 KB&lt;/td&gt;&lt;td&gt;30.2%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-4.png' target="_blank"&gt;img/blog/screenshots/post-4.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;88 KB&lt;/td&gt;&lt;td&gt;49 KB&lt;/td&gt;&lt;td&gt;44.8%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-5.png' target="_blank"&gt;img/blog/screenshots/post-5.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;122 KB&lt;/td&gt;&lt;td&gt;104 KB&lt;/td&gt;&lt;td&gt;13.3%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/icons/icon-rss-32.png' target="_blank"&gt;img/blog/icons/icon-rss-32.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;1,659 bytes&lt;/td&gt;&lt;td&gt;1,571 bytes&lt;/td&gt;&lt;td&gt;5.3%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/logo/logo-1.png' target="_blank"&gt;img/blog/logo/logo-1.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;5,025 bytes&lt;/td&gt;&lt;td&gt;3,181 bytes&lt;/td&gt;&lt;td&gt;36.7%&lt;/td&gt;&lt;/tr&gt;
+				&lt;/table&gt;
+				&lt;p&gt;Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
+
+			</content>
+    </entry>
+    <entry>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=3</id>
         <title
             type="text">Post #7: Links to GitHub</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
@@ -20,11 +65,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=3</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=4</id>
         <title
             type="text">Post #6: Traffic Analytics</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
@@ -40,11 +85,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=4</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=5</id>
         <title
             type="text">Post #5: RSS, Atom, and Build Tools</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -64,11 +109,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=5</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=6</id>
         <title
             type="text">Post #4: For the Machines</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -121,11 +166,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=6</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=7</id>
         <title
             type="text">Post #3: Basic Visual Cleanup</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -151,11 +196,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=7</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=8</id>
         <title
             type="text">Post #2: Deploying New Posts</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -194,11 +239,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:fd85acc7-b418-4be5-9916-931be315741c;id=8</id>
+        <id>uuid:089b63e7-2455-42cd-adc4-30e1cd481268;id=9</id>
         <title
             type="text">Post #1: The Plan</title>
-        <published>2012-09-08T14:13:33-05:00</published>
-        <updated>2012-09-08T19:13:33Z</updated>
+        <published>2012-09-10T17:03:05-05:00</published>
+        <updated>2012-09-10T22:03:05Z</updated>
         <content
             type="text">
 				&lt;p&gt;This has been a long time coming. 

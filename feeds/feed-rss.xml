@@ -7,13 +7,54 @@
         <description />
         <language>en-us</language>
         <item>
+            <title>Post #8: Automatic Image Compression</title>
+            <description>
+				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
+				&lt;p&gt;These images are saved as &lt;a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target="_blank"&gt;PNG&lt;/a&gt; files, which is a lossless image format meaning that all of the original image data is still intact. Unlike &lt;a href='http://en.wikipedia.org/wiki/JPEG' target="_blank"&gt;JPEG&lt;/a&gt; files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
+				&lt;div class='callout'&gt;
+					&lt;img src='img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
+					&lt;span class='citation'&gt;Image comparing PNG (left) vs JPEG (right) detail&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
+				&lt;p&gt;So there are two main actions that should be taken here:
+				&lt;ol&gt;
+					&lt;li&gt;Reduce the filesize via compression utilities&lt;/li&gt;
+					&lt;li&gt;Create separate thumbnail images and reference those for the previews&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;p&gt;For this post, I decided to tackle the compression issue first, even though creating thumbnails would have a bigger effect, simply because the utility that I wrote is more useful universally.
+				&lt;p&gt;The utility I just created, called &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/imgsqz' target="_blank"&gt;imgsqz&lt;/a&gt; (image squeeze for lack of creativity), has the following purpose:
+				&lt;ul&gt;
+					&lt;li&gt;Be executed as part of the "Build" process for this site&lt;/li&gt;
+					&lt;li&gt;Batch process entire folders full of images to compress them&lt;/li&gt;
+					&lt;li&gt;Not waste time try to recompress images that have already been compressed (because compression can take a long time)&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;I've checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
+				&lt;p&gt;&lt;span class='code'&gt;imgsqz.exe -s=c:\FolderWithImages&lt;/span&gt;
+				&lt;p&gt;It's now part of the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt;, so that all PNG images from now on will be optimized before they hit the internet for consumption.
+				&lt;p&gt;Here are the results for some of the files on this site:
+				&lt;table id='table-png-compression-results'&gt;
+					&lt;tr&gt;&lt;th&gt;File&lt;/th&gt;&lt;th&gt;Original Size&lt;/th&gt;&lt;th&gt;New Size&lt;/th&gt;&lt;th&gt;% Saved&lt;/th&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-1.png' target="_blank"&gt;img/blog/screenshots/post-1.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;103 KB&lt;/td&gt;&lt;td&gt;86 KB&lt;/td&gt;&lt;td&gt;16.4%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-2.png' target="_blank"&gt;img/blog/screenshots/post-2.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;90 KB&lt;/td&gt;&lt;td&gt;74 KB&lt;/td&gt;&lt;td&gt;17.7%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-3.png' target="_blank"&gt;img/blog/screenshots/post-3.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;97 KB&lt;/td&gt;&lt;td&gt;68 KB&lt;/td&gt;&lt;td&gt;30.2%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-4.png' target="_blank"&gt;img/blog/screenshots/post-4.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;88 KB&lt;/td&gt;&lt;td&gt;49 KB&lt;/td&gt;&lt;td&gt;44.8%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/screenshots/post-5.png' target="_blank"&gt;img/blog/screenshots/post-5.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;122 KB&lt;/td&gt;&lt;td&gt;104 KB&lt;/td&gt;&lt;td&gt;13.3%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/icons/icon-rss-32.png' target="_blank"&gt;img/blog/icons/icon-rss-32.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;1,659 bytes&lt;/td&gt;&lt;td&gt;1,571 bytes&lt;/td&gt;&lt;td&gt;5.3%&lt;/td&gt;&lt;/tr&gt;
+					&lt;tr&gt;&lt;td&gt;&lt;a href='img/blog/logo/logo-1.png' target="_blank"&gt;img/blog/logo/logo-1.png&lt;/a&gt;&lt;/td&gt;&lt;td&gt;5,025 bytes&lt;/td&gt;&lt;td&gt;3,181 bytes&lt;/td&gt;&lt;td&gt;36.7%&lt;/td&gt;&lt;/tr&gt;
+				&lt;/table&gt;
+				&lt;p&gt;Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
+
+			</description>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+        </item>
+        <item>
             <title>Post #7: Links to GitHub</title>
             <description>
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				&lt;p&gt;
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
         <item>
             <title>Post #6: Traffic Analytics</title>
@@ -29,7 +70,7 @@
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
 				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
         <item>
             <title>Post #5: RSS, Atom, and Build Tools</title>
@@ -49,7 +90,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
         <item>
             <title>Post #4: For the Machines</title>
@@ -102,7 +143,7 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
         <item>
             <title>Post #3: Basic Visual Cleanup</title>
@@ -128,7 +169,7 @@
 
 
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
         <item>
             <title>Post #2: Deploying New Posts</title>
@@ -167,7 +208,7 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
         <item>
             <title>Post #1: The Plan</title>
@@ -213,7 +254,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Sat, 08 Sep 2012 14:13:33 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
         </item>
     </channel>
 </rss>
