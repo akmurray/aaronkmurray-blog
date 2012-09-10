@@ -45,7 +45,7 @@
 				&lt;p&gt;Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #7: Links to GitHub</title>
@@ -54,7 +54,7 @@
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				&lt;p&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #6: Traffic Analytics</title>
@@ -70,7 +70,7 @@
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
 				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #5: RSS, Atom, and Build Tools</title>
@@ -90,7 +90,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #4: For the Machines</title>
@@ -143,7 +143,7 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #3: Basic Visual Cleanup</title>
@@ -169,7 +169,7 @@
 
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #2: Deploying New Posts</title>
@@ -208,7 +208,7 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
         <item>
             <title>Post #1: The Plan</title>
@@ -254,7 +254,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 17:03:05 -0500</pubDate>
+            <pubDate>Mon, 10 Sep 2012 17:10:20 -0500</pubDate>
         </item>
     </channel>
 </rss>
