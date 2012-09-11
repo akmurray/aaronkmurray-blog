@@ -7,6 +7,32 @@
         <description />
         <language>en-us</language>
         <item>
+            <title>Post #10: The SEO Plan</title>
+            <description>
+				&lt;p&gt;As outlined in &lt;a href='#blog-post-1'&gt;The Plan&lt;/a&gt;, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
+				&lt;p&gt;I hinted at this in &lt;a href='#blog-post-4'&gt;Post 4: For the Machines&lt;/a&gt;. Another major component for creating a site is the plan to go from simply being "out there on the Internet" to being easy to find from any major search engine. Much of the steps that need to be taken are lumped into the phrase &lt;a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target="_blank"&gt;Search Engine Optimization&lt;/a&gt;, or SEO for short.
+				&lt;p&gt;This is probably the most overlooked part of developing a site. Next week I'm going to start a 4-part series on SEO, in collaboration with guest author &lt;a href='http://ppcwithoutpity.com/' target="_blank"&gt;Shawn Livengood who runs the blog ppcwithoutpity.com&lt;/a&gt;.
+				&lt;p&gt;The prep for that series, it is prudent to start tracking some key SEO metrics as soon as possible. That way we'll be able to see how the changes affect those metrics over time.
+				&lt;p&gt;I won't go into too much detail know about each of these metrics, but here they are captured for historical purposes:
+				&lt;ul&gt;
+					&lt;li&gt;From Google:
+						&lt;ul&gt;
+							&lt;li&gt;&lt;a href='http://en.wikipedia.org/wiki/PageRank' target="_blank"&gt;PageRank&lt;/a&gt;: 0/10&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+					&lt;li&gt;From &lt;a href='http://www.seomoz.org/' target="_blank"&gt;seoMoz&lt;/a&gt; and &lt;a href='http://www.opensiteexplorer.org' target="_blank"&gt;opensiteexplorer.org&lt;/a&gt;:
+						&lt;ul&gt;
+							&lt;li&gt;&lt;a href='http://www.seomoz.org/learn-seo/domain-authority' target="_blank"&gt;Domain Authority&lt;/a&gt;: &lt;a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target="_blank"&gt;10/100&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;a href='http://www.seomoz.org/learn-seo/mozrank' target="_blank"&gt;MozRank&lt;/a&gt;: &lt;a href='http://moonsy.com/mozrank/' target="_blank"&gt;2.97&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;Linking Root Domains: &lt;a href='http://www.opensiteexplorer.org/domains?site=www.aaronkmurray.com' target="_blank"&gt;2&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;Total Links (inbound): &lt;a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target="_blank"&gt;5&lt;/a&gt;&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+				&lt;/ul&gt;
+			</description>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
+        </item>
+        <item>
             <title>Post 9: IIS Static File Compression in web.config</title>
             <description>
 				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
@@ -27,7 +53,7 @@
 				&lt;p&gt;Put this code in your web.config file and enjoy.
 				&lt;p&gt;&lt;script src="https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #8: Automatic Image Compression</title>
@@ -68,7 +94,7 @@
 				&lt;p&gt;Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #7: Links to GitHub</title>
@@ -77,7 +103,7 @@
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				&lt;p&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #6: Traffic Analytics</title>
@@ -93,7 +119,7 @@
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
 				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #5: RSS, Atom, and Build Tools</title>
@@ -113,7 +139,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #4: For the Machines</title>
@@ -166,7 +192,7 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #3: Basic Visual Cleanup</title>
@@ -192,7 +218,7 @@
 
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #2: Deploying New Posts</title>
@@ -231,7 +257,7 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
         <item>
             <title>Post #1: The Plan</title>
@@ -277,7 +303,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Mon, 10 Sep 2012 18:23:10 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 09:21:10 -0500</pubDate>
         </item>
     </channel>
 </rss>

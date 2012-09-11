@@ -4,14 +4,44 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=1</id>
-    <updated>2012-09-10T23:23:11Z</updated>
+    <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=1</id>
+    <updated>2012-09-11T14:21:10Z</updated>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=2</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=2</id>
+        <title
+            type="text">Post #10: The SEO Plan</title>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
+        <content
+            type="text">
+				&lt;p&gt;As outlined in &lt;a href='#blog-post-1'&gt;The Plan&lt;/a&gt;, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
+				&lt;p&gt;I hinted at this in &lt;a href='#blog-post-4'&gt;Post 4: For the Machines&lt;/a&gt;. Another major component for creating a site is the plan to go from simply being "out there on the Internet" to being easy to find from any major search engine. Much of the steps that need to be taken are lumped into the phrase &lt;a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target="_blank"&gt;Search Engine Optimization&lt;/a&gt;, or SEO for short.
+				&lt;p&gt;This is probably the most overlooked part of developing a site. Next week I'm going to start a 4-part series on SEO, in collaboration with guest author &lt;a href='http://ppcwithoutpity.com/' target="_blank"&gt;Shawn Livengood who runs the blog ppcwithoutpity.com&lt;/a&gt;.
+				&lt;p&gt;The prep for that series, it is prudent to start tracking some key SEO metrics as soon as possible. That way we'll be able to see how the changes affect those metrics over time.
+				&lt;p&gt;I won't go into too much detail know about each of these metrics, but here they are captured for historical purposes:
+				&lt;ul&gt;
+					&lt;li&gt;From Google:
+						&lt;ul&gt;
+							&lt;li&gt;&lt;a href='http://en.wikipedia.org/wiki/PageRank' target="_blank"&gt;PageRank&lt;/a&gt;: 0/10&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+					&lt;li&gt;From &lt;a href='http://www.seomoz.org/' target="_blank"&gt;seoMoz&lt;/a&gt; and &lt;a href='http://www.opensiteexplorer.org' target="_blank"&gt;opensiteexplorer.org&lt;/a&gt;:
+						&lt;ul&gt;
+							&lt;li&gt;&lt;a href='http://www.seomoz.org/learn-seo/domain-authority' target="_blank"&gt;Domain Authority&lt;/a&gt;: &lt;a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target="_blank"&gt;10/100&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;&lt;a href='http://www.seomoz.org/learn-seo/mozrank' target="_blank"&gt;MozRank&lt;/a&gt;: &lt;a href='http://moonsy.com/mozrank/' target="_blank"&gt;2.97&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;Linking Root Domains: &lt;a href='http://www.opensiteexplorer.org/domains?site=www.aaronkmurray.com' target="_blank"&gt;2&lt;/a&gt;&lt;/li&gt;
+							&lt;li&gt;Total Links (inbound): &lt;a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target="_blank"&gt;5&lt;/a&gt;&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+				&lt;/ul&gt;
+			</content>
+    </entry>
+    <entry>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=3</id>
         <title
             type="text">Post 9: IIS Static File Compression in web.config</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
@@ -34,11 +64,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=3</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=4</id>
         <title
             type="text">Post #8: Automatic Image Compression</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
@@ -79,11 +109,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=4</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=5</id>
         <title
             type="text">Post #7: Links to GitHub</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
@@ -92,11 +122,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=5</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=6</id>
         <title
             type="text">Post #6: Traffic Analytics</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
@@ -112,11 +142,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=6</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=7</id>
         <title
             type="text">Post #5: RSS, Atom, and Build Tools</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -136,11 +166,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=7</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=8</id>
         <title
             type="text">Post #4: For the Machines</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -193,11 +223,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=8</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=9</id>
         <title
             type="text">Post #3: Basic Visual Cleanup</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -223,11 +253,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=9</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=10</id>
         <title
             type="text">Post #2: Deploying New Posts</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -266,11 +296,11 @@
 			</content>
     </entry>
     <entry>
-        <id>uuid:0664142e-61bf-413c-b9d9-0c61319c50f0;id=10</id>
+        <id>uuid:e8fa2f4b-dd8a-4033-9f91-0201cccdf316;id=11</id>
         <title
             type="text">Post #1: The Plan</title>
-        <published>2012-09-10T18:23:11-05:00</published>
-        <updated>2012-09-10T23:23:11Z</updated>
+        <published>2012-09-11T09:21:10-05:00</published>
+        <updated>2012-09-11T14:21:10Z</updated>
         <content
             type="text">
 				&lt;p&gt;This has been a long time coming. 
