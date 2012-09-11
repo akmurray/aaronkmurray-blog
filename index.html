@@ -87,8 +87,8 @@
 				<p>The next step was realizing that I didn't want to have another manual step in the process of releaing a new post. I don't want to <a href='http://www.guidgenerator.com/online-guid-generator.aspx' target="_blank">generate</a> <a href='http://msdn.microsoft.com/en-us/library/system.guid.newguid.aspx' target="_blank">a</a> <a href='http://docs.oracle.com/javase/1.5.0/docs/api/java/util/UUID.html#randomUUID()' target="_blank">guid</a> by hand each time. I also didn't want to store a list of guids that are mapped to blog posts in some external file. 
 				<p>My solution for now while we're still in hand-coding mode is to add a step to rssgen that will search for a guid in each post, and if it doesn't find one, it adds it. 
 				<p>That means that as a write a post, in the post html I have this empty stub:
-				<ul><li><span class='code'>&lt;div class='blog-post-guid'&gt;</span></li></ul></div>
-				<p>I <a href='https://github.com/akmurray/aaronkmurray-blog-tools/commit/70f220e27e750a3f7b339b7bcb7310e0e63620d6' target="_blank">updated rssgen</a> to add the guids inside those stubs, and then re-save the index.html file during the build process.
+				<ul><li><span class='code'>&lt;div class='blog-post-guid'&gt;</span></li></ul>
+				<p>I <a href='https://github.com/akmurray/aaronkmurray-blog-tools/commit/70f220e27e750a3f7b339b7bcb7310e0e63620d6' target="_blank">updated rssgen</a> to add the guids inside those stubs, and then re-save the index.html file during the build process. And if I ever want to resend an update out for an old post, I can simply update the guid.
 				<p>This project is pretty interesting for me so far. These solutions are not the way I normally operate because I typically stand on the shoulders of giants and leverage frameworks that handle many of the details like this. My hope is that the readers learn a few things along the way, though I have a feeling that this project just may radically challenge many of my standard processes and assumptions about web development.
 			</div>
 			<div class='blog-post-footer'>
@@ -96,7 +96,7 @@
 				<span class='post-timestamp'>Posted on September 11, 2012 @ 12:05pm</span>
 				<span class='post-screenshot'><a href='img/blog/screenshots/post-11.png' target='_blank'><img src='img/blog/screenshots/post-11.png' title='Screenshot of site after post #11' width="100"></a></span>
 			</div>
-			<div class='blog-post-guid'>e8a8715f-24dd-44c4-9655-0aac79284aa0</div>
+			<div class='blog-post-guid'>e8a8715f-24dd-44c4-9655-0aac79284aa1</div>
 		</div>
 		
 		<div class='blog-post' name='blog-post-10'>
