@@ -7,6 +7,25 @@
         <description />
         <language>en-us</language>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
+            <title>Post 11: RSS Fix to Stop Spamming Readers</title>
+            <description>
+				&lt;p&gt;Bugs! Already there are bugs :) 
+				&lt;p&gt;A colleague of mine mentioned to me that whenever I release a new post, his reader fills shows that &lt;em&gt;all&lt;/em&gt; of the posts appear as new posts.
+				&lt;p&gt;&lt;img src='/img/blog/posts/post-11-google-reader.png' alt='Google Reader showing multiple new posts with each post'&gt;
+				&lt;p&gt;This is an interesting problem caused by the fact that I wasn't defining a &lt;span class='code'&gt;&amp;lt;guid&amp;gt;&lt;/span&gt; element in the RSS feed, nor a corresponding &lt;span class='code'&gt;&amp;lt;id&amp;gt;&lt;/span&gt; element in the atom feed. These elements are what feed readers (like Google Reader) use to determine if a post/entry is new or not. If the entry doesn't have an ID, it'll always be treated as new. Obviously I need to add these Ids.
+				&lt;p&gt;So, how should I choose a unique Id for each post? Some say that a &lt;a href='http://www.taguri.org/' target="_blank"&gt;TAG Uri&lt;/a&gt; should be used. While that seems like a nice way to ensure the creation of a unique id, I don't really want to put a lot of effort into building these Ids by hand (since we're still not using a DB yet). Additionally, I don't care what the Ids are because they are only going to be used by machines, so they don't need to be fancy. 
+				&lt;p&gt;I think this solution calls for a &lt;a href='http://en.wikipedia.org/wiki/Globally_unique_identifier' target="_blank"&gt;Guid&lt;/a&gt;. In fact, RSS feeds explicitly have an element for it. Bingo.
+				&lt;p&gt;The next step was realizing that I didn't want to have another manual step in the process of releaing a new post. I don't want to &lt;a href='http://www.guidgenerator.com/online-guid-generator.aspx' target="_blank"&gt;generate&lt;/a&gt; &lt;a href='http://msdn.microsoft.com/en-us/library/system.guid.newguid.aspx' target="_blank"&gt;a&lt;/a&gt; &lt;a href='http://docs.oracle.com/javase/1.5.0/docs/api/java/util/UUID.html#randomUUID()' target="_blank"&gt;guid&lt;/a&gt; by hand each time. I also didn't want to store a list of guids that are mapped to blog posts in some external file. 
+				&lt;p&gt;My solution for now while we're still in hand-coding mode is to add a step to rssgen that will search for a guid in each post, and if it doesn't find one, it adds it. 
+				&lt;p&gt;That means that as a write a post, in the post html I have this empty stub:
+				&lt;ul&gt;&lt;li&gt;&lt;span class='code'&gt;&amp;lt;div class='blog-post-guid'&amp;gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;</description>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
+        </item>
+        <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #10: The SEO Plan</title>
             <description>
 				&lt;p&gt;As outlined in &lt;a href='#blog-post-1'&gt;The Plan&lt;/a&gt;, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
@@ -30,9 +49,11 @@
 					&lt;/li&gt;
 				&lt;/ul&gt;
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post 9: IIS Static File Compression in web.config</title>
             <description>
 				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
@@ -53,9 +74,11 @@
 				&lt;p&gt;Put this code in your web.config file and enjoy.
 				&lt;p&gt;&lt;script src="https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #8: Automatic Image Compression</title>
             <description>
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
@@ -94,18 +117,22 @@
 				&lt;p&gt;Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
 
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #7: Links to GitHub</title>
             <description>
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='/img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				&lt;p&gt;
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #6: Traffic Analytics</title>
             <description>
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
@@ -119,9 +146,11 @@
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
 				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #5: RSS, Atom, and Build Tools</title>
             <description>
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -139,9 +168,11 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #4: For the Machines</title>
             <description>
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -192,9 +223,11 @@
 					&lt;/li&gt;
 				&lt;/li&gt;&lt;/ul&gt;
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #3: Basic Visual Cleanup</title>
             <description>
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -218,9 +251,11 @@
 
 
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #2: Deploying New Posts</title>
             <description>
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -257,9 +292,11 @@
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
         <item>
+            <guid
+                isPermaLink="false">e8a8715f-24dd-44c4-9655-0aac79284aa0</guid>
             <title>Post #1: The Plan</title>
             <description>
 				&lt;p&gt;This has been a long time coming. 
@@ -303,7 +340,7 @@
 				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
 
 			</description>
-            <pubDate>Tue, 11 Sep 2012 09:54:45 -0500</pubDate>
+            <pubDate>Tue, 11 Sep 2012 12:04:50 -0500</pubDate>
         </item>
     </channel>
 </rss>

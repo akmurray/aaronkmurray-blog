@@ -32,6 +32,7 @@
 		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
 		.blog-post-body div.callout {margin:10px;text-align:center;}
 		.blog-post-body div.callout span.citation {text-align:center;color:#555;clear:both;display:block;font-size:smaller;}
+		.blog-post-guid {display:none;}
 
 		.blog-post-footer .post-timestamp, .blog-post-footer .post-tags {display:block;clear:both;}
 		.blog-post-footer {padding:10px;border-bottom:1px solid #cdd;background-color:#f9f9f9;} 
@@ -62,39 +63,66 @@
 	<div id='wrapper-site-header'>
 		<span class='title'>Aaron Murray's blog</span>
 		<div id='wrapper-site-header-icons'>
-			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-32.png' /></a>
-			<a href='https://twitter.com/aaronkmurray' target=_blank title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-32.png' /></a>
-			<a href='https://github.com/akmurray' target=_blank title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-32.png' /></a>
+			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank" title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-32.png'></a>
+			<a href='https://twitter.com/aaronkmurray' target="_blank" title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-32.png'></a>
+			<a href='https://github.com/akmurray' target="_blank" title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-32.png'></a>
 		</div>
 	</div>
 
 	<div id='wrapper-blog-posts'>
 
- 
+		<div class='blog-post' name='blog-post-11'>
+			<a name='blog-post-11'></a>
+			<div class='blog-post-header'>
+				<span>Post 11: RSS Fix to Stop Spamming Readers</span>
+				<span class='commit-link'><a href='#' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Bugs! Already there are bugs :) 
+				<p>A colleague of mine mentioned to me that whenever I release a new post, his reader fills shows that <em>all</em> of the posts appear as new posts.
+				<p><img src='img/blog/posts/post-11-google-reader.png' alt='Google Reader showing multiple new posts with each post'>
+				<p>This is an interesting problem caused by the fact that I wasn't defining a <span class='code'>&lt;guid&gt;</span> element in the RSS feed, nor a corresponding <span class='code'>&lt;id&gt;</span> element in the atom feed. These elements are what feed readers (like Google Reader) use to determine if a post/entry is new or not. If the entry doesn't have an ID, it'll always be treated as new. Obviously I need to add these Ids.
+				<p>So, how should I choose a unique Id for each post? Some say that a <a href='http://www.taguri.org/' target="_blank">TAG Uri</a> should be used. While that seems like a nice way to ensure the creation of a unique id, I don't really want to put a lot of effort into building these Ids by hand (since we're still not using a DB yet). Additionally, I don't care what the Ids are because they are only going to be used by machines, so they don't need to be fancy. 
+				<p>I think this solution calls for a <a href='http://en.wikipedia.org/wiki/Globally_unique_identifier' target="_blank">Guid</a>. In fact, RSS feeds explicitly have an element for it. Bingo.
+				<p>The next step was realizing that I didn't want to have another manual step in the process of releaing a new post. I don't want to <a href='http://www.guidgenerator.com/online-guid-generator.aspx' target="_blank">generate</a> <a href='http://msdn.microsoft.com/en-us/library/system.guid.newguid.aspx' target="_blank">a</a> <a href='http://docs.oracle.com/javase/1.5.0/docs/api/java/util/UUID.html#randomUUID()' target="_blank">guid</a> by hand each time. I also didn't want to store a list of guids that are mapped to blog posts in some external file. 
+				<p>My solution for now while we're still in hand-coding mode is to add a step to rssgen that will search for a guid in each post, and if it doesn't find one, it adds it. 
+				<p>That means that as a write a post, in the post html I have this empty stub:
+				<ul><li><span class='code'>&lt;div class='blog-post-guid'&gt;</span></li></ul></div>
+				<p>I <a href='https://github.com/akmurray/aaronkmurray-blog-tools/commit/70f220e27e750a3f7b339b7bcb7310e0e63620d6' target="_blank">updated rssgen</a> to add the guids inside those stubs, and then re-save the index.html file during the build process.
+				<p>This project is pretty interesting for me so far. These solutions are not the way I normally operate because I typically stand on the shoulders of giants and leverage frameworks that handle many of the details like this. My hope is that the readers learn a few things along the way, though I have a feeling that this project just may radically challenge many of my standard processes and assumptions about web development.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>rss</span>, <span class='post-tag'>rssgen</span>, <span class='post-tag'>guid</span></span>
+				<span class='post-timestamp'>Posted on September 11, 2012 @ 12:05pm</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-11.png' target='_blank'><img src='img/blog/screenshots/post-11.png' title='Screenshot of site after post #11' width="100"></a></span>
+			</div>
+			<div class='blog-post-guid'>e8a8715f-24dd-44c4-9655-0aac79284aa0</div>
+		</div>
+		
 		<div class='blog-post' name='blog-post-10'>
 			<a name='blog-post-10'></a>
 			<div class='blog-post-header'>
 				<span>Post #10: The SEO Plan</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/18d9668f9164739eb7bd40ec7d305dd82fcdb66b' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/18d9668f9164739eb7bd40ec7d305dd82fcdb66b' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>As outlined in <a href='#blog-post-1'>The Plan</a>, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
-				<p>I hinted at this in <a href='#blog-post-4'>Post 4: For the Machines</a>. Another major component for creating a site is the plan to go from simply being "out there on the Internet" to being easy to find from any major search engine. Much of the steps that need to be taken are lumped into the phrase <a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target=_blank>Search Engine Optimization</a>, or SEO for short.
-				<p>This is probably the most overlooked part of developing a site. Next week I'm going to start a 4-part series on SEO, in collaboration with guest author <a href='http://ppcwithoutpity.com/' target=_blank>Shawn Livengood who runs the blog ppcwithoutpity.com</a>.
+				<p>I hinted at this in <a href='#blog-post-4'>Post 4: For the Machines</a>. Another major component for creating a site is the plan to go from simply being "out there on the Internet" to being easy to find from any major search engine. Much of the steps that need to be taken are lumped into the phrase <a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target="_blank">Search Engine Optimization</a>, or SEO for short.
+				<p>This is probably the most overlooked part of developing a site. Next week I'm going to start a 4-part series on SEO, in collaboration with guest author <a href='http://ppcwithoutpity.com/' target="_blank">Shawn Livengood who runs the blog ppcwithoutpity.com</a>.
 				<p>The prep for that series, it is prudent to start tracking some key SEO metrics as soon as possible. That way we'll be able to see how the changes affect those metrics over time.
 				<p>I won't go into too much detail know about each of these metrics, but here they are captured for historical purposes:
 				<ul>
 					<li>From Google:
 						<ul>
-							<li><a href='http://en.wikipedia.org/wiki/PageRank' target=_blank>PageRank</a>: 0/10</li>
+							<li><a href='http://en.wikipedia.org/wiki/PageRank' target="_blank">PageRank</a>: 0/10</li>
 						</ul>
 					</li>
-					<li>From <a href='http://www.seomoz.org/' target=_blank>seoMoz</a> and <a href='http://www.opensiteexplorer.org' target=_blank>opensiteexplorer.org</a>:
+					<li>From <a href='http://www.seomoz.org/' target="_blank">seoMoz</a> and <a href='http://www.opensiteexplorer.org' target="_blank">opensiteexplorer.org</a>:
 						<ul>
-							<li><a href='http://www.seomoz.org/learn-seo/domain-authority' target=_blank>Domain Authority</a>: <a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target=_blank>10/100</a></li>
-							<li><a href='http://www.seomoz.org/learn-seo/mozrank' target=_blank>MozRank</a>: <a href='http://moonsy.com/mozrank/' target=_blank>2.97</a></li>
-							<li>Linking Root Domains: <a href='http://www.opensiteexplorer.org/domains?site=www.aaronkmurray.com' target=_blank>2</a></li>
-							<li>Total Links (inbound): <a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target=_blank>5</a></li>
+							<li><a href='http://www.seomoz.org/learn-seo/domain-authority' target="_blank">Domain Authority</a>: <a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target="_blank">10/100</a></li>
+							<li><a href='http://www.seomoz.org/learn-seo/mozrank' target="_blank">MozRank</a>: <a href='http://moonsy.com/mozrank/' target="_blank">2.97</a></li>
+							<li>Linking Root Domains: <a href='http://www.opensiteexplorer.org/domains?site=www.aaronkmurray.com' target="_blank">2</a></li>
+							<li>Total Links (inbound): <a href='http://www.opensiteexplorer.org/links?site=www.aaronkmurray.com' target="_blank">5</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -102,15 +130,16 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>SEO</span>, <span class='post-tag'>PageRank</span>, <span class='post-tag'>MozRank</span></span>
 				<span class='post-timestamp'>Posted on September 11, 2012 @ 9:25am</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-10.png' target='_blank'><img src='img/blog/screenshots/post-10.png' title='Screenshot of site after post #10' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-10.png' target='_blank'><img src='img/blog/screenshots/post-10.png' title='Screenshot of site after post #10' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>9b04f8d9-f240-4ce7-9eea-44c76137e097</div>
 		</div>
 
 		<div class='blog-post' name='blog-post-9'>
 			<a name='blog-post-9'></a>
 			<div class='blog-post-header'>
 				<span>Post 9: IIS Static File Compression in web.config</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/70c9344d99d8d1025a7597cd8edba384d28a48c7' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/70c9344d99d8d1025a7597cd8edba384d28a48c7' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
@@ -119,13 +148,13 @@
 					<li>Configure text (html, css) and javascript (js, json) files to be gzip'd automatically when the browser can handle it (ex: Accept-Encoding:gzip)</li>
 				</ol>
 				<div class='callout'>
-					<img src='img/blog/posts/post-9-request-sniff-1.png' alt='Request details before web.config changes' />
+					<img src='img/blog/posts/post-9-request-sniff-1.png' alt='Request details before web.config changes'>
 					<span class='citation'>Request details before web.config changes (inspected using Chrome Developer Tools)</span>
 				</div>
-				<p>First of all - the Response Header "X-Powered-By" is a waste of 20 incompressible bytes (because they are in the header and the older HTTP protocol <a href='http://stackoverflow.com/questions/5333367/http-header-compression' target=_blank>does not support header compression</a> like the <a href='http://en.wikipedia.org/wiki/SPDY' target=_blank>SPDY protocol</a> does). From now on, every response sent from webserver will be 20 bytes lighter. Sweet!
+				<p>First of all - the Response Header "X-Powered-By" is a waste of 20 incompressible bytes (because they are in the header and the older HTTP protocol <a href='http://stackoverflow.com/questions/5333367/http-header-compression' target="_blank">does not support header compression</a> like the <a href='http://en.wikipedia.org/wiki/SPDY' target="_blank">SPDY protocol</a> does). From now on, every response sent from webserver will be 20 bytes lighter. Sweet!
 				<p>Secondly, we want to make sure that text files get compressed before they are sent to the client. Typically you can expect gzip'd files to be fully 2/3rds smaller than their uncompressed bretheren. In the case of this home page (index.html), the payload went from a hearty 39.67KB to a relatively svelte 12.83KB - a 67.7% savings!
 				<div class='callout'>
-					<img src='img/blog/posts/post-9-request-sniff-2.png' alt='Request details after web.config changes' />
+					<img src='img/blog/posts/post-9-request-sniff-2.png' alt='Request details after web.config changes'>
 					<span class='citation'>Request details after web.config changes: gzip'd index.html payload is 67.7% smaller</span>
 				</div>
 				<p>Put this code in your web.config file and enjoy.
@@ -134,21 +163,22 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>web.config</span>, <span class='post-tag'>IIS</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>headers</span></span>
 				<span class='post-timestamp'>Posted on September 10, 2012 @ 6:30pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-9.png' target='_blank'><img src='img/blog/screenshots/post-9.png' title='Screenshot of site after post #9' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-9.png' target='_blank'><img src='img/blog/screenshots/post-9.png' title='Screenshot of site after post #9' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>5f6842bd-df6f-402d-b451-a7447d247db5</div>
 		</div>
 
 		<div class='blog-post' name='blog-post-8'>
 			<a name='blog-post-8'></a>
 			<div class='blog-post-header'>
 				<span>Post #8: Automatic Image Compression</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/cc4a47493fa67f731f53abb9048cc1701cb979eb' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/cc4a47493fa67f731f53abb9048cc1701cb979eb' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the <a href='https://github.com/akmurray/aaronkmurray-blog' target=_blank>code from github</a> at a certain point in time and view the site locally.
-				<p>These images are saved as <a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target=_blank>PNG</a> files, which is a lossless image format meaning that all of the original image data is still intact. Unlike <a href='http://en.wikipedia.org/wiki/JPEG' target=_blank>JPEG</a> files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
+				<p>Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">code from github</a> at a certain point in time and view the site locally.
+				<p>These images are saved as <a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target="_blank">PNG</a> files, which is a lossless image format meaning that all of the original image data is still intact. Unlike <a href='http://en.wikipedia.org/wiki/JPEG' target="_blank">JPEG</a> files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
 				<div class='callout'>
-					<img src='img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk' />
+					<img src='img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'>
 					<span class='citation'>Image comparing PNG (left) vs JPEG (right) detail</span>
 				</div>
 				<p>The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
@@ -158,7 +188,7 @@
 					<li>Create separate thumbnail images and reference those for the previews</li>
 				</ol>
 				<p>For this post, I decided to tackle the compression issue first, even though creating thumbnails would have a bigger effect, simply because the utility that I wrote is more useful universally.
-				<p>The utility I just created, called <a href='https://github.com/akmurray/aaronkmurray-blog-tools/imgsqz' target=_blank>imgsqz</a> (image squeeze for lack of creativity), has the following purpose:
+				<p>The utility I just created, called <a href='https://github.com/akmurray/aaronkmurray-blog-tools/imgsqz' target="_blank">imgsqz</a> (image squeeze for lack of creativity), has the following purpose:
 				<ul>
 					<li>Be executed as part of the "Build" process for this site</li>
 					<li>Batch process entire folders full of images to compress them</li>
@@ -166,17 +196,17 @@
 				</ul>
 				<p>I've checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
 				<p><span class='code'>imgsqz.exe -s=c:\FolderWithImages</span>
-				<p>It's now part of the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target=_blank>build script for this site</a>, so that all PNG images from now on will be optimized before they hit the internet for consumption.
+				<p>It's now part of the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a>, so that all PNG images from now on will be optimized before they hit the internet for consumption.
 				<p>Here are the results for some of the files on this site:
 				<table id='table-png-compression-results'>
 					<tr><th>File</th><th>Original Size</th><th>New Size</th><th>% Saved</th></tr>
-					<tr><td><a href='img/blog/screenshots/post-1.png' target=_blank>img/blog/screenshots/post-1.png</a></td><td>103 KB</td><td>86 KB</td><td>16.4%</td></tr>
-					<tr><td><a href='img/blog/screenshots/post-2.png' target=_blank>img/blog/screenshots/post-2.png</a></td><td>90 KB</td><td>74 KB</td><td>17.7%</td></tr>
-					<tr><td><a href='img/blog/screenshots/post-3.png' target=_blank>img/blog/screenshots/post-3.png</a></td><td>97 KB</td><td>68 KB</td><td>30.2%</td></tr>
-					<tr><td><a href='img/blog/screenshots/post-4.png' target=_blank>img/blog/screenshots/post-4.png</a></td><td>88 KB</td><td>49 KB</td><td>44.8%</td></tr>
-					<tr><td><a href='img/blog/screenshots/post-5.png' target=_blank>img/blog/screenshots/post-5.png</a></td><td>122 KB</td><td>104 KB</td><td>13.3%</td></tr>
-					<tr><td><a href='img/blog/icons/icon-rss-32.png' target=_blank>img/blog/icons/icon-rss-32.png</a></td><td>1,659 bytes</td><td>1,571 bytes</td><td>5.3%</td></tr>
-					<tr><td><a href='img/blog/logo/logo-1.png' target=_blank>img/blog/logo/logo-1.png</a></td><td>5,025 bytes</td><td>3,181 bytes</td><td>36.7%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-1.png' target="_blank">img/blog/screenshots/post-1.png</a></td><td>103 KB</td><td>86 KB</td><td>16.4%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-2.png' target="_blank">img/blog/screenshots/post-2.png</a></td><td>90 KB</td><td>74 KB</td><td>17.7%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-3.png' target="_blank">img/blog/screenshots/post-3.png</a></td><td>97 KB</td><td>68 KB</td><td>30.2%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-4.png' target="_blank">img/blog/screenshots/post-4.png</a></td><td>88 KB</td><td>49 KB</td><td>44.8%</td></tr>
+					<tr><td><a href='img/blog/screenshots/post-5.png' target="_blank">img/blog/screenshots/post-5.png</a></td><td>122 KB</td><td>104 KB</td><td>13.3%</td></tr>
+					<tr><td><a href='img/blog/icons/icon-rss-32.png' target="_blank">img/blog/icons/icon-rss-32.png</a></td><td>1,659 bytes</td><td>1,571 bytes</td><td>5.3%</td></tr>
+					<tr><td><a href='img/blog/logo/logo-1.png' target="_blank">img/blog/logo/logo-1.png</a></td><td>5,025 bytes</td><td>3,181 bytes</td><td>36.7%</td></tr>
 				</table>
 				<p>Each KB of savings is worth a tiny bit of load time and a tiny bit of bandwidth. Over time these savings will add up nicely.
 
@@ -184,41 +214,43 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>images</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>bandwidth</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>imgsqz</span></span>
 				<span class='post-timestamp'>Posted on September 10, 2012 @ 5:05pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-8.png' target='_blank'><img src='img/blog/screenshots/post-8.png' title='Screenshot of site after post #8' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-8.png' target='_blank'><img src='img/blog/screenshots/post-8.png' title='Screenshot of site after post #8' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>9d61cdb5-c803-43cf-a5d8-644839b870a9</div>
 		</div>
 
 		<div class='blog-post' name='blog-post-7'>
 			<a name='blog-post-7'></a>
 			<div class='blog-post-header'>
 				<span>Post #7: Links to GitHub</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Quick post here - I just added links to <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target=_blank>each Post's main commit on github</a> in the post header. Just click on the <a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a> icon to see what was changed.
+				<p>Quick post here - I just added links to <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank">each Post's main commit on github</a> in the post header. Just click on the <a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a> icon to see what was changed.
 				<p>The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				<p>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>github</span>, <span class='post-tag'>commit</span></span>
 				<span class='post-timestamp'>Posted on September 8, 2012 @ 2:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-7.png' target='_blank'><img src='img/blog/screenshots/post-7.png' title='Screenshot of site after post #7' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-7.png' target='_blank'><img src='img/blog/screenshots/post-7.png' title='Screenshot of site after post #7' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>6825317b-ba31-4a4c-acba-67d52dfc44ca</div>
 		</div>
 
 		<div class='blog-post' name='blog-post-6'>
 			<a name='blog-post-6'></a>
 			<div class='blog-post-header'>
 				<span>Post #6: Traffic Analytics</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/f61bdfc72b758ae365f73d4c108f44628fcbd34a' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/f61bdfc72b758ae365f73d4c108f44628fcbd34a' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using <a href='https://www.quantcast.com/aaronkmurray.com' target=_blank>Quantcast</a>. 
+				<p>Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using <a href='https://www.quantcast.com/aaronkmurray.com' target="_blank">Quantcast</a>. 
 				<p>After you sign up for a free/basic Quantcast account, you can "start quantifying" your traffic by entering your domain name and generating a snippet of html/js that will ping their servers each time someone loads up your page. Simply slap that down at the bottom of your page for now, and we can start getting a rough idea of traffic stats. 
 				<p>That snippet is polite because it does 2 things:
 				<ul>
-					<li>Try to load the tracking script using the <a href='http://davidwalsh.name/html5-async' target=_blank>async attribute</a>, which <a href='http://www.stevesouders.com/blog/2012/01/13/javascript-performance/' target=_blank>speeds</a> up the responsiveness of the site</li>
-					<li>Fallback to <a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target=_blank>pixel tracking image</a> when javascript is unavailable</li>
+					<li>Try to load the tracking script using the <a href='http://davidwalsh.name/html5-async' target="_blank">async attribute</a>, which <a href='http://www.stevesouders.com/blog/2012/01/13/javascript-performance/' target="_blank">speeds</a> up the responsiveness of the site</li>
+					<li>Fallback to <a href='http://www.ehow.com/how_5277834_use-pixel-tracking.html' target="_blank">pixel tracking image</a> when javascript is unavailable</li>
 				</ul>
 				<p>Simple, effective, and good enough for now.
 				<p>Note: it will take a few days before the stats for this site show up on Quantcast. 
@@ -227,22 +259,23 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>quantcast</span>, <span class='post-tag'>tracking</span>, <span class='post-tag'>traffic</span>, <span class='post-tag'>async</span></span>
 				<span class='post-timestamp'>Posted on September 7, 2012 @ 5:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-6.png' target='_blank'><img src='img/blog/screenshots/post-6.png' title='Screenshot of site after post #6' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-6.png' target='_blank'><img src='img/blog/screenshots/post-6.png' title='Screenshot of site after post #6' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>1497a7a5-638d-4fb2-b51c-94d67f6cc9f2</div>
 		</div>
 
 		<div class='blog-post' name='blog-post-5'>
 			<a name='blog-post-5'></a>
 			<div class='blog-post-header'>
 				<span>Post #5: RSS, Atom, and Build Tools</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/5eb387dd03581340da8bfd120200f0666123c6d2' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/5eb387dd03581340da8bfd120200f0666123c6d2' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Alrighty - creating a new blog these days pratically assumes that readers will be provided with an <a href='http://en.wikipedia.org/wiki/RSS' target=_blank>RSS</a> or <a href='http://en.wikipedia.org/wiki/Atom_(standard)' target=_blank>Atom</a> feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
-				<p>Ironically, in the interest of starting from absolute square 1, this blog lacked an <a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank>RSS feed</a>. That was one of the more challenging pieces that I had to get over mentally when considering doing a blog this way. Fortunately, the thought of losing potential followers was ultimately outweighed by the principle of the project.
+				<p>Alrighty - creating a new blog these days pratically assumes that readers will be provided with an <a href='http://en.wikipedia.org/wiki/RSS' target="_blank">RSS</a> or <a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank">Atom</a> feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
+				<p>Ironically, in the interest of starting from absolute square 1, this blog lacked an <a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank">RSS feed</a>. That was one of the more challenging pieces that I had to get over mentally when considering doing a blog this way. Fortunately, the thought of losing potential followers was ultimately outweighed by the principle of the project.
 				<p>That said, getting an RSS feed up ASAP was <em>very important</em> to me...even more important than other basics like choosing a database. This leads to an interesting chicken/egg problem however. How will I provide an RSS feed without a database? Am I going to copy/paste even more HTML into an XML file for a RSS feed? What about the Atom feed? Should that be another set of copying/pasting/formatting? Should I just buck up, pick a db, but not mention it until later? 
 				<p>Well, given that this site is a fairly unique project, I'm open to fairly unique solutions as we trod down this path. So what is the solution to the feed problem? Parsing.
-				<p>Considering my disdain for copying and pasting, and the lack of a database to draw from, I wrote a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen/rssgen' target=_blank>little parser</a> that would read the HTML from this site and produce <a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank>RSS</a> and <a href='http://aaronkmurray.com/feeds/feed-atom.xml' target=_blank>Atom</a> feeds automatically.
+				<p>Considering my disdain for copying and pasting, and the lack of a database to draw from, I wrote a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen/rssgen' target="_blank">little parser</a> that would read the HTML from this site and produce <a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank">RSS</a> and <a href='http://aaronkmurray.com/feeds/feed-atom.xml' target="_blank">Atom</a> feeds automatically.
 				<p>Running that tool now becomes the first step in the "build" process for this site. That means that the current process for making and releasing a change to this site is now:
 				<ul>
 					<li>Edit this index.html file</li>
@@ -256,15 +289,16 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>rss</span>, <span class='post-tag'>atom</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>command line</span>, <span class='post-tag'>build</span>, <span class='post-tag'>release</span></span>
 				<span class='post-timestamp'>Posted on September 7, 2012 @ 4:40pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-5.png' target='_blank'><img src='img/blog/screenshots/post-5.png' title='Screenshot of site after post #5' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-5.png' target='_blank'><img src='img/blog/screenshots/post-5.png' title='Screenshot of site after post #5' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>b4932981-4707-45e9-baff-adb57e36e1d6</div>
 		</div>
 
 		<div class='blog-post' name='blog-post-4'>
 			<a name='blog-post-4'></a>
 			<div class='blog-post-header'>
 				<span>Post #4: For the Machines</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/978f856970e0d2bd911583a61db4883f24e63cb1' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/978f856970e0d2bd911583a61db4883f24e63cb1' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -283,8 +317,8 @@
 							<li>If it is not, or it is missing, then the browser will just try to figure out the character encoding set on it's own.</li>
 							<li>You will typically only run across the need to include this once you start dealing with localization of your site.</li>
 							<li>More info <a href='http://code.google.com/p/doctype-mirror/wiki/MetaCharsetAttribute' target='_blank'>here</a>
-						</ul>
-					</li>
+						</li></ul>
+					
 					<li><span class='code'>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;</span>
 						<ul>
 							<li>This tag basically does two things.</li>
@@ -313,13 +347,14 @@
 							<li>We'll dive deeper into this in the future, but we've got too many bigger fish to fry at the moment</li>
 						</ul>
 					</li>
-				</ul>
+				</li></ul>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>robots</span>, <span class='post-tag'>meta</span>, <span class='post-tag'>crawlers</span>, <span class='post-tag'>seo</span></span>
 				<span class='post-timestamp'>Posted on August 23, 2012 @ 11:15am</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-4.png' target='_blank'><img src='img/blog/screenshots/post-4.png' title='Screenshot of site after post #4' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-4.png' target='_blank'><img src='img/blog/screenshots/post-4.png' title='Screenshot of site after post #4' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>3c8edac9-4a60-4ab0-b335-e68b55329fee</div>
 		</div>
 
 
@@ -328,7 +363,7 @@
 			<a name='blog-post-3'></a>
 			<div class='blog-post-header'>
 				<span>Post #3: Basic Visual Cleanup</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/480dc9d7c9073ec3e91b12c26b6c157cc11143d6' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/480dc9d7c9073ec3e91b12c26b6c157cc11143d6' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty, so we have a plan, we've got the code up on <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -355,15 +390,16 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>css</span>, <span class='post-tag'>html</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 6:10pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-3.png' target='_blank'><img src='img/blog/screenshots/post-3.png' title='Screenshot of site after post #3' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-3.png' target='_blank'><img src='img/blog/screenshots/post-3.png' title='Screenshot of site after post #3' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>95f8c883-3c79-4f4c-87e0-71fd7c631a62</div>
 		</div>
 
 		<div class='blog-post'>
 			<a name='blog-post-2'></a>
 			<div class='blog-post-header'>
 				<span>Post #2: Deploying New Posts</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d1cbce99a47e5b5e37f46c98293d5ab5821715d' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d1cbce99a47e5b5e37f46c98293d5ab5821715d' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -403,15 +439,16 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>git</span>, <span class='post-tag'>command-line</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 4:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-2.png' target='_blank'><img src='img/blog/screenshots/post-2.png' title='Screenshot of site after post #2' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-2.png' target='_blank'><img src='img/blog/screenshots/post-2.png' title='Screenshot of site after post #2' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>1a761ec2-aecf-43c2-a76f-4eebdabf6b51</div>
 		</div>
 
 		<div class='blog-post'>
 			<a name='blog-post-1'></a>
 			<div class='blog-post-header'>
 				<span>Post #1: The Plan</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/be3aa221316ebdab153ab31f43d9c03b9df65fc3' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/be3aa221316ebdab153ab31f43d9c03b9df65fc3' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>This has been a long time coming. 
@@ -427,13 +464,13 @@
 				<p>As I poured through ideas and wrote down reams of notes, one thing was apparent: <span class='callout'>I was spending a lot of time and effort on the blog but not actually blogging.</span>
 				<p>Last night I couldn't sleep. The kid's toy keyboard was "cleaned up" in a way that a key was being pressed repeatedly whenever the air conditioning changed the pressure in the play room. I finally got up to address the situation, and then found myself unable to fall back to sleep. 
 				<p>After laying in bed for a couple of hours thinking about the blog, I finally got up to write down my ideas on paper so that I could actually fall asleep. This is common for me: the fear of forgetting an idea keeping me from drifting off into sleepytown.
-				<p>This morning I get into work and checked on my RSS feed folder for .NET development. It's been a few days since I checked it, but <a href='http://www.hanselman.com/blog/YourWordsAreWasted.aspx' target=_blank>this call-to-action from Scott Hanselman</a> was the final straw. The answer is simply to start blogging now and sort out the details later.
+				<p>This morning I get into work and checked on my RSS feed folder for .NET development. It's been a few days since I checked it, but <a href='http://www.hanselman.com/blog/YourWordsAreWasted.aspx' target="_blank">this call-to-action from Scott Hanselman</a> was the final straw. The answer is simply to start blogging now and sort out the details later.
 				<p>So what's the plan? Well, the plan is:
 				<ul>
 					<li>Roll my own site/blog from the ground up</li>
 					<li>Hosted at my house in my server rack</li>
 					<li>Post about all of the changes and more importantly, show the intention behind them</li>
-					<li>Make this site <a href='https://github.com/akmurray/aaronkmurray-blog' target=_blank>publicly available on github</a> so that everyone can see how it works and see it progress</li>
+					<li>Make this site <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">publicly available on github</a> so that everyone can see how it works and see it progress</li>
 					<li>Start with a single index.html file and advance the site it all the way through to a scalable, distributed system, from the ground up</li>
 				</ul>
 				<p>Ultimately, I'd like to think that someone new to the web development craft will be able to use this site, the posts, and the source code history as a guide to seeing what goes on behind the scenes for how to create modern web software. I'm going to start at absolute step 1, and advance steadily through the growth of a real application. 
@@ -458,8 +495,9 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>site-story</span>, <span class='post-tag'>insomnia</span>, <span class='post-tag'>plan</span>, <span class='post-tag'>twitter</span>, <span class='post-tag'>git</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-1.png' target='_blank'><img src='img/blog/screenshots/post-1.png' title='Screenshot of site after first post' width=100 /></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-1.png' target='_blank'><img src='img/blog/screenshots/post-1.png' title='Screenshot of site after first post' width="100"></a></span>
 			</div>
+			<div class='blog-post-guid'>a882e042-86e5-4d3e-b1c7-f970cf2e0769</div>
 		</div>
 
 
@@ -482,6 +520,7 @@
 				<span class='post-timestamp'>Posted on MONTH DD, 2012 @ 3:00pm</span>
 				<span class='post-screenshot'><a href='img/blog/screenshots/post-?????.png' target='_blank'><img src='img/blog/screenshots/post-?????.png' title='Screenshot of site after post #?????' width=100 /></a></span>
 			</div>
+			<div class='blog-post-guid'></div>
 		</div>
 		????? REMINDER for Mr. No Database: Add an entry to the Posts section of the menu on the right
 -->
@@ -490,7 +529,7 @@
 	<div id='wrapper-sidebar'>
 
 		<div id='wrapper-logo'>
-			<img src='img/blog/logo/logo-1.png' class='logo' />
+			<img src='img/blog/logo/logo-1.png' class='logo'>
 		</div>
 
 		<div id='wrapper-blog-post-menu'>
@@ -506,8 +545,9 @@
 				<li><a href='#blog-post-8'>Post 8: Automatic Image Compression</a></li>
 				<li><a href='#blog-post-9'>Post 9: IIS Static File Compression in web.config</a></li>
 				<li><a href='#blog-post-10'>Post 10: The SEO Plan</a></li>
+				<li><a href='#blog-post-11'>Post 11: RSS Fix to Stop Spamming Readers</a></li>
 			<ul>
-		</div>
+		</ul></ul></div>
 
 	</div>
 
@@ -515,9 +555,9 @@
 
 		<span class='copyright'>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span>
 		<div id='wrapper-site-footer-icons'>
-			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target=_blank title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-16.png' /></a>
-			<a href='https://twitter.com/aaronkmurray' target=_blank title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-16.png' /></a>
-			<a href='https://github.com/akmurray' target=_blank title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-16.png' /></a>
+			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank" title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-16.png'></a>
+			<a href='https://twitter.com/aaronkmurray' target="_blank" title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-16.png'></a>
+			<a href='https://github.com/akmurray' target="_blank" title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-16.png'></a>
 			<!--
 			my gists: https://gist.github.com/akmurray
 			-->
@@ -542,10 +582,10 @@
 	</script>
 
 	<noscript>
-	<div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif" border="0" height="1" width="1" alt="Quantcast"/></div>
+	<div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif" border="0" height="1" width="1" alt="Quantcast"></div>
 	</noscript>
 	<!-- End Quantcast tag -->
 
-</div>
+
 </body>
 </html>
