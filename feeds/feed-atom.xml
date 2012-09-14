@@ -4,14 +4,50 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:a38b39ee-d6b4-4bd6-ab55-9116466bbd74;id=1</id>
-    <updated>2012-09-11T17:34:26Z</updated>
+    <id>uuid:8e8964e7-06e8-48f6-9389-cc266e4e95b0;id=1</id>
+    <updated>2012-09-14T22:14:34Z</updated>
+    <entry>
+        <id>2ee06cd8-f5d6-46b4-ba6f-62aeb1c2ecf9</id>
+        <title
+            type="text">Post #12: Favicon</title>
+        <published>2012-09-14T16:51:00-05:00</published>
+        <updated>2012-09-14T16:51:00-05:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;Alrighty. Today's post is simple - but something that is very visible to users. The Favicon.
+				&lt;p&gt;A Favicon is the little icon that appears in the browser tab/address bar. 
+				&lt;div class='callout'&gt;
+					&lt;img src='/img/blog/posts/post-12-favico-browser-comparo.png' title='Favicon browser comparison'&gt;
+					&lt;span class='citation'&gt;Favicons as they are shown in Firefox 14, Chrome 21, and Internet Explorer 9&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;In 1999, Microsoft introduced Favicons for the purpose of having an icon to display in the Favorites (bookmarks) menu on Internet Explorer. 2 things were done that (nowadays) goes against some web principles:
+				&lt;ol&gt;
+					&lt;li&gt;Use of the Windows .ico file format
+						&lt;ul&gt;&lt;li&gt;example: favicon.ico instead of favicon.jpg&lt;/li&gt;&lt;/ul&gt;
+					&lt;/li&gt;
+					&lt;li&gt;Default convention for the file location off the root of the site's domain URL, which meant the location didn't have to be specified in HTML
+						&lt;ul&gt;
+							&lt;li&gt;www.aaronkmurray.com/favicon.ico&lt;/li&gt;
+							&lt;li&gt;This limits the webmaster's ability to place the file anywhere, or even on a different server, without mapping OS folders or making URL-rewrite rules (we'll cover those later)&lt;/li&gt;
+						&lt;/ul&gt;
+					&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;p&gt;As a result, even though you can now specify any location and filetype that you want for your favicon, I still recommend serving an actual favicon.ico from your root for 2 reasons:
+				&lt;ol&gt;
+					&lt;li&gt;Many browsers and RSS readers will still make requests to this location looking for an icon&lt;/li&gt;
+					&lt;li&gt;You'll cut down on the 404 (File Not Found) error noise that will show up in your hit logging&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;p&gt;Adding a modern Favicon is simple: &lt;span class='code'&gt;&amp;lt;link rel="icon" href="/favicon.png" type="image/png" /&amp;gt;&lt;/span&gt;
+				&lt;p&gt;But you should still slap a &lt;a href='/favicon.ico' target="_blank"&gt;favicon.ico&lt;/a&gt; in your root.
+				&lt;p&gt;If you don't know how to make a &lt;a href='http://en.wikipedia.org/wiki/ICO_(file_format)' target="_blank"&gt;.ico file&lt;/a&gt;, you can use a free site like &lt;a href='http://www.convertico.com/' target="_blank"&gt;convertico.com&lt;/a&gt; to upload an image and get an .ico file back.
+			</content>
+    </entry>
     <entry>
         <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
         <title
             type="text">Post 11: RSS Fix to Stop Spamming Readers</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-11T12:05:00-05:00</published>
+        <updated>2012-09-11T12:05:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Bugs! Already there are bugs :) 
@@ -26,14 +62,16 @@
 				&lt;ul&gt;&lt;li&gt;&lt;span class='code'&gt;&amp;lt;div class='blog-post-guid'&amp;gt;&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;
 				&lt;p&gt;I &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/commit/70f220e27e750a3f7b339b7bcb7310e0e63620d6' target="_blank"&gt;updated rssgen&lt;/a&gt; to add the guids inside those stubs, and then re-save the index.html file during the build process. And if I ever want to resend an update out for an old post, I can simply update the guid.
 				&lt;p&gt;This project is pretty interesting for me so far. These solutions are not the way I normally operate because I typically stand on the shoulders of giants and leverage frameworks that handle many of the details like this. My hope is that the readers learn a few things along the way, though I have a feeling that this project just may radically challenge many of my standard processes and assumptions about web development.
+				&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt; September 14, 2012:
+				&lt;p&gt;Ironically, I had to add more changes to keep from spamming the feed readers. The changes included keeping the date timestamps from changing which would trigger a refetch/display as well.
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>9b04f8d9-f240-4ce7-9eea-44c76137e097</id>
         <title
             type="text">Post #10: The SEO Plan</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-11T09:25:00-05:00</published>
+        <updated>2012-09-11T09:25:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;As outlined in &lt;a href='#blog-post-1'&gt;The Plan&lt;/a&gt;, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
@@ -59,11 +97,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>5f6842bd-df6f-402d-b451-a7447d247db5</id>
         <title
             type="text">Post 9: IIS Static File Compression in web.config</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-10T18:30:00-05:00</published>
+        <updated>2012-09-10T18:30:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
@@ -86,11 +124,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>9d61cdb5-c803-43cf-a5d8-644839b870a9</id>
         <title
             type="text">Post #8: Automatic Image Compression</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-10T17:05:00-05:00</published>
+        <updated>2012-09-10T17:05:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
@@ -131,11 +169,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>6825317b-ba31-4a4c-acba-67d52dfc44ca</id>
         <title
             type="text">Post #7: Links to GitHub</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-14T17:14:34-05:00</published>
+        <updated>2012-09-14T17:14:34-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='/img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
@@ -144,11 +182,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>1497a7a5-638d-4fb2-b51c-94d67f6cc9f2</id>
         <title
             type="text">Post #6: Traffic Analytics</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-14T17:14:34-05:00</published>
+        <updated>2012-09-14T17:14:34-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
@@ -164,11 +202,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>b4932981-4707-45e9-baff-adb57e36e1d6</id>
         <title
             type="text">Post #5: RSS, Atom, and Build Tools</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-09-14T17:14:34-05:00</published>
+        <updated>2012-09-14T17:14:34-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -188,11 +226,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>3c8edac9-4a60-4ab0-b335-e68b55329fee</id>
         <title
             type="text">Post #4: For the Machines</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-08-23T11:15:00-05:00</published>
+        <updated>2012-08-23T11:15:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
@@ -245,11 +283,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>95f8c883-3c79-4f4c-87e0-71fd7c631a62</id>
         <title
             type="text">Post #3: Basic Visual Cleanup</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-08-22T18:10:00-05:00</published>
+        <updated>2012-08-22T18:10:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
@@ -275,11 +313,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>1a761ec2-aecf-43c2-a76f-4eebdabf6b51</id>
         <title
             type="text">Post #2: Deploying New Posts</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-08-22T16:00:00-05:00</published>
+        <updated>2012-08-22T16:00:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
@@ -318,11 +356,11 @@
 			</content>
     </entry>
     <entry>
-        <id>e8a8715f-24dd-44c4-9655-0aac79284aa1</id>
+        <id>a882e042-86e5-4d3e-b1c7-f970cf2e0769</id>
         <title
             type="text">Post #1: The Plan</title>
-        <published>2012-09-11T12:34:26-05:00</published>
-        <updated>2012-09-11T17:34:26Z</updated>
+        <published>2012-08-22T15:00:00-05:00</published>
+        <updated>2012-08-22T15:00:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;This has been a long time coming. 
