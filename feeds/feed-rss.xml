@@ -172,8 +172,8 @@
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 				&lt;p&gt;
 			</description>
-            <pubDate>Fri, 14 Sep 2012 17:16:35 -0500</pubDate>
-            <a10:updated>2012-09-14T17:16:35-05:00</a10:updated>
+            <pubDate>Fri, 14 Sep 2012 17:20:49 -0500</pubDate>
+            <a10:updated>2012-09-14T17:20:49-05:00</a10:updated>
         </item>
         <item>
             <guid
@@ -191,8 +191,8 @@
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
 				&lt;p&gt;&lt;script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"&gt;&lt;/script&gt;
 			</description>
-            <pubDate>Fri, 14 Sep 2012 17:16:35 -0500</pubDate>
-            <a10:updated>2012-09-14T17:16:35-05:00</a10:updated>
+            <pubDate>Fri, 14 Sep 2012 17:20:49 -0500</pubDate>
+            <a10:updated>2012-09-14T17:20:49-05:00</a10:updated>
         </item>
         <item>
             <guid
@@ -214,8 +214,8 @@
 				&lt;/ul&gt;
 				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
-            <pubDate>Fri, 14 Sep 2012 17:16:35 -0500</pubDate>
-            <a10:updated>2012-09-14T17:16:35-05:00</a10:updated>
+            <pubDate>Fri, 14 Sep 2012 17:20:49 -0500</pubDate>
+            <a10:updated>2012-09-14T17:20:49-05:00</a10:updated>
         </item>
         <item>
             <guid
