@@ -4,12 +4,40 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:3f6d8baf-4de7-44fc-9c23-fc6778d42135;id=1</id>
-    <updated>2012-09-14T22:28:21Z</updated>
+    <id>uuid:f932c803-abae-46e9-97c8-74918a1d74d7;id=1</id>
+    <updated>2012-09-17T19:51:37Z</updated>
+    <entry>
+        <id>6bbfc7bf-2561-4cd0-a384-5574f714e51a</id>
+        <title
+            type="text">Post 13: Image Thumbnails</title>
+        <published>2012-09-17T14:55:00-05:00</published>
+        <updated>2012-09-17T14:55:00-05:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;Way back in &lt;a href='#blog-post-8'&gt;Post 8&lt;/a&gt; I mentioned 2 ways to reduce the impact of images on bandwidth. The method I tackled then was to automatically compress the png images in the build script. In this post, I will show you how to further reduce the impact by creating and displaying thumbnails instead of scaling down the original image using HTML (&lt;span class='code'&gt;&amp;lt;img ... &lt;strong&gt;width=100&lt;/strong&gt; /&amp;gt;&lt;/span&gt;).
+				&lt;div class='callout'&gt;
+					&lt;img src='/img/blog/posts/post-13-request-payload-before-thumbnails-chart.png' alt='Request payload before thumbnails'&gt;
+					&lt;span class='citation'&gt;Request payload before using thumbnails (inspected using Firefox, &lt;a href='http://getfirebug.com/' target="_blank"&gt;FireBug&lt;/a&gt;, and &lt;a href='http://developer.yahoo.com/yslow/' target="_blank"&gt;YSlow&lt;/a&gt; plugin)&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;As you can see from the chart, fully 98% of the data that users have to download from the site is for images. Of those 24 images, 12 were fullsize blog post screenshots, which weighed in at a portly 1.17MB. Those 12 little screenshot previews accounted 77% of the size for the entire page - and that is after we compressed the images to reduce about one-third of the filesize.
+				&lt;p&gt;I made a sample thumbnail by resizing the image down to 100 pixels wide produced a new preview image that was 90% smaller than the original. The prospect of reducing 77% of the entire request payload by 90% got me excited. 
+				&lt;p&gt;Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don't want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt; so I knew that I wanted to tie into that step. 
+				&lt;p&gt;
+				&lt;script src="https://gist.github.com/3739310.js"&gt; &lt;/script&gt;
+				&lt;p&gt;Notes on the batch file:
+				&lt;ul&gt;
+					&lt;li&gt;The &lt;span class='code'&gt;FOR&lt;/span&gt; loop gets a list of all of the screenshot files that don't have "thumb" in the name&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;SETLOCAL ENABLEDELAYEDEXPANSION&lt;/span&gt; is special inside of loops so that variables can be set with each iteration&lt;/li&gt;
+					&lt;li&gt;A new thumbnail file is only created if one does not exist already&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;convert.exe&lt;/span&gt; file comes from the free image utility library &lt;a href='http://www.imagemagick.org'&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;span class='code'&gt;width=100&lt;/span&gt; attributes from the previews because it was no longer necessary. Not too shabby for a few lines of code added to the build script.
+			</content>
+    </entry>
     <entry>
         <id>2ee06cd8-f5d6-46b4-ba6f-62aeb1c2ecf9</id>
         <title
-            type="text">Post #12: Favicon</title>
+            type="text">Post 12: Favicon</title>
         <published>2012-09-14T16:51:00-05:00</published>
         <updated>2012-09-14T16:51:00-05:00</updated>
         <content
@@ -69,7 +97,7 @@
     <entry>
         <id>9b04f8d9-f240-4ce7-9eea-44c76137e097</id>
         <title
-            type="text">Post #10: The SEO Plan</title>
+            type="text">Post 10: The SEO Plan</title>
         <published>2012-09-11T09:25:00-05:00</published>
         <updated>2012-09-11T09:25:00-05:00</updated>
         <content
@@ -126,7 +154,7 @@
     <entry>
         <id>9d61cdb5-c803-43cf-a5d8-644839b870a9</id>
         <title
-            type="text">Post #8: Automatic Image Compression</title>
+            type="text">Post 8: Automatic Image Compression</title>
         <published>2012-09-10T17:05:00-05:00</published>
         <updated>2012-09-10T17:05:00-05:00</updated>
         <content
@@ -134,7 +162,7 @@
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
 				&lt;p&gt;These images are saved as &lt;a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target="_blank"&gt;PNG&lt;/a&gt; files, which is a lossless image format meaning that all of the original image data is still intact. Unlike &lt;a href='http://en.wikipedia.org/wiki/JPEG' target="_blank"&gt;JPEG&lt;/a&gt; files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
 				&lt;div class='callout'&gt;
-					&lt;img src='/img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
+					&lt;img src='/img/blog/posts/post-8-png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
 					&lt;span class='citation'&gt;Image comparing PNG (left) vs JPEG (right) detail&lt;/span&gt;
 				&lt;/div&gt;
 				&lt;p&gt;The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
@@ -171,7 +199,7 @@
     <entry>
         <id>6825317b-ba31-4a4c-acba-67d52dfc44ca</id>
         <title
-            type="text">Post #7: Links to GitHub</title>
+            type="text">Post 7: Links to GitHub</title>
         <published>2012-09-08T14:00:00-05:00</published>
         <updated>2012-09-08T14:00:00-05:00</updated>
         <content
@@ -184,7 +212,7 @@
     <entry>
         <id>1497a7a5-638d-4fb2-b51c-94d67f6cc9f2</id>
         <title
-            type="text">Post #6: Traffic Analytics</title>
+            type="text">Post 6: Traffic Analytics</title>
         <published>2012-09-07T17:00:00-05:00</published>
         <updated>2012-09-07T17:00:00-05:00</updated>
         <content
@@ -204,7 +232,7 @@
     <entry>
         <id>b4932981-4707-45e9-baff-adb57e36e1d6</id>
         <title
-            type="text">Post #5: RSS, Atom, and Build Tools</title>
+            type="text">Post 5: RSS, Atom, and Build Tools</title>
         <published>2012-09-07T16:40:00-05:00</published>
         <updated>2012-09-07T16:40:00-05:00</updated>
         <content
@@ -228,7 +256,7 @@
     <entry>
         <id>3c8edac9-4a60-4ab0-b335-e68b55329fee</id>
         <title
-            type="text">Post #4: For the Machines</title>
+            type="text">Post 4: For the Machines</title>
         <published>2012-08-23T11:15:00-05:00</published>
         <updated>2012-08-23T11:15:00-05:00</updated>
         <content
@@ -285,7 +313,7 @@
     <entry>
         <id>95f8c883-3c79-4f4c-87e0-71fd7c631a62</id>
         <title
-            type="text">Post #3: Basic Visual Cleanup</title>
+            type="text">Post 3: Basic Visual Cleanup</title>
         <published>2012-08-22T18:10:00-05:00</published>
         <updated>2012-08-22T18:10:00-05:00</updated>
         <content
@@ -315,7 +343,7 @@
     <entry>
         <id>1a761ec2-aecf-43c2-a76f-4eebdabf6b51</id>
         <title
-            type="text">Post #2: Deploying New Posts</title>
+            type="text">Post 2: Deploying New Posts</title>
         <published>2012-08-22T16:00:00-05:00</published>
         <updated>2012-08-22T16:00:00-05:00</updated>
         <content
@@ -358,7 +386,7 @@
     <entry>
         <id>a882e042-86e5-4d3e-b1c7-f970cf2e0769</id>
         <title
-            type="text">Post #1: The Plan</title>
+            type="text">Post 1: The Plan</title>
         <published>2012-08-22T15:00:00-05:00</published>
         <updated>2012-08-22T15:00:00-05:00</updated>
         <content
@@ -368,7 +396,7 @@
 				&lt;p&gt;There have been tons of questions swirling around in my head, like: 
 				&lt;ul&gt;
 					&lt;li&gt;Blog: Roll my &lt;a href='http://www.tandemgames.com/' target='_blank'&gt;own&lt;/a&gt; &lt;a href='http://www.domainofheroes.com/' target='_blank'&gt;site&lt;/a&gt; &lt;a href='http://www.aliensandrobots.com/' target='_blank'&gt;again&lt;/a&gt;? or use seasoned blog &lt;a href='http://dasblog.codeplex.com/' target='_blank'&gt;software&lt;/a&gt; with &lt;a href='http://wordpress.org/' target='_blank'&gt;heavy community support&lt;/a&gt;?&lt;/li&gt;
-					&lt;li&gt;Host: Use a &lt;a href='https://appharbor.com' target='_blank'&gt;cloud&lt;/a&gt; &lt;a href='http://www.heroku.com/' target='_blank'&gt;application&lt;/a&gt;  &lt;a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'&gt;host&lt;/a&gt;? Use a cheap host that &lt;a href='http://bluehost.com/' target='_blank'&gt;supports simple scripts&lt;/a&gt; for common apps? Host out of the &lt;a href='img/blog/posts/aarons_server_rack.jpg' target='_blank'&gt;server rack in my house&lt;/a&gt;?&lt;/li&gt;
+					&lt;li&gt;Host: Use a &lt;a href='https://appharbor.com' target='_blank'&gt;cloud&lt;/a&gt; &lt;a href='http://www.heroku.com/' target='_blank'&gt;application&lt;/a&gt;  &lt;a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'&gt;host&lt;/a&gt;? Use a cheap host that &lt;a href='http://bluehost.com/' target='_blank'&gt;supports simple scripts&lt;/a&gt; for common apps? Host out of the &lt;a href='img/blog/posts/post-1-aarons_server_rack.jpg' target='_blank'&gt;server rack in my house&lt;/a&gt;?&lt;/li&gt;
 					&lt;li&gt;Platform: Java? .NET? "pure" HTML/JS? &lt;a href='http://expect.sourceforge.net/cgi.tcl/'&gt;TCL/CGI&lt;/a&gt;? Something more &lt;a href='http://rubyonrails.org/' target='_target'&gt;hip&lt;/a&gt;?&lt;/li&gt;
 					&lt;li&gt;Audience: Should I be connecting with &lt;a href='http://lostechies.com/' target='_blank'&gt;other developers&lt;/a&gt;? Other small-business owners? Friends? Family? &lt;/li&gt;
 					&lt;li&gt;Content: Is this going to be a personal activity log? Professional journal? Or just another tech experiement?&lt;/li&gt;

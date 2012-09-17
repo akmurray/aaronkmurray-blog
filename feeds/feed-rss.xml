@@ -8,8 +8,35 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">6bbfc7bf-2561-4cd0-a384-5574f714e51a</guid>
+            <title>Post 13: Image Thumbnails</title>
+            <description>
+				&lt;p&gt;Way back in &lt;a href='#blog-post-8'&gt;Post 8&lt;/a&gt; I mentioned 2 ways to reduce the impact of images on bandwidth. The method I tackled then was to automatically compress the png images in the build script. In this post, I will show you how to further reduce the impact by creating and displaying thumbnails instead of scaling down the original image using HTML (&lt;span class='code'&gt;&amp;lt;img ... &lt;strong&gt;width=100&lt;/strong&gt; /&amp;gt;&lt;/span&gt;).
+				&lt;div class='callout'&gt;
+					&lt;img src='/img/blog/posts/post-13-request-payload-before-thumbnails-chart.png' alt='Request payload before thumbnails'&gt;
+					&lt;span class='citation'&gt;Request payload before using thumbnails (inspected using Firefox, &lt;a href='http://getfirebug.com/' target="_blank"&gt;FireBug&lt;/a&gt;, and &lt;a href='http://developer.yahoo.com/yslow/' target="_blank"&gt;YSlow&lt;/a&gt; plugin)&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;As you can see from the chart, fully 98% of the data that users have to download from the site is for images. Of those 24 images, 12 were fullsize blog post screenshots, which weighed in at a portly 1.17MB. Those 12 little screenshot previews accounted 77% of the size for the entire page - and that is after we compressed the images to reduce about one-third of the filesize.
+				&lt;p&gt;I made a sample thumbnail by resizing the image down to 100 pixels wide produced a new preview image that was 90% smaller than the original. The prospect of reducing 77% of the entire request payload by 90% got me excited. 
+				&lt;p&gt;Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don't want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt; so I knew that I wanted to tie into that step. 
+				&lt;p&gt;
+				&lt;script src="https://gist.github.com/3739310.js"&gt; &lt;/script&gt;
+				&lt;p&gt;Notes on the batch file:
+				&lt;ul&gt;
+					&lt;li&gt;The &lt;span class='code'&gt;FOR&lt;/span&gt; loop gets a list of all of the screenshot files that don't have "thumb" in the name&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;SETLOCAL ENABLEDELAYEDEXPANSION&lt;/span&gt; is special inside of loops so that variables can be set with each iteration&lt;/li&gt;
+					&lt;li&gt;A new thumbnail file is only created if one does not exist already&lt;/li&gt;
+					&lt;li&gt;&lt;span class='code'&gt;convert.exe&lt;/span&gt; file comes from the free image utility library &lt;a href='http://www.imagemagick.org'&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;span class='code'&gt;width=100&lt;/span&gt; attributes from the previews because it was no longer necessary. Not too shabby for a few lines of code added to the build script.
+			</description>
+            <pubDate>Mon, 17 Sep 2012 14:55:00 -0500</pubDate>
+            <a10:updated>2012-09-17T14:55:00-05:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">2ee06cd8-f5d6-46b4-ba6f-62aeb1c2ecf9</guid>
-            <title>Post #12: Favicon</title>
+            <title>Post 12: Favicon</title>
             <description>
 				&lt;p&gt;Alrighty. Today's post is simple - but something that is very visible to users. The Favicon.
 				&lt;p&gt;A Favicon is the little icon that appears in the browser tab/address bar. 
@@ -67,7 +94,7 @@
         <item>
             <guid
                 isPermaLink="false">9b04f8d9-f240-4ce7-9eea-44c76137e097</guid>
-            <title>Post #10: The SEO Plan</title>
+            <title>Post 10: The SEO Plan</title>
             <description>
 				&lt;p&gt;As outlined in &lt;a href='#blog-post-1'&gt;The Plan&lt;/a&gt;, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
 				&lt;p&gt;I hinted at this in &lt;a href='#blog-post-4'&gt;Post 4: For the Machines&lt;/a&gt;. Another major component for creating a site is the plan to go from simply being "out there on the Internet" to being easy to find from any major search engine. Much of the steps that need to be taken are lumped into the phrase &lt;a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target="_blank"&gt;Search Engine Optimization&lt;/a&gt;, or SEO for short.
@@ -122,12 +149,12 @@
         <item>
             <guid
                 isPermaLink="false">9d61cdb5-c803-43cf-a5d8-644839b870a9</guid>
-            <title>Post #8: Automatic Image Compression</title>
+            <title>Post 8: Automatic Image Compression</title>
             <description>
 				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank"&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
 				&lt;p&gt;These images are saved as &lt;a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target="_blank"&gt;PNG&lt;/a&gt; files, which is a lossless image format meaning that all of the original image data is still intact. Unlike &lt;a href='http://en.wikipedia.org/wiki/JPEG' target="_blank"&gt;JPEG&lt;/a&gt; files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
 				&lt;div class='callout'&gt;
-					&lt;img src='/img/blog/posts/png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
+					&lt;img src='/img/blog/posts/post-8-png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
 					&lt;span class='citation'&gt;Image comparing PNG (left) vs JPEG (right) detail&lt;/span&gt;
 				&lt;/div&gt;
 				&lt;p&gt;The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
@@ -166,7 +193,7 @@
         <item>
             <guid
                 isPermaLink="false">6825317b-ba31-4a4c-acba-67d52dfc44ca</guid>
-            <title>Post #7: Links to GitHub</title>
+            <title>Post 7: Links to GitHub</title>
             <description>
 				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='/img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
@@ -178,7 +205,7 @@
         <item>
             <guid
                 isPermaLink="false">1497a7a5-638d-4fb2-b51c-94d67f6cc9f2</guid>
-            <title>Post #6: Traffic Analytics</title>
+            <title>Post 6: Traffic Analytics</title>
             <description>
 				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target="_blank"&gt;Quantcast&lt;/a&gt;. 
 				&lt;p&gt;After you sign up for a free/basic Quantcast account, you can "start quantifying" your traffic by entering your domain name and generating a snippet of html/js that will ping their servers each time someone loads up your page. Simply slap that down at the bottom of your page for now, and we can start getting a rough idea of traffic stats. 
@@ -197,7 +224,7 @@
         <item>
             <guid
                 isPermaLink="false">b4932981-4707-45e9-baff-adb57e36e1d6</guid>
-            <title>Post #5: RSS, Atom, and Build Tools</title>
+            <title>Post 5: RSS, Atom, and Build Tools</title>
             <description>
 				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target="_blank"&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank"&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
 				&lt;p&gt;Ironically, in the interest of starting from absolute square 1, this blog lacked an &lt;a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank"&gt;RSS feed&lt;/a&gt;. That was one of the more challenging pieces that I had to get over mentally when considering doing a blog this way. Fortunately, the thought of losing potential followers was ultimately outweighed by the principle of the project.
@@ -220,7 +247,7 @@
         <item>
             <guid
                 isPermaLink="false">3c8edac9-4a60-4ab0-b335-e68b55329fee</guid>
-            <title>Post #4: For the Machines</title>
+            <title>Post 4: For the Machines</title>
             <description>
 				&lt;p&gt;The purpose of this post is to assist the machines that will be "reading" the site. 
 				&lt;p&gt;There are a couple of simple things that we need to do:
@@ -276,7 +303,7 @@
         <item>
             <guid
                 isPermaLink="false">95f8c883-3c79-4f4c-87e0-71fd7c631a62</guid>
-            <title>Post #3: Basic Visual Cleanup</title>
+            <title>Post 3: Basic Visual Cleanup</title>
             <description>
 				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
 				&lt;p&gt;Despite my guts screaming out for functionality, something has to be done about the visuals around here. The look is way too 1994, and not in a cool 1994 sort of way.
@@ -305,7 +332,7 @@
         <item>
             <guid
                 isPermaLink="false">1a761ec2-aecf-43c2-a76f-4eebdabf6b51</guid>
-            <title>Post #2: Deploying New Posts</title>
+            <title>Post 2: Deploying New Posts</title>
             <description>
 				&lt;p&gt;Already there is pain. Currently, my brand new process when I want to write a new post is:
 					&lt;ul&gt;
@@ -347,14 +374,14 @@
         <item>
             <guid
                 isPermaLink="false">a882e042-86e5-4d3e-b1c7-f970cf2e0769</guid>
-            <title>Post #1: The Plan</title>
+            <title>Post 1: The Plan</title>
             <description>
 				&lt;p&gt;This has been a long time coming. 
 				&lt;p&gt;I've been wanting to start blogging for about a year now, but have been struggling with figuring out where to start.
 				&lt;p&gt;There have been tons of questions swirling around in my head, like: 
 				&lt;ul&gt;
 					&lt;li&gt;Blog: Roll my &lt;a href='http://www.tandemgames.com/' target='_blank'&gt;own&lt;/a&gt; &lt;a href='http://www.domainofheroes.com/' target='_blank'&gt;site&lt;/a&gt; &lt;a href='http://www.aliensandrobots.com/' target='_blank'&gt;again&lt;/a&gt;? or use seasoned blog &lt;a href='http://dasblog.codeplex.com/' target='_blank'&gt;software&lt;/a&gt; with &lt;a href='http://wordpress.org/' target='_blank'&gt;heavy community support&lt;/a&gt;?&lt;/li&gt;
-					&lt;li&gt;Host: Use a &lt;a href='https://appharbor.com' target='_blank'&gt;cloud&lt;/a&gt; &lt;a href='http://www.heroku.com/' target='_blank'&gt;application&lt;/a&gt;  &lt;a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'&gt;host&lt;/a&gt;? Use a cheap host that &lt;a href='http://bluehost.com/' target='_blank'&gt;supports simple scripts&lt;/a&gt; for common apps? Host out of the &lt;a href='img/blog/posts/aarons_server_rack.jpg' target='_blank'&gt;server rack in my house&lt;/a&gt;?&lt;/li&gt;
+					&lt;li&gt;Host: Use a &lt;a href='https://appharbor.com' target='_blank'&gt;cloud&lt;/a&gt; &lt;a href='http://www.heroku.com/' target='_blank'&gt;application&lt;/a&gt;  &lt;a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'&gt;host&lt;/a&gt;? Use a cheap host that &lt;a href='http://bluehost.com/' target='_blank'&gt;supports simple scripts&lt;/a&gt; for common apps? Host out of the &lt;a href='img/blog/posts/post-1-aarons_server_rack.jpg' target='_blank'&gt;server rack in my house&lt;/a&gt;?&lt;/li&gt;
 					&lt;li&gt;Platform: Java? .NET? "pure" HTML/JS? &lt;a href='http://expect.sourceforge.net/cgi.tcl/'&gt;TCL/CGI&lt;/a&gt;? Something more &lt;a href='http://rubyonrails.org/' target='_target'&gt;hip&lt;/a&gt;?&lt;/li&gt;
 					&lt;li&gt;Audience: Should I be connecting with &lt;a href='http://lostechies.com/' target='_blank'&gt;other developers&lt;/a&gt;? Other small-business owners? Friends? Family? &lt;/li&gt;
 					&lt;li&gt;Content: Is this going to be a personal activity log? Professional journal? Or just another tech experiement?&lt;/li&gt;
