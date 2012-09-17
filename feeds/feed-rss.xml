@@ -28,7 +28,7 @@
 					&lt;li&gt;A new thumbnail file is only created if one does not exist already&lt;/li&gt;
 					&lt;li&gt;&lt;span class='code'&gt;convert.exe&lt;/span&gt; file comes from the free image utility library &lt;a href='http://www.imagemagick.org'&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;span class='code'&gt;width=100&lt;/span&gt; attributes from the previews because it was no longer necessary. Not too shabby for a few lines of code added to the build script.
+				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;span class='code'&gt;width=100&lt;/span&gt; attributes from the previews as they are no longer necessary. Not too shabby for a few lines of code added to the build script.
 			</description>
             <pubDate>Mon, 17 Sep 2012 14:55:00 -0500</pubDate>
             <a10:updated>2012-09-17T14:55:00-05:00</a10:updated>

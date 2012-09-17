@@ -4,8 +4,8 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:f932c803-abae-46e9-97c8-74918a1d74d7;id=1</id>
-    <updated>2012-09-17T19:51:37Z</updated>
+    <id>uuid:119721f1-b119-4dce-9ced-158cec2d9dc4;id=1</id>
+    <updated>2012-09-17T20:03:09Z</updated>
     <entry>
         <id>6bbfc7bf-2561-4cd0-a384-5574f714e51a</id>
         <title
@@ -31,7 +31,7 @@
 					&lt;li&gt;A new thumbnail file is only created if one does not exist already&lt;/li&gt;
 					&lt;li&gt;&lt;span class='code'&gt;convert.exe&lt;/span&gt; file comes from the free image utility library &lt;a href='http://www.imagemagick.org'&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;span class='code'&gt;width=100&lt;/span&gt; attributes from the previews because it was no longer necessary. Not too shabby for a few lines of code added to the build script.
+				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;span class='code'&gt;width=100&lt;/span&gt; attributes from the previews as they are no longer necessary. Not too shabby for a few lines of code added to the build script.
 			</content>
     </entry>
     <entry>
