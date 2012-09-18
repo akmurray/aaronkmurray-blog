@@ -4,8 +4,68 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:119721f1-b119-4dce-9ced-158cec2d9dc4;id=1</id>
-    <updated>2012-09-17T20:03:09Z</updated>
+    <id>uuid:9168eae8-5531-471c-ab9b-70e4bf205cd4;id=1</id>
+    <updated>2012-09-18T16:57:37Z</updated>
+    <entry>
+        <id>7559decd-05a3-49f5-ac1b-81248aa6789d</id>
+        <title
+            type="text">Post 14: SEO 1/4: Getting Indexed</title>
+        <published>2012-09-18T11:59:00-05:00</published>
+        <updated>2012-09-18T11:59:00-05:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the first in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target="_blank"&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target="_blank"&gt;ppcwithoutpity.com&lt;/a&gt;. &lt;/em&gt;
+				&lt;div class='guest-post-content'&gt;
+					&lt;h3&gt;SEO Post 1: Getting Indexed&lt;/h3&gt;
+					&lt;p&gt;Before you can start seeing spectacular SEO results on your site, first you have to let the search engines know that your site is there. There are a few ways to go about this:
+					&lt;ol&gt;
+						&lt;li&gt;Google Webmaster Tools submission&lt;/li&gt;
+						&lt;li&gt;Bing Webmaster Tools submission&lt;/li&gt;
+						&lt;li&gt;Creating an XML sitemap&lt;/li&gt;
+						&lt;li&gt;Getting a link from an influential, recently-cached site&lt;/li&gt;
+					&lt;/ol&gt;
+					&lt;p&gt;Let's go through the how-to of each one.
+					&lt;h3&gt;Google Webmaster Tools&lt;/h3&gt;
+					&lt;ol&gt;
+						&lt;li&gt;Go to &lt;a href='http://www.google.com/webmasters/' target="_blank"&gt;google.com/webmasters&lt;/a&gt; to create an account.&lt;/li&gt;
+						&lt;li&gt;Once you create an account, click on the "Add A Site" button to add your URL.&lt;/li&gt;
+						&lt;li&gt;After you enter the URL you want to add, you'll be asked to verify that you own the site. You can do this via several different methods: through your domain name provider, uploading an HTML file to your web server, adding a special META tag to your homepage header, or by linking your Google Analytics account. Different sites and hosting configurations have different interactions with each of these verification methods. But, the most reliable (and easiest) method in my experience is the META tag addition.&lt;/li&gt;
+					&lt;/ol&gt;
+					&lt;div class='callout'&gt;
+						&lt;img src='/img/blog/posts/post-14-3-gwt-step-3.jpg' alt='Google Webmaster Tools: Verify Site'&gt;
+						&lt;span class='citation'&gt;Google Webmaster Tools: Verify Site Ownership Options&lt;/span&gt;
+					&lt;/div&gt;
+
+					&lt;p&gt;Once your site is verified, you will have access to a set of tools that will help you diagnose SEO issues with your site, track inbound links and search queries, and create ways to help Google index your site. I won't get into all the ins and outs of Google Webmaster Tools here (that would take a whole series of posts), but I do want to cover a few settings that will help get your site indexed initially.
+					&lt;p&gt;Click on the Configuration section in the navigation, and select "Settings."  You have a few options on this page. You can select your geographic target here. This will help Google understand what your local language is in, and which international Google search engines should give your site priority. Also on this page, you can choose a preferred domain. You can state that you prefer your domain with or without "www."  This will help prevent duplicate content issues by defining one canonical version of your domain name in Google's system. The third option on this page is to select the crawl rate. If you just added your site, you probably won't have the option to change this just yet. But once you get some traffic, you can return to this page to define a suggested crawl frequency for Google's spiders to re-index your site. Of course, this is just a suggestion to Google - there's no guarantee they'll actually follow your instructions.
+					&lt;p&gt;In Google Webmaster tools, you can also upload an XML sitemap. You can perform this task in the Optimization &amp;gt; Sitemaps section of your account. We'll go into this a little bit more in the sitemaps part of this post.
+					&lt;h3&gt;Bing Webmaster Tools&lt;/h3&gt;
+					&lt;p&gt;Bing may not be as popular as Google, but it still gets enough user traffic where it makes sense to have your site indexed by them. Fortunately, they also have a webmaster tools account where you can show Bing how to index your content.
+					&lt;ol&gt;
+						&lt;li&gt;Go to &lt;a href='http://www.bing.com/toolbox/webmaster' target="_blank"&gt;bing.com/toolbox/webmaster&lt;/a&gt;&lt;/li&gt;
+						&lt;li&gt;Enter the URL of the site you want to add at the top of the page.&lt;/li&gt;
+						&lt;li&gt;Fill out the form on the next page with your personal information. You can also add a sitemap URL on this form, if you have one.&lt;/li&gt;
+						&lt;li&gt;Once you save your info, your site will appear on your Bing Webmaster Tools dashboard. But, you still need to verify it. Click on the "Verify Now" link next to the site URL.&lt;/li&gt;
+						&lt;li&gt;Bing offers you three verification methods: you can upload a special Bing XML file to your root folder in your hosting account, you can verify via a special META tag on your homepage &lt;head&gt; section, or you can add a unique CNAME record to your DNS.&lt;/head&gt;&lt;/li&gt;
+					&lt;/ol&gt;
+					&lt;div class='callout'&gt;
+						&lt;img src='/img/blog/posts/post-14-10-bing-verify-site-options.jpg' alt='Bing Webmaster Tools: Verify Site Ownership'&gt;
+						&lt;span class='citation'&gt;Bing Webmaster Tools: Verify Site Ownership Options&lt;/span&gt;
+					&lt;/div&gt;
+
+					&lt;p&gt;Bing Webmaster Tools also has a lot of options to help your site get crawled. You can submit sitemaps, submit individual URLs, and define the crawl rate of your site. All of these options help your new site become more findable by search engine spiders.
+					&lt;h3&gt;Creating an XML Sitemap&lt;/h3&gt;
+					&lt;p&gt;As I mentioned above, creating a sitemap is an important part of getting a website crawled by search engine spiders. First, some clarification: just adding a sitemap will not make your site more findable. What a sitemap does is provide a roadmap for crawlers that arrive on your site, helping them find all of the pages within your domain. A crawler has to reach your domain in the first place for a sitemap to help, and uploading that sitemap will not help anything find your domain. But, the sitemap does play an important role in assisting web crawlers with finding all of the obscure, deeply-buried pages within your site. And the more pages on your site that get found, the more pages that have the potential to show up on a web search.
+					&lt;p&gt;If you have a small (&amp;lt; 500 page) site, you can create a sitemap for free using the tool at &lt;a href='http://www.xml-sitemaps.com/' target="_blank"&gt;xml-sitemaps.com&lt;/a&gt;. Just follow the instructions on the page and you should be good to go. If you have a larger site, you may need to run a program on your web server to index and create all the entries on the sitemap. Google has a tool for this (in beta, of course) at this URL: &lt;a href='http://code.google.com/p/googlesitemapgenerator/' target="_blank"&gt;code.google.com/p/googlesitemapgenerator/&lt;/a&gt;. There are also dozens of other tools out there to create sitemaps, so finding an easy way to make one is only a Google search away.
+					&lt;p&gt;Once you have a sitemap, you'll need to upload it to your web server. It must reside at this address: &lt;em&gt;www.your-site-name-here.com&lt;/em&gt;/sitemap.xml. If you have to gzip your sitemap due to size, the URL of &lt;em&gt;www.your-site-name-here.com&lt;/em&gt;/sitemap.xml.gz is also acceptable. Whichever URL you go with, make sure to enter this URL in your robots.txt file to ensure that the search engines know where it is. And just to be extra sure, submit that sitemap to both Google Webmaster Tools and Bing Webmaster Tools.
+					&lt;h3&gt;Getting An Influential Link&lt;/h3&gt;
+					&lt;p&gt;Even after all this work, it may take a while for the search engines to find your site to speed up this process, it helps to get a strong initial link to get the ball rolling. You'll want to get a link from a site that gets cached frequently. If crawlers return to a site frequently to check for new links, the link to your site should be found quickly, meaning that the crawler will reach your site via the link and add it to the search engine's index as soon as the page with your link is cached. Also, you should make sure that the link you get is dofollow - a crawler will not pass through a nofollow link, negating the benefit of indexation.
+					&lt;p&gt;Getting links isn't exactly easy. But, maybe you have an established site that gets decent search traffic. Or maybe you know a friend who has one. You can even reach out to an influential blogger that you admire and ask them nicely to give you a link to this new project you're working on. Be creative in your linkbuilding, and you will be rewarded.
+					&lt;p&gt;To check on when a page was last cached by Google, you can use this tool: &lt;a href='http://www.searchenginegenie.com/tools/google-bot-last-accessed-date.php' target="_blank"&gt;searchenginegenie.com/tools/google-bot-last-accessed-date.php&lt;/a&gt;. Or, the SEOBook toolbar has this functionality within their browser extension. You can download it here: &lt;a href='http://tools.seobook.com/seo-toolbar/' target="_blank"&gt;tools.seobook.com/seo-toolbar/&lt;/a&gt;. Remember to check the cache date of the page where your link will appear. Homepages tend to get cached pretty frequently, while individual post and category pages do not.
+					&lt;p&gt;-&lt;a href='https://twitter.com/slivengood' target="_blank"&gt;Shawn Livengood&lt;/a&gt;
+				&lt;/div&gt;
+			</content>
+    </entry>
     <entry>
         <id>6bbfc7bf-2561-4cd0-a384-5574f714e51a</id>
         <title
