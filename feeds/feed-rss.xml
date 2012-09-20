@@ -8,6 +8,68 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">1ee21e12-47fb-4d50-9e17-72ab21aab632</guid>
+            <title>Post 15: CSS Includes</title>
+            <description>
+				&lt;p&gt;Back to basics. I've blogged a couple of times already about the importance of reducing the amount of data that has to be downloaded. Some of you have noticed that up until now, the CSS styles for this blog were still imbedded in the HTML markup. 
+				&lt;p&gt;First, let me explain why the seemingly odd order. There was less that 2KB of CSS in the page, as compared to hundreds of KB in images. I also wanted to have a history right in the index.html for a while so that it was easily apparent to learners looking through the GitHub commit history which CSS changes were causing the visual differences with the first few posts.
+				&lt;p&gt;In the big picture of site performance, including CSS styles in separate files provides the following benefits:
+				&lt;ul&gt;
+					&lt;li&gt;The styles can be used by different pages on the site (code reuse)&lt;/li&gt;
+					&lt;li&gt;The CSS files can be cached by the browser so that they do not have to be re-downloaded with each page view&lt;/li&gt;
+					&lt;li&gt;The CSS files can be served from a different server in your network, or even a different network entirely (like a global &lt;a href='http://en.wikipedia.org/wiki/Content_delivery_network' target="_blank"&gt;CDN&lt;/a&gt;)&lt;/li&gt;
+					&lt;li&gt;The CSS files can be compressed, even if your HTML content is not&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;The downsides including CSS styles in separate files are:
+				&lt;ul&gt;
+					&lt;li&gt;Initial (empty cache) page load (slightly) takes longer with multiple requests&lt;/li&gt;
+					&lt;li&gt;If external files are served from a different domain/subdomain, then there is also an extra (relatively slow-ish) &lt;a href='https://developers.google.com/speed/docs/best-practices/rtt#MinimizeDNSLookups' target="_blank"&gt;DNS lookup&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Browsers need to know when the file was last changed in order to not use outdated/changed files&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;In practice, the upsides outweigh the downsides considerably. So let's get started! 
+				&lt;p&gt;First, start off by making a new text file. I'll call this &lt;span class='code'&gt;blog.css&lt;/span&gt; for the sake of simplicity and place it in a folder called &lt;span class='code'&gt;css&lt;/span&gt;. Then simply add some html to the &lt;span class='code'&gt;&amp;lt;head&amp;gt;&lt;/span&gt; section let the browser know that it needs to download those styles and use them in the page: 
+				&lt;ul&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;link rel="stylesheet" href="&lt;a href='css/blog.css' target="_blank"&gt;css/blog.css&lt;/a&gt;"&amp;gt;&lt;/span&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Final note: the one truly notable downside with external file includes has to do with the browsers caching files and dealing with the scenario where a visitor has been to your site before. In that scenario, browser will nearly always try to use a cached version on the file, but may fail to recognize, for various reasons, that the file has been updated/changed and that it should use the latest version from the server instead of the one that it has saved locally. This can cause users to view your site with the old files, and is usually the reason you hear a first web-debugging step of "clear your cache" or "restart your browser/computer."
+				&lt;p&gt;The best and most reliable way around this is to put simple version numbers in your actual filenames so that the browser always tries to fetch a file that has changed, but that can be cumbersome to maintain. Example:
+				&lt;ul&gt;
+					&lt;li&gt;&lt;span class='code'&gt;&amp;lt;link rel="stylesheet" href="css/blog-version-123.css"&amp;gt;&lt;/span&gt;&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Other, less ideal, methods include: 
+				&lt;ul&gt;
+					&lt;li&gt;Include a querystring paramter after the filename that changes with each version: &lt;span class='code'&gt;&amp;lt;link rel="stylesheet" href="css/blog.css?version=123"&amp;gt;&lt;/span&gt;
+						&lt;ol&gt;
+							&lt;li&gt;Problem: The file won't be automatically cached for you by external/regionally distributed networks/routers/switches.&lt;/li&gt;
+							&lt;li&gt;Problem: The browser isn't guaranteed to actually fetch the new version&lt;/li&gt;
+						&lt;/ol&gt;
+					&lt;/li&gt;
+					&lt;li&gt;Specify a &lt;a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9' target="_blank"&gt;&lt;span class='code'&gt;Cache-Control&lt;/span&gt;&lt;/a&gt; Response header: &lt;span class='code'&gt;Cache-Control: max-age=3600, must-revalidate&lt;/span&gt;
+						&lt;ol&gt;
+							&lt;li&gt;Problem: You need to have a good estimate of how frequently files change to set a "good" &lt;span class='code'&gt;max-age&lt;/span&gt; value in seconds (or any of the other directive values)&lt;/li&gt;
+							&lt;li&gt;Problem: The browser doesn't always obey these headers for various technical reasons&lt;/li&gt;
+						&lt;/ol&gt;
+					&lt;/li&gt;
+					&lt;li&gt;Specify an &lt;a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19' target="_blank"&gt;&lt;span class='code'&gt;ETag&lt;/span&gt;&lt;/a&gt; Response header: &lt;span class='code'&gt;ETag:"1edec-3e3073913b100"&lt;/span&gt;
+						&lt;ol&gt;
+							&lt;li&gt;Problem: This value needs to change when the contents of the file change&lt;/li&gt;
+							&lt;li&gt;Problem: The browser doesn't always obey these headers for various technical reasons&lt;/li&gt;
+						&lt;/ol&gt;
+					&lt;/li&gt;
+					&lt;li&gt;Specify an &lt;a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21' target="_blank"&gt;&lt;span class='code'&gt;Expires&lt;/span&gt;&lt;/a&gt; Response header: &lt;span class='code'&gt;Expires: Thu, 20 Sep 2012 16:00:00 GMT&lt;/span&gt;
+						&lt;ol&gt;
+							&lt;li&gt;Problem: You need to have a good estimate of how frequently files change to set a "good" &lt;span class='code'&gt;Expires&lt;/span&gt; value in GMT date format&lt;/li&gt;
+							&lt;li&gt;Problem: The browser doesn't always obey these headers for various technical reasons&lt;/li&gt;
+						&lt;/ol&gt;
+					&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;In the worst case scenario of my versioned filename approach, the user will refetch the newest version of the file with each page load. In the worst case scenario of the other methods, the user have the wrong version of the file. In a future post, we'll go over some automated ways of handling this situation.
+			</description>
+            <pubDate>Thu, 20 Sep 2012 14:00:00 -0500</pubDate>
+            <a10:updated>2012-09-20T14:00:00-05:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">7559decd-05a3-49f5-ac1b-81248aa6789d</guid>
             <title>Post 14: SEO 1/4: Getting Indexed</title>
             <description>

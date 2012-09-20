@@ -8,57 +8,7 @@
 	<meta name="description" content="Aaron Murray's Blog on technology, developer life, and the Internet">
     <meta name="viewport" content="width=device-width">
 	<link rel="icon" href="favicon.png" type="image/png">
-
-	<style>
-		body {margin:0;padding:0;}
-		* {color:#333;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;}
-
-		#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu, #wrapper-logo {padding:10px;}
-		#wrapper-site-header, #wrapper-site-footer, #wrapper-logo {clear:both;}
-
-		#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:32px;font-size:20px;}
-		#wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;}
-
-		#wrapper-site-header-icons, #wrapper-site-footer-icons {float:right;}
-		#wrapper-site-header-icons img, #wrapper-site-footer-icons img {border:0px;}
-
-		#wrapper-blog-posts {float:left;max-width:70%}
-		#wrapper-sidebar {float:right;max-width:25%;border-left:1px solid #bcc;background-color:#dee;}
-
-		.blog-post-header {padding:10px;border-bottom:1px solid #cdd;background-color:#eff;}
-		.blog-post-header span {font-weight:bold;}
-		.blog-post-header .commit-link {float:right}
-		.blog-post-header .commit-link img {border:0;}
-
-		.blog-post-body {padding:10px;}
-		.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
-		.blog-post-body div.callout {margin:10px;text-align:center;}
-		.blog-post-body div.callout span.citation {text-align:center;color:#555;clear:both;display:block;font-size:smaller;}
-		.blog-post-guid {display:none;}
-
-		.blog-post-body .guest-post-content {margin:10px;}
-
-		.blog-post-footer .post-timestamp, .post-timestamp-updated, .blog-post-footer .post-tags, .post-screenshot {display:block;clear:both;}
-		.blog-post-footer {padding:10px;border-bottom:1px solid #cdd;background-color:#f9f9f9;} 
-
-		.post-screenshot img {border:0;margin:10px;}
-
-
-		#wrapper-logo .logo {display: block;margin-left: auto;margin-right: auto;}
-
-		#wrapper-blog-post-menu .menu-header {}
-
-		#table-png-compression-results {
-			border-collapse:collapse;
-		}
-
-		#table-png-compression-results th, #table-png-compression-results td {
-			padding:10px;
-			border:1px solid #888;
-		}
-
-
-	</style>
+	<link rel="stylesheet" href="css/blog.css">
 </head>
 <body>
 <div id='wrapper-body'>
@@ -73,6 +23,75 @@
 	</div>
 
 	<div id='wrapper-blog-posts'>
+
+		<div class='blog-post' name='blog-post-15'>
+			<a name='blog-post-15'></a>
+			<div class='blog-post-header'>
+				<span>Post 15: CSS Includes</span>
+				<span class='commit-link'><a href='#' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Back to basics. I've blogged a couple of times already about the importance of reducing the amount of data that has to be downloaded. Some of you have noticed that up until now, the CSS styles for this blog were still imbedded in the HTML markup. 
+				<p>First, let me explain why the seemingly odd order. There was less that 2KB of CSS in the page, as compared to hundreds of KB in images. I also wanted to have a history right in the index.html for a while so that it was easily apparent to learners looking through the GitHub commit history which CSS changes were causing the visual differences with the first few posts.
+				<p>In the big picture of site performance, including CSS styles in separate files provides the following benefits:
+				<ul>
+					<li>The styles can be used by different pages on the site (code reuse)</li>
+					<li>The CSS files can be cached by the browser so that they do not have to be re-downloaded with each page view</li>
+					<li>The CSS files can be served from a different server in your network, or even a different network entirely (like a global <a href='http://en.wikipedia.org/wiki/Content_delivery_network' target="_blank">CDN</a>)</li>
+					<li>The CSS files can be compressed, even if your HTML content is not</li>
+				</ul>
+				<p>The downsides including CSS styles in separate files are:
+				<ul>
+					<li>Initial (empty cache) page load (slightly) takes longer with multiple requests</li>
+					<li>If external files are served from a different domain/subdomain, then there is also an extra (relatively slow-ish) <a href='https://developers.google.com/speed/docs/best-practices/rtt#MinimizeDNSLookups' target=_blank>DNS lookup</a></li>
+					<li>Browsers need to know when the file was last changed in order to not use outdated/changed files</li>
+				</ul>
+				<p>In practice, the upsides outweigh the downsides considerably. So let's get started! 
+				<p>First, start off by making a new text file. I'll call this <span class='code'>blog.css</span> for the sake of simplicity and place it in a folder called <span class='code'>css</span>. Then simply add some html to the <span class='code'>&lt;head&gt;</span> section let the browser know that it needs to download those styles and use them in the page: 
+				<ul>
+					<li><span class='code'>&lt;link rel="stylesheet" href="<a href='css/blog.css' target=_blank>css/blog.css</a>"&gt;</span></li>
+				</ul>
+				<p>Final note: the one truly notable downside with external file includes has to do with the browsers caching files and dealing with the scenario where a visitor has been to your site before. In that scenario, browser will nearly always try to use a cached version on the file, but may fail to recognize, for various reasons, that the file has been updated/changed and that it should use the latest version from the server instead of the one that it has saved locally. This can cause users to view your site with the old files, and is usually the reason you hear a first web-debugging step of "clear your cache" or "restart your browser/computer."
+				<p>The best and most reliable way around this is to put simple version numbers in your actual filenames so that the browser always tries to fetch a file that has changed, but that can be cumbersome to maintain. Example:
+				<ul>
+					<li><span class='code'>&lt;link rel="stylesheet" href="css/blog-version-123.css"&gt;</span></li>
+				</ul>
+				<p>Other, less ideal, methods include: 
+				<ul>
+					<li>Include a querystring paramter after the filename that changes with each version: <span class='code'>&lt;link rel="stylesheet" href="css/blog.css?version=123"&gt;</span></span>
+						<ol>
+							<li>Problem: The file won't be automatically cached for you by external/regionally distributed networks/routers/switches.</li>
+							<li>Problem: The browser isn't guaranteed to actually fetch the new version</li>
+						</ol>
+					</li>
+					<li>Specify a <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9' target=_blank><span class='code'>Cache-Control</span></a> Response header: <span class='code'>Cache-Control: max-age=3600, must-revalidate</span>
+						<ol>
+							<li>Problem: You need to have a good estimate of how frequently files change to set a "good" <span class='code'>max-age</span> value in seconds (or any of the other directive values)</li>
+							<li>Problem: The browser doesn't always obey these headers for various technical reasons</li>
+						</ol>
+					</li>
+					<li>Specify an <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19' target=_blank><span class='code'>ETag</span></a> Response header: <span class='code'>ETag:"1edec-3e3073913b100"</span>
+						<ol>
+							<li>Problem: This value needs to change when the contents of the file change</li>
+							<li>Problem: The browser doesn't always obey these headers for various technical reasons</li>
+						</ol>
+					</li>
+					<li>Specify an <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21' target=_blank><span class='code'>Expires</span></a> Response header: <span class='code'>Expires: Thu, 20 Sep 2012 16:00:00 GMT</span>
+						<ol>
+							<li>Problem: You need to have a good estimate of how frequently files change to set a "good" <span class='code'>Expires</span> value in GMT date format</li>
+							<li>Problem: The browser doesn't always obey these headers for various technical reasons</li>
+						</ol>
+					</li>
+				</ul>
+				<p>In the worst case scenario of my versioned filename approach, the user will refetch the newest version of the file with each page load. In the worst case scenario of the other methods, the user have the wrong version of the file. In a future post, we'll go over some automated ways of handling this situation.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>css</span>, <span class='post-tag'>cdn</span>, <span class='post-tag'>bandwidth</span>, <span class='post-tag'>performance</span></span>
+				<span class='post-timestamp'>Posted on September 20, 2012 @ 2:00PM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-15.png' target='_blank'><img src='img/blog/screenshots/post-15-thumb-100.png' title='Screenshot of site after post #15'></a></span>
+			</div>
+			<div class='blog-post-guid'>1ee21e12-47fb-4d50-9e17-72ab21aab632</div>
+		</div>
 
 		<div class='blog-post' name='blog-post-14'>
 			<a name='blog-post-14'></a>
@@ -697,6 +716,7 @@
 				<li><a href='#blog-post-12'>Post 12: Favicon</a></li>
 				<li><a href='#blog-post-13'>Post 13: Image Thumbnails</a></li>
 				<li><a href='#blog-post-14'>Post 14: SEO 1/4: Getting Indexed</a></li>
+				<li><a href='#blog-post-15'>Post 15: CSS Includes</a></li>
 			<ul>
 		</ul></ul></div>
 
