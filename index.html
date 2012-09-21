@@ -1,14 +1,14 @@
 <!doctype html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 	<title>AaronKMurray.com : Blog | Twitter @aaronkmurray</title>
-	<meta name="author" content="Aaron Murray, akmurray@gmail.com">
-	<meta name="description" content="Aaron Murray's Blog on technology, developer life, and the Internet">
-    <meta name="viewport" content="width=device-width">
-	<link rel="icon" href="favicon.png" type="image/png">
-	<link rel="stylesheet" href="css/blog.css">
+	<meta name='author' content='Aaron Murray, akmurray@gmail.com'>
+	<meta name='description' content="Aaron Murray's Blog on software technology, developer life, and the Internet">
+    <meta name='viewport' content='width=device-width'>
+	<link rel='icon' href='favicon.png' type='image/png'>
+	<link rel='stylesheet' href='css/blog.css'>
 </head>
 <body>
 <div id='wrapper-body'>
@@ -16,19 +16,103 @@
 	<div id='wrapper-site-header'>
 		<span class='title'>Aaron Murray's blog</span>
 		<div id='wrapper-site-header-icons'>
-			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank" title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-32.png'></a>
-			<a href='https://twitter.com/aaronkmurray' target="_blank" title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-32.png'></a>
-			<a href='https://github.com/akmurray' target="_blank" title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-32.png'></a>
+			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank" title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-32.png' alt='RSS icon'></a>
+			<a href='https://twitter.com/aaronkmurray' target="_blank" title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-32.png' alt='Twitter icon'></a>
+			<a href='https://github.com/akmurray' target="_blank" title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-32.png' alt='GitHub icon'></a>
 		</div>
 	</div>
 
 	<div id='wrapper-blog-posts'>
 
-		<div class='blog-post' name='blog-post-15'>
-			<a name='blog-post-15'></a>
+		<div class='blog-post' id='blog-post-16'>
+			<div class='blog-post-header'>
+				<span>Post 16: HTML Markup Cleanup</span>
+				<span class='commit-link'><a href='#' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>This post is a little bit of housekeeping and HTML fundamentals. It will touch on a few of the "smaller" questions that come up related to writing HTML, and then show how to use an automated tool at build time to get a report on the basic structure of our HTML (look for errors, etc.)
+
+				<h3>A micro-history of HTML</h3>
+				<p>Back in the old days, browsers were fighting to provide the best experience possible as we were discovering the possibilities of the Internet. 
+				<p>At their core, browser are essentially fancy text parsers. They get HTML from a server, and then try to interpret that text and turn it into a nice picture for a human.
+				<p>It sounds simple enough, but instantly it was troublesome. As it turns out, humans aren't perfect when it comes to creating nested hierarchies of nodes and text. And back then, many sites were hand-made similarly to how this blog is currently being developed. Despite our best efforts, we humans still get it wrong. 
+				<p>For browsers, they needed to not only be great at parsing HTML, but they had to be even better at deriving the author's intention in the midst of the author's own HTML mistakes. This was part of the reason for all of the old nasty doctype declarations (see next section). The goal was to give the browser a hint at what the author intended. 
+
+				<h3>DOCTYPE</h3>
+				<p>Let's start from the top: <a href='http://www.w3schools.com/tags/tag_doctype.asp' target="_blank">doctype</a>. 
+				<p>Doctype is a special tag that basically tells the browser what type of document that it should expect to parse. As such, it has to be the first element of a page. 
+				<p>Here is the modern example: <span class='code'>&lt;!doctype html&gt;</span>
+				<p>There are all sort of different doctypes out there, but the skinny is: if you are making a new site, or you are fortunate enough to no be concerned with supporting ancient browsers, then the doctype example from above is all you need to use. Done. Simple. 
+				<p>If you live in the e-Commerce world, work on intranet apps, or have an affinity for providing support to folks who still use Netscape 4.7, then you have a decision to make.
+				<p>I won't go into the details here, but it's likely that you'll be using <span class='code'>HTML 4.01 Transitional</span> or <span class='code'>HTML 4.01 Frameset</span>. 
+				<p>Well, just as authors can make mistakes in the markup, they can also make mistakes when choosing a doctype. Furthermore, most pages on large sites are actually generated on the fly by combining smaller chunks of html into one large page. This makes it especially hard to determine which doctype should be used. The code that chooses the doctype may be aggregating HTML from a source without knowing if that HTML is going to use FRAMESETS. Ugh.
+				<p>The old intention was noble, but ultimately flawed. So now we just go back to basics, and tell the browser that it should expect HTML.
+
+				<h3>XHTML vs HTML</h3>
+				<p>The first thing you learn when you start researching (old) doctypes is that in addition to HTML, there is an option for XHTML. 
+				<p>To put it simply, XHTML is strictly-written HTML. It doesn't allow for mistakes. It removes the interpretation part from the lenient HTML structure parsing that browsers do. 
+				<p>Again, this was originally intended to combat the wild-west, poorly written HTML that originally dominated the Internet. The moral of this story is: chances are likely that you will never have to know or care about XHTML. Be thankful for that.
+
+				<h3>Tag and Attribute Names: uppercase vs lowercase</h3>
+				<p>Easy: doesn't matter. UPPER CASE has a way of crying out for attention. Typically when I am reading HTML I am more interested in the tag attribute values as opposed to the tag names and attribute. Because of this, I prefer lowercase. These are functionally equivalent:
+				<ul>
+					<li><span class='code'>&lt;!doctype html&gt;</span></li>
+					<li><span class='code'>&lt;!DOCTYPE HTML&gt;</span></li>
+				</ul>
+				<h3>DOM Element Identification: "<span class='code'>id</span>" vs "<span class='code'>name</span>"</h3>
+				<p>Both <span class='code'>id</span> and <span class='code'>name</span> are attributes for DOM elements that allow you to identify certain nodes. There are differences, but this guideline will take you a long way: use <span class='code'>id</span> instead of <span class='code'>name</span> to uniquely identify elements.
+				<p>When should you use <span class='code'>name</span> then? 
+				<ul>
+					<li>Only on <span class='code'>form</span> elements that you want to submit to a server</li>
+					<li>Only on the tags: <span class='code'>a, form, iframe, img, map, input, select, textarea</span></li>
+					<li>Example: <span class='code'>&lt;input type='text' id='txtAddress' name='txtAddress' ... /&gt;</span></li>
+				</ul>
+				<p>It is okay/advisable to also use the <span class='code'>id</span> attribute whenever using the <span class='code'>name</span> attribute. My standard mode of operating is to use the <span class='code'>id</span> attribute always, and then additionally use the <span class='code'>name</span> attribute on <span class='code'>form input</span> fields.
+
+				<h3>Attribute values: with or without quotes?</h3>
+				<p>Simply put: use quotes if the attribute <span class='code'>value</span> has a space in it. If the value comes from a database or other location, then use quotes and make sure to escape any quotes that may appear in that value by using <span class='code'>&amp;#39;</span>for single quotes and <span class='code'>&amp;quot;</span> for double quotes.
+				<p>Examples:
+				<ul>
+					<li>Right: <span class='code'>&lt;input type='text' value='Aaron<strong>&amp;#39;</strong>s House' name='txtPartyLocation' ... /&gt;</span></li>
+					<li>Wrong: <span class='code'>&lt;input type='text' value='Aaron<strong>'</strong>s House' name='txtPartyLocation' ... /&gt;</span></li>
+					<li>Right: <span class='code'>&lt;input type="text" value="The <strong>&amp;quot;</strong>Good<strong>&amp;quot;</strong> Son" name="txtNickname" ... /&gt;</span></li>
+					<li>Wrong: <span class='code'>&lt;input type="text" value="The <strong>"</strong>Good<strong>"</strong> Son" name="txtNickname" ... /&gt;</span></li>
+				</ul>
+
+				<h3>Attribute values: Single quotes vs Double quotes</h3>
+				<p>Short answer: either. Individual style preference. Functionally they are the same. If you are working in a big project that uses double quotes, use double quotes. And vice versa.
+				<p>Personally, I am conflicted. I prefer single quotes because it "cuts down on the visual noise" when I'm looking at HTML and javascript, but the flipside is that I write a lot of C# code and <span class='code'>strings</span> in C# are wrapped in double quotes. These days I find myself using single quotes most of the time.
+
+				<h3>Tools to help</h3>
+				<p>Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I'll show a tool called <a href='https://github.com/w3c/tidy-html5' target="_blank">html-tidy5</a> that can be run as part of our build process. 
+				<p>There are also <a href='http://lint.brihten.com/html/' target=_blank>online tools</a> that you can play with to see example results.
+				<p>I added tidy as the first step in the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a>. If it finds errors or warnings when it runs, it will cancel the build and open notepad to show a list of problems. Those can then be fixed, and the build can be run again.
+				<p>Here is a sample of what html tidy found on this page: 
+				<ul>
+					<li>Illegal closing tag <span class='code'>&lt;/span&gt;</span> for <span class='code'>&lt;li&gt;</span></li>
+					<li>A quotation error in my meta name=description tag after refactoring double quotes to single quotes</li>
+					<li>target='_target' instead of target='_blank'</li>
+					<li>missing alt tags on images</li>
+				</ul>
+				<p>I was able to quickly go back and make edits to correct the bugs that I had created. I did have to make a change to the automatic timestamp HTML because tidy flags empty <span class='code'>span</span> nodes as warnings. The choice was either to ignore warnings altogether, which would leave me vulnerable to dozens of other warnings that it found, or change my process to stub out a value that was easy to detect. I chose the latter, so now my empty timestamp stubs have a question mark in them, and look like:
+				<ul>
+					<li><span class='code'>&gt;span class='post-timestamp'&lt;?&gt;/span&lt;</span></li>
+				</ul>
+				<p>This new process is a simple way to ensure that I maintain a decent quality of my code as the project gets bigger.
+
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>html</span>, <span class='post-tag'>tidy</span>, <span class='post-tag'>doctype</span>, <span class='post-tag'>xhtml</span>, <span class='post-tag'>attributes</span></span>
+				<span class='post-timestamp'>Posted on September 21, 2012 @ 2:25PM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-16.png' target="_blank"><img src='img/blog/screenshots/post-16-thumb-100.png' alt='Screenshot of site after post #16'></a></span>
+			</div>
+			<div class='blog-post-guid'>e19b213c-4e59-4c4d-bcc7-33973d0576f5</div>
+		</div>
+		
+		<div class='blog-post' id='blog-post-15'>
 			<div class='blog-post-header'>
 				<span>Post 15: CSS Includes</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d59ad24082cc8f8b43b873e22ec2cd031ea9063' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d59ad24082cc8f8b43b873e22ec2cd031ea9063' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Back to basics. I've blogged a couple of times already about the importance of reducing the amount of data that has to be downloaded. Some of you have noticed that up until now, the CSS styles for this blog were still imbedded in the HTML markup. 
@@ -43,40 +127,40 @@
 				<p>The downsides including CSS styles in separate files are:
 				<ul>
 					<li>Initial (empty cache) page load (slightly) takes longer with multiple requests</li>
-					<li>If external files are served from a different domain/subdomain, then there is also an extra (relatively slow-ish) <a href='https://developers.google.com/speed/docs/best-practices/rtt#MinimizeDNSLookups' target=_blank>DNS lookup</a></li>
+					<li>If external files are served from a different domain/subdomain, then there is also an extra (relatively slow-ish) <a href='https://developers.google.com/speed/docs/best-practices/rtt#MinimizeDNSLookups' target="_blank">DNS lookup</a></li>
 					<li>Browsers need to know when the file was last changed in order to not use outdated/changed files</li>
 				</ul>
 				<p>In practice, the upsides outweigh the downsides considerably. So let's get started! 
 				<p>First, start off by making a new text file. I'll call this <span class='code'>blog.css</span> for the sake of simplicity and place it in a folder called <span class='code'>css</span>. Then simply add some html to the <span class='code'>&lt;head&gt;</span> section let the browser know that it needs to download those styles and use them in the page: 
 				<ul>
-					<li><span class='code'>&lt;link rel="stylesheet" href="<a href='css/blog.css' target=_blank>css/blog.css</a>"&gt;</span></li>
+					<li><span class='code'>&lt;link rel='stylesheet' href='<a href='css/blog.css' target="_blank">css/blog.css</a>'&gt;</span></li>
 				</ul>
 				<p>Final note: the one truly notable downside with external file includes has to do with the browsers caching files and dealing with the scenario where a visitor has been to your site before. In that scenario, browser will nearly always try to use a cached version on the file, but may fail to recognize, for various reasons, that the file has been updated/changed and that it should use the latest version from the server instead of the one that it has saved locally. This can cause users to view your site with the old files, and is usually the reason you hear a first web-debugging step of "clear your cache" or "restart your browser/computer."
 				<p>The best and most reliable way around this is to put simple version numbers in your actual filenames so that the browser always tries to fetch a file that has changed, but that can be cumbersome to maintain. Example:
 				<ul>
-					<li><span class='code'>&lt;link rel="stylesheet" href="css/blog-version-123.css"&gt;</span></li>
+					<li><span class='code'>&lt;link rel='stylesheet' href='css/blog-version-123.css'&gt;</span></li>
 				</ul>
 				<p>Other, less ideal, methods include: 
 				<ul>
-					<li>Include a querystring paramter after the filename that changes with each version: <span class='code'>&lt;link rel="stylesheet" href="css/blog.css?version=123"&gt;</span></span>
+					<li>Include a querystring paramter after the filename that changes with each version: <span class='code'>&lt;link rel='stylesheet' href='css/blog.css?version=123'&gt;</span>
 						<ol>
 							<li>Problem: The file won't be automatically cached for you by external/regionally distributed networks/routers/switches.</li>
 							<li>Problem: The browser isn't guaranteed to actually fetch the new version</li>
 						</ol>
 					</li>
-					<li>Specify a <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9' target=_blank><span class='code'>Cache-Control</span></a> Response header: <span class='code'>Cache-Control: max-age=3600, must-revalidate</span>
+					<li>Specify a <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9' target="_blank"><span class='code'>Cache-Control</span></a> Response header: <span class='code'>Cache-Control: max-age=3600, must-revalidate</span>
 						<ol>
 							<li>Problem: You need to have a good estimate of how frequently files change to set a "good" <span class='code'>max-age</span> value in seconds (or any of the other directive values)</li>
 							<li>Problem: The browser doesn't always obey these headers for various technical reasons</li>
 						</ol>
 					</li>
-					<li>Specify an <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19' target=_blank><span class='code'>ETag</span></a> Response header: <span class='code'>ETag:"1edec-3e3073913b100"</span>
+					<li>Specify an <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19' target="_blank"><span class='code'>ETag</span></a> Response header: <span class='code'>ETag:"1edec-3e3073913b100"</span>
 						<ol>
 							<li>Problem: This value needs to change when the contents of the file change</li>
 							<li>Problem: The browser doesn't always obey these headers for various technical reasons</li>
 						</ol>
 					</li>
-					<li>Specify an <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21' target=_blank><span class='code'>Expires</span></a> Response header: <span class='code'>Expires: Thu, 20 Sep 2012 16:00:00 GMT</span>
+					<li>Specify an <a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21' target="_blank"><span class='code'>Expires</span></a> Response header: <span class='code'>Expires: Thu, 20 Sep 2012 16:00:00 GMT</span>
 						<ol>
 							<li>Problem: You need to have a good estimate of how frequently files change to set a "good" <span class='code'>Expires</span> value in GMT date format</li>
 							<li>Problem: The browser doesn't always obey these headers for various technical reasons</li>
@@ -88,16 +172,15 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>css</span>, <span class='post-tag'>cdn</span>, <span class='post-tag'>bandwidth</span>, <span class='post-tag'>performance</span></span>
 				<span class='post-timestamp'>Posted on September 20, 2012 @ 2:00PM</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-15.png' target='_blank'><img src='img/blog/screenshots/post-15-thumb-100.png' title='Screenshot of site after post #15'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-15.png' target="_blank"><img src='img/blog/screenshots/post-15-thumb-100.png' alt='Screenshot of site after post #15'></a></span>
 			</div>
 			<div class='blog-post-guid'>1ee21e12-47fb-4d50-9e17-72ab21aab632</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-14'>
-			<a name='blog-post-14'></a>
+		<div class='blog-post' id='blog-post-14'>
 			<div class='blog-post-header'>
 				<span>Post 14: SEO 1/4: Getting Indexed</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/809680a52837a2f86cac25aa714f61eb7268055c' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/809680a52837a2f86cac25aa714f61eb7268055c' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p><em>As I mentioned in <a href='#blog-post-10'>Post 10: The SEO Plan</a>, this post is the first in a 4-part series on SEO written by guest author <a href='https://twitter.com/slivengood' target="_blank">Shawn Livengood</a> who runs the blog <a href='http://ppcwithoutpity.com/' target="_blank">ppcwithoutpity.com</a>. </em>
@@ -132,7 +215,7 @@
 						<li>Enter the URL of the site you want to add at the top of the page.</li>
 						<li>Fill out the form on the next page with your personal information. You can also add a sitemap URL on this form, if you have one.</li>
 						<li>Once you save your info, your site will appear on your Bing Webmaster Tools dashboard. But, you still need to verify it. Click on the "Verify Now" link next to the site URL.</li>
-						<li>Bing offers you three verification methods: you can upload a special Bing XML file to your root folder in your hosting account, you can verify via a special META tag on your homepage <head> section, or you can add a unique CNAME record to your DNS.</head></li>
+						<li>Bing offers you three verification methods: you can upload a special Bing XML file to your root folder in your hosting account, you can verify via a special META tag on your homepage &lt;head&gt; section, or you can add a unique CNAME record to your DNS.</li>
 					</ol>
 					<div class='callout'>
 						<img src='img/blog/posts/post-14-10-bing-verify-site-options.jpg' alt='Bing Webmaster Tools: Verify Site Ownership'>
@@ -154,16 +237,15 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>seo</span>, <span class='post-tag'>google</span>, <span class='post-tag'>bing</span>, <span class='post-tag'>sitemap</span>, <span class='post-tag'>ppcwithoutpity</span></span>
 				<span class='post-timestamp'>Posted on September 18, 2012 @ 11:59AM</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-14.png' target='_blank'><img src='img/blog/screenshots/post-14-thumb-100.png' title='Screenshot of site after post #14'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-14.png' target="_blank"><img src='img/blog/screenshots/post-14-thumb-100.png' alt='Screenshot of site after post #14'></a></span>
 			</div>
 			<div class='blog-post-guid'>7559decd-05a3-49f5-ac1b-81248aa6789d</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-13'>
-			<a name='blog-post-13'></a>
+		<div class='blog-post' id='blog-post-13'>
 			<div class='blog-post-header'>
 				<span>Post 13: Image Thumbnails</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/266bee8839e36297db1fe4256ff1d3e331712c52' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/266bee8839e36297db1fe4256ff1d3e331712c52' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Way back in <a href='#blog-post-8'>Post 8</a> I mentioned 2 ways to reduce the impact of images on bandwidth. The method I tackled then was to automatically compress the png images in the build script. In this post, I will show you how to further reduce the impact by creating and displaying thumbnails instead of scaling down the original image using HTML (<span class='code'>&lt;img ... <strong>width=100</strong> /&gt;</span>).
@@ -175,7 +257,7 @@
 				<p>I made a sample thumbnail by resizing the image down to 100 pixels wide produced a new preview image that was 90% smaller than the original. The prospect of reducing 77% of the entire request payload by 90% got me excited. 
 				<p>Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don't want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a> so I knew that I wanted to tie into that step. 
 				<p>
-				<script src="https://gist.github.com/3739310.js"> </script>
+				<script src='https://gist.github.com/3739310.js'> </script>
 				<p>Notes on the batch file:
 				<ul>
 					<li>The <span class='code'>FOR</span> loop gets a list of all of the screenshot files that don't have "thumb" in the name</li>
@@ -188,22 +270,21 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>images</span>, <span class='post-tag'>bandwidth</span>, <span class='post-tag'>batchfile</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>thumbnail</span></span>
 				<span class='post-timestamp'>Posted on September 17, 2012 @ 2:55PM</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-13.png' target='_blank'><img src='img/blog/screenshots/post-13-thumb-100.png' title='Screenshot of site after post #13'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-13.png' target="_blank"><img src='img/blog/screenshots/post-13-thumb-100.png' alt='Screenshot of site after post #13'></a></span>
 			</div>
 			<div class='blog-post-guid'>6bbfc7bf-2561-4cd0-a384-5574f714e51a</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-12'>
-			<a name='blog-post-12'></a>
+		<div class='blog-post' id='blog-post-12'>
 			<div class='blog-post-header'>
 				<span>Post 12: Favicon</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/45555907c121025acf277bd2f7200b3b5417a166' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/45555907c121025acf277bd2f7200b3b5417a166' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty. Today's post is simple - but something that is very visible to users. The Favicon.
 				<p>A Favicon is the little icon that appears in the browser tab/address bar. 
 				<div class='callout'>
-					<img src='img/blog/posts/post-12-favico-browser-comparo.png' title='Favicon browser comparison'>
+					<img src='img/blog/posts/post-12-favico-browser-comparo.png' alt='Favicon browser comparison'>
 					<span class='citation'>Favicons as they are shown in Firefox 14, Chrome 21, and Internet Explorer 9</span>
 				</div>
 				<p>In 1999, Microsoft introduced Favicons for the purpose of having an icon to display in the Favorites (bookmarks) menu on Internet Explorer. 2 things were done that (nowadays) goes against some web principles:
@@ -223,23 +304,22 @@
 					<li>Many browsers and RSS readers will still make requests to this location looking for an icon</li>
 					<li>You'll cut down on the 404 (File Not Found) error noise that will show up in your hit logging</li>
 				</ol>
-				<p>Adding a modern Favicon is simple: <span class='code'>&lt;link rel="icon" href="/favicon.png" type="image/png" /&gt;</span>
+				<p>Adding a modern Favicon is simple: <span class='code'>&lt;link rel='icon' href='/favicon.png' type='image/png' /&gt;</span>
 				<p>But you should still slap a <a href='/favicon.ico' target="_blank">favicon.ico</a> in your root.
 				<p>If you don't know how to make a <a href='http://en.wikipedia.org/wiki/ICO_(file_format)' target="_blank">.ico file</a>, you can use a free site like <a href='http://www.convertico.com/' target="_blank">convertico.com</a> to upload an image and get an .ico file back.
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>favicon</span>, <span class='post-tag'>icon</span></span>
 				<span class='post-timestamp'>Posted on September 14, 2012 @ 4:51PM</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-12.png' target='_blank'><img src='img/blog/screenshots/post-12-thumb-100.png' title='Screenshot of site after post #12'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-12.png' target="_blank"><img src='img/blog/screenshots/post-12-thumb-100.png' alt='Screenshot of site after post #12'></a></span>
 			</div>
 			<div class='blog-post-guid'>2ee06cd8-f5d6-46b4-ba6f-62aeb1c2ecf9</div>
 		</div>
 		
-		<div class='blog-post' name='blog-post-11'>
-			<a name='blog-post-11'></a>
+		<div class='blog-post' id='blog-post-11'>
 			<div class='blog-post-header'>
 				<span>Post 11: RSS Fix to Stop Spamming Readers</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/e91b6cf36a5f32d45ffe545a0a1b38ab8d7517f3' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/e91b6cf36a5f32d45ffe545a0a1b38ab8d7517f3' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Bugs! Already there are bugs :) 
@@ -261,16 +341,15 @@
 				<span class='post-tags'>Tags: <span class='post-tag'>rss</span>, <span class='post-tag'>rssgen</span>, <span class='post-tag'>guid</span></span>
 				<span class='post-timestamp'>Posted on September 11, 2012 @ 12:05pm</span>
 				<span class='post-timestamp-updated'>Last Updated on September 14, 2012 @ 5:15pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-11.png' target='_blank'><img src='img/blog/screenshots/post-11-thumb-100.png' title='Screenshot of site after post #11'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-11.png' target="_blank"><img src='img/blog/screenshots/post-11-thumb-100.png' alt='Screenshot of site after post #11'></a></span>
 			</div>
 			<div class='blog-post-guid'>e8a8715f-24dd-44c4-9655-0aac79284aa1</div>
 		</div>
 		
-		<div class='blog-post' name='blog-post-10'>
-			<a name='blog-post-10'></a>
+		<div class='blog-post' id='blog-post-10'>
 			<div class='blog-post-header'>
 				<span>Post 10: The SEO Plan</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/18d9668f9164739eb7bd40ec7d305dd82fcdb66b' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/18d9668f9164739eb7bd40ec7d305dd82fcdb66b' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>As outlined in <a href='#blog-post-1'>The Plan</a>, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
@@ -297,16 +376,15 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>SEO</span>, <span class='post-tag'>PageRank</span>, <span class='post-tag'>MozRank</span></span>
 				<span class='post-timestamp'>Posted on September 11, 2012 @ 9:25am</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-10.png' target='_blank'><img src='img/blog/screenshots/post-10-thumb-100.png' title='Screenshot of site after post #10'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-10.png' target="_blank"><img src='img/blog/screenshots/post-10-thumb-100.png' alt='Screenshot of site after post #10'></a></span>
 			</div>
 			<div class='blog-post-guid'>9b04f8d9-f240-4ce7-9eea-44c76137e097</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-9'>
-			<a name='blog-post-9'></a>
+		<div class='blog-post' id='blog-post-9'>
 			<div class='blog-post-header'>
 				<span>Post 9: IIS Static File Compression in web.config</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/70c9344d99d8d1025a7597cd8edba384d28a48c7' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/70c9344d99d8d1025a7597cd8edba384d28a48c7' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
@@ -325,21 +403,20 @@
 					<span class='citation'>Request details after web.config changes: gzip'd index.html payload is 67.7% smaller</span>
 				</div>
 				<p>Put this code in your web.config file and enjoy.
-				<p><script src="https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com"></script>
+				<p><script src='https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com'></script>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>web.config</span>, <span class='post-tag'>IIS</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>headers</span></span>
 				<span class='post-timestamp'>Posted on September 10, 2012 @ 6:30pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-9.png' target='_blank'><img src='img/blog/screenshots/post-9-thumb-100.png' title='Screenshot of site after post #9'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-9.png' target="_blank"><img src='img/blog/screenshots/post-9-thumb-100.png' alt='Screenshot of site after post #9'></a></span>
 			</div>
 			<div class='blog-post-guid'>5f6842bd-df6f-402d-b451-a7447d247db5</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-8'>
-			<a name='blog-post-8'></a>
+		<div class='blog-post' id='blog-post-8'>
 			<div class='blog-post-header'>
 				<span>Post 8: Automatic Image Compression</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/cc4a47493fa67f731f53abb9048cc1701cb979eb' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/cc4a47493fa67f731f53abb9048cc1701cb979eb' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">code from github</a> at a certain point in time and view the site locally.
@@ -363,7 +440,7 @@
 				</ul>
 				<p>I've checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
 				<p><span class='code'>imgsqz.exe -s=c:\FolderWithImages</span>
-				<p>It's now part of the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a>, so that all PNG images from now on will be optimized before they hit the internet for consumption.
+				<p>It's now part of the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a>, so that all PNG images from now on will be optimized before they hit the Internet for consumption.
 				<p>Here are the results for some of the files on this site:
 				<table id='table-png-compression-results'>
 					<tr><th>File</th><th>Original Size</th><th>New Size</th><th>% Saved</th></tr>
@@ -381,35 +458,32 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>images</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>bandwidth</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>imgsqz</span></span>
 				<span class='post-timestamp'>Posted on September 10, 2012 @ 5:05pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-8.png' target='_blank'><img src='img/blog/screenshots/post-8-thumb-100.png' title='Screenshot of site after post #8'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-8.png' target="_blank"><img src='img/blog/screenshots/post-8-thumb-100.png' alt='Screenshot of site after post #8'></a></span>
 			</div>
 			<div class='blog-post-guid'>9d61cdb5-c803-43cf-a5d8-644839b870a9</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-7'>
-			<a name='blog-post-7'></a>
+		<div class='blog-post' id='blog-post-7'>
 			<div class='blog-post-header'>
 				<span>Post 7: Links to GitHub</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Quick post here - I just added links to <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank">each Post's main commit on github</a> in the post header. Just click on the <a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a> icon to see what was changed.
+				<p>Quick post here - I just added links to <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank">each Post's main commit on github</a> in the post header. Just click on the <a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a> icon to see what was changed.
 				<p>The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
-				<p>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>github</span>, <span class='post-tag'>commit</span></span>
 				<span class='post-timestamp'>Posted on September 8, 2012 @ 2:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-7.png' target='_blank'><img src='img/blog/screenshots/post-7-thumb-100.png' title='Screenshot of site after post #7'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-7.png' target="_blank"><img src='img/blog/screenshots/post-7-thumb-100.png' alt='Screenshot of site after post #7'></a></span>
 			</div>
 			<div class='blog-post-guid'>6825317b-ba31-4a4c-acba-67d52dfc44ca</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-6'>
-			<a name='blog-post-6'></a>
+		<div class='blog-post' id='blog-post-6'>
 			<div class='blog-post-header'>
 				<span>Post 6: Traffic Analytics</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/f61bdfc72b758ae365f73d4c108f44628fcbd34a' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/f61bdfc72b758ae365f73d4c108f44628fcbd34a' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using <a href='https://www.quantcast.com/aaronkmurray.com' target="_blank">Quantcast</a>. 
@@ -421,21 +495,20 @@
 				</ul>
 				<p>Simple, effective, and good enough for now.
 				<p>Note: it will take a few days before the stats for this site show up on Quantcast. 
-				<p><script src="https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com"></script>
+				<p><script src='https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com'></script>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>quantcast</span>, <span class='post-tag'>tracking</span>, <span class='post-tag'>traffic</span>, <span class='post-tag'>async</span></span>
 				<span class='post-timestamp'>Posted on September 7, 2012 @ 5:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-6.png' target='_blank'><img src='img/blog/screenshots/post-6-thumb-100.png' title='Screenshot of site after post #6'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-6.png' target="_blank"><img src='img/blog/screenshots/post-6-thumb-100.png' alt='Screenshot of site after post #6'></a></span>
 			</div>
 			<div class='blog-post-guid'>1497a7a5-638d-4fb2-b51c-94d67f6cc9f2</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-5'>
-			<a name='blog-post-5'></a>
+		<div class='blog-post' id='blog-post-5'>
 			<div class='blog-post-header'>
 				<span>Post 5: RSS, Atom, and Build Tools</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/5eb387dd03581340da8bfd120200f0666123c6d2' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/5eb387dd03581340da8bfd120200f0666123c6d2' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Alrighty - creating a new blog these days pratically assumes that readers will be provided with an <a href='http://en.wikipedia.org/wiki/RSS' target="_blank">RSS</a> or <a href='http://en.wikipedia.org/wiki/Atom_(standard)' target="_blank">Atom</a> feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
@@ -447,7 +520,7 @@
 				<ul>
 					<li>Edit this index.html file</li>
 					<li>Run my new <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat'>build script</a></li>
-					<li>Commit and Push the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a></li>
+					<li>Commit and Push the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">github</a></li>
 					<li>Remote into the webserver hosting this site</li>
 					<li>Run my new <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/release/release-aaronkmurray-site.bat'>release script</a></li>
 				</ul>
@@ -456,88 +529,85 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>rss</span>, <span class='post-tag'>atom</span>, <span class='post-tag'>build</span>, <span class='post-tag'>tools</span>, <span class='post-tag'>command line</span>, <span class='post-tag'>build</span>, <span class='post-tag'>release</span></span>
 				<span class='post-timestamp'>Posted on September 7, 2012 @ 4:40pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-5.png' target='_blank'><img src='img/blog/screenshots/post-5-thumb-100.png' title='Screenshot of site after post #5'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-5.png' target="_blank"><img src='img/blog/screenshots/post-5-thumb-100.png' alt='Screenshot of site after post #5'></a></span>
 			</div>
 			<div class='blog-post-guid'>b4932981-4707-45e9-baff-adb57e36e1d6</div>
 		</div>
 
-		<div class='blog-post' name='blog-post-4'>
-			<a name='blog-post-4'></a>
+		<div class='blog-post' id='blog-post-4'>
 			<div class='blog-post-header'>
 				<span>Post 4: For the Machines</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/978f856970e0d2bd911583a61db4883f24e63cb1' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/978f856970e0d2bd911583a61db4883f24e63cb1' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>The purpose of this post is to assist the machines that will be "reading" the site. 
 				<p>There are a couple of simple things that we need to do:
 				<ul>
-					<li>Create a <a href='http://www.robotstxt.org/robotstxt.html' target='_blank'>robots.txt</a> file for communicating instructions with web crawlers</li>
+					<li>Create a <a href='http://www.robotstxt.org/robotstxt.html' target="_blank">robots.txt</a> file for communicating instructions with web crawlers</li>
 					<li>Add <span class='code'>&lt;meta&gt;</span> tags to help browsers and search engines</li>
 				</ul>
-				<p>You'll notice that this site's <a href='robots.txt' target='_blank'>robots.txt file</a> is fairly empty. One interesting note is the line <span class='code'>Disallow: /BadBotHoneyPot/</span>
+				<p>You'll notice that this site's <a href='robots.txt' target="_blank">robots.txt file</a> is fairly empty. One interesting note is the line <span class='code'>Disallow: /BadBotHoneyPot/</span>
 				<p>I'll go over that in the future, but for now, I'll just say that we'll use that as a trap to identify "bad" crawlers so that we can automatically block them should we choose.
 				<p>As for the <span class='code'>&lt;meta&gt;</span> tags:
 				<ul>
-					<li><span class='code'>&lt;meta charset="utf-8"&gt;</span>
+					<li><span class='code'>&lt;meta charset='utf-8'&gt;</span>
 						<ul>
 							<li>This meta tag needs to be near the top of the HTML file (before any text).</li>
 							<li>If it is not, or it is missing, then the browser will just try to figure out the character encoding set on it's own.</li>
 							<li>You will typically only run across the need to include this once you start dealing with localization of your site.</li>
-							<li>More info <a href='http://code.google.com/p/doctype-mirror/wiki/MetaCharsetAttribute' target='_blank'>here</a>
-						</li></ul>
-					
-					<li><span class='code'>&lt;meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"&gt;</span>
-						<ul>
-							<li>This tag basically does two things.</li>
-							<li>#1: Tell Internet Explorer to use it's <a href='http://msdn.microsoft.com/en-us/library/cc288325(v=vs.85).aspx' target='_blank'>most modern mode available</a> (as opposed to IE trying to determine which mode it should run in for best compatibility)</li>
-							<li>#2: Tells browsers with <a href='http://www.chromium.org/developers/how-tos/chrome-frame-getting-started' target='_blank'>Google Chrome Frame</a> installed to render using GCF instead of their native renderer (Uncommon, mostly to help old slow browsers)</li>
-							<li></li>
+							<li>More info <a href='http://code.google.com/p/doctype-mirror/wiki/MetaCharsetAttribute' target="_blank">here</a></li>
 						</ul>
 					</li>
-					<li><span class='code'>&lt;meta name="author" content="Aaron Murray, akmurray@gmail.com"&gt;</span>
+					<li><span class='code'>&lt;meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'&gt;</span>
+						<ul>
+							<li>This tag basically does two things.</li>
+							<li>#1: Tell Internet Explorer to use it's <a href='http://msdn.microsoft.com/en-us/library/cc288325(v=vs.85).aspx' target="_blank">most modern mode available</a> (as opposed to IE trying to determine which mode it should run in for best compatibility)</li>
+							<li>#2: Tells browsers with <a href='http://www.chromium.org/developers/how-tos/chrome-frame-getting-started' target="_blank">Google Chrome Frame</a> installed to render using GCF instead of their native renderer (Uncommon, mostly to help old slow browsers)</li>
+						</ul>
+					</li>
+					<li><span class='code'>&lt;meta name='author' content='Aaron Murray, akmurray@gmail.com'&gt;</span>
 						<ul>
 							<li>Tell the crawler who authored this page</li>
 							<li>Tell any users who view your source how to contact you if needed</li>
 							<li>This is more uncommon for sites that have multiple contributors</li>
 						</ul>
 					</li>
-					<li><span class='code'>&lt;meta name="description" content="..."&gt;</span>
+					<li><span class='code'>&lt;meta name='description' content='...'&gt;</span>
 						<ul>
 							<li>This is a spot where you can describe your site</li>
 							<li>Some search engines will use this text as preview content</li>
-							<li>Adds some <a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target='_blank'>SEO</a> value to your site</li>
+							<li>Adds some <a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target="_blank">SEO</a> value to your site</li>
 						</ul>
 					</li>
-					<li><span class='code'>&lt;meta name="viewport" content="width=device-width"&gt;</span>
+					<li><span class='code'>&lt;meta name='viewport' content='width=device-width'&gt;</span>
 						<ul>
-							<li><a href='https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html' target='_blank'>This tag</a> is largely useful once you start wanting to have your site look nice on <a href='http://www.nokia.com/gb-en/products/phone/700/' target='_blank'>small handheld</a> or <a href='http://arstechnica.com/gadgets/2011/11/microsofts-table-sized-tablet-surfaces-in-pre-order/' target='_blank'>giant surface devices</a></li>
+							<li><a href='https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html' target="_blank">This tag</a> is largely useful once you start wanting to have your site look nice on <a href='http://www.nokia.com/gb-en/products/phone/700/' target="_blank">small handheld</a> or <a href='http://arstechnica.com/gadgets/2011/11/microsofts-table-sized-tablet-surfaces-in-pre-order/' target="_blank">giant surface devices</a></li>
 							<li>We'll dive deeper into this in the future, but we've got too many bigger fish to fry at the moment</li>
 						</ul>
 					</li>
-				</li></ul>
+				</ul>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>robots</span>, <span class='post-tag'>meta</span>, <span class='post-tag'>crawlers</span>, <span class='post-tag'>seo</span></span>
 				<span class='post-timestamp'>Posted on August 23, 2012 @ 11:15am</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-4.png' target='_blank'><img src='img/blog/screenshots/post-4-thumb-100.png' title='Screenshot of site after post #4'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-4.png' target="_blank"><img src='img/blog/screenshots/post-4-thumb-100.png' alt='Screenshot of site after post #4'></a></span>
 			</div>
 			<div class='blog-post-guid'>3c8edac9-4a60-4ab0-b335-e68b55329fee</div>
 		</div>
 
 
 		
-		<div class='blog-post'>
-			<a name='blog-post-3'></a>
+		<div class='blog-post' id='blog-post-3'>
 			<div class='blog-post-header'>
 				<span>Post 3: Basic Visual Cleanup</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/480dc9d7c9073ec3e91b12c26b6c157cc11143d6' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/480dc9d7c9073ec3e91b12c26b6c157cc11143d6' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Alrighty, so we have a plan, we've got the code up on <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
+				<p>Alrighty, so we have a plan, we've got the code up on <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">github</a> for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
 				<p>Despite my guts screaming out for functionality, something has to be done about the visuals around here. The look is way too 1994, and not in a cool 1994 sort of way.
-				<p>I'm going to start attaching a screenshot of the site with each post so that in the future we can easily view the visual progress that is being made. This will be easier than checking out snapshot from the <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master/' target='_blank'>github commit history</a> and running the site locally. In the future this will be harder for folks to do once we get distributed and have various databases powering the content. Fun stuff!
-				<p>Back to reality - let's spruce this place up. For all of the newbs out there, the best way to fancy up the visuals on a web page is to sprinkle a little <a href='http://www.w3schools.com/css/' target='_blank'>CSS</a> love around. Quickly you'll learn about one of the most loved (hated) aspects of web development: browser differences. Luckily there are <a href='http://www.alistapart.com/' target='_blank'>resources</a> out there to help. For now we won't get into the weeds, but let's just say that for nearly 2 decades we've been struggling with browser differences and there is no end in sight, but at least there is a lot of <a href='http://html5.org/' target='_blank'>hope</a> that things will get better over the next decade as <a href='http://www.ie6countdown.com/' target='_blank'>older browsers start to die off</a>.
-				<p>Step 1: very basic <a href='http://en.wikipedia.org/wiki/User_interface' target='_blank'>UI</a>/<a href='http://en.wikipedia.org/wiki/User_experience_design' target='_blank'>UX</a> stuff:
+				<p>I'm going to start attaching a screenshot of the site with each post so that in the future we can easily view the visual progress that is being made. This will be easier than checking out snapshot from the <a href='https://github.com/akmurray/aaronkmurray-blog/commits/master/' target="_blank">github commit history</a> and running the site locally. In the future this will be harder for folks to do once we get distributed and have various databases powering the content. Fun stuff!
+				<p>Back to reality - let's spruce this place up. For all of the newbs out there, the best way to fancy up the visuals on a web page is to sprinkle a little <a href='http://www.w3schools.com/css/' target="_blank">CSS</a> love around. Quickly you'll learn about one of the most loved (hated) aspects of web development: browser differences. Luckily there are <a href='http://www.alistapart.com/' target="_blank">resources</a> out there to help. For now we won't get into the weeds, but let's just say that for nearly 2 decades we've been struggling with browser differences and there is no end in sight, but at least there is a lot of <a href='http://html5.org/' target="_blank">hope</a> that things will get better over the next decade as <a href='http://www.ie6countdown.com/' target="_blank">older browsers start to die off</a>.
+				<p>Step 1: very basic <a href='http://en.wikipedia.org/wiki/User_interface' target="_blank">UI</a>/<a href='http://en.wikipedia.org/wiki/User_experience_design' target="_blank">UX</a> stuff:
 				<ul>
 					<li>Visually split up the site header from the posts</li>
 					<li>Split up the post from each other</li>
@@ -550,41 +620,40 @@
 				<ul>
 					<li><span class='code'>&lt;style&gt; .blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; } &lt;/style&gt;</span></li>
 				</ul>
-				<p>To enabling linking directly to a post, we're going to use the old-school method of using <span class='code'>name</span> attributes and <span class='code'>#</span> links. I know this is absurd in the days of <a href='http://www.bloggingbasics101.com/2008/11/what-is-a-permalink/' target='_blank'>permalinks</a> and SEO friendliness, but we haven't written the permalink code yet, so we suffer for now. I'm doing this for your own benefit here folks - it's my <a href='http://en.wikipedia.org/wiki/PageRank' target='_blank'>PageRank</a> that will suffer. When we fix this later, it'll also be a great time to talk about the joys of <a href='http://en.wikipedia.org/wiki/Code_refactoring' target='_blank'>refactoring</a> and <a href='http://en.wikipedia.org/wiki/Brownfield_(software_development)' target='_blank'>brown-field</a> upgrades.
+				<p>To enabling linking directly to a post, we're going to use the old-school method of using <span class='code'>name</span> attributes and <span class='code'>#</span> links. I know this is absurd in the days of <a href='http://www.bloggingbasics101.com/2008/11/what-is-a-permalink/' target="_blank">permalinks</a> and SEO friendliness, but we haven't written the permalink code yet, so we suffer for now. I'm doing this for your own benefit here folks - it's my <a href='http://en.wikipedia.org/wiki/PageRank' target="_blank">PageRank</a> that will suffer. When we fix this later, it'll also be a great time to talk about the joys of <a href='http://en.wikipedia.org/wiki/Code_refactoring' target="_blank">refactoring</a> and <a href='http://en.wikipedia.org/wiki/Brownfield_(software_development)' target="_blank">brown-field</a> upgrades.
 
 
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>css</span>, <span class='post-tag'>html</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 6:10pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-3.png' target='_blank'><img src='img/blog/screenshots/post-3-thumb-100.png' title='Screenshot of site after post #3'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-3.png' target="_blank"><img src='img/blog/screenshots/post-3-thumb-100.png' alt='Screenshot of site after post #3'></a></span>
 			</div>
 			<div class='blog-post-guid'>95f8c883-3c79-4f4c-87e0-71fd7c631a62</div>
 		</div>
 
-		<div class='blog-post'>
-			<a name='blog-post-2'></a>
+		<div class='blog-post' id='blog-post-2'>
 			<div class='blog-post-header'>
 				<span>Post 2: Deploying New Posts</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d1cbce99a47e5b5e37f46c98293d5ab5821715d' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d1cbce99a47e5b5e37f46c98293d5ab5821715d' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Already there is pain. Currently, my brand new process when I want to write a new post is:
 					<ul>
-						<li>Open up my <a href='http://www.editplus.com/' target='_blank'>text editor</a> of choice</li>
+						<li>Open up my <a href='http://www.editplus.com/' target="_blank">text editor</a> of choice</li>
 						<li>Copy and paste the HTML for a post from my previous post</li>
 						<li>Edit the old HTML</li>
 						<li>Save and preview the file (testing testing testing)</li>
 						<li>Fix my bugs (remember to edit the timestamp, post tags, etc)</li>
-						<li>Commit the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> using <a href='http://code.google.com/p/tortoisegit/' target='_blank'>TortoiseGit</a></li>
-						<li>Push the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'>github</a> using <a href='http://code.google.com/p/tortoisegit/' target='_blank'>TortoiseGit</a> (Manually enter username and password each time in the prompt boxes)</li>
+						<li>Commit the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">github</a> using <a href='http://code.google.com/p/tortoisegit/' target="_blank">TortoiseGit</a></li>
+						<li>Push the changes to <a href='https://github.com/akmurray/aaronkmurray-blog' target="_blank">github</a> using <a href='http://code.google.com/p/tortoisegit/' target="_blank">TortoiseGit</a> (Manually enter username and password each time in the prompt boxes)</li>
 						<li>Remote into the webserver hosting this site</li>
 						<li>Pull the changes from github to a local folder</li>
 						<li>Copy the files to the IIS folder hosting the site</li>
 					</ul>
 				<p>Ugh. No fun already. I know we can do better than that. First up, let's automate a couple of those steps.
 				<ul>
-					<li>Install <a href='http://msysgit.github.com/' target='_blank'>Git for Windows</a> (<a href='http://www.thegeekstuff.com/2012/02/git-for-windows/' target='_blank'>how-to</a>)</li>
+					<li>Install <a href='http://msysgit.github.com/' target="_blank">Git for Windows</a> (<a href='http://www.thegeekstuff.com/2012/02/git-for-windows/' target="_blank">how-to</a>)</li>
 					<li>Select the option for "Run Git from the Windows Command Prompt" so that we can write scripts to do our work</li>
 					<li>Make sure that worked (open a Command Prompt, type in "git" and hit Enter</li>
 					<li>Clone the github repo to a local directory. <span class='code'>c:\code\git>git clone https://github.com/akmurray/aaronkmurray-blog c:\code\git\aaronkmurray-blog</span></li>
@@ -598,34 +667,33 @@
 					</li>
 				</ul>
 				<p>Now we can just run that file on the webserver and it'll fetch the latest source from github and push it to the website's folder. 
-				<p>Next up, let's take out the step of entering a username/password each time when doing the <span class='code'>git push</span>. <a href='http://www.programmoria.com/2012/02/saving-tortoisegit-password.html' target='_blank'>Here is an article</a> that describes the simple step of creating a batch file, and then running it, enter your username and password, and it creates the file that TortoiseGit needs so that you don't have to enter those manually anymore.
+				<p>Next up, let's take out the step of entering a username/password each time when doing the <span class='code'>git push</span>. <a href='http://www.programmoria.com/2012/02/saving-tortoisegit-password.html' target="_blank">Here is an article</a> that describes the simple step of creating a batch file, and then running it, enter your username and password, and it creates the file that TortoiseGit needs so that you don't have to enter those manually anymore.
 				<p>Far from perfect, but we're taking baby steps here ;)
-				<p>Article on <a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_target'>git fetch vs pull</a>
+				<p>Article on <a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target="_blank">git fetch vs pull</a>
 
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>git</span>, <span class='post-tag'>command-line</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 4:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-2.png' target='_blank'><img src='img/blog/screenshots/post-2-thumb-100.png' title='Screenshot of site after post #2'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-2.png' target="_blank"><img src='img/blog/screenshots/post-2-thumb-100.png' alt='Screenshot of site after post #2'></a></span>
 			</div>
 			<div class='blog-post-guid'>1a761ec2-aecf-43c2-a76f-4eebdabf6b51</div>
 		</div>
 
-		<div class='blog-post'>
-			<a name='blog-post-1'></a>
+		<div class='blog-post' id='blog-post-1'>
 			<div class='blog-post-header'>
 				<span>Post 1: The Plan</span>
-				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/be3aa221316ebdab153ab31f43d9c03b9df65fc3' target="_blank"><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/be3aa221316ebdab153ab31f43d9c03b9df65fc3' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>This has been a long time coming. 
 				<p>I've been wanting to start blogging for about a year now, but have been struggling with figuring out where to start.
 				<p>There have been tons of questions swirling around in my head, like: 
 				<ul>
-					<li>Blog: Roll my <a href='http://www.tandemgames.com/' target='_blank'>own</a> <a href='http://www.domainofheroes.com/' target='_blank'>site</a> <a href='http://www.aliensandrobots.com/' target='_blank'>again</a>? or use seasoned blog <a href='http://dasblog.codeplex.com/' target='_blank'>software</a> with <a href='http://wordpress.org/' target='_blank'>heavy community support</a>?</li>
-					<li>Host: Use a <a href='https://appharbor.com' target='_blank'>cloud</a> <a href='http://www.heroku.com/' target='_blank'>application</a>  <a href='http://www.rackspace.com/cloud/public/sites/' target='_blank'>host</a>? Use a cheap host that <a href='http://bluehost.com/' target='_blank'>supports simple scripts</a> for common apps? Host out of the <a href='img/blog/posts/post-1-aarons_server_rack.jpg' target='_blank'>server rack in my house</a>?</li>
-					<li>Platform: Java? .NET? "pure" HTML/JS? <a href='http://expect.sourceforge.net/cgi.tcl/'>TCL/CGI</a>? Something more <a href='http://rubyonrails.org/' target='_target'>hip</a>?</li>
-					<li>Audience: Should I be connecting with <a href='http://lostechies.com/' target='_blank'>other developers</a>? Other small-business owners? Friends? Family? </li>
+					<li>Blog: Roll my <a href='http://www.tandemgames.com/' target="_blank">own</a> <a href='http://www.domainofheroes.com/' target="_blank">site</a> <a href='http://www.aliensandrobots.com/' target="_blank">again</a>? or use seasoned blog <a href='http://dasblog.codeplex.com/' target="_blank">software</a> with <a href='http://wordpress.org/' target="_blank">heavy community support</a>?</li>
+					<li>Host: Use a <a href='https://appharbor.com' target="_blank">cloud</a> <a href='http://www.heroku.com/' target="_blank">application</a>  <a href='http://www.rackspace.com/cloud/public/sites/' target="_blank">host</a>? Use a cheap host that <a href='http://bluehost.com/' target="_blank">supports simple scripts</a> for common apps? Host out of the <a href='img/blog/posts/post-1-aarons_server_rack.jpg' target="_blank">server rack in my house</a>?</li>
+					<li>Platform: Java? .NET? "pure" HTML/JS? <a href='http://expect.sourceforge.net/cgi.tcl/'>TCL/CGI</a>? Something more <a href='http://rubyonrails.org/' target="_blank">hip</a>?</li>
+					<li>Audience: Should I be connecting with <a href='http://lostechies.com/' target="_blank">other developers</a>? Other small-business owners? Friends? Family? </li>
 					<li>Content: Is this going to be a personal activity log? Professional journal? Or just another tech experiement?</li>
 				</ul>
 				<p>As I poured through ideas and wrote down reams of notes, one thing was apparent: <span class='callout'>I was spending a lot of time and effort on the blog but not actually blogging.</span>
@@ -642,7 +710,7 @@
 				</ul>
 				<p>Ultimately, I'd like to think that someone new to the web development craft will be able to use this site, the posts, and the source code history as a guide to seeing what goes on behind the scenes for how to create modern web software. I'm going to start at absolute step 1, and advance steadily through the growth of a real application. 
 				<p>I'd love it if you followed me on this journey. It'd be great if you could sign up for an RSS feed to get auto-notifications when I make new posts, but since this is just an index.html file at the moment, you can't. Looks like we've got a lot of work to do. Get ready for a fun ride.
-				<p>For now, you can reach me on <a href='https://twitter.com/aaronkmurray' target='_blank'>Twitter @aaronkmurray</a>. Let me know what you think about this project and what features you'd like to see implemented. Here's a sample of what I have planned already:
+				<p>For now, you can reach me on <a href='https://twitter.com/aaronkmurray' target="_blank">Twitter @aaronkmurray</a>. Let me know what you think about this project and what features you'd like to see implemented. Here's a sample of what I have planned already:
 				<ul>
 					<li>Basics: CSS reset, JS framework, Cloud/CDN hosting</li>
 					<li>Javascript: organizing your JS files (custom and 3rd-party), creating your own framework patterns, debugging</li>
@@ -662,7 +730,7 @@
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>site-story</span>, <span class='post-tag'>insomnia</span>, <span class='post-tag'>plan</span>, <span class='post-tag'>twitter</span>, <span class='post-tag'>git</span></span>
 				<span class='post-timestamp'>Posted on August 22, 2012 @ 3:00pm</span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-1.png' target='_blank'><img src='img/blog/screenshots/post-1-thumb-100.png' title='Screenshot of site after first post'></a></span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-1.png' target="_blank"><img src='img/blog/screenshots/post-1-thumb-100.png' alt='Screenshot of site after first post'></a></span>
 			</div>
 			<div class='blog-post-guid'>a882e042-86e5-4d3e-b1c7-f970cf2e0769</div>
 		</div>
@@ -671,11 +739,10 @@
 <!--	Someday we'll have a database for these posts and I won't need this copy/paste template :)      -->
 <!--		
 
-		<div class='blog-post' name='blog-post-?????'>
-			<a name='blog-post-?????'></a>
+		<div class='blog-post' id='blog-post-?????'>
 			<div class='blog-post-header'>
 				<span>Post ?????: </span>
-				<span class='commit-link'><a href='#' target=_blank><img src='img/blog/icons/icon-github-16.png' title='View the code changes related to this post on github' /></a></span>
+				<span class='commit-link'><a href='#' target=_blank><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github' /></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>
@@ -684,8 +751,8 @@
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'></span>, <span class='post-tag'></span>, <span class='post-tag'></span></span>
-				<span class='post-timestamp'></span>
-				<span class='post-screenshot'><a href='img/blog/screenshots/post-?????.png' target='_blank'><img src='img/blog/screenshots/post-?????-thumb-100.png' title='Screenshot of site after post #?????' /></a></span>
+				<span class='post-timestamp'>?</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-?????.png' target=_blank><img src='img/blog/screenshots/post-?????-thumb-100.png' alt='Screenshot of site after post #?????' /></a></span>
 			</div>
 			<div class='blog-post-guid'></div>
 		</div>
@@ -696,39 +763,39 @@
 	<div id='wrapper-sidebar'>
 
 		<div id='wrapper-logo'>
-			<img src='img/blog/logo/logo-1.png' class='logo'>
+			<img src='img/blog/logo/logo-1.png' class='logo' alt='site logo'>
 		</div>
 
 		<div id='wrapper-blog-post-menu'>
 			<div class='menu-header'>Posts</div>
-			<ul>
-				<li><a href='#blog-post-1'>Post 1: The Plan</a></li>
-				<li><a href='#blog-post-2'>Post 2: Deploying New Posts</a></li>
-				<li><a href='#blog-post-3'>Post 3: Basic Visual Cleanup</a></li>
-				<li><a href='#blog-post-4'>Post 4: For the Machines</a></li>
-				<li><a href='#blog-post-5'>Post 5: RSS, Atom, and Build Tools</a></li>
-				<li><a href='#blog-post-6'>Post 6: Traffic Analytics</a></li>
-				<li><a href='#blog-post-7'>Post 7: Links to GitHub</a></li>
-				<li><a href='#blog-post-8'>Post 8: Automatic Image Compression</a></li>
-				<li><a href='#blog-post-9'>Post 9: IIS Static File Compression in web.config</a></li>
-				<li><a href='#blog-post-10'>Post 10: The SEO Plan</a></li>
-				<li><a href='#blog-post-11'>Post 11: RSS Fix to Stop Spamming Readers</a></li>
-				<li><a href='#blog-post-12'>Post 12: Favicon</a></li>
-				<li><a href='#blog-post-13'>Post 13: Image Thumbnails</a></li>
-				<li><a href='#blog-post-14'>Post 14: SEO 1/4: Getting Indexed</a></li>
-				<li><a href='#blog-post-15'>Post 15: CSS Includes</a></li>
-			<ul>
-		</ul></ul></div>
-
+				<ul>
+					<li><a href='#blog-post-1'>Post 1: The Plan</a></li>
+					<li><a href='#blog-post-2'>Post 2: Deploying New Posts</a></li>
+					<li><a href='#blog-post-3'>Post 3: Basic Visual Cleanup</a></li>
+					<li><a href='#blog-post-4'>Post 4: For the Machines</a></li>
+					<li><a href='#blog-post-5'>Post 5: RSS, Atom, and Build Tools</a></li>
+					<li><a href='#blog-post-6'>Post 6: Traffic Analytics</a></li>
+					<li><a href='#blog-post-7'>Post 7: Links to GitHub</a></li>
+					<li><a href='#blog-post-8'>Post 8: Automatic Image Compression</a></li>
+					<li><a href='#blog-post-9'>Post 9: IIS Static File Compression in web.config</a></li>
+					<li><a href='#blog-post-10'>Post 10: The SEO Plan</a></li>
+					<li><a href='#blog-post-11'>Post 11: RSS Fix to Stop Spamming Readers</a></li>
+					<li><a href='#blog-post-12'>Post 12: Favicon</a></li>
+					<li><a href='#blog-post-13'>Post 13: Image Thumbnails</a></li>
+					<li><a href='#blog-post-14'>Post 14: SEO 1/4: Getting Indexed</a></li>
+					<li><a href='#blog-post-15'>Post 15: CSS Includes</a></li>
+					<li><a href='#blog-post-16'>Post 16: HTML Markup Cleanup</a></li>
+				</ul>
+			</div>
 	</div>
 
 	<div id='wrapper-site-footer'>
 
-		<span class='copyright'>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span>
+		<span class='copyright'>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target="_blank">Aaron Murray</a></span>
 		<div id='wrapper-site-footer-icons'>
-			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank" title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-16.png'></a>
-			<a href='https://twitter.com/aaronkmurray' target="_blank" title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-16.png'></a>
-			<a href='https://github.com/akmurray' target="_blank" title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-16.png'></a>
+			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target="_blank" title='Subscribe via RSS'><img src='img/blog/icons/icon-rss-16.png' alt='RSS icon'></a>
+			<a href='https://twitter.com/aaronkmurray' target="_blank" title='Follow me on Twitter @aaronkmurray'><img src='img/blog/icons/icon-twitter-16.png' alt='Twitter icon'></a>
+			<a href='https://github.com/akmurray' target="_blank" title='View the code for this site on GitHub'><img src='img/blog/icons/icon-github-16.png' alt='GitHub icon'></a>
 			<!--
 			my gists: https://gist.github.com/akmurray
 			-->
@@ -737,23 +804,23 @@
 	</div>
 
 	<!-- Quantcast Tag -->
-	<script type="text/javascript">
+	<script type='text/javascript'>
 	var _qevents = _qevents || [];
 
 	(function() {
 	var elem = document.createElement('script');
-	elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+	elem.src = (document.location.protocol == 'https:' ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
 	elem.async = true;
-	elem.type = "text/javascript";
+	elem.type = 'text/javascript';
 	var scpt = document.getElementsByTagName('script')[0];
 	scpt.parentNode.insertBefore(elem, scpt);
 	})();
 
-	_qevents.push({ qacct:"p-M_hV8wgLbE9k_" });
+	_qevents.push({ qacct:'p-M_hV8wgLbE9k_' });
 	</script>
 
 	<noscript>
-	<div style="display:none;"><img src="//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif" border="0" height="1" width="1" alt="Quantcast"></div>
+	<div style='display:none;'><img src='//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif' border='0' height='1' width='1' alt='Quantcast'></div>
 	</noscript>
 	<!-- End Quantcast tag -->
 
