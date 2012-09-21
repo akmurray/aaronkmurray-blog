@@ -4,8 +4,8 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:d71f5534-0103-403e-92dd-a06ca57d8f79;id=1</id>
-    <updated>2012-09-21T20:22:19Z</updated>
+    <id>uuid:efa23596-5c8d-4bb5-9b91-b39522398b1f;id=1</id>
+    <updated>2012-09-21T20:24:09Z</updated>
     <entry>
         <id>8197c362-a697-414c-bbe2-72d6247303bc</id>
         <title
@@ -76,8 +76,8 @@
         <id>e19b213c-4e59-4c4d-bcc7-33973d0576f5</id>
         <title
             type="text">Post 16: HTML Markup Cleanup</title>
-        <published>2012-09-21T15:22:00-05:00</published>
-        <updated>2012-09-21T15:22:00-05:00</updated>
+        <published>2012-09-21T15:25:00-05:00</published>
+        <updated>2012-09-21T15:25:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;This post is a little bit of housekeeping and HTML fundamentals. It will touch on a few of the "smaller" questions that come up related to writing HTML, and then show how to use an automated tool at build time to get a report on the basic structure of our HTML (look for errors, etc.)
