@@ -4,8 +4,8 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:78b53873-4a8f-4857-b935-e93924369fdc;id=1</id>
-    <updated>2012-09-21T19:19:12Z</updated>
+    <id>uuid:801d6416-09a1-4df2-98fc-f61965c27134;id=1</id>
+    <updated>2012-09-21T19:23:25Z</updated>
     <entry>
         <id>e19b213c-4e59-4c4d-bcc7-33973d0576f5</id>
         <title
@@ -68,7 +68,9 @@
 				&lt;p&gt;Personally, I am conflicted. I prefer single quotes because it "cuts down on the visual noise" when I'm looking at HTML and javascript, but the flipside is that I write a lot of C# code and &lt;span class='code'&gt;strings&lt;/span&gt; in C# are wrapped in double quotes. These days I find myself using single quotes most of the time.
 
 				&lt;h3&gt;Tools to help&lt;/h3&gt;
-				&lt;p&gt;Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I'll show a tool called &lt;a href='https://github.com/w3c/tidy-html5' target="_blank"&gt;html-tidy5&lt;/a&gt; that can be run as part of our build process. I added tidy as the first step in the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt;. If it finds errors or warnings when it runs, it will cancel the build and open notepad to show a list of problems. Those can then be fixed, and the build can be run again.
+				&lt;p&gt;Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I'll show a tool called &lt;a href='https://github.com/w3c/tidy-html5' target="_blank"&gt;html-tidy5&lt;/a&gt; that can be run as part of our build process. 
+				&lt;p&gt;There are also &lt;a href='http://lint.brihten.com/html/' target="_blank"&gt;online tools&lt;/a&gt; that you can play with to see example results.
+				&lt;p&gt;I added tidy as the first step in the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt;. If it finds errors or warnings when it runs, it will cancel the build and open notepad to show a list of problems. Those can then be fixed, and the build can be run again.
 				&lt;p&gt;Here is a sample of what html tidy found on this page: 
 				&lt;ul&gt;
 					&lt;li&gt;Illegal closing tag &lt;span class='code'&gt;&amp;lt;/span&amp;gt;&lt;/span&gt; for &lt;span class='code'&gt;&amp;lt;li&amp;gt;&lt;/span&gt;&lt;/li&gt;
