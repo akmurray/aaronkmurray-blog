@@ -8,6 +8,71 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">8197c362-a697-414c-bbe2-72d6247303bc</guid>
+            <title>Post 17: First Month Retrospective</title>
+            <description>
+				&lt;p&gt;I'm a big fan of postmortems, and find myself reading lots of them from sites like &lt;a href='http://gamasutra.com/search/index.php?search_text=postmortem' target="_blank"&gt;Gamasutra.com&lt;/a&gt;. 
+				&lt;p&gt;The great thing about doing a postmortem is that it helps re-enforce and solidify the learning experiences from a project while they are still fresh.
+				&lt;p&gt;It has been a month since I started this blog, so I figured that a look back at the project was in order.
+
+				&lt;h3&gt;What Went Right&lt;/h3&gt;
+				&lt;ul&gt;
+					&lt;li&gt;Lots of posts. I was worried that I wouldn't find enough minutes in each day to construct a decent post.&lt;/li&gt;
+					&lt;li&gt;Variety of posts. I've covered various topics, from entry-level HTML and CSS, to build scripts and tools.&lt;/li&gt;
+					&lt;li&gt;RSS Feed. Not getting one up quickly was my biggest fear when doing a blog project from scratch.&lt;/li&gt;
+				&lt;/ul&gt;
+
+				&lt;h3&gt;What Went Wrong&lt;/h3&gt;
+				&lt;ul&gt;
+					&lt;li&gt;RSS Feed. The intial feed had bugs that spammed all posts out as new posts each time I did an update.&lt;/li&gt;
+					&lt;li&gt;Not enough pictures. Looking back at the posts, many of them are huge walls of text.&lt;/li&gt;
+					&lt;li&gt;Build/Commit/Build process. I still have to do 2 GitHub Commits for each post because each post has a link to it's own commit. Still trying to figure that one out.&lt;/li&gt;
+				&lt;/ul&gt;
+
+				&lt;h3&gt;Frustrations&lt;/h3&gt;
+				&lt;p&gt;As much fun as I am having with this project, there are still many frustrations and things that "feel wrong" every time I do them. 
+				&lt;ul&gt;
+					&lt;li&gt;Not having a tradition database feels yucky/scary&lt;/li&gt;
+					&lt;li&gt;Copying and Pasting my post template with each post feels wrong and is prone to error&lt;/li&gt;
+					&lt;li&gt;Not using code that I've already written to acheive things that I want to do feels wasteful&lt;/li&gt;
+					&lt;li&gt;Writing everything from scratch feels tedious (yet liberating) at times&lt;/li&gt;
+					&lt;li&gt;My Build/Release process still has a couple manual steps&lt;/li&gt;
+				&lt;/ul&gt;
+
+				&lt;h3&gt;Realizations&lt;/h3&gt;
+				&lt;ul&gt;
+					&lt;li&gt;Different is okay. I was so used to doing sites a certain way with a wealth of frameworks that I've built up and leveraged over the years, it was scary and foreign to go back to a single HTML page as a starting point. Now I am embracing the process. With each post I challenge myself to achieve the intended end result in a way that I have not done before.&lt;/li&gt;
+					&lt;li&gt;Database != DBMS. Thinking about the term "database" without meaning mySQL, SQL Server, or Raven is really odd. Currently, the database for this site is &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/index.html' target="_blank"&gt;index.html&lt;/a&gt;. That is a new paradigm of thinking for me, and it has led to some radical thoughts that I plan on exploring in the future.&lt;/li&gt;
+					&lt;li&gt;New process is hard. It actually isn't the process that is difficult as much as challenging my brain to be willing to do things that I've done a dozen times in a new and different way.&lt;/li&gt;
+				&lt;/ul&gt;
+
+				&lt;h3&gt;What Is Next?&lt;/h3&gt;
+				&lt;p&gt;This is the constant question. There are many things that I have listed out in my project notes. Here is a quick sample of things on my short-list:
+				&lt;ul&gt;
+					&lt;li&gt;Tech: use a CDN&lt;/li&gt;
+					&lt;li&gt;Tech: js and css minification, bundling, versioning, and debugging&lt;/li&gt;
+					&lt;li&gt;Tech: css sprites/images&lt;/li&gt;
+					&lt;li&gt;Tech: html minification&lt;/li&gt;
+					&lt;li&gt;Tech: url-rewriting&lt;/li&gt;
+					&lt;li&gt;Tech: automated testing&lt;/li&gt;
+					&lt;li&gt;Tech: reporting&lt;/li&gt;
+					&lt;li&gt;Tech: figure out what "database" means&lt;/li&gt;
+					&lt;li&gt;Tech: automatic seo analytics capture&lt;/li&gt;
+					&lt;li&gt;Tech: server-side rendering and client-side MVC&lt;/li&gt;
+					&lt;li&gt;Feature: tag cloud&lt;/li&gt;
+					&lt;li&gt;Feature: permalinks&lt;/li&gt;
+					&lt;li&gt;Feature: post paging&lt;/li&gt;
+					&lt;li&gt;Feature: post comments&lt;/li&gt;
+					&lt;li&gt;Feature: social integrations&lt;/li&gt;
+					&lt;li&gt;Feature: decent UI design&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;If there are other things that you'd like to see, &lt;a href='https://twitter.com/aaronkmurray' target="_blank"&gt;hit me up on Twitter&lt;/a&gt;.
+			</description>
+            <pubDate>Fri, 21 Sep 2012 15:20:00 -0500</pubDate>
+            <a10:updated>2012-09-21T15:20:00-05:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">e19b213c-4e59-4c4d-bcc7-33973d0576f5</guid>
             <title>Post 16: HTML Markup Cleanup</title>
             <description>
@@ -66,7 +131,7 @@
 
 				&lt;h3&gt;Tools to help&lt;/h3&gt;
 				&lt;p&gt;Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I'll show a tool called &lt;a href='https://github.com/w3c/tidy-html5' target="_blank"&gt;html-tidy5&lt;/a&gt; that can be run as part of our build process. 
-				&lt;p&gt;There are also &lt;a href='http://lint.brihten.com/html/' target="_blank"&gt;online tools&lt;/a&gt; that you can play with to see example results.
+				&lt;p&gt;There are also &lt;a href='http://lint.brihten.com/html/report?u=http%3A//aaronkmurray.com&amp;amp;s=0100110#' target="_blank"&gt;online tools&lt;/a&gt; that you can play with to see example results.
 				&lt;p&gt;I added tidy as the first step in the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt;. If it finds errors or warnings when it runs, it will cancel the build and open notepad to show a list of problems. Those can then be fixed, and the build can be run again.
 				&lt;p&gt;Here is a sample of what html tidy found on this page: 
 				&lt;ul&gt;
@@ -82,8 +147,8 @@
 				&lt;p&gt;This new process is a simple way to ensure that I maintain a decent quality of my code as the project gets bigger.
 
 			</description>
-            <pubDate>Fri, 21 Sep 2012 14:25:00 -0500</pubDate>
-            <a10:updated>2012-09-21T14:25:00-05:00</a10:updated>
+            <pubDate>Fri, 21 Sep 2012 15:22:00 -0500</pubDate>
+            <a10:updated>2012-09-21T15:22:00-05:00</a10:updated>
         </item>
         <item>
             <guid

@@ -24,6 +24,77 @@
 
 	<div id='wrapper-blog-posts'>
 
+		<div class='blog-post' id='blog-post-17'>
+			<div class='blog-post-header'>
+				<span>Post 17: First Month Retrospective</span>
+				<span class='commit-link'><a href='#' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>I'm a big fan of postmortems, and find myself reading lots of them from sites like <a href='http://gamasutra.com/search/index.php?search_text=postmortem' target="_blank">Gamasutra.com</a>. 
+				<p>The great thing about doing a postmortem is that it helps re-enforce and solidify the learning experiences from a project while they are still fresh.
+				<p>It has been a month since I started this blog, so I figured that a look back at the project was in order.
+
+				<h3>What Went Right</h3>
+				<ul>
+					<li>Lots of posts. I was worried that I wouldn't find enough minutes in each day to construct a decent post.</li>
+					<li>Variety of posts. I've covered various topics, from entry-level HTML and CSS, to build scripts and tools.</li>
+					<li>RSS Feed. Not getting one up quickly was my biggest fear when doing a blog project from scratch.</li>
+				</ul>
+
+				<h3>What Went Wrong</h3>
+				<ul>
+					<li>RSS Feed. The intial feed had bugs that spammed all posts out as new posts each time I did an update.</li>
+					<li>Not enough pictures. Looking back at the posts, many of them are huge walls of text.</li>
+					<li>Build/Commit/Build process. I still have to do 2 GitHub Commits for each post because each post has a link to it's own commit. Still trying to figure that one out.</li>
+				</ul>
+
+				<h3>Frustrations</h3>
+				<p>As much fun as I am having with this project, there are still many frustrations and things that "feel wrong" every time I do them. 
+				<ul>
+					<li>Not having a tradition database feels yucky/scary</li>
+					<li>Copying and Pasting my post template with each post feels wrong and is prone to error</li>
+					<li>Not using code that I've already written to acheive things that I want to do feels wasteful</li>
+					<li>Writing everything from scratch feels tedious (yet liberating) at times</li>
+					<li>My Build/Release process still has a couple manual steps</li>
+				</ul>
+
+				<h3>Realizations</h3>
+				<ul>
+					<li>Different is okay. I was so used to doing sites a certain way with a wealth of frameworks that I've built up and leveraged over the years, it was scary and foreign to go back to a single HTML page as a starting point. Now I am embracing the process. With each post I challenge myself to achieve the intended end result in a way that I have not done before.</li>
+					<li>Database != DBMS. Thinking about the term "database" without meaning mySQL, SQL Server, or Raven is really odd. Currently, the database for this site is <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/index.html' target="_blank">index.html</a>. That is a new paradigm of thinking for me, and it has led to some radical thoughts that I plan on exploring in the future.</li>
+					<li>New process is hard. It actually isn't the process that is difficult as much as challenging my brain to be willing to do things that I've done a dozen times in a new and different way.</li>
+				</ul>
+
+				<h3>What Is Next?</h3>
+				<p>This is the constant question. There are many things that I have listed out in my project notes. Here is a quick sample of things on my short-list:
+				<ul>
+					<li>Tech: use a CDN</li>
+					<li>Tech: js and css minification, bundling, versioning, and debugging</li>
+					<li>Tech: css sprites/images</li>
+					<li>Tech: html minification</li>
+					<li>Tech: url-rewriting</li>
+					<li>Tech: automated testing</li>
+					<li>Tech: reporting</li>
+					<li>Tech: figure out what "database" means</li>
+					<li>Tech: automatic seo analytics capture</li>
+					<li>Tech: server-side rendering and client-side MVC</li>
+					<li>Feature: tag cloud</li>
+					<li>Feature: permalinks</li>
+					<li>Feature: post paging</li>
+					<li>Feature: post comments</li>
+					<li>Feature: social integrations</li>
+					<li>Feature: decent UI design</li>
+				</ul>
+				<p>If there are other things that you'd like to see, <a href='https://twitter.com/aaronkmurray' target="_blank">hit me up on Twitter</a>.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>postmortem</span>, <span class='post-tag'>retrospective</span></span>
+				<span class='post-timestamp'>Posted on September 21, 2012 @ 3:20PM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-17.png' target="_blank"><img src='img/blog/screenshots/post-17-thumb-100.png' alt='Screenshot of site after post #17'></a></span>
+			</div>
+			<div class='blog-post-guid'>8197c362-a697-414c-bbe2-72d6247303bc</div>
+		</div>
+
 		<div class='blog-post' id='blog-post-16'>
 			<div class='blog-post-header'>
 				<span>Post 16: HTML Markup Cleanup</span>
@@ -85,7 +156,7 @@
 
 				<h3>Tools to help</h3>
 				<p>Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I'll show a tool called <a href='https://github.com/w3c/tidy-html5' target="_blank">html-tidy5</a> that can be run as part of our build process. 
-				<p>There are also <a href='http://lint.brihten.com/html/' target=_blank>online tools</a> that you can play with to see example results.
+				<p>There are also <a href='http://lint.brihten.com/html/report?u=http%3A//aaronkmurray.com&amp;s=0100110#' target="_blank">online tools</a> that you can play with to see example results.
 				<p>I added tidy as the first step in the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a>. If it finds errors or warnings when it runs, it will cancel the build and open notepad to show a list of problems. Those can then be fixed, and the build can be run again.
 				<p>Here is a sample of what html tidy found on this page: 
 				<ul>
@@ -103,7 +174,7 @@
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>html</span>, <span class='post-tag'>tidy</span>, <span class='post-tag'>doctype</span>, <span class='post-tag'>xhtml</span>, <span class='post-tag'>attributes</span></span>
-				<span class='post-timestamp'>Posted on September 21, 2012 @ 2:25PM</span>
+				<span class='post-timestamp'>Posted on September 21, 2012 @ 3:25PM</span>
 				<span class='post-screenshot'><a href='img/blog/screenshots/post-16.png' target="_blank"><img src='img/blog/screenshots/post-16-thumb-100.png' alt='Screenshot of site after post #16'></a></span>
 			</div>
 			<div class='blog-post-guid'>e19b213c-4e59-4c4d-bcc7-33973d0576f5</div>
@@ -785,6 +856,7 @@
 					<li><a href='#blog-post-14'>Post 14: SEO 1/4: Getting Indexed</a></li>
 					<li><a href='#blog-post-15'>Post 15: CSS Includes</a></li>
 					<li><a href='#blog-post-16'>Post 16: HTML Markup Cleanup</a></li>
+					<li><a href='#blog-post-17'>Post 17: First Month Retrospective</a></li>
 				</ul>
 			</div>
 	</div>
