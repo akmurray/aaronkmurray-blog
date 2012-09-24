@@ -19,7 +19,7 @@ body {margin:0;padding:0;}
 .blog-post-header .commit-link img {border:0;}
 
 .blog-post-body {padding:10px;}
-.blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; }
+.blog-post-body span.code, code {font-family: monospace, Courier, Lucidatypewriter; }
 .blog-post-body div.callout {margin:10px;text-align:center;}
 .blog-post-body div.callout span.citation {text-align:center;color:#555;clear:both;display:block;font-size:smaller;}
 .blog-post-guid {display:none;}
