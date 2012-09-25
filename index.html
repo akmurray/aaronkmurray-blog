@@ -10,6 +10,8 @@
     <meta name='viewport' content='width=device-width'>
 	<link rel='icon' href='favicon.png' type='image/png'>
 	<link rel='stylesheet' href='css/blog.css'>
+	<link rel='stylesheet' href='css/blog-logo.css'>
+	<script type="text/javascript" src="js/prototype-extensions.js"></script> 
 </head>
 
 <body>
@@ -888,7 +890,14 @@
 	<div id='wrapper-sidebar'>
 
 		<div id='wrapper-logo'>
-			<img src='img/blog/logo/logo-1.png' class='logo' alt='site logo'>
+			<div id='logo-cube' class='show-side-1'>
+				<figure class='side-2'><img src='img/blog/logo/logo-2-128.png' class='logo' alt='site logo'></figure>
+				<figure class='side-3'><img src='img/blog/logo/logo-3-128.png' class='logo' alt='site logo'></figure>
+				<figure class='side-4'><img src='img/blog/logo/logo-4-128.png' class='logo' alt='site logo'></figure>
+				<figure class='side-5'><img src='img/blog/logo/logo-5-128.png' class='logo' alt='site logo'></figure>
+				<figure class='side-6'><img src='img/blog/logo/logo-6-128.png' class='logo' alt='site logo'></figure>
+				<figure class='side-1'><img src='img/blog/logo/logo-1-128.png' class='logo' alt='site logo'></figure>
+			</div>
 		</div>
 
 		<div id='wrapper-blog-post-menu'>
@@ -929,6 +938,31 @@
 		</div>
 
 	</div>
+
+
+	<script>
+
+	var init = function() {
+
+		//rotate the logo cube...
+		var logoRotate = function() {
+			var cube = document.getElementById('wrapper-logo').children[0];
+			for (var i=1;i<=6;i++)
+				cube.removeClassName('show-side-' + i);
+			var num = Math.ceil(Math.random()*6);
+			cube.addClassName('show-side-' + num);
+		};
+
+		//...every few seconds
+		var intervalLogo = self.setInterval(logoRotate,3000);
+	  
+	};
+	  
+	window.addEventListener( 'DOMContentLoaded', init, false);
+
+	</script>
+
+
 
 	<!-- Quantcast Tag -->
 	<script type='text/javascript'>
