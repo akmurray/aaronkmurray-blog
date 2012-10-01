@@ -12,6 +12,7 @@
 	<link rel='stylesheet' href='css/blog.css'>
 	<link rel='stylesheet' href='css/blog-logo.css'>
 	<script type="text/javascript" src="js/prototype-extensions.js"></script> 
+	<script type="text/javascript" src="js/akm-blog.js"></script> 
 </head>
 
 <body>
@@ -27,6 +28,48 @@
 	</div>
 
 	<div id='wrapper-blog-posts'>
+
+		<article class='blog-post' id='blog-post-19'>
+			<div class='blog-post-header'>
+				<span>Post 19: Fun With A CSS3 Cube</span>
+				<span class='commit-link'><a href='#' target="_blank"><img src='img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>In this post I will show you how I did the "3D" CSS cube for my logo. The <a href='https://github.com/akmurray/aaronkmurray-blog/commit/721fc83fad549ba5b27174b7743496fb7e66685d' target="_blank">code for the changes is on GitHub</a> (as usual). 
+
+				<h3>Site Logo represented as a 3D Cube using CSS3 Transforms</h3>
+				<p>I won't do a full write-up because there is already <a href='http://desandro.github.com/3dtransforms/docs/cube.html' target="_blank">a nice series of CSS 3D Transforms articles</a> written by <a href='http://desandro.com/' target="_blank">desandro</a>. If you are interested, you should read the article for full details on how to do it yourself.
+				<p>The summary of interesting bits for how I implemented the logo cube is:
+				<ul>
+					<li>HTML: Create a wrapper DIV that will represent the "cube"</li>
+					<li>HTML: Create 6 DOM Elements inside the wrapper that will represent the 6 sides/faces of the cube</li>
+					<li><script src="https://gist.github.com/3811888.js"> </script></li>
+					<li>CSS: <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/css/blog-logo.css' target="_blank">Style the cube for size and 3D transform</a></li>
+					<li>JS: After the page loads, set up a timer that will rotate the cube every few seconds</li>
+					<li><script src="https://gist.github.com/3811934.js"> </script></li>
+				</ul>
+
+				<h3>Fallback when browser doesn't support CSS3 Transforms</h3>
+				<p>Because having a rotating 3D cube for my logo isn't "critical" for this site, I didn't concern myself with having the same experience for all browsers. In this case, browsers that don't support CSS3 Transforms will not show the 3D rotation. They will simply show the "last" image in the stack of "sides", which will result in a single static logo being displayed.
+				<p>Currently there are two ways of viewing this concept: <dfn>Graceful Degradation</dfn> and <dfn>Progressive Enhancement</dfn>. 
+				<ol>
+					<li><dfn>Graceful Degradation</dfn> means that if a feature isn't supported, and acceptable fallback would occur.</li>
+					<li><dfn>Progressive Enhancement</dfn> is the opposite way of viewing the same situation. A basic experience is defined, and when possible, enhancements to that experience will be provided based on browser support.</li>
+				</ol>
+				<p>The differences are subtle, but meaningful. 
+				<ul>
+					<li><dfn>Progressive Enhancement</dfn> implies that all basic functionality will exist, and then extras will be added on to make the experience better. Example: The logo for this site will be a 2D image, unless the browser supports a 3D rendering via CSS.</li>
+					<li><dfn>Graceful Degradation</dfn> typically means that when failure occurs, it doesn't completely kill the experience, but that experience may not be the same. The primary example of this is the use of a text message to the user when Adobe's Flash plugin is not installed/available, instead of providing an alternative way to see that content.</li>
+				</ul>
+				<p>It's up to you to choose when features are "critical" and when they are simply icing on the cake.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>css3</span>, <span class='post-tag'>cube</span>, <span class='post-tag'>logo</span>, <span class='post-tag'>progressive enhancement</span>, <span class='post-tag'>graceful degradation</span></span>
+				<span class='post-timestamp'>Posted on October 1, 2012 @ 11:05AM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-19.png' target="_blank"><img src='img/blog/screenshots/post-19-thumb-100.png' alt='Screenshot of site after post #19'></a></span>
+			</div>
+			<div class='blog-post-guid'>aea98599-7cb9-4cc4-ad4e-81d7b4c0c627</div>
+		</article>
 
 		<article class='blog-post' id='blog-post-18'>
 			<div class='blog-post-header'>
@@ -921,6 +964,7 @@
 					<li><a href='#blog-post-16'>Post 16: HTML Markup Cleanup</a></li>
 					<li><a href='#blog-post-17'>Post 17: First Month Retrospective</a></li>
 					<li><a href='#blog-post-18'>Post 18: SEO Part 2/4: Optimizing Code Tags For SEO</a></li>
+					<li><a href='#blog-post-19'>Post 19: Fun With A CSS3 Cube</a></li>
 				</ul>
 			</div>
 	</div>
@@ -938,30 +982,6 @@
 		</div>
 
 	</div>
-
-
-	<script>
-
-	var init = function() {
-
-		//rotate the logo cube...
-		var logoRotate = function() {
-			var cube = document.getElementById('wrapper-logo').children[0];
-			for (var i=1;i<=6;i++)
-				cube.removeClassName('show-side-' + i);
-			var num = Math.ceil(Math.random()*6);
-			cube.addClassName('show-side-' + num);
-		};
-
-		//...every few seconds
-		var intervalLogo = self.setInterval(logoRotate,3000);
-	  
-	};
-	  
-	window.addEventListener( 'DOMContentLoaded', init, false);
-
-	</script>
-
 
 
 	<!-- Quantcast Tag -->
