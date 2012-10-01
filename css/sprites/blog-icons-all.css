@@ -1,0 +1,60 @@
+.img-icon-twitter-32
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: 0px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-github-32
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -32px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-rss-32
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: 0px -32px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-rss-16
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -32px -32px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-twitter-16
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -48px -32px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-github-16
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: 0px -64px;
+    background-repeat:no-repeat;
+}
+
+

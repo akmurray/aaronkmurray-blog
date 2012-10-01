@@ -4,8 +4,49 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:e36b2cfe-9d26-46c1-a0ce-32ba68c8e8c2;id=1</id>
-    <updated>2012-10-01T16:03:16Z</updated>
+    <id>uuid:4a415cf3-83e3-4a45-869e-55b825746937;id=1</id>
+    <updated>2012-10-01T23:57:22Z</updated>
+    <entry>
+        <id>8724a9a0-3ba8-4302-9e9e-8f9e70e1fe97</id>
+        <title
+            type="text">Post 20: CSS Sprites</title>
+        <published>2012-10-01T19:00:00-05:00</published>
+        <updated>2012-10-01T19:00:00-05:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;Alrighty, another round of performance enhancements. This time we'll go over CSS Sprites. 
+				&lt;p&gt;The concept of CSS Sprites is simple. Instead of downloading 1 real image for each individual image that you see on the screen, we'll actually pack multiple images into 1 file and use CSS to only show the portion of the image that we want to show. This primary benefit is the reduction of http requests which results in faster load times. A secondary benefit is that the browser will use less RAM.
+				&lt;p&gt;Let's take the little icon images on this blog for example. There are icons in the header and footer for RSS, Twitter, and GitHub. There are 16x16 and 32x32 pixel versions as well. That is 6 icons for a total of 5.73KB after compression. Now let's put them in a simple sprite:
+				&lt;div class='callout'&gt;
+					&lt;img src='/img/blog/posts/post-20-blog-icons-all.png' alt='6 site icons in a sprite'&gt;
+					&lt;span class='citation'&gt;6 site icons in a sprite&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;p&gt;The new sprite has an 11% smaller filesize (5.11KB). Even better though, we'll save 5 http requests. I also did this for the little post thumbnails. There was 19 of them before this post weighing in at a whopping 192KB. After putting them into a single sprite, the filesize actually got a bit bigger (209KB), but 19 http requests were saved. 
+				&lt;p&gt;I was also curious to see if I could reduce the image quality on the screenshot thumbnails without having them suffer too much visually. The end result is that I determined that an 8bit color depth was nearly as good as 24bit color depth in the thumbnails, and the filesize dropped From 209KB to a tiny 32KB! That is 160KB less than the originals, plus 19 fewer http requests. Win-win. But what does the HTML look like?
+				&lt;p&gt;Original: &lt;code&gt;&amp;lt;img src='/img/blog/icons/icon-github-32.png'&gt;&lt;/code&gt;
+				&lt;p&gt;Sprite: &lt;code&gt;&amp;lt;img src='/img/blog/clear.gif' class='img-icon-github-32'&gt;&lt;/code&gt;
+				&lt;p&gt;As you can see, the required change is very minor. First I set the image source to a clear gif, and then I set the class to one that is similar to the image filename.
+				&lt;p&gt;Naturally, I made a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'&gt;command-line tool&lt;/a&gt; to make sprites for me because doing them by hand is tedious and error prone. Plus it will generate the css so I don't have to write that either. I also put in the option for limiting the color bit depth to 8 bits. After testing that functionality with ImageMagick, I decided to use a custom &lt;a href='http://msdn2.microsoft.com/en-us/library/aa479306.aspx' target='_blank'&gt;quantization&lt;/a&gt; alogrithm which resulted in a smaller filesize and a much better looking image.
+				&lt;p&gt;The next step was to update the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank"&gt;build script for this site&lt;/a&gt;. Example:  
+				&lt;p&gt;&lt;code&gt;imgsprite.exe -in:../../aaronkmurray-blog/img/blog/icons/*.png -img-out:../../aaronkmurray-blog/img/blog/sprites/blog-icons-all.png -css-out:../../aaronkmurray-blog/css/sprites/blog-icons-all.css -css-class-name-prefix:img- -image-deploy-url-base:../../img/blog/sprites/ -gen-test-html:true -test-html-path:../../aaronkmurray-blog/test/sprites/ -test-html-deploy-url-base:../../img/blog/sprites/&lt;/code&gt;
+				&lt;p&gt;I know that is a gnarly block of command line, so I'll break it down:
+				&lt;ul&gt;
+					&lt;li&gt;&lt;code&gt;imgsprite.exe&lt;/code&gt;: name of the tool&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-in:../../aaronkmurray-blog/img/blog/icons/*.png&lt;/code&gt;: go grab all of the png icons&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-img-out:../../aaronkmurray-blog/img/blog/sprites/blog-icons-all.png&lt;/code&gt;: put them in a new file named blog-icons-all.png&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-css-out:../../aaronkmurray-blog/css/sprites/blog-icons-all.css&lt;/code&gt;: make a new css file called blog-icons-all.css&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-css-class-name-prefix:img-&lt;/code&gt;: prefix the css class name with &amp;quot;img-&amp;quot;&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-image-deploy-url-base:../../img/blog/sprites/&lt;/code&gt;: base url for the sprite&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-gen-test-html:true&lt;/code&gt;: make a test html page to view all of the sprite images at once&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-test-html-path:../../aaronkmurray-blog/test/sprites/&lt;/code&gt;: this is where the test html page goes&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;-test-html-deploy-url-base:../../img/blog/sprites/&lt;/code&gt;: use a special base url for the sprite in the test page because the paths are relative (for now until CDN)&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;There is one of these lines in the build script for each sprite that I want to create. You can view the test page for the &lt;a href='test/sprites/blog-icons-all.css_test.html' target='_blank'&gt;icons&lt;/a&gt; and &lt;a href='test/sprites/post-screenshot-thumbs-all.css_test.html' target='_blank'&gt;screenshots&lt;/a&gt; if you're interested. These allow me to visually do a sanity check on the results, as well as provide me with a nice way of finding the css class name for each sprite.
+				&lt;p&gt;Before the sprites, a hit to this page had 52 http requests and a payload of 667KB. After the sprites it was 33 http requests and 506KB.
+				&lt;p&gt;And just for grins, I decided to quantize 5 of the former post images that didn't need to be lossless just to see how much they'd shrink. The result: 248KB originally down to 88KB for a savings of another 160KB. Sweet!
+				&lt;p&gt;So there you have it. Another tool to add to your collection. CSS Sprites and further image reduction options without breaking a sweat.
+			</content>
+    </entry>
     <entry>
         <id>aea98599-7cb9-4cc4-ad4e-81d7b4c0c627</id>
         <title
@@ -119,9 +160,9 @@
 				&lt;h3&gt;Frustrations&lt;/h3&gt;
 				&lt;p&gt;As much fun as I am having with this project, there are still many frustrations and things that "feel wrong" every time I do them. 
 				&lt;ul&gt;
-					&lt;li&gt;Not having a tradition database feels yucky/scary&lt;/li&gt;
+					&lt;li&gt;Not having a traditional database feels yucky/scary&lt;/li&gt;
 					&lt;li&gt;Copying and Pasting my post template with each post feels wrong and is prone to error&lt;/li&gt;
-					&lt;li&gt;Not using code that I've already written to acheive things that I want to do feels wasteful&lt;/li&gt;
+					&lt;li&gt;Not using code that I've already written to achieve things that I want to do feels wasteful&lt;/li&gt;
 					&lt;li&gt;Writing everything from scratch feels tedious (yet liberating) at times&lt;/li&gt;
 					&lt;li&gt;My Build/Release process still has a couple manual steps&lt;/li&gt;
 				&lt;/ul&gt;
@@ -557,7 +598,7 @@
         <updated>2012-09-08T14:00:00-05:00</updated>
         <content
             type="text">
-				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='/img/blog/icons/icon-github-16.png' alt='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
+				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target="_blank"&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target="_blank"&gt;&lt;img src='/img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for "releasing" a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 			</content>
     </entry>
