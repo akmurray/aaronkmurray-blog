@@ -73,9 +73,27 @@
 				<p>Original: <code>&lt;img src='img/blog/icons/icon-github-32.png'></code>
 				<p>Sprite: <code>&lt;img src='img/blog/clear.gif' class='img-icon-github-32'></code>
 				<p>As you can see, the required change is very minor. First I set the image source to a clear gif, and then I set the class to one that is similar to the image filename.
+				<p>The CSS is fairly straightforward as well:
+				<pre class='code'>
+.img-icon-github-32
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -32px 0px;
+    background-repeat:no-repeat;
+}</pre>
 				<p>Naturally, I made a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'>command-line tool</a> to make sprites for me because doing them by hand is tedious and error prone. Plus it will generate the css so I don't have to write that either. I also put in the option for limiting the color bit depth to 8 bits. After testing that functionality with ImageMagick, I decided to use a custom <a href='http://msdn2.microsoft.com/en-us/library/aa479306.aspx' target='_blank'>quantization</a> alogrithm which resulted in a smaller filesize and a much better looking image.
 				<p>The next step was to update the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target="_blank">build script for this site</a>. Example:  
-				<p><code>imgsprite.exe -in:../../aaronkmurray-blog/img/blog/icons/*.png -img-out:../../aaronkmurray-blog/img/blog/sprites/blog-icons-all.png -css-out:../../aaronkmurray-blog/css/sprites/blog-icons-all.css -css-class-name-prefix:img- -image-deploy-url-base:../../img/blog/sprites/ -gen-test-html:true -test-html-path:../../aaronkmurray-blog/test/sprites/ -test-html-deploy-url-base:../../img/blog/sprites/</code>
+				<pre class='code'>imgsprite.exe 
+	-in:../../aaronkmurray-blog/img/blog/icons/*.png 
+	-img-out:../../aaronkmurray-blog/img/blog/sprites/blog-icons-all.png 
+	-css-out:../../aaronkmurray-blog/css/sprites/blog-icons-all.css 
+	-css-class-name-prefix:img- 
+	-image-deploy-url-base:../../img/blog/sprites/ 
+	-gen-test-html:true 
+	-test-html-path:../../aaronkmurray-blog/test/sprites/ 
+	-test-html-deploy-url-base:../../img/blog/sprites/</pre>
 				<p>I know that is a gnarly block of command line, so I'll break it down:
 				<ul>
 					<li><code>imgsprite.exe</code>: name of the tool</li>
@@ -88,7 +106,7 @@
 					<li><code>-test-html-path:../../aaronkmurray-blog/test/sprites/</code>: this is where the test html page goes</li>
 					<li><code>-test-html-deploy-url-base:../../img/blog/sprites/</code>: use a special base url for the sprite in the test page because the paths are relative (for now until CDN)</li>
 				</ul>
-				<p>There is one of these lines in the build script for each sprite that I want to create. You can view the test page for the <a href='test/sprites/blog-icons-all.css_test.html' target='_blank'>icons</a> and <a href='test/sprites/post-screenshot-thumbs-all.css_test.html' target='_blank'>screenshots</a> if you're interested. These allow me to visually do a sanity check on the results, as well as provide me with a nice way of finding the css class name for each sprite.
+				<p>There is one of these calls to imgsprite.exe in the build script for each sprite that I want to create. You can view the test page for the <a href='test/sprites/blog-icons-all.css_test.html' target='_blank'>icons</a> and <a href='test/sprites/post-screenshot-thumbs-all.css_test.html' target='_blank'>screenshots</a> if you're interested. These allow me to visually do a sanity check on the results, as well as provide me with a nice way of finding the css class name for each sprite.
 				<p>Before the sprites, a hit to this page had 52 http requests and a payload of 667KB. After the sprites it was 33 http requests and 506KB.
 				<p>And just for grins, I decided to quantize 5 of the former post images that didn't need to be lossless just to see how much they'd shrink. The result: 248KB originally down to 88KB for a savings of another 160KB. Sweet!
 				<p>So there you have it. Another tool to add to your collection. CSS Sprites and further image reduction options without breaking a sweat.
