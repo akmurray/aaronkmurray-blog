@@ -1,20 +1,31 @@
 body {margin:0;padding:0;}
 * {color:#333;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;}
 
+h1 {font-size:20px;}
+h2 {font-size:19px;}
+h3 {font-size:18px;}
+h4 {font-size:17px;}
+h5 {font-size:16px;}
+h6 {font-size:15px;}
+
 #wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu, #wrapper-logo {padding:10px;}
 #wrapper-site-header, #wrapper-site-footer, #wrapper-logo {clear:both;}
 
 #wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:32px;font-size:20px;}
 #wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;}
 
+#wrapper-site-header h1 {display:inline;}
+
 #wrapper-site-header-icons, #wrapper-site-footer-icons {float:right;}
 #wrapper-site-header-icons img, #wrapper-site-footer-icons img {border:0px;}
+
+
 
 #wrapper-blog-posts {float:left;max-width:70%}
 #wrapper-sidebar {float:right;max-width:25%;border-left:1px solid #bcc;background-color:#dee;}
 
 .blog-post-header {padding:10px;border-bottom:1px solid #cdd;background-color:#eff;}
-.blog-post-header span {font-weight:bold;}
+.blog-post-header h2 {display:inline;font-weight:bold;}
 .blog-post-header .commit-link {float:right}
 .blog-post-header .commit-link img {border:0;}
 
