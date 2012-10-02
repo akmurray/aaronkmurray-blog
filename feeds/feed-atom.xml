@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-16"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <feed
     xml:lang="en-us"
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:f471b429-c7f4-47a8-bdb7-dfc65276d49d;id=1</id>
-    <updated>2012-10-02T14:25:22Z</updated>
+    <id>uuid:0d38535b-670a-4e47-ba05-7ea77955f1f1;id=1</id>
+    <updated>2012-10-02T18:53:19Z</updated>
     <entry>
         <id>4d900633-dc8d-4827-a1fe-5e5add783b86</id>
         <title
@@ -15,7 +15,7 @@
         <content
             type="text">
 				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the third in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven't already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt; and &lt;a href='#blog-post-18'&gt;Part 2: Optimizing Code Tags For SEO&lt;/a&gt;&lt;/em&gt;.
-				
+				 
 				&lt;div class='guest-post-content'&gt;
 					
 					&lt;h3&gt;SEO Part 3: Linkbuilding&lt;/h3&gt;
