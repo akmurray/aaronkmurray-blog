@@ -356,7 +356,7 @@
 				</ul>
 				<p>I was able to quickly go back and make edits to correct the bugs that I had created. I did have to make a change to the automatic timestamp HTML because tidy flags empty <code>span</code> nodes as warnings. The choice was either to ignore warnings altogether, which would leave me vulnerable to dozens of other warnings that it found, or change my process to stub out a value that was easy to detect. I chose the latter, so now my empty timestamp stubs have a question mark in them, and look like:
 				<ul>
-					<li><code>&gt;span class='post-timestamp'&lt;?&gt;/span&lt;</code></li>
+					<li><code>&lt;span class='post-timestamp'&gt;?&lt;/span&gt;</code></li>
 				</ul>
 				<p>This new process is a simple way to ensure that I maintain a decent quality of my code as the project gets bigger.
 

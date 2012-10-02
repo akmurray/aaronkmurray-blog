@@ -4,8 +4,8 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:b0a25706-1651-4454-bbb0-8112af1ffa77;id=1</id>
-    <updated>2012-10-02T00:24:10Z</updated>
+    <id>uuid:f14fcf01-3371-4f11-b513-5d2107a16dbe;id=1</id>
+    <updated>2012-10-02T00:43:26Z</updated>
     <entry>
         <id>8724a9a0-3ba8-4302-9e9e-8f9e70e1fe97</id>
         <title
@@ -289,7 +289,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;I was able to quickly go back and make edits to correct the bugs that I had created. I did have to make a change to the automatic timestamp HTML because tidy flags empty &lt;code&gt;span&lt;/code&gt; nodes as warnings. The choice was either to ignore warnings altogether, which would leave me vulnerable to dozens of other warnings that it found, or change my process to stub out a value that was easy to detect. I chose the latter, so now my empty timestamp stubs have a question mark in them, and look like:
 				&lt;ul&gt;
-					&lt;li&gt;&lt;code&gt;&amp;gt;span class='post-timestamp'&amp;lt;?&amp;gt;/span&amp;lt;&lt;/code&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;&amp;lt;span class='post-timestamp'&amp;gt;?&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;p&gt;This new process is a simple way to ensure that I maintain a decent quality of my code as the project gets bigger.
 
