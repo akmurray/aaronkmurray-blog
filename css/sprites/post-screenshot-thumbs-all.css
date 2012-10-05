@@ -88,17 +88,17 @@
 }
 
 
-.img-post-8-thumb-100
+.img-post-16-thumb-100
 {
     width: 100px;
-    height: 62px;
+    height: 80px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
     background-position: -400px -95px;
     background-repeat:no-repeat;
 }
 
 
-.img-post-16-thumb-100
+.img-post-15-thumb-100
 {
     width: 100px;
     height: 80px;
@@ -148,12 +148,22 @@
 }
 
 
+.img-post-22-thumb-100
+{
+    width: 100px;
+    height: 84px;
+    background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
+    background-position: 0px -259px;
+    background-repeat:no-repeat;
+}
+
+
 .img-post-19-thumb-100
 {
     width: 100px;
     height: 86px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
-    background-position: 0px -259px;
+    background-position: -100px -259px;
     background-repeat:no-repeat;
 }
 
@@ -163,7 +173,7 @@
     width: 100px;
     height: 87px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
-    background-position: -100px -259px;
+    background-position: -200px -259px;
     background-repeat:no-repeat;
 }
 
@@ -173,7 +183,7 @@
     width: 100px;
     height: 95px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
-    background-position: -200px -259px;
+    background-position: -300px -259px;
     background-repeat:no-repeat;
 }
 
@@ -183,17 +193,17 @@
     width: 100px;
     height: 95px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
-    background-position: -300px -259px;
+    background-position: -400px -259px;
     background-repeat:no-repeat;
 }
 
 
-.img-post-15-thumb-100
+.img-post-8-thumb-100
 {
     width: 100px;
-    height: 80px;
+    height: 62px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
-    background-position: -400px -259px;
+    background-position: 0px -354px;
     background-repeat:no-repeat;
 }
 
@@ -203,7 +213,7 @@
     width: 100px;
     height: 57px;
     background-image: url(../../img/blog/sprites/post-screenshot-thumbs-all.png);
-    background-position: 0px -354px;
+    background-position: -100px -354px;
     background-repeat:no-repeat;
 }
 

@@ -33,8 +33,8 @@
 				&lt;p&gt;&lt;code&gt;Defer&lt;/code&gt; attribute. In the HTML5 spec, there is a new attribute for &lt;code&gt;script&lt;/code&gt; tags called &lt;code&gt;async&lt;/code&gt;, and it tells the browser not to hold up processing of the html while that javascript file gets downloaded and executed. So the browser will collect these script references and make requests to the various host servers while it continues processing the page. As those scripts come in, they get executed. Sadly, not all browsers support this because it is new. But do not fret! I argue that a better alternative has existed since Internet Explorer 4. The &lt;a href='http://www.w3schools.com/tags/att_script_defer.asp' target='_blank' rel='nofollow'&gt;&lt;code&gt;defer&lt;/code&gt;&lt;/a&gt; attribute has existed since IE4, FF 0.7, and Opera 7. Plus it has a cool distinguishing feature from &lt;code&gt;async&lt;/code&gt; because the browser will load the deferred the scripts in the order they are included. This is perfect for pages where you server your javascript files from your own domain and are not concerned about one particular domain holding up the rest of the order.
 				&lt;h3&gt;Results&lt;/h3&gt;
 				&lt;p&gt;Before these changes: A test load in Chrome 22 with an empty cache: DOMContent event fired at 700ms, Load event at 1600ms. 
-				&lt;p&gt;After these changes: 
-				&lt;p&gt;That is pretty darn snappy. It is worth noting that this page now loads faster than it was with only the first post and a single, scaled-down 1MB screenshot image.
+				&lt;p&gt;After these changes: DOMContent event fired at 185ms, Load event at 208ms! 
+				&lt;p&gt;1.4 seconds quicker to initial load - that is pretty darn snappy. It is worth noting that this page now loads faster than it was with only the first post and a single, scaled-down 1MB screenshot image.
 			</description>
             <pubDate>Thu, 04 Oct 2012 22:50:00 -0500</pubDate>
             <a10:updated>2012-10-04T22:50:00-05:00</a10:updated>
