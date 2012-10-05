@@ -4,8 +4,42 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:0d38535b-670a-4e47-ba05-7ea77955f1f1;id=1</id>
-    <updated>2012-10-02T18:53:19Z</updated>
+    <id>uuid:4d747a19-509a-4488-ad7e-6cbefa1b69d6;id=1</id>
+    <updated>2012-10-05T03:51:11Z</updated>
+    <entry>
+        <id>1efc5edc-4c2d-4278-89d3-bb141b43b5c9</id>
+        <title
+            type="text">Post 22: Tuning Page Load Time</title>
+        <published>2012-10-04T22:50:00-05:00</published>
+        <updated>2012-10-04T22:50:00-05:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;This post has a lot of little tweaks that radically affect the page load time. Some of these are fairly well-known, and some are a little more obscure.
+				&lt;p&gt;There are a ton of changes so I won't go into extreme detail about every line of code, but I will highlight the particularly interesting bits. Additionally, I wrote a fair bit of javascript util/library code, so I urge you to check out the source code to see what was done. It is commented so that you can follow along easily.
+				&lt;p&gt;Before diving into the details, let me first state how &lt;a href='http://www.strangeloopnetworks.com/assets/images/visualizing_web_performance_poster.jpg' target='_blank' rel='nofollow'&gt;important it is to have a quick loading site&lt;/a&gt;. Each year our patience for slow web experiences dwindles. Slow sites get left in the dust. I'll bounce from a site if it doesn't load in a couple of seconds. The importance of speed cannot be emphasized enough. Amazon equates each tenth of a second (100ms) of speed improvement to a 1% increase in revenue. 
+				&lt;div class='callout'&gt;
+					&lt;img src='/img/blog/posts/post-22-speed-affects-consumers-8.png' alt='Speed affects consumers negatively'&gt;
+					&lt;span class='citation'&gt;Don't be lazy and slow. Site speed affects consumers negatively.&lt;/span&gt;
+				&lt;/div&gt;
+				&lt;h3&gt;Summary&lt;/h3&gt;
+				&lt;p&gt;Here is a list of what I did in this post, and below I'll explain the details as well as show before and after stats.
+				&lt;ul&gt;
+					&lt;li&gt;Removed 5 external Gist js includes and 1 css include by copying them locally and putting content into &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'&gt;akm-gist.js&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Move Quantcast and ShareThis scripts, css, and images after page load using new utility loader in &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-util.js' target='_blank' rel='nofollow'&gt;akm-util.js&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Split my &amp;quot;&lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-util.js' target='_blank' rel='nofollow'&gt;akm.blog.init()&lt;/a&gt;&amp;quot; handler into two parts to move all non-essential javascript after load event&lt;/li&gt;
+					&lt;li&gt;Added &lt;code&gt;defer&lt;/code&gt; attribute to all script includes&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;h3&gt;Details&lt;/h3&gt;
+				&lt;p&gt;Gists. The Gists are the snippets of blocks of code that are included in some of the posts. The default way of including them is to put a javascript file reference somewhere on the page and then wait for their server to send the file back down. That file simply contains two lines of code. The first code includes their standard css file for embedded scripts. The second line is a &lt;code&gt;document.write()&lt;/code&gt; that just spews out the html. Because the gist js files call &lt;code&gt;document.write&lt;/code&gt; they cannot be loaded after page load or the entire markup for the page will get replaced. I simply downloaded each of those js files, along with the css file, and put the contents in my own javascript file (&lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'&gt;akm-gist.js&lt;/a&gt;) so that I could control how the html was rendered. The lesson: just because a site provides you with a javascript include file doesn't mean that you have to use it that way to gain the functionality that it provides.
+				&lt;p&gt;Script Loader. The Quantcast script was being loaded asynchronously, but because it was inline in the HTML &lt;code&gt;body&lt;/code&gt;, it was getting triggered before the page load event. It wouldn't stop the browser from continuing to process the rest of the page, but it still meant that page load happened after it finished loading. ShareThis was a little different because it was being loaded synchronously because there is a call that must be made after the script loads. The script loader function that I wrote takes a callback so that I could specify which code was to be run after the script was loaded. 
+				&lt;p&gt;akm.blog.init() split. When I added the logo cube in &lt;a href='#post-19'&gt;Post 19&lt;/a&gt;, I added this function to be called during the window onload event. That event gets triggered, and runs any attached functions before it finishes. Since the cube code isn't critical, there is no reason to potentially wait on that code to run. That code was moved into a new function called &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-blog.js' target="_blank"&gt;&lt;code&gt;akm.blog._initDeferred()&lt;/code&gt;&lt;/a&gt; that will be triggered a quarter second after the init function. 
+				&lt;p&gt;&lt;code&gt;Defer&lt;/code&gt; attribute. In the HTML5 spec, there is a new attribute for &lt;code&gt;script&lt;/code&gt; tags called &lt;code&gt;async&lt;/code&gt;, and it tells the browser not to hold up processing of the html while that javascript file gets downloaded and executed. So the browser will collect these script references and make requests to the various host servers while it continues processing the page. As those scripts come in, they get executed. Sadly, not all browsers support this because it is new. But do not fret! I argue that a better alternative has existed since Internet Explorer 4. The &lt;a href='http://www.w3schools.com/tags/att_script_defer.asp' target='_blank' rel='nofollow'&gt;&lt;code&gt;defer&lt;/code&gt;&lt;/a&gt; attribute has existed since IE4, FF 0.7, and Opera 7. Plus it has a cool distinguishing feature from &lt;code&gt;async&lt;/code&gt; because the browser will load the deferred the scripts in the order they are included. This is perfect for pages where you server your javascript files from your own domain and are not concerned about one particular domain holding up the rest of the order.
+				&lt;h3&gt;Results&lt;/h3&gt;
+				&lt;p&gt;Before these changes: A test load in Chrome 22 with an empty cache: DOMContent event fired at 700ms, Load event at 1600ms. 
+				&lt;p&gt;After these changes: 
+				&lt;p&gt;That is pretty darn snappy. It is worth noting that this page now loads faster than it was with only the first post and a single, scaled-down 1MB screenshot image.
+			</content>
+    </entry>
     <entry>
         <id>4d900633-dc8d-4827-a1fe-5e5add783b86</id>
         <title
@@ -131,10 +165,10 @@
 				&lt;ul&gt;
 					&lt;li&gt;HTML: Create a wrapper DIV that will represent the &amp;quot;cube&amp;quot;&lt;/li&gt;
 					&lt;li&gt;HTML: Create 6 DOM Elements inside the wrapper that will represent the 6 sides/faces of the cube&lt;/li&gt;
-					&lt;li&gt;&lt;script src='https://gist.github.com/3811888.js'&gt; &lt;/script&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;div id='wrapper-gist-3811888'&gt;loading gist...&lt;/div&gt;&lt;/li&gt;
 					&lt;li&gt;CSS: &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/css/blog-logo.css' target='_blank'&gt;Style the cube for size and 3D transform&lt;/a&gt;&lt;/li&gt;
 					&lt;li&gt;JS: After the page loads, set up a timer that will rotate the cube every few seconds&lt;/li&gt;
-					&lt;li&gt;&lt;script src='https://gist.github.com/3811934.js'&gt; &lt;/script&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;div id='wrapper-gist-3811934'&gt;loading gist...&lt;/div&gt;&lt;/li&gt;
 				&lt;/ul&gt;
 
 				&lt;h3&gt;Fallback when browser doesn't support CSS3 Transforms&lt;/h3&gt;
@@ -484,8 +518,7 @@
 				&lt;p&gt;As you can see from the chart, fully 98% of the data that users have to download from the site is for images. Of those 24 images, 12 were fullsize blog post screenshots, which weighed in at a portly 1.17MB. Those 12 little screenshot previews accounted 77% of the size for the entire page - and that is after we compressed the images to reduce about one-third of the filesize.
 				&lt;p&gt;I made a sample thumbnail by resizing the image down to 100 pixels wide produced a new preview image that was 90% smaller than the original. The prospect of reducing 77% of the entire request payload by 90% got me excited. 
 				&lt;p&gt;Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don't want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt; so I knew that I wanted to tie into that step. 
-				&lt;p&gt;
-				&lt;script src='https://gist.github.com/3739310.js'&gt; &lt;/script&gt;
+				&lt;div id='wrapper-gist-3739310'&gt;loading gist...&lt;/div&gt;
 				&lt;p&gt;Notes on the batch file:
 				&lt;ul&gt;
 					&lt;li&gt;The &lt;code&gt;FOR&lt;/code&gt; loop gets a list of all of the screenshot files that don't have &amp;quot;thumb&amp;quot; in the name&lt;/li&gt;
@@ -610,7 +643,7 @@
 					&lt;span class='citation'&gt;Request details after web.config changes: gzip'd index.html payload is 67.7% smaller&lt;/span&gt;
 				&lt;/div&gt;
 				&lt;p&gt;Put this code in your web.config file and enjoy.
-				&lt;p&gt;&lt;script src='https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com'&gt;&lt;/script&gt;
+				&lt;div id='wrapper-gist-3694724'&gt;loading gist...&lt;/div&gt;
 			</content>
     </entry>
     <entry>
@@ -687,7 +720,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;Simple, effective, and good enough for now.
 				&lt;p&gt;Note: it will take a few days before the stats for this site show up on Quantcast. 
-				&lt;p&gt;&lt;script src='https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com'&gt;&lt;/script&gt;
+				&lt;div id='wrapper-gist-3678669'&gt;loading gist...&lt;/div&gt;
 			</content>
     </entry>
     <entry>

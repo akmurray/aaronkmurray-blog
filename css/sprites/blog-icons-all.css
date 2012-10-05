@@ -1,4 +1,4 @@
-.img-icon-github-32
+.img-icon-aaronkmurray-32
 {
     width: 32px;
     height: 32px;
@@ -8,12 +8,32 @@
 }
 
 
-.img-icon-rss-32
+.img-icon-github-32
 {
     width: 32px;
     height: 32px;
     background-image: url(../../img/blog/sprites/blog-icons-all.png);
     background-position: -32px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-googleplus-32
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -64px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-rss-32
+{
+    width: 32px;
+    height: 32px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -96px 0px;
     background-repeat:no-repeat;
 }
 
@@ -28,7 +48,7 @@
 }
 
 
-.img-icon-github-16
+.img-icon-aaronkmurray-16
 {
     width: 16px;
     height: 16px;
@@ -38,7 +58,7 @@
 }
 
 
-.img-icon-rss-16
+.img-icon-github-16
 {
     width: 16px;
     height: 16px;
@@ -48,12 +68,32 @@
 }
 
 
+.img-icon-googleplus-16
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -64px -32px;
+    background-repeat:no-repeat;
+}
+
+
+.img-icon-rss-16
+{
+    width: 16px;
+    height: 16px;
+    background-image: url(../../img/blog/sprites/blog-icons-all.png);
+    background-position: -80px -32px;
+    background-repeat:no-repeat;
+}
+
+
 .img-icon-twitter-16
 {
     width: 16px;
     height: 16px;
     background-image: url(../../img/blog/sprites/blog-icons-all.png);
-    background-position: 0px -64px;
+    background-position: -96px -32px;
     background-repeat:no-repeat;
 }
 

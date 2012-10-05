@@ -9,19 +9,28 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
     <meta name='viewport' content='width=device-width'>
 	<link rel='icon' href='favicon.png' type='image/png'>
+	
 	<link rel='stylesheet' href='css/blog.css'>
 	<link rel='stylesheet' href='css/blog-logo.css'>
 	<link rel='stylesheet' href='css/sprites/blog-icons-all.css'>
 	<link rel='stylesheet' href='css/sprites/post-screenshot-thumbs-all.css'>
-	<script type='text/javascript' src='js/prototype-extensions.js'></script> 
-	<script type='text/javascript' src='js/akm-blog.js'></script> 
+	<link rel="stylesheet" href="css/gist-embed.css">
+
+	<script defer='true' type='text/javascript' src='js/XMLHttpRequest.2012.09.02.js'></script> 
+	<script defer='true' type='text/javascript' src='js/prototype-extensions.js'></script> 
+	<script defer='true' type='text/javascript' src='js/akm-util.js'></script> 
+	<script defer='true' type='text/javascript' src='js/akm-gist.js'></script>
+	<script defer='true' type='text/javascript' src='js/akm-blog.js'></script>
 </head>
 
 <body>
 <div id='wrapper-body'>
 
 	<div id='wrapper-site-header'>
-		<h1>Aaron K. Murray's Blog on software technology, developer life, and the Internet.</h1>
+		<div id='wrapper-site-header-words'>
+			<h1>Aaron K. Murray's Blog</h1>
+			<h2>Purpose: Show the world how to build a complete site from index.html onward</h2>
+		</div>
 		<div id='wrapper-site-header-icons'>
 			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target='_blank' title='Subscribe via RSS'><img src='img/blog/clear.gif' class='img-icon-rss-32' alt='RSS icon'></a>
 			<a href='https://twitter.com/aaronkmurray' target='_blank' title='Follow me on Twitter @aaronkmurray'><img src='img/blog/clear.gif' class='img-icon-twitter-32' alt='Twitter icon'></a>
@@ -54,6 +63,44 @@
 		????? REMINDER for Mr. No Database: Add an entry to the Posts section of the menu on the right
 -->
 
+		<article class='blog-post' id='blog-post-22'>
+			<div class='blog-post-header'>
+				<h2>Post 22: Tuning Page Load Time</h2>
+				<span class='commit-link'><a href='#' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>This post has a lot of little tweaks that radically affect the page load time. Some of these are fairly well-known, and some are a little more obscure.
+				<p>There are a ton of changes so I won't go into extreme detail about every line of code, but I will highlight the particularly interesting bits. Additionally, I wrote a fair bit of javascript util/library code, so I urge you to check out the source code to see what was done. It is commented so that you can follow along easily.
+				<p>Before diving into the details, let me first state how <a href='http://www.strangeloopnetworks.com/assets/images/visualizing_web_performance_poster.jpg' target='_blank' rel='nofollow'>important it is to have a quick loading site</a>. Each year our patience for slow web experiences dwindles. Slow sites get left in the dust. I'll bounce from a site if it doesn't load in a couple of seconds. The importance of speed cannot be emphasized enough. Amazon equates each tenth of a second (100ms) of speed improvement to a 1% increase in revenue. 
+				<div class='callout'>
+					<img src='img/blog/posts/post-22-speed-affects-consumers-8.png' alt='Speed affects consumers negatively'>
+					<span class='citation'>Don't be lazy and slow. Site speed affects consumers negatively.</span>
+				</div>
+				<h3>Summary</h3>
+				<p>Here is a list of what I did in this post, and below I'll explain the details as well as show before and after stats.
+				<ul>
+					<li>Removed 5 external Gist js includes and 1 css include by copying them locally and putting content into <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'>akm-gist.js</a></li>
+					<li>Move Quantcast and ShareThis scripts, css, and images after page load using new utility loader in <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-util.js' target='_blank' rel='nofollow'>akm-util.js</a></li>
+					<li>Split my &quot;<a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-util.js' target='_blank' rel='nofollow'>akm.blog.init()</a>&quot; handler into two parts to move all non-essential javascript after load event</li>
+					<li>Added <code>defer</code> attribute to all script includes</li>
+				</ul>
+				<h3>Details</h3>
+				<p>Gists. The Gists are the snippets of blocks of code that are included in some of the posts. The default way of including them is to put a javascript file reference somewhere on the page and then wait for their server to send the file back down. That file simply contains two lines of code. The first code includes their standard css file for embedded scripts. The second line is a <code>document.write()</code> that just spews out the html. Because the gist js files call <code>document.write</code> they cannot be loaded after page load or the entire markup for the page will get replaced. I simply downloaded each of those js files, along with the css file, and put the contents in my own javascript file (<a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'>akm-gist.js</a>) so that I could control how the html was rendered. The lesson: just because a site provides you with a javascript include file doesn't mean that you have to use it that way to gain the functionality that it provides.
+				<p>Script Loader. The Quantcast script was being loaded asynchronously, but because it was inline in the HTML <code>body</code>, it was getting triggered before the page load event. It wouldn't stop the browser from continuing to process the rest of the page, but it still meant that page load happened after it finished loading. ShareThis was a little different because it was being loaded synchronously because there is a call that must be made after the script loads. The script loader function that I wrote takes a callback so that I could specify which code was to be run after the script was loaded. 
+				<p>akm.blog.init() split. When I added the logo cube in <a href='#post-19'>Post 19</a>, I added this function to be called during the window onload event. That event gets triggered, and runs any attached functions before it finishes. Since the cube code isn't critical, there is no reason to potentially wait on that code to run. That code was moved into a new function called <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-blog.js' target=_blank><code>akm.blog._initDeferred()</code></a> that will be triggered a quarter second after the init function. 
+				<p><code>Defer</code> attribute. In the HTML5 spec, there is a new attribute for <code>script</code> tags called <code>async</code>, and it tells the browser not to hold up processing of the html while that javascript file gets downloaded and executed. So the browser will collect these script references and make requests to the various host servers while it continues processing the page. As those scripts come in, they get executed. Sadly, not all browsers support this because it is new. But do not fret! I argue that a better alternative has existed since Internet Explorer 4. The <a href='http://www.w3schools.com/tags/att_script_defer.asp' target='_blank' rel='nofollow'><code>defer</code></a> attribute has existed since IE4, FF 0.7, and Opera 7. Plus it has a cool distinguishing feature from <code>async</code> because the browser will load the deferred the scripts in the order they are included. This is perfect for pages where you server your javascript files from your own domain and are not concerned about one particular domain holding up the rest of the order.
+				<h3>Results</h3>
+				<p>Before these changes: A test load in Chrome 22 with an empty cache: DOMContent event fired at 700ms, Load event at 1600ms. 
+				<p>After these changes: 
+				<p>That is pretty darn snappy. It is worth noting that this page now loads faster than it was with only the first post and a single, scaled-down 1MB screenshot image.
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>defer</span>, <span class='post-tag'>async</span>, <span class='post-tag'>js</span>, <span class='post-tag'>performance</span></span>
+				<span class='post-timestamp'>Posted on October 4, 2012 @ 10:50PM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-22.png' target='_blank' rel='nofollow'><img src='img/blog/clear.gif' class='img-post-22-thumb-100' alt='Screenshot of site after post #22'></a></span>
+			</div>
+			<div class='blog-post-guid'>1efc5edc-4c2d-4278-89d3-bb141b43b5c9</div>
+		</article>
  
 		<article class='blog-post' id='blog-post-21'>
 			<div class='blog-post-header'>
@@ -188,10 +235,10 @@
 				<ul>
 					<li>HTML: Create a wrapper DIV that will represent the &quot;cube&quot;</li>
 					<li>HTML: Create 6 DOM Elements inside the wrapper that will represent the 6 sides/faces of the cube</li>
-					<li><script src='https://gist.github.com/3811888.js'> </script></li>
+					<li><div id='wrapper-gist-3811888'>loading gist...</div></li>
 					<li>CSS: <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/css/blog-logo.css' target='_blank'>Style the cube for size and 3D transform</a></li>
 					<li>JS: After the page loads, set up a timer that will rotate the cube every few seconds</li>
-					<li><script src='https://gist.github.com/3811934.js'> </script></li>
+					<li><div id='wrapper-gist-3811934'>loading gist...</div></li>
 				</ul>
 
 				<h3>Fallback when browser doesn't support CSS3 Transforms</h3>
@@ -571,8 +618,7 @@
 				<p>As you can see from the chart, fully 98% of the data that users have to download from the site is for images. Of those 24 images, 12 were fullsize blog post screenshots, which weighed in at a portly 1.17MB. Those 12 little screenshot previews accounted 77% of the size for the entire page - and that is after we compressed the images to reduce about one-third of the filesize.
 				<p>I made a sample thumbnail by resizing the image down to 100 pixels wide produced a new preview image that was 90% smaller than the original. The prospect of reducing 77% of the entire request payload by 90% got me excited. 
 				<p>Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don't want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'>build script for this site</a> so I knew that I wanted to tie into that step. 
-				<p>
-				<script src='https://gist.github.com/3739310.js'> </script>
+				<div id='wrapper-gist-3739310'>loading gist...</div>
 				<p>Notes on the batch file:
 				<ul>
 					<li>The <code>FOR</code> loop gets a list of all of the screenshot files that don't have &quot;thumb&quot; in the name</li>
@@ -718,7 +764,7 @@
 					<span class='citation'>Request details after web.config changes: gzip'd index.html payload is 67.7% smaller</span>
 				</div>
 				<p>Put this code in your web.config file and enjoy.
-				<p><script src='https://gist.github.com/3694724.js?file=web.config-aaronkmurray.com'></script>
+				<div id='wrapper-gist-3694724'>loading gist...</div>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>web.config</span>, <span class='post-tag'>IIS</span>, <span class='post-tag'>compression</span>, <span class='post-tag'>headers</span></span>
@@ -810,7 +856,7 @@
 				</ul>
 				<p>Simple, effective, and good enough for now.
 				<p>Note: it will take a few days before the stats for this site show up on Quantcast. 
-				<p><script src='https://gist.github.com/3678669.js?file=quantcast-aaronkmurray.com'></script>
+				<div id='wrapper-gist-3678669'>loading gist...</div>
 			</div>
 			<div class='blog-post-footer'>
 				<span class='post-tags'>Tags: <span class='post-tag'>quantcast</span>, <span class='post-tag'>tracking</span>, <span class='post-tag'>traffic</span>, <span class='post-tag'>async</span></span>
@@ -1089,50 +1135,72 @@
 					<li><a href='#blog-post-19'>Post 19: Fun With A CSS3 Cube</a></li>
 					<li><a href='#blog-post-20'>Post 20: CSS Sprites</a></li>
 					<li><a href='#blog-post-21'>Post 21: SEO Part 3/4: Linkbuilding</a></li>
+					<li><a href='#blog-post-22'>Post 22: Tuning Page Load Time</a></li>
 				</ul>
 			</div>
 	</div>
 
 	<div id='wrapper-site-footer'>
+		<div id='content-site-footer'>
+		
+			<section class='contact'>
+				<h3>Stay in Touch</h3>
+				<ul>
+					<li><a href='https://twitter.com/aaronkmurray' target='_blank' title='Follow me on Twitter @aaronkmurray'><img src='img/blog/clear.gif' class='img-icon-twitter-16' alt='Twitter icon'> @aaronkmurray</a></li>
+					<li><a href='http://www.aaronkmurray.com' target='_blank' title='My Blog'><img src='img/blog/clear.gif' class='img-icon-aaronkmurray-16' alt='Blog icon'> Blog</a></li>
+					<li><a href='https://github.com/akmurray' target='_blank' title='View the code for this site on GitHub'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> GitHub</a></li>
+					<li><a href='http://aaronkmurray.com/feeds/feed-rss.xml' target='_blank' title='Subscribe via RSS'><img src='img/blog/clear.gif' class='img-icon-rss-16' alt='RSS icon'> RSS Feed</a></li>
+					<!--
+					<li><a href='https://plus.google.com/110489899179528047715' target='_blank' title='Find me on Google+'><img src='img/blog/clear.gif' class='img-icon-googleplus-16' alt='Google+ icon'> Google+</a></li>
+					-->
+				</ul>
+			</section>
+			
+			<section class='tools'>
+				<h3>Code &amp; Tools</h3>
+				<ul>
+					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> imgsprite</a></li>
+					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsqz/imgsqz' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> imgsqz</a></li>
+					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> rssgen</a></li>
+					<li><a href='https://gist.github.com/akmurray' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> My Gists</a></li>
+				</ul>
+			</section>
+			
+			<section class='share'>
+				<h3>Share...</h3>
+				<ul>
+					<li><span class='st_twitter' displaytext='Tweet'>&nbsp;</span></li>
+					<li><span class='st_digg' displaytext='Digg'>&nbsp;</span></li>
+					<li><span class='st_stumbleupon' displaytext='StumbleUpon'>&nbsp;</span></li>
+					<li><span class='st_reddit' displaytext='Reddit'>&nbsp;</span></li>
+				<!-- 
+					//['digg','stumbleupon','slashdot','reddit','google_reader','googleplus','dotnetshoutout','facebook','pinterest','twitter','linkedin','sharethis','email'] 
+					<li><span class='st_dotnetshoutout' displayText='DotNetShoutOut'>&nbsp;</span></li>
+				-->
+				</ul>
+			</section>
 
-		<span class='copyright'>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span>
-		<div id='wrapper-site-footer-icons'>
-			<a href='http://aaronkmurray.com/feeds/feed-rss.xml' target='_blank' title='Subscribe via RSS'><img src='img/blog/clear.gif' class='img-icon-rss-16' alt='RSS icon'></a>
-			<a href='https://twitter.com/aaronkmurray' target='_blank' title='Follow me on Twitter @aaronkmurray'><img src='img/blog/clear.gif' class='img-icon-twitter-16' alt='Twitter icon'></a>
-			<a href='https://github.com/akmurray' target='_blank' title='View the code for this site on GitHub'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'></a>
-			<!--
-			my gists: https://gist.github.com/akmurray
-			-->
+			<section class='share'>
+				<h3>...more</h3>
+				<ul>
+					<li><span class='st_facebook' displaytext='Facebook'>&nbsp;</span></li>
+					<li><span class='st_linkedin' displaytext='LinkedIn'>&nbsp;</span></li>
+					<li><span class='st_googleplus' displaytext='Google+'>&nbsp;</span></li>
+					<li><span class='st_slashdot' displaytext='Slashdot'>&nbsp;</span></li>
+				<!-- 
+					//['digg','stumbleupon','slashdot','reddit','google_reader','googleplus','dotnetshoutout','facebook','pinterest','twitter','linkedin','sharethis','email'] 
+					<li><span class='st_dotnetshoutout' displayText='DotNetShoutOut'>&nbsp;</span></li>
+				-->
+				</ul>
+			</section>
+
+			<div class='copyright'><span>&copy; Copyright 2012, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span></div>
 		</div>
-		<link media='screen' type='text/css' rel='stylesheet' href='http://w.sharethis.com/gallery/shareegg/shareegg.css'>
-		<div id='wrapper-sharing'><span>Help spread the word:</span><div id='shareThisShareEgg' class='shareEgg'></div></div>
 	</div>
 
 
-	<!-- START Quantcast Tag -->
-	<script type='text/javascript'>
-	var _qevents = _qevents || [];
-	(function() {
-	var elem = document.createElement('script');
-	elem.src = (document.location.protocol == 'https:' ? 'https://secure' : 'http://edge') + '.quantserve.com/quant.js';
-	elem.async = true;
-	elem.type = 'text/javascript';
-	var scpt = document.getElementsByTagName('script')[0];
-	scpt.parentNode.insertBefore(elem, scpt);
-	})();
-	_qevents.push({ qacct:'p-M_hV8wgLbE9k_' });
-	</script>
-	<noscript>
-	<div style='display:none;'><img src='//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif' border='0' height='1' width='1' alt='Quantcast'></div>
-	</noscript>
-	<!-- END Quantcast tag -->
-
-	<!-- START ShareThis -->
-	<script type='text/javascript' src='http://w.sharethis.com/gallery/shareegg/shareegg.js'></script>
-	<script type='text/javascript' src='http://w.sharethis.com/button/buttons.js'></script>
-	<script type='text/javascript'>stLight.options({publisher: 'ur-93a896b-e80-3cd6-3597-520757af63a7', onhover:false});</script>
-	<script type='text/javascript'>stlib.shareEgg.createEgg('shareThisShareEgg', ['digg','stumbleupon','slashdot','reddit','google_reader','googleplus','dotnetshoutout','facebook','pinterest','twitter','linkedin','sharethis','email'], {title:'Help me get the word out',url:'http://www.sharethis.com',theme:'shareegg'});</script>
-	<!-- END ShareThis -->
+	<!-- Quantcast Fallback -->
+	<noscript><div style='display:none;'><img src='//pixel.quantserve.com/pixel/p-M_hV8wgLbE9k_.gif' border='0' height='1' width='1' alt='Quantcast'></div></noscript> 
 
 </div>
 </body>

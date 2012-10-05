@@ -1,24 +1,49 @@
-body {margin:0;padding:0;}
-* {color:#333;font-family:'lucida grande',tahoma,verdana,arial,sans-serif;}
+body {
+	margin:0;
+	padding:0;
+	font-size:100%;
+	color:#333;
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	line-height:1.25em; /* 16x1.25=20px */
+}
 
-h1 {font-size:20px;}
-h2 {font-size:19px;}
-h3 {font-size:18px;}
-h4 {font-size:17px;}
-h5 {font-size:16px;}
-h6 {font-size:15px;}
+
+h1 {font-size:1.3125em;/* 16x1.3125=21px */}
+h2 {font-size:1.25em;}
+h3 {font-size:1.1875em; }
+h4 {font-size:1.125em; /* 16x1.125=18px */}
+h5 {font-size:1.0625em;}
+h6 {font-size:1.0em;/* 16px=1em */}
+
+img {border:0px;}
 
 #wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu, #wrapper-logo {padding:10px;}
 #wrapper-site-header, #wrapper-site-footer, #wrapper-logo {clear:both;}
 
-#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:32px;font-size:20px;}
-#wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;}
+#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:5em;}
+#wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;min-height:20em;}
 
-#wrapper-site-header h1 {display:inline;}
+#wrapper-site-header-words {float:left;max-width:600px;clear:both;}
+#wrapper-site-header-words h1, #wrapper-site-header-words h2 {}
+#wrapper-site-header-words h2 {font-size:0.875em;font-weight:normal;}
 
-#wrapper-site-header-icons, #wrapper-site-footer-icons {float:right;}
-#wrapper-site-header-icons img, #wrapper-site-footer-icons img {border:0px;}
+#wrapper-site-header-icons {float:right;}
 
+#wrapper-site-footer a {text-decoration:none;}
+#wrapper-site-footer a:hover {opacity: .75;}
+
+#wrapper-site-footer section {float:left;width:13em;}
+#wrapper-site-footer section h3 {margin-left:0em;}
+
+#wrapper-site-footer section ul {list-style: disc inside;margin:0;padding:0;}
+#wrapper-site-footer section ul li {list-style: none;line-height:2em;}
+#wrapper-site-footer section.share ul {margin-left:-0.45em;}
+
+#content-site-footer {width:55em;margin-left:auto;margin-right:auto;}
+
+
+div.copyright {clear:both;padding:2em;}
+div.copyright span {display:block;width:20em;margin-left:auto;margin-right:auto;}
 
 
 #wrapper-blog-posts {float:left;max-width:70%}
@@ -48,12 +73,15 @@ h6 {font-size:15px;}
 #wrapper-blog-post-menu .menu-header {}
 
 /* START post-specific styles */
+
+/* START POST 8 */
 #table-png-compression-results {
 	border-collapse:collapse;
 }
-
 #table-png-compression-results th, #table-png-compression-results td {
 	padding:10px;
 	border:1px solid #888;
 }
+/* END POST 8 */
+
 /* END post-specific styles */
