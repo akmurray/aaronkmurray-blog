@@ -4,14 +4,14 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:2f65facb-61b7-49c4-a16d-7c1daf60d7cf;id=1</id>
-    <updated>2012-10-11T23:16:42Z</updated>
+    <id>uuid:2a82e88d-a2c3-4b88-98ed-efdc91151e61;id=1</id>
+    <updated>2012-10-11T23:20:28Z</updated>
     <entry>
         <id>5586da29-52bf-477b-b9b6-4db339b0b3ad</id>
         <title
             type="text">Post 23: CSS Resets and Organization</title>
-        <published>2012-10-11T18:16:00-05:00</published>
-        <updated>2012-10-11T18:16:00-05:00</updated>
+        <published>2012-10-11T18:20:00-05:00</published>
+        <updated>2012-10-11T18:20:00-05:00</updated>
         <content
             type="text">
 				&lt;p&gt;CSS, which stands for Cascading Style Sheets, is something that nearly everyone has heard of, most people have used, and few people understand. 

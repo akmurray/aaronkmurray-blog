@@ -28,8 +28,8 @@
 				&lt;p&gt;Have a look at the source code for this post to see what I changed. There are comments in the CSS as well as urls to some &lt;a href='https://github.com/csswizardry/CSS-Guidelines' target='_blank' rel='nofollow'&gt;more&lt;/a&gt; &lt;a href='http://fvsch.com/code/base-stylesheet/full.css' target='_blank' rel='nofollow'&gt;useful&lt;/a&gt; &lt;a href='http://html5doctor.com/html-5-reset-stylesheet/' target='_blank' rel='nofollow'&gt;reads&lt;/a&gt;. 
 				&lt;p&gt;I also split up the styles into multiple CSS files. This is bad from the standpoint of http requests, and flies in the wind of &lt;a href='#blog-post-22' target='_blank' rel='nofollow'&gt;previous tuning efforts&lt;/a&gt; that I&amp;#39;ve done, but do not fear. Soon I&amp;#39;ll show you one way to bundle your files together for performance, and still retain the development benefits of managing separate files over giant monoliths.
 			</description>
-            <pubDate>Thu, 11 Oct 2012 18:16:00 -0500</pubDate>
-            <a10:updated>2012-10-11T18:16:00-05:00</a10:updated>
+            <pubDate>Thu, 11 Oct 2012 18:20:00 -0500</pubDate>
+            <a10:updated>2012-10-11T18:20:00-05:00</a10:updated>
         </item>
         <item>
             <guid
