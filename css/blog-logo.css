@@ -3,16 +3,23 @@ img.logo {
 }
 
 #wrapper-logo {
+  float:right;
+  padding:0;
+  margin-right:12em;
+  margin-top:20px;
+  margin-left:40px;
   width: 128px;
   height: 128px;
   position: relative;
-  margin-top:20px;
-  margin-left:40px;
   border: 0px solid #CCC;
   -webkit-perspective: 640px;
 	 -moz-perspective: 640px;
 	   -o-perspective: 640px;
 		  perspective: 640px;
+}
+
+#wrapper-logo .logo {
+	display: block;
 }
 
 #logo-cube {

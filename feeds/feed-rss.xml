@@ -8,18 +8,43 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">5586da29-52bf-477b-b9b6-4db339b0b3ad</guid>
+            <title>Post 23: CSS Resets and Organization</title>
+            <description>
+				&lt;p&gt;CSS, which stands for Cascading Style Sheets, is something that nearly everyone has heard of, most people have used, and few people understand. 
+				&lt;p&gt;The first experience many people have with CSS is to do something simple, like set the background color on a page. Many folks stop learning once they are done applying colors and borders to html elements.
+				&lt;p&gt;The next big step for many folks is learning about affecting layout by &amp;quot;floating &lt;code&gt;DIV&lt;/code&gt;s&amp;quot; or pursuing a &amp;quot;tableless&amp;quot; &lt;a href='http://www.w3.org/2002/03/csslayout-howto' target='_blank' rel='nofollow'&gt;layout&lt;/a&gt;.
+				&lt;p&gt;While these are pratical steps in learning about CSS, I think it is important to call out the intention for CSS. Simply put, that purpose is to help separate the page content from the page visuals.
+
+				&lt;h3&gt;Inline styles are valid, but bad practice&lt;/h3&gt;
+				&lt;p&gt;In HTML, it is perfectly valid to apply inline styles to an element, along with the rest of the attributes for that element, using the &lt;code&gt;style&lt;/code&gt; property. Example: 
+				&lt;figure&gt;
+					&lt;code&gt;&amp;lt;img style=&amp;#39;border:1px solid red;height:100px;&amp;#39; src=&amp;#39;...&amp;#39;&amp;gt;&lt;/code&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;As valid as inline styles are, the problem with them arises as the size and complexity of the site grows. The decision to change colors becomes tedious and error prone when that style is littered across hundreds of elements. The other major problem has to do with &lt;a href='http://coding.smashingmagazine.com/2007/07/27/css-specificity-things-you-should-know/' target='_blank' rel='nofollow'&gt;selector specificity&lt;/a&gt;, because inline styles are very specifc and will almost always override the styles from your css files.
+				&lt;h3&gt;CSS Resets&lt;/h3&gt;
+				&lt;p&gt;Search for &lt;a href='https://www.google.com/search?q=css+reset' target='_blank' rel='nofollow'&gt;css reset&lt;/a&gt; and you will find a ton of examples, tips, and flame wars surrounding their use. Basically, the problem that css resets are trying to solve is this: Different browsers (and version of those browsers) have different default values for various styles. 
+				&lt;p&gt;These differences in default values lead to many of the headaches that you will experience when trying to get a similar look across many browsers. Shooting for an exact duplicate experience is very tough and likely futile, but using a basic CSS reset and then applying your custom styles after the reset will help save a ton of time debugging subtle differences (especially with &lt;code&gt;margin&lt;/code&gt; and &lt;code&gt;padding&lt;/code&gt;).
+				&lt;p&gt;Have a look at the source code for this post to see what I changed. There are comments in the CSS as well as urls to some &lt;a href='https://github.com/csswizardry/CSS-Guidelines' target='_blank' rel='nofollow'&gt;more&lt;/a&gt; &lt;a href='http://fvsch.com/code/base-stylesheet/full.css' target='_blank' rel='nofollow'&gt;useful&lt;/a&gt; &lt;a href='http://html5doctor.com/html-5-reset-stylesheet/' target='_blank' rel='nofollow'&gt;reads&lt;/a&gt;. 
+				&lt;p&gt;I also split up the styles into multiple CSS files. This is bad from the standpoint of http requests, and flies in the wind of &lt;a href='#blog-post-22' target='_blank' rel='nofollow'&gt;previous tuning efforts&lt;/a&gt; that I&amp;#39;ve done, but do not fear. Soon I&amp;#39;ll show you one way to bundle your files together for performance, and still retain the development benefits of managing separate files over giant monoliths.
+			</description>
+            <pubDate>Thu, 11 Oct 2012 18:16:00 -0500</pubDate>
+            <a10:updated>2012-10-11T18:16:00-05:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">1efc5edc-4c2d-4278-89d3-bb141b43b5c9</guid>
             <title>Post 22: Tuning Page Load Time</title>
             <description>
 				&lt;p&gt;This post has a lot of little tweaks that radically affect the page load time. Some of these are fairly well-known, and some are a little more obscure.
-				&lt;p&gt;There are a ton of changes so I won't go into extreme detail about every line of code, but I will highlight the particularly interesting bits. Additionally, I wrote a fair bit of javascript util/library code, so I urge you to check out the source code to see what was done. It is commented so that you can follow along easily.
-				&lt;p&gt;Before diving into the details, let me first state how &lt;a href='http://www.strangeloopnetworks.com/assets/images/visualizing_web_performance_poster.jpg' target='_blank' rel='nofollow'&gt;important it is to have a quick loading site&lt;/a&gt;. Each year our patience for slow web experiences dwindles. Slow sites get left in the dust. I'll bounce from a site if it doesn't load in a couple of seconds. The importance of speed cannot be emphasized enough. Amazon equates each tenth of a second (100ms) of speed improvement to a 1% increase in revenue. 
-				&lt;div class='callout'&gt;
+				&lt;p&gt;There are a ton of changes so I won&amp;#39;t go into extreme detail about every line of code, but I will highlight the particularly interesting bits. Additionally, I wrote a fair bit of javascript util/library code, so I urge you to check out the source code to see what was done. It is commented so that you can follow along easily.
+				&lt;p&gt;Before diving into the details, let me first state how &lt;a href='http://www.strangeloopnetworks.com/assets/images/visualizing_web_performance_poster.jpg' target='_blank' rel='nofollow'&gt;important it is to have a quick loading site&lt;/a&gt;. Each year our patience for slow web experiences dwindles. Slow sites get left in the dust. I&amp;#39;ll bounce from a site if it doesn&amp;#39;t load in a couple of seconds. The importance of speed cannot be emphasized enough. Amazon equates each tenth of a second (100ms) of speed improvement to a 1% increase in revenue. 
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-22-speed-affects-consumers-8.png' alt='Speed affects consumers negatively'&gt;
-					&lt;span class='citation'&gt;Don't be lazy and slow. Site speed affects consumers negatively.&lt;/span&gt;
-				&lt;/div&gt;
+					&lt;figcaption&gt;Don&amp;#39;t be lazy and slow. Site speed affects consumers negatively.&lt;/figcaption&gt;
+				&lt;/figure&gt;
 				&lt;h3&gt;Summary&lt;/h3&gt;
-				&lt;p&gt;Here is a list of what I did in this post, and below I'll explain the details as well as show before and after stats.
+				&lt;p&gt;Here is a list of what I did in this post, and below I&amp;#39;ll explain the details as well as show before and after stats.
 				&lt;ul&gt;
 					&lt;li&gt;Removed 5 external Gist js includes and 1 css include by copying them locally and putting content into &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'&gt;akm-gist.js&lt;/a&gt;&lt;/li&gt;
 					&lt;li&gt;Move Quantcast and ShareThis scripts, css, and images after page load using new utility loader in &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-util.js' target='_blank' rel='nofollow'&gt;akm-util.js&lt;/a&gt;&lt;/li&gt;
@@ -27,9 +52,9 @@
 					&lt;li&gt;Added &lt;code&gt;defer&lt;/code&gt; attribute to all script includes&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;h3&gt;Details&lt;/h3&gt;
-				&lt;p&gt;Gists. The Gists are the snippets of blocks of code that are included in some of the posts. The default way of including them is to put a javascript file reference somewhere on the page and then wait for their server to send the file back down. That file simply contains two lines of code. The first code includes their standard css file for embedded scripts. The second line is a &lt;code&gt;document.write()&lt;/code&gt; that just spews out the html. Because the gist js files call &lt;code&gt;document.write&lt;/code&gt; they cannot be loaded after page load or the entire markup for the page will get replaced. I simply downloaded each of those js files, along with the css file, and put the contents in my own javascript file (&lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'&gt;akm-gist.js&lt;/a&gt;) so that I could control how the html was rendered. The lesson: just because a site provides you with a javascript include file doesn't mean that you have to use it that way to gain the functionality that it provides.
-				&lt;p&gt;Script Loader. The Quantcast script was being loaded asynchronously, but because it was inline in the HTML &lt;code&gt;body&lt;/code&gt;, it was getting triggered before the page load event. It wouldn't stop the browser from continuing to process the rest of the page, but it still meant that page load happened after it finished loading. ShareThis was a little different because it was being loaded synchronously because there is a call that must be made after the script loads. The script loader function that I wrote takes a callback so that I could specify which code was to be run after the script was loaded. 
-				&lt;p&gt;akm.blog.init() split. When I added the logo cube in &lt;a href='#post-19'&gt;Post 19&lt;/a&gt;, I added this function to be called during the window onload event. That event gets triggered, and runs any attached functions before it finishes. Since the cube code isn't critical, there is no reason to potentially wait on that code to run. That code was moved into a new function called &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-blog.js' target="_blank"&gt;&lt;code&gt;akm.blog._initDeferred()&lt;/code&gt;&lt;/a&gt; that will be triggered a quarter second after the init function. 
+				&lt;p&gt;Gists. The Gists are the snippets of blocks of code that are included in some of the posts. The default way of including them is to put a javascript file reference somewhere on the page and then wait for their server to send the file back down. That file simply contains two lines of code. The first code includes their standard css file for embedded scripts. The second line is a &lt;code&gt;document.write()&lt;/code&gt; that just spews out the html. Because the gist js files call &lt;code&gt;document.write&lt;/code&gt; they cannot be loaded after page load or the entire markup for the page will get replaced. I simply downloaded each of those js files, along with the css file, and put the contents in my own javascript file (&lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-gist.js' target='_blank' rel='nofollow'&gt;akm-gist.js&lt;/a&gt;) so that I could control how the html was rendered. The lesson: just because a site provides you with a javascript include file doesn&amp;#39;t mean that you have to use it that way to gain the functionality that it provides.
+				&lt;p&gt;Script Loader. The Quantcast script was being loaded asynchronously, but because it was inline in the HTML &lt;code&gt;body&lt;/code&gt;, it was getting triggered before the page load event. It wouldn&amp;#39;t stop the browser from continuing to process the rest of the page, but it still meant that page load happened after it finished loading. ShareThis was a little different because it was being loaded synchronously because there is a call that must be made after the script loads. The script loader function that I wrote takes a callback so that I could specify which code was to be run after the script was loaded. 
+				&lt;p&gt;akm.blog.init() split. When I added the logo cube in &lt;a href='#post-19'&gt;Post 19&lt;/a&gt;, I added this function to be called during the window onload event. That event gets triggered, and runs any attached functions before it finishes. Since the cube code isn&amp;#39;t critical, there is no reason to potentially wait on that code to run. That code was moved into a new function called &lt;a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/js/akm-blog.js' target="_blank"&gt;&lt;code&gt;akm.blog._initDeferred()&lt;/code&gt;&lt;/a&gt; that will be triggered a quarter second after the init function. 
 				&lt;p&gt;&lt;code&gt;Defer&lt;/code&gt; attribute. In the HTML5 spec, there is a new attribute for &lt;code&gt;script&lt;/code&gt; tags called &lt;code&gt;async&lt;/code&gt;, and it tells the browser not to hold up processing of the html while that javascript file gets downloaded and executed. So the browser will collect these script references and make requests to the various host servers while it continues processing the page. As those scripts come in, they get executed. Sadly, not all browsers support this because it is new. But do not fret! I argue that a better alternative has existed since Internet Explorer 4. The &lt;a href='http://www.w3schools.com/tags/att_script_defer.asp' target='_blank' rel='nofollow'&gt;&lt;code&gt;defer&lt;/code&gt;&lt;/a&gt; attribute has existed since IE4, FF 0.7, and Opera 7. Plus it has a cool distinguishing feature from &lt;code&gt;async&lt;/code&gt; because the browser will load the deferred the scripts in the order they are included. This is perfect for pages where you server your javascript files from your own domain and are not concerned about one particular domain holding up the rest of the order.
 				&lt;h3&gt;Results&lt;/h3&gt;
 				&lt;p&gt;Before these changes: A test load in Chrome 22 with an empty cache: DOMContent event fired at 700ms, Load event at 1600ms. 
@@ -44,14 +69,14 @@
                 isPermaLink="false">4d900633-dc8d-4827-a1fe-5e5add783b86</guid>
             <title>Post 21: SEO Part 3/4: Linkbuilding</title>
             <description>
-				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the third in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven't already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt; and &lt;a href='#blog-post-18'&gt;Part 2: Optimizing Code Tags For SEO&lt;/a&gt;&lt;/em&gt;.
+				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the third in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt; and &lt;a href='#blog-post-18'&gt;Part 2: Optimizing Code Tags For SEO&lt;/a&gt;&lt;/em&gt;.
 				 
 				&lt;div class='guest-post-content'&gt;
 					
 					&lt;h3&gt;SEO Part 3: Linkbuilding&lt;/h3&gt;
-					&lt;p&gt;Now that we've covered most of the basics of SEO, it's time to talk about the most time consuming, yet most potentially rewarding aspect of SEO: linkbuilding.  Linkbuilding is the process of obtaining links from other sites to your site. These links act as a &amp;quot;vote&amp;quot; for your site when search engines are evaluating your credibility. If an external site links to your site using specific anchor text in the link, that sends a signal to search engine crawlers that your site is relevant to the keywords that appear in that anchor text. Repeat the link process dozens, hundreds, or even thousands of times, and your site starts to rank higher in the search engine results for the keyword.
-					&lt;p&gt;Of course, this process is highly abused precisely because it is so effective. Unethical SEO practitioners use &amp;quot;black hat&amp;quot; tactics like buying links from webmasters, using bots to make thousands of spam comments on blogs with keyword-rich anchor text, or even hacking sites to sneak in a link or two. These tactics work well in the short term, but they're almost always discovered by search engines in a matter of months, leading to a complete de-indexation of the offending site.
-					&lt;p&gt;But, you don't have to resort to black hat tactics to have success. There are many legitimate ways to obtain links. Here are a few:
+					&lt;p&gt;Now that we&amp;#39;ve covered most of the basics of SEO, it&amp;#39;s time to talk about the most time consuming, yet most potentially rewarding aspect of SEO: linkbuilding.  Linkbuilding is the process of obtaining links from other sites to your site. These links act as a &amp;quot;vote&amp;quot; for your site when search engines are evaluating your credibility. If an external site links to your site using specific anchor text in the link, that sends a signal to search engine crawlers that your site is relevant to the keywords that appear in that anchor text. Repeat the link process dozens, hundreds, or even thousands of times, and your site starts to rank higher in the search engine results for the keyword.
+					&lt;p&gt;Of course, this process is highly abused precisely because it is so effective. Unethical SEO practitioners use &amp;quot;black hat&amp;quot; tactics like buying links from webmasters, using bots to make thousands of spam comments on blogs with keyword-rich anchor text, or even hacking sites to sneak in a link or two. These tactics work well in the short term, but they&amp;#39;re almost always discovered by search engines in a matter of months, leading to a complete de-indexation of the offending site.
+					&lt;p&gt;But, you don&amp;#39;t have to resort to black hat tactics to have success. There are many legitimate ways to obtain links. Here are a few:
 					&lt;ol&gt;
 						&lt;li&gt;Requesting a link from bloggers/webmasters you know personally or professionally.&lt;/li&gt;
 						&lt;li&gt;Adding links back to your site on your social network profiles.&lt;/li&gt;
@@ -62,26 +87,26 @@
 						&lt;li&gt;Submitting your link to Reddit, Digg, Stumbleupon, or similar link-sharing sites.&lt;/li&gt;
 						&lt;li&gt;Writing a guest post for another blog, and including a link back to your site.&lt;/li&gt;
 					&lt;/ol&gt;
-					&lt;p&gt;Of course, these are just the most current linkbuilding strategies. Ask me again next year, and I'll probably give you another list. The key is to avoid tactics that seem spammy to search engines. If your gut tells you that something is spammy, it probably is. Also, if the link you obtain requires no editorial oversight from a human being, or if you pay an absurdly small amount of money for a high volume of links (I'm looking at you, Fiverr), then the link is probably spammy and will hurt you in the long run. Focus on creating relevant, useful content with a relevant link back to your site and you should be good.
+					&lt;p&gt;Of course, these are just the most current linkbuilding strategies. Ask me again next year, and I&amp;#39;ll probably give you another list. The key is to avoid tactics that seem spammy to search engines. If your gut tells you that something is spammy, it probably is. Also, if the link you obtain requires no editorial oversight from a human being, or if you pay an absurdly small amount of money for a high volume of links (I&amp;#39;m looking at you, Fiverr), then the link is probably spammy and will hurt you in the long run. Focus on creating relevant, useful content with a relevant link back to your site and you should be good.
 					&lt;p&gt;There are a few other factors you should consider when link building:
 					&lt;h3&gt;Dofollow vs. Nofollow&lt;/h3&gt;
-					&lt;p&gt;Before you start linkbuilding, it's important to note the difference between a dofollow and a nofollow link. These are attributes in the HTML code of a link that tell search engine spiders whether or not to follow that link and cast a &amp;quot;vote&amp;quot; for the site that's being linked to. Here's an example:
+					&lt;p&gt;Before you start linkbuilding, it&amp;#39;s important to note the difference between a dofollow and a nofollow link. These are attributes in the HTML code of a link that tell search engine spiders whether or not to follow that link and cast a &amp;quot;vote&amp;quot; for the site that&amp;#39;s being linked to. Here&amp;#39;s an example:
 					&lt;p&gt;&lt;code&gt;&amp;lt;a href='http://ppcwithoutpity.com' rel='nofollow'&amp;gt;PPC Without Pity&amp;lt;/a&amp;gt;&lt;/code&gt;
-					&lt;p&gt;Dofollow means that a search engine spider will go through the link and give credit to the site being linked to. All HTML links are dofollow by default. Nofollow links mean that you'll get an active link, but no real SEO benefit from the link. These days, most blog comments and social media profile links are nofollow to prevent abuse from SEO spammers. It certainly doesn't hurt to have a few nofollow links, though (see the &lt;a href='#post-21-natural-link-profiles'&gt;Natural Link Profiles&lt;/a&gt; section for more on this). Even if you don't get any SEO benefit, you may obtain some valuable referral traffic.
+					&lt;p&gt;Dofollow means that a search engine spider will go through the link and give credit to the site being linked to. All HTML links are dofollow by default. Nofollow links mean that you&amp;#39;ll get an active link, but no real SEO benefit from the link. These days, most blog comments and social media profile links are nofollow to prevent abuse from SEO spammers. It certainly doesn&amp;#39;t hurt to have a few nofollow links, though (see the &lt;a href='#post-21-natural-link-profiles'&gt;Natural Link Profiles&lt;/a&gt; section for more on this). Even if you don&amp;#39;t get any SEO benefit, you may obtain some valuable referral traffic.
 					&lt;h3&gt;Keywords In Anchor Text&lt;/h3&gt;
 					&lt;p&gt;As I mentioned earlier, having keywords within a link's anchor text affect how the linked-to site ranks for those particular keywords. Basically, if you want to rank for a particular keyword, get some links that contain that keyword in the anchor text. Partial matches of the keyword have an effect as well. For example, if you wanted to rank for the keyword &amp;quot;plaid armadillo,&amp;quot; you would probably get some ranking benefit from links that contained the anchor text &amp;quot;armadillo that is plaid&amp;quot; or &amp;quot;plaid baby armadillo&amp;quot;.
 					&lt;p&gt;But, you can overdo this. If you have too many links with the same anchor text, it looks really spammy to the search engines and you may be penalized. As a general rule, you should have more links back to your site that contain your site's name or URL than the quantity of links that contain only keyword anchor text.
 					&lt;h3 id='post-21-natural-link-profiles'&gt;Natural Link Profiles&lt;/h3&gt;
-					&lt;p&gt;In a perfect world, the best sites for particular topics would automatically get ranked well for the keywords relevant to the site. These sites would naturally obtain links from a variety of sites - blogs, directories, school and library resource pages, citations from other websites, etc. Unfortunately, we live in a world where the people who are most adept at SEO get the best rankings. But still, search engines favor a link profile that looks like our perfect world scenario. If you have too many links from one type of site, too many instances of a particular anchor text, or if you build a lot of links unnaturally fast, you may end up being penalized by the search engines for being a spammer. Instead, pay attention to the kinds of links you build to your site. Build a lot of links with variety. Include both dofollow and nofollow links, make sure you have more brand name/URL anchor text than any one keyword, and don't build all your links from one particular type of site.
-					&lt;p&gt;Now, let's talk about how to select which sites to approach for links. Not every site is worth your time to obtain a link from. The better a site's quality, the more SEO benefit it will confer on any site it links to. Here's how to tell if a site will provide SEO benefit:
+					&lt;p&gt;In a perfect world, the best sites for particular topics would automatically get ranked well for the keywords relevant to the site. These sites would naturally obtain links from a variety of sites - blogs, directories, school and library resource pages, citations from other websites, etc. Unfortunately, we live in a world where the people who are most adept at SEO get the best rankings. But still, search engines favor a link profile that looks like our perfect world scenario. If you have too many links from one type of site, too many instances of a particular anchor text, or if you build a lot of links unnaturally fast, you may end up being penalized by the search engines for being a spammer. Instead, pay attention to the kinds of links you build to your site. Build a lot of links with variety. Include both dofollow and nofollow links, make sure you have more brand name/URL anchor text than any one keyword, and don&amp;#39;t build all your links from one particular type of site.
+					&lt;p&gt;Now, let's talk about how to select which sites to approach for links. Not every site is worth your time to obtain a link from. The better a site's quality, the more SEO benefit it will confer on any site it links to. Here&amp;#39;s how to tell if a site will provide SEO benefit:
 					&lt;h3&gt;Domain Authority/Page Authority&lt;/h3&gt;
-					&lt;p&gt;Domain Authority and Page Authority are two proprietary SEO metrics created by SEOMoz, one of the leading SEO tool providers in the market. These metrics tell you (on a scale of 1 to 100) the &amp;quot;authority&amp;quot; of a domain or individual site page based on the number of links and quality of links pointing to that URL. To see a site's authority metrics, you'll need the SEOMoz toolbar. You can get it here:  &lt;a href='http://www.seomoz.org/seo-toolbar' target='_blank' rel='nofollow'&gt;seomoz.org/seo-toolbar&lt;/a&gt;.
-					&lt;p&gt;Before you get a link from a site, check the page that your link will appear on. If the site has a Domain Authority below 20 or 30 and the Page Authority of the page containing your potential link also falls below that threshold, the link probably won't do much for you. Generally speaking, the higher the Domain Authority and Page Authority of a link source, the more benefit it will confer upon the linked-to site.
+					&lt;p&gt;Domain Authority and Page Authority are two proprietary SEO metrics created by SEOMoz, one of the leading SEO tool providers in the market. These metrics tell you (on a scale of 1 to 100) the &amp;quot;authority&amp;quot; of a domain or individual site page based on the number of links and quality of links pointing to that URL. To see a site's authority metrics, you&amp;#39;ll need the SEOMoz toolbar. You can get it here:  &lt;a href='http://www.seomoz.org/seo-toolbar' target='_blank' rel='nofollow'&gt;seomoz.org/seo-toolbar&lt;/a&gt;.
+					&lt;p&gt;Before you get a link from a site, check the page that your link will appear on. If the site has a Domain Authority below 20 or 30 and the Page Authority of the page containing your potential link also falls below that threshold, the link probably won&amp;#39;t do much for you. Generally speaking, the higher the Domain Authority and Page Authority of a link source, the more benefit it will confer upon the linked-to site.
 					&lt;h3&gt;PageRank&lt;/h3&gt;
 					&lt;p&gt;PageRank is a similar metric to Domain Authority and Page Authority, but it takes into account on-page SEO factors as well. However, it has two drawbacks. One, it is only valid for Google ranking (PageRank is a Google proprietary metric). And two, PageRank is only updated for sites every couple of months. So if a site has been penalized for bad SEO practices recently, their PageRank might not reflect that.
-					&lt;p&gt;PageRank is kind of an outdated metric at this point, but it's still good as a general sniff test to see if a site or page will provide SEO benefit. Sites with a PageRank of 2 or higher are generally pretty good candidates for linkbuilding. As with Domain and Page Authority, the higher the PageRank, the better. There are many tools to find a site or page's PageRank. My personal favorite is the &lt;a href='http://tools.seobook.com/seo-toolbar/' target='_blank' rel='nofollow'&gt;SEOBook toolbar&lt;/a&gt;. It has a lot of other neat bells and whistles for SEO pros, too.
+					&lt;p&gt;PageRank is kind of an outdated metric at this point, but it&amp;#39;s still good as a general sniff test to see if a site or page will provide SEO benefit. Sites with a PageRank of 2 or higher are generally pretty good candidates for linkbuilding. As with Domain and Page Authority, the higher the PageRank, the better. There are many tools to find a site or page's PageRank. My personal favorite is the &lt;a href='http://tools.seobook.com/seo-toolbar/' target='_blank' rel='nofollow'&gt;SEOBook toolbar&lt;/a&gt;. It has a lot of other neat bells and whistles for SEO pros, too.
 					&lt;h3&gt;Cache Dates&lt;/h3&gt;
-					&lt;p&gt;If you get a link from a site, but Google never finds the site containing a link, it won't do you any good. That's why it's important to look up a site's latest Google cache date. This metric can be obtained from the SEOBook toolbar mentioned above. If the cache date is more than 30 days in the past, that should be a red flag. Try to avoid getting links from pages like that, or else you're going to be waiting a long time for some SEO benefit.
+					&lt;p&gt;If you get a link from a site, but Google never finds the site containing a link, it won&amp;#39;t do you any good. that&amp;#39;s why it&amp;#39;s important to look up a site's latest Google cache date. This metric can be obtained from the SEOBook toolbar mentioned above. If the cache date is more than 30 days in the past, that should be a red flag. Try to avoid getting links from pages like that, or else you're going to be waiting a long time for some SEO benefit.
 				&lt;/div&gt;
 
 			</description>
@@ -93,14 +118,14 @@
                 isPermaLink="false">8724a9a0-3ba8-4302-9e9e-8f9e70e1fe97</guid>
             <title>Post 20: CSS Sprites</title>
             <description>
-				&lt;p&gt;Alrighty, another round of performance enhancements. This time we'll go over CSS Sprites. 
-				&lt;p&gt;The concept of CSS Sprites is simple. Instead of downloading 1 real image for each individual image that you see on the screen, we'll actually pack multiple images into 1 file and use CSS to only show the portion of the image that we want to show. This primary benefit is the reduction of http requests which results in faster load times. A secondary benefit is that the browser will use less RAM.
-				&lt;p&gt;Let's take the little icon images on this blog for example. There are icons in the header and footer for RSS, Twitter, and GitHub. There are 16x16 and 32x32 pixel versions as well. That is 6 icons for a total of 5.73KB after compression. Now let's put them in a simple sprite:
-				&lt;div class='callout'&gt;
+				&lt;p&gt;Alrighty, another round of performance enhancements. This time we&amp;#39;ll go over CSS Sprites. 
+				&lt;p&gt;The concept of CSS Sprites is simple. Instead of downloading 1 real image for each individual image that you see on the screen, we&amp;#39;ll actually pack multiple images into 1 file and use CSS to only show the portion of the image that we want to show. This primary benefit is the reduction of http requests which results in faster load times. A secondary benefit is that the browser will use less RAM.
+				&lt;p&gt;Let&amp;#39;s take the little icon images on this blog for example. There are icons in the header and footer for RSS, Twitter, and GitHub. There are 16x16 and 32x32 pixel versions as well. That is 6 icons for a total of 5.73KB after compression. Now let's put them in a simple sprite:
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-20-blog-icons-all.png' alt='6 site icons in a sprite'&gt;
-					&lt;span class='citation'&gt;6 site icons in a sprite&lt;/span&gt;
-				&lt;/div&gt;
-				&lt;p&gt;The new sprite has an 11% smaller filesize (5.11KB). Even better though, we'll save 5 http requests. I also did this for the little post thumbnails. There was 19 of them before this post weighing in at a whopping 192KB. After putting them into a single sprite, the filesize actually got a bit bigger (209KB), but 19 http requests were saved. 
+					&lt;figcaption&gt;6 site icons in a sprite&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;The new sprite has an 11% smaller filesize (5.11KB). Even better though, we&amp;#39;ll save 5 http requests. I also did this for the little post thumbnails. There was 19 of them before this post weighing in at a whopping 192KB. After putting them into a single sprite, the filesize actually got a bit bigger (209KB), but 19 http requests were saved. 
 				&lt;p&gt;I was also curious to see if I could reduce the image quality on the screenshot thumbnails without having them suffer too much visually. The end result is that I determined that an 8bit color depth was nearly as good as 24bit color depth in the thumbnails, and the filesize dropped From 209KB to a tiny 32KB! That is 160KB less than the originals, plus 19 fewer http requests. Win-win. But what does the HTML look like?
 				&lt;p&gt;Original: &lt;code&gt;&amp;lt;img src='/img/blog/icons/icon-github-32.png'&gt;&lt;/code&gt;
 				&lt;p&gt;Sprite: &lt;code&gt;&amp;lt;img src='/img/blog/clear.gif' class='img-icon-github-32'&gt;&lt;/code&gt;
@@ -115,7 +140,7 @@
     background-position: -32px 0px;
     background-repeat:no-repeat;
 }&lt;/pre&gt;
-				&lt;p&gt;Naturally, I made a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'&gt;command-line tool&lt;/a&gt; to make sprites for me because doing them by hand is tedious and error prone. Plus it will generate the css so I don't have to write that either. I also put in the option for limiting the color bit depth to 8 bits. After testing that functionality with ImageMagick, I decided to use a custom &lt;a href='http://msdn2.microsoft.com/en-us/library/aa479306.aspx' target='_blank' rel='nofollow'&gt;quantization&lt;/a&gt; alogrithm which resulted in a smaller filesize and a much better looking image.
+				&lt;p&gt;Naturally, I made a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'&gt;command-line tool&lt;/a&gt; to make sprites for me because doing them by hand is tedious and error prone. Plus it will generate the css so I don&amp;#39;t have to write that either. I also put in the option for limiting the color bit depth to 8 bits. After testing that functionality with ImageMagick, I decided to use a custom &lt;a href='http://msdn2.microsoft.com/en-us/library/aa479306.aspx' target='_blank' rel='nofollow'&gt;quantization&lt;/a&gt; alogrithm which resulted in a smaller filesize and a much better looking image.
 				&lt;p&gt;The next step was to update the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt;. Example:  
 				&lt;pre class='code'&gt;imgsprite.exe 
 	-in:../../aaronkmurray-blog/img/blog/icons/*.png 
@@ -126,7 +151,7 @@
 	-gen-test-html:true 
 	-test-html-path:../../aaronkmurray-blog/test/sprites/ 
 	-test-html-deploy-url-base:../../img/blog/sprites/&lt;/pre&gt;
-				&lt;p&gt;I know that is a gnarly block of command line, so I'll break it down:
+				&lt;p&gt;I know that is a gnarly block of command line, so I&amp;#39;ll break it down:
 				&lt;ul&gt;
 					&lt;li&gt;&lt;code&gt;imgsprite.exe&lt;/code&gt;: name of the tool&lt;/li&gt;
 					&lt;li&gt;&lt;code&gt;-in:../../aaronkmurray-blog/img/blog/icons/*.png&lt;/code&gt;: go grab all of the png icons&lt;/li&gt;
@@ -140,7 +165,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;There is one of these calls to imgsprite.exe in the build script for each sprite that I want to create. You can view the test page for the &lt;a href='test/sprites/blog-icons-all.css_test.html' target='_blank'&gt;icons&lt;/a&gt; and &lt;a href='test/sprites/post-screenshot-thumbs-all.css_test.html' target='_blank'&gt;screenshots&lt;/a&gt; if you're interested. These allow me to visually do a sanity check on the results, as well as provide me with a nice way of finding the css class name for each sprite.
 				&lt;p&gt;Before the sprites, a hit to this page had 52 http requests and a payload of 667KB. After the sprites it was 33 http requests and 506KB.
-				&lt;p&gt;And just for grins, I decided to quantize 5 of the former post images that didn't need to be lossless just to see how much they'd shrink. The result: 248KB originally down to 88KB for a savings of another 160KB. Sweet!
+				&lt;p&gt;And just for grins, I decided to quantize 5 of the former post images that didn&amp;#39;t need to be lossless just to see how much they'd shrink. The result: 248KB originally down to 88KB for a savings of another 160KB. Sweet!
 				&lt;p&gt;So there you have it. Another tool to add to your collection. CSS Sprites and further image reduction options without breaking a sweat.
 			</description>
             <pubDate>Mon, 01 Oct 2012 19:00:00 -0500</pubDate>
@@ -154,7 +179,7 @@
 				&lt;p&gt;In this post I will show you how I did the &amp;quot;3D&amp;quot; CSS cube for my logo. The &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/721fc83fad549ba5b27174b7743496fb7e66685d' target='_blank'&gt;code for the changes is on GitHub&lt;/a&gt; (as usual). 
 
 				&lt;h3&gt;Site Logo represented as a 3D Cube using CSS3 Transforms&lt;/h3&gt;
-				&lt;p&gt;I won't do a full write-up because there is already &lt;a href='http://desandro.github.com/3dtransforms/docs/cube.html' target='_blank'&gt;a nice series of CSS 3D Transforms articles&lt;/a&gt; written by &lt;a href='http://desandro.com/' target='_blank'&gt;desandro&lt;/a&gt;. If you are interested, you should read the article for full details on how to do it yourself.
+				&lt;p&gt;I won&amp;#39;t do a full write-up because there is already &lt;a href='http://desandro.github.com/3dtransforms/docs/cube.html' target='_blank'&gt;a nice series of CSS 3D Transforms articles&lt;/a&gt; written by &lt;a href='http://desandro.com/' target='_blank'&gt;desandro&lt;/a&gt;. If you are interested, you should read the article for full details on how to do it yourself.
 				&lt;p&gt;The summary of interesting bits for how I implemented the logo cube is:
 				&lt;ul&gt;
 					&lt;li&gt;HTML: Create a wrapper DIV that will represent the &amp;quot;cube&amp;quot;&lt;/li&gt;
@@ -165,8 +190,8 @@
 					&lt;li&gt;&lt;div id='wrapper-gist-3811934'&gt;loading gist...&lt;/div&gt;&lt;/li&gt;
 				&lt;/ul&gt;
 
-				&lt;h3&gt;Fallback when browser doesn't support CSS3 Transforms&lt;/h3&gt;
-				&lt;p&gt;Because having a rotating 3D cube for my logo isn't &amp;quot;critical&amp;quot; for this site, I didn't concern myself with having the same experience for all browsers. In this case, browsers that don't support CSS3 Transforms will not show the 3D rotation. They will simply show the &amp;quot;last&amp;quot; image in the stack of &amp;quot;sides&amp;quot;, which will result in a single static logo being displayed.
+				&lt;h3&gt;Fallback when browser doesn&amp;#39;t support CSS3 Transforms&lt;/h3&gt;
+				&lt;p&gt;Because having a rotating 3D cube for my logo isn't &amp;quot;critical&amp;quot; for this site, I didn&amp;#39;t concern myself with having the same experience for all browsers. In this case, browsers that don&amp;#39;t support CSS3 Transforms will not show the 3D rotation. They will simply show the &amp;quot;last&amp;quot; image in the stack of &amp;quot;sides&amp;quot;, which will result in a single static logo being displayed.
 				&lt;p&gt;Currently there are two ways of viewing this concept: &lt;dfn&gt;Graceful Degradation&lt;/dfn&gt; and &lt;dfn&gt;Progressive Enhancement&lt;/dfn&gt;. 
 				&lt;ol&gt;
 					&lt;li&gt;&lt;dfn&gt;Graceful Degradation&lt;/dfn&gt; means that if a feature isn't supported, and acceptable fallback would occur.&lt;/li&gt;
@@ -175,9 +200,9 @@
 				&lt;p&gt;The differences are subtle, but meaningful. 
 				&lt;ul&gt;
 					&lt;li&gt;&lt;dfn&gt;Progressive Enhancement&lt;/dfn&gt; implies that all basic functionality will exist, and then extras will be added on to make the experience better. Example: The logo for this site will be a 2D image, unless the browser supports a 3D rendering via CSS.&lt;/li&gt;
-					&lt;li&gt;&lt;dfn&gt;Graceful Degradation&lt;/dfn&gt; typically means that when failure occurs, it doesn't completely kill the experience, but that experience may not be the same. The primary example of this is the use of a text message to the user when Adobe's Flash plugin is not installed/available, instead of providing an alternative way to see that content.&lt;/li&gt;
+					&lt;li&gt;&lt;dfn&gt;Graceful Degradation&lt;/dfn&gt; typically means that when failure occurs, it doesn&amp;#39;t completely kill the experience, but that experience may not be the same. The primary example of this is the use of a text message to the user when Adobe's Flash plugin is not installed/available, instead of providing an alternative way to see that content.&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;It's up to you to choose when features are &amp;quot;critical&amp;quot; and when they are simply icing on the cake.
+				&lt;p&gt;it&amp;#39;s up to you to choose when features are &amp;quot;critical&amp;quot; and when they are simply icing on the cake.
 			</description>
             <pubDate>Mon, 01 Oct 2012 11:05:00 -0500</pubDate>
             <a10:updated>2012-10-01T11:05:00-05:00</a10:updated>
@@ -187,41 +212,41 @@
                 isPermaLink="false">f403007e-6f72-4364-8539-18e1adbd6508</guid>
             <title>Post 18: SEO Part 2/4: Optimizing Code Tags For SEO</title>
             <description>
-				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the second in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven't already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt;&lt;/em&gt;. And after you finish reading this post, have a look at the code changes for this post in GitHub to see Shawn's suggestions at work on this site, as well as some &lt;a href='http://www.w3schools.com/html5/html5_reference.asp' target='_blank' rel='nofollow'&gt;html tag&lt;/a&gt; changes to move towards cleaner, &lt;a href='http://en.wikipedia.org/wiki/Semantic_HTML' target='_blank' rel='nofollow'&gt;semantic markup&lt;/a&gt;.
+				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the second in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt;&lt;/em&gt;. And after you finish reading this post, have a look at the code changes for this post in GitHub to see Shawn's suggestions at work on this site, as well as some &lt;a href='http://www.w3schools.com/html5/html5_reference.asp' target='_blank' rel='nofollow'&gt;html tag&lt;/a&gt; changes to move towards cleaner, &lt;a href='http://en.wikipedia.org/wiki/Semantic_HTML' target='_blank' rel='nofollow'&gt;semantic markup&lt;/a&gt;.
 				&lt;div class='guest-post-content'&gt;
 					
 					&lt;h3&gt;SEO Part 2: Optimizing Code Tags For SEO&lt;/h3&gt;
-					&lt;p&gt;It's a common misconception that there are some magical code tweaks that you can make to your site to &amp;quot;do&amp;quot; SEO. Unfortunately, this is not the case. About ten or fifteen years ago, when search engines were just starting to achieve mainstream popularity, there were a lot of secret tweaks you could do to fool search engines into thinking your spam site was the most relevant page for a specific search query. Fortunately for search engine users, search engines have closed many of these loopholes, and the effect of on-site signals to determine keyword relevance have been somewhat diminished.
-					&lt;p&gt;However, they have not been eliminated entirely. There are still a few code tags that you can enter keywords into in order to influence search engine ranking. Sometimes, if you're targeting a key term with little or no competition, you can even reach a #1 rank through code optimization alone. Let's take a look at some of the code tags that still influence SEO rank.
+					&lt;p&gt;it&amp;#39;s a common misconception that there are some magical code tweaks that you can make to your site to &amp;quot;do&amp;quot; SEO. Unfortunately, this is not the case. About ten or fifteen years ago, when search engines were just starting to achieve mainstream popularity, there were a lot of secret tweaks you could do to fool search engines into thinking your spam site was the most relevant page for a specific search query. Fortunately for search engine users, search engines have closed many of these loopholes, and the effect of on-site signals to determine keyword relevance have been somewhat diminished.
+					&lt;p&gt;However, they have not been eliminated entirely. There are still a few code tags that you can enter keywords into in order to influence search engine ranking. Sometimes, if you're targeting a key term with little or no competition, you can even reach a #1 rank through code optimization alone. Let&amp;#39;s take a look at some of the code tags that still influence SEO rank.
 
 					&lt;h3&gt;&amp;quot;META&amp;quot; Tags&lt;/h3&gt;
 					&lt;p&gt;&lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; tags appear in the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section of each page on your website, and provide metadata to browsers and search engines about what your page is about. There are lots of different &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; tags, but there are only two that have much bearing on SEO.
 
 					&lt;h3&gt;&amp;lt;Title&amp;gt;&lt;/h3&gt;
-					&lt;p&gt;The &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; tag defines your page's title, and most browsers render the title as the text in your browser tab that labels the site. It's also the text that appears in the hyperlink on a search engine results page (SERP). In the code, it looks a little something like this:
+					&lt;p&gt;The &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; tag defines your page's title, and most browsers render the title as the text in your browser tab that labels the site. it&amp;#39;s also the text that appears in the hyperlink on a search engine results page (SERP). In the code, it looks a little something like this:
 					&lt;p&gt;&lt;code&gt;&amp;lt;title&amp;gt;PPC Without Pity - A PPC Marketing Blog From A Merciless Perspective&amp;lt;/title&amp;gt;&lt;/code&gt;
-					&lt;p&gt;Different search engines and browsers have different character limits for the title tag (or at least, limits on what text they display). This limit varies between 65 to 72 characters. So it's best to keep your &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; tag length around 60 characters or less.
-					&lt;p&gt;You can insert keywords into your title tag. These keywords seem to have a powerful influence on ranking. In fact, optimizing your &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; tag for targeted keywords is probably the easiest thing you can do to your site that will have a distinct SEO impact. But, that doesn't mean you should just cram a mess of keywords into your title tag. Pick one or two phrases you want to target, then add your site's title after that (or if it's your home page, put your site's title first).
+					&lt;p&gt;Different search engines and browsers have different character limits for the title tag (or at least, limits on what text they display). This limit varies between 65 to 72 characters. So it&amp;#39;s best to keep your &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; tag length around 60 characters or less.
+					&lt;p&gt;You can insert keywords into your title tag. These keywords seem to have a powerful influence on ranking. In fact, optimizing your &lt;code&gt;&amp;lt;title&amp;gt;&lt;/code&gt; tag for targeted keywords is probably the easiest thing you can do to your site that will have a distinct SEO impact. But, that doesn&amp;#39;t mean you should just cram a mess of keywords into your title tag. Pick one or two phrases you want to target, then add your site's title after that (or if it&amp;#39;s your home page, put your site's title first).
 
 					&lt;h3&gt;&amp;lt;META&amp;gt; Description&lt;/h3&gt;
 					&lt;p&gt;The &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description tag also appears in your site's &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section. This tag provides the words that appear below your site's hyperlinked title in the SERPs. Or at least, it does most of the time - if your &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description is spammy or nonexistent, the search engines may replace that block of text with a different block of text that appears within your page. A &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description tag looks like this in the code:
 					&lt;p&gt;&lt;code&gt;&amp;lt;meta name=&amp;quot;description&amp;quot; content=&amp;quot;A PPC blog dedicated to pay per click advertising, Google Adwords, Yahoo Search Marketing, MSN AdCenter, and other pay per click advertising formats and accounts.&amp;quot; /&amp;gt;&lt;/code&gt;
-					&lt;p&gt;&lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description doesn't have any direct bearing on your search engine ranking. That particular loophole was closed years ago. But, since the &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description appears on the SERPs, it will influence whether or not a user clicks on your site. If you have a really appealing description tag, you may end up getting more clicks than other sites on the results page with an irrelevant description. Treat your &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description as ad copy to entice a user to click on your result.
+					&lt;p&gt;&lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description doesn&amp;#39;t have any direct bearing on your search engine ranking. That particular loophole was closed years ago. But, since the &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description appears on the SERPs, it will influence whether or not a user clicks on your site. If you have a really appealing description tag, you may end up getting more clicks than other sites on the results page with an irrelevant description. Treat your &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description as ad copy to entice a user to click on your result.
 					&lt;p&gt;Like the &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; title, this tag has varying character limits depending on the search engine. But if you keep your &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; description below 150 characters, you should be good.
 
 					&lt;h3&gt;&amp;lt;META&amp;gt; Keywords&lt;/h3&gt;
-					&lt;p&gt;Another tag that appears in the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section, but this one has absolutely no effect on anything. But, it's worth mentioning for that fact. This meta tag was highly abused back in the day, so search engines have disregarded it entirely. If someone is trying to give you SEO advice by telling you to optimize for &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; keywords, it's probably a good indicator that they don't know what they're talking about.
+					&lt;p&gt;Another tag that appears in the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section, but this one has absolutely no effect on anything. But, it&amp;#39;s worth mentioning for that fact. This meta tag was highly abused back in the day, so search engines have disregarded it entirely. If someone is trying to give you SEO advice by telling you to optimize for &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; keywords, it&amp;#39;s probably a good indicator that they don&amp;#39;t know what they&amp;#39;re talking about.
 
 					&lt;h3&gt;Heading Tags (H1, H2, H3, etc.)&lt;/h3&gt;
-					&lt;p&gt;Heading tags were used more frequently in pre-CSS web development to segment content sections. But now that CSS does that trick, heading tags are somewhat obsolete. Still, there is some evidence that search engines use keywords within H1, H2, and occasionally H3 tags to determine ranking. H1 tags pass the most influence, and H2s pass a little. So if you're using H1 tags, it's a good idea to give some thought to which keywords you use in them.
+					&lt;p&gt;Heading tags were used more frequently in pre-CSS web development to segment content sections. But now that CSS does that trick, heading tags are somewhat obsolete. Still, there is some evidence that search engines use keywords within H1, H2, and occasionally H3 tags to determine ranking. H1 tags pass the most influence, and H2s pass a little. So if you're using H1 tags, it&amp;#39;s a good idea to give some thought to which keywords you use in them.
 
 					&lt;h3&gt;Image Alt Tags&lt;/h3&gt;
 					&lt;p&gt;When you create an image, you have an option to create an &amp;quot;alt&amp;quot; attribute to append a text description to the image. It looks like this:
 					&lt;p&gt;&lt;code&gt;&amp;lt;img src=&amp;quot;http://ppcwithoutpity.com/wp-content/uploads/2012/09/adwords-seller-ratings-example.jpg&amp;quot; alt=&amp;quot;adwords seller ratings example&amp;quot; width=&amp;quot;224&amp;quot; height=&amp;quot;103&amp;quot; class=&amp;quot;aligncenter size-full wp-image-943&amp;quot; /&amp;gt;&lt;/code&gt;
-					&lt;p&gt;Alt attributes were created to aid in screen-reading programs for blind web users. Having a picture doesn't really help describe anything if you're unable to see it. But guess who else can't see images to tell what they're about?  Search engines!  Search engine spiders use the text in the alt attribute to determine the topic of your image. If you put some keywords within your alt attribute, then it could help those keywords rank for the page they appear on.
+					&lt;p&gt;Alt attributes were created to aid in screen-reading programs for blind web users. Having a picture doesn&amp;#39;t really help describe anything if you're unable to see it. But guess who else can't see images to tell what they&amp;#39;re about?  Search engines!  Search engine spiders use the text in the alt attribute to determine the topic of your image. If you put some keywords within your alt attribute, then it could help those keywords rank for the page they appear on.
 
 					&lt;h3&gt;A Final Note On Keyword Content&lt;/h3&gt;
-					&lt;p&gt;Including keywords within these code tags is important, but let's not forget the most important place to put your keywords: your content. If you want to rank well for a keyword, it needs to appear within your content, preferably somewhere within the first paragraph or so. But, that doesn't give you a license to just pump your page content full of the same keyword. A good sniff test is to have someone else read your content and ask them if any keyword appears to be repeated too often. You could potentially be penalized for having a spammy site if your site content seems stuffed full of keywords, so you really need to straddle that fine line between using your targeted keywords, but not using them unnaturally.
+					&lt;p&gt;Including keywords within these code tags is important, but let's not forget the most important place to put your keywords: your content. If you want to rank well for a keyword, it needs to appear within your content, preferably somewhere within the first paragraph or so. But, that doesn&amp;#39;t give you a license to just pump your page content full of the same keyword. A good sniff test is to have someone else read your content and ask them if any keyword appears to be repeated too often. You could potentially be penalized for having a spammy site if your site content seems stuffed full of keywords, so you really need to straddle that fine line between using your targeted keywords, but not using them unnaturally.
 					&lt;p&gt;-&lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt;
 				&lt;/div&gt;
 			</description>
@@ -233,7 +258,7 @@
                 isPermaLink="false">8197c362-a697-414c-bbe2-72d6247303bc</guid>
             <title>Post 17: First Month Retrospective</title>
             <description>
-				&lt;p&gt;I'm a big fan of postmortems, and find myself reading lots of them from sites like &lt;a href='http://gamasutra.com/search/index.php?search_text=postmortem' target='_blank' rel='nofollow'&gt;Gamasutra.com&lt;/a&gt;. 
+				&lt;p&gt;I&amp;#39;m a big fan of postmortems, and find myself reading lots of them from sites like &lt;a href='http://gamasutra.com/search/index.php?search_text=postmortem' target='_blank' rel='nofollow'&gt;Gamasutra.com&lt;/a&gt;. 
 				&lt;p&gt;The great thing about doing a postmortem is that it helps re-enforce and solidify the learning experiences from a project while they are still fresh.
 				&lt;p&gt;It has been a month since I started this blog, so I figured that a look back at the project was in order.
 
@@ -248,7 +273,7 @@
 				&lt;ul&gt;
 					&lt;li&gt;RSS Feed. The intial feed had bugs that spammed all posts out as new posts each time I did an update.&lt;/li&gt;
 					&lt;li&gt;Not enough pictures. Looking back at the posts, many of them are huge walls of text.&lt;/li&gt;
-					&lt;li&gt;Build/Commit/Build process. I still have to do 2 GitHub Commits for each post because each post has a link to it's own commit. Still trying to figure that one out.&lt;/li&gt;
+					&lt;li&gt;Build/Commit/Build process. I still have to do 2 GitHub Commits for each post because each post has a link to it&amp;#39;s own commit. Still trying to figure that one out.&lt;/li&gt;
 				&lt;/ul&gt;
 
 				&lt;h3&gt;Frustrations&lt;/h3&gt;
@@ -307,22 +332,22 @@
 				&lt;p&gt;For browsers, they needed to not only be great at parsing HTML, but they had to be even better at deriving the author's intention in the midst of the author's own HTML mistakes. This was part of the reason for all of the old nasty doctype declarations (see next section). The goal was to give the browser a hint at what the author intended. 
 
 				&lt;h3&gt;DOCTYPE&lt;/h3&gt;
-				&lt;p&gt;Let's start from the top: &lt;a href='http://www.w3schools.com/tags/tag_doctype.asp' target='_blank' rel='nofollow'&gt;doctype&lt;/a&gt;. 
+				&lt;p&gt;Let&amp;#39;s start from the top: &lt;a href='http://www.w3schools.com/tags/tag_doctype.asp' target='_blank' rel='nofollow'&gt;doctype&lt;/a&gt;. 
 				&lt;p&gt;Doctype is a special tag that basically tells the browser what type of document that it should expect to parse. As such, it has to be the first element of a page. 
 				&lt;p&gt;Here is the modern example: &lt;code&gt;&amp;lt;!doctype html&amp;gt;&lt;/code&gt;
 				&lt;p&gt;There are all sort of different doctypes out there, but the skinny is: if you are making a new site, or you are fortunate enough to no be concerned with supporting ancient browsers, then the doctype example from above is all you need to use. Done. Simple. 
 				&lt;p&gt;If you live in the e-Commerce world, work on intranet apps, or have an affinity for providing support to folks who still use Netscape 4.7, then you have a decision to make.
-				&lt;p&gt;I won't go into the details here, but it's likely that you'll be using &lt;code&gt;HTML 4.01 Transitional&lt;/code&gt; or &lt;code&gt;HTML 4.01 Frameset&lt;/code&gt;. 
+				&lt;p&gt;I won&amp;#39;t go into the details here, but it&amp;#39;s likely that you&amp;#39;ll be using &lt;code&gt;HTML 4.01 Transitional&lt;/code&gt; or &lt;code&gt;HTML 4.01 Frameset&lt;/code&gt;. 
 				&lt;p&gt;Well, just as authors can make mistakes in the markup, they can also make mistakes when choosing a doctype. Furthermore, most pages on large sites are actually generated on the fly by combining smaller chunks of html into one large page. This makes it especially hard to determine which doctype should be used. The code that chooses the doctype may be aggregating HTML from a source without knowing if that HTML is going to use FRAMESETS. Ugh.
 				&lt;p&gt;The old intention was noble, but ultimately flawed. So now we just go back to basics, and tell the browser that it should expect HTML.
 
 				&lt;h3&gt;XHTML vs HTML&lt;/h3&gt;
 				&lt;p&gt;The first thing you learn when you start researching (old) doctypes is that in addition to HTML, there is an option for XHTML. 
-				&lt;p&gt;To put it simply, XHTML is strictly-written HTML. It doesn't allow for mistakes. It removes the interpretation part from the lenient HTML structure parsing that browsers do. 
+				&lt;p&gt;To put it simply, XHTML is strictly-written HTML. It doesn&amp;#39;t allow for mistakes. It removes the interpretation part from the lenient HTML structure parsing that browsers do. 
 				&lt;p&gt;Again, this was originally intended to combat the wild-west, poorly written HTML that originally dominated the Internet. The moral of this story is: chances are likely that you will never have to know or care about XHTML. Be thankful for that.
 
 				&lt;h3&gt;Tag and Attribute Names: uppercase vs lowercase&lt;/h3&gt;
-				&lt;p&gt;Easy: doesn't matter. UPPER CASE has a way of crying out for attention. Typically when I am reading HTML I am more interested in the tag attribute values as opposed to the tag names and attribute. Because of this, I prefer lowercase. These are functionally equivalent:
+				&lt;p&gt;Easy: doesn&amp;#39;t matter. UPPER CASE has a way of crying out for attention. Typically when I am reading HTML I am more interested in the tag attribute values as opposed to the tag names and attribute. Because of this, I prefer lowercase. These are functionally equivalent:
 				&lt;ul&gt;
 					&lt;li&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;&lt;/code&gt;&lt;/li&gt;
 					&lt;li&gt;&lt;code&gt;&amp;lt;!DOCTYPE HTML&amp;gt;&lt;/code&gt;&lt;/li&gt;
@@ -349,10 +374,10 @@
 
 				&lt;h3&gt;Attribute values: Single quotes vs Double quotes&lt;/h3&gt;
 				&lt;p&gt;Short answer: either. Individual style preference. Functionally they are the same. If you are working in a big project that uses double quotes, use double quotes. And vice versa.
-				&lt;p&gt;Personally, I am conflicted. I prefer single quotes because it &amp;quot;cuts down on the visual noise&amp;quot; when I'm looking at HTML and javascript, but the flipside is that I write a lot of C# code and &lt;code&gt;strings&lt;/code&gt; in C# are wrapped in double quotes. These days I find myself using single quotes most of the time.
+				&lt;p&gt;Personally, I am conflicted. I prefer single quotes because it &amp;quot;cuts down on the visual noise&amp;quot; when I&amp;#39;m looking at HTML and javascript, but the flipside is that I write a lot of C# code and &lt;code&gt;strings&lt;/code&gt; in C# are wrapped in double quotes. These days I find myself using single quotes most of the time.
 
 				&lt;h3&gt;Tools to help&lt;/h3&gt;
-				&lt;p&gt;Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I'll show a tool called &lt;a href='https://github.com/w3c/tidy-html5' target='_blank' rel='nofollow'&gt;html-tidy5&lt;/a&gt; that can be run as part of our build process. 
+				&lt;p&gt;Above I mentioned that web browsers work by parsing text/HTML and turning that into a visual that humans can understand more easily. There are tools that we can use to pre-parse the HTML and then warn us of the glaring structural errors. For this example, I&amp;#39;ll show a tool called &lt;a href='https://github.com/w3c/tidy-html5' target='_blank' rel='nofollow'&gt;html-tidy5&lt;/a&gt; that can be run as part of our build process. 
 				&lt;p&gt;There are also &lt;a href='http://lint.brihten.com/html/report?u=http%3A//aaronkmurray.com&amp;amp;s=0100110#' target='_blank' rel='nofollow'&gt;online tools&lt;/a&gt; that you can play with to see example results.
 				&lt;p&gt;I added tidy as the first step in the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt;. If it finds errors or warnings when it runs, it will cancel the build and open notepad to show a list of problems. Those can then be fixed, and the build can be run again.
 				&lt;p&gt;Here is a sample of what html tidy found on this page: 
@@ -393,7 +418,7 @@
 					&lt;li&gt;Browsers need to know when the file was last changed in order to not use outdated/changed files&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;p&gt;In practice, the upsides outweigh the downsides considerably. So let's get started! 
-				&lt;p&gt;First, start off by making a new text file. I'll call this &lt;code&gt;blog.css&lt;/code&gt; for the sake of simplicity and place it in a folder called &lt;code&gt;css&lt;/code&gt;. Then simply add some html to the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section let the browser know that it needs to download those styles and use them in the page: 
+				&lt;p&gt;First, start off by making a new text file. I&amp;#39;ll call this &lt;code&gt;blog.css&lt;/code&gt; for the sake of simplicity and place it in a folder called &lt;code&gt;css&lt;/code&gt;. Then simply add some html to the &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section let the browser know that it needs to download those styles and use them in the page: 
 				&lt;ul&gt;
 					&lt;li&gt;&lt;code&gt;&amp;lt;link rel='stylesheet' href='&lt;a href='css/blog.css' target='_blank' rel='nofollow'&gt;css/blog.css&lt;/a&gt;'&amp;gt;&lt;/code&gt;&lt;/li&gt;
 				&lt;/ul&gt;
@@ -406,30 +431,30 @@
 				&lt;ul&gt;
 					&lt;li&gt;Include a querystring paramter after the filename that changes with each version: &lt;code&gt;&amp;lt;link rel='stylesheet' href='css/blog.css?version=123'&amp;gt;&lt;/code&gt;
 						&lt;ol&gt;
-							&lt;li&gt;Problem: The file won't be automatically cached for you by external/regionally distributed networks/routers/switches.&lt;/li&gt;
+							&lt;li&gt;Problem: The file won&amp;#39;t be automatically cached for you by external/regionally distributed networks/routers/switches.&lt;/li&gt;
 							&lt;li&gt;Problem: The browser isn't guaranteed to actually fetch the new version&lt;/li&gt;
 						&lt;/ol&gt;
 					&lt;/li&gt;
 					&lt;li&gt;Specify a &lt;a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9' target='_blank' rel='nofollow'&gt;&lt;code&gt;Cache-Control&lt;/code&gt;&lt;/a&gt; Response header: &lt;code&gt;Cache-Control: max-age=3600, must-revalidate&lt;/code&gt;
 						&lt;ol&gt;
 							&lt;li&gt;Problem: You need to have a good estimate of how frequently files change to set a &amp;quot;good&amp;quot; &lt;code&gt;max-age&lt;/code&gt; value in seconds (or any of the other directive values)&lt;/li&gt;
-							&lt;li&gt;Problem: The browser doesn't always obey these headers for various technical reasons&lt;/li&gt;
+							&lt;li&gt;Problem: The browser doesn&amp;#39;t always obey these headers for various technical reasons&lt;/li&gt;
 						&lt;/ol&gt;
 					&lt;/li&gt;
 					&lt;li&gt;Specify an &lt;a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.19' target='_blank' rel='nofollow'&gt;&lt;code&gt;ETag&lt;/code&gt;&lt;/a&gt; Response header: &lt;code&gt;ETag:&amp;quot;1edec-3e3073913b100&amp;quot;&lt;/code&gt;
 						&lt;ol&gt;
 							&lt;li&gt;Problem: This value needs to change when the contents of the file change&lt;/li&gt;
-							&lt;li&gt;Problem: The browser doesn't always obey these headers for various technical reasons&lt;/li&gt;
+							&lt;li&gt;Problem: The browser doesn&amp;#39;t always obey these headers for various technical reasons&lt;/li&gt;
 						&lt;/ol&gt;
 					&lt;/li&gt;
 					&lt;li&gt;Specify an &lt;a href='http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.21' target='_blank' rel='nofollow'&gt;&lt;code&gt;Expires&lt;/code&gt;&lt;/a&gt; Response header: &lt;code&gt;Expires: Thu, 20 Sep 2012 16:00:00 GMT&lt;/code&gt;
 						&lt;ol&gt;
 							&lt;li&gt;Problem: You need to have a good estimate of how frequently files change to set a &amp;quot;good&amp;quot; &lt;code&gt;Expires&lt;/code&gt; value in GMT date format&lt;/li&gt;
-							&lt;li&gt;Problem: The browser doesn't always obey these headers for various technical reasons&lt;/li&gt;
+							&lt;li&gt;Problem: The browser doesn&amp;#39;t always obey these headers for various technical reasons&lt;/li&gt;
 						&lt;/ol&gt;
 					&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;In the worst case scenario of my versioned filename approach, the user will refetch the newest version of the file with each page load. In the worst case scenario of the other methods, the user have the wrong version of the file. In a future post, we'll go over some automated ways of handling this situation.
+				&lt;p&gt;In the worst case scenario of my versioned filename approach, the user will refetch the newest version of the file with each page load. In the worst case scenario of the other methods, the user have the wrong version of the file. In a future post, we&amp;#39;ll go over some automated ways of handling this situation.
 			</description>
             <pubDate>Thu, 20 Sep 2012 14:00:00 -0500</pubDate>
             <a10:updated>2012-09-20T14:00:00-05:00</a10:updated>
@@ -449,21 +474,21 @@
 						&lt;li&gt;Creating an XML sitemap&lt;/li&gt;
 						&lt;li&gt;Getting a link from an influential, recently-cached site&lt;/li&gt;
 					&lt;/ol&gt;
-					&lt;p&gt;Let's go through the how-to of each one.
+					&lt;p&gt;Let&amp;#39;s go through the how-to of each one.
 					&lt;h3&gt;Google Webmaster Tools&lt;/h3&gt;
 					&lt;ol&gt;
 						&lt;li&gt;Go to &lt;a href='http://www.google.com/webmasters/' target='_blank' rel='nofollow'&gt;google.com/webmasters&lt;/a&gt; to create an account.&lt;/li&gt;
 						&lt;li&gt;Once you create an account, click on the &amp;quot;Add A Site&amp;quot; button to add your URL.&lt;/li&gt;
-						&lt;li&gt;After you enter the URL you want to add, you'll be asked to verify that you own the site. You can do this via several different methods: through your domain name provider, uploading an HTML file to your web server, adding a special META tag to your homepage header, or by linking your Google Analytics account. Different sites and hosting configurations have different interactions with each of these verification methods. But, the most reliable (and easiest) method in my experience is the META tag addition.&lt;/li&gt;
+						&lt;li&gt;After you enter the URL you want to add, you&amp;#39;ll be asked to verify that you own the site. You can do this via several different methods: through your domain name provider, uploading an HTML file to your web server, adding a special META tag to your homepage header, or by linking your Google Analytics account. Different sites and hosting configurations have different interactions with each of these verification methods. But, the most reliable (and easiest) method in my experience is the META tag addition.&lt;/li&gt;
 					&lt;/ol&gt;
-					&lt;div class='callout'&gt;
+					&lt;figure&gt;
 						&lt;img src='/img/blog/posts/post-14-3-gwt-step-3.jpg' alt='Google Webmaster Tools: Verify Site'&gt;
-						&lt;span class='citation'&gt;Google Webmaster Tools: Verify Site Ownership Options&lt;/span&gt;
-					&lt;/div&gt;
+						&lt;figcaption&gt;Google Webmaster Tools: Verify Site Ownership Options&lt;/figcaption&gt;
+					&lt;/figure&gt;
 
-					&lt;p&gt;Once your site is verified, you will have access to a set of tools that will help you diagnose SEO issues with your site, track inbound links and search queries, and create ways to help Google index your site. I won't get into all the ins and outs of Google Webmaster Tools here (that would take a whole series of posts), but I do want to cover a few settings that will help get your site indexed initially.
-					&lt;p&gt;Click on the Configuration section in the navigation, and select &amp;quot;Settings.&amp;quot;  You have a few options on this page. You can select your geographic target here. This will help Google understand what your local language is in, and which international Google search engines should give your site priority. Also on this page, you can choose a preferred domain. You can state that you prefer your domain with or without &amp;quot;www.&amp;quot;  This will help prevent duplicate content issues by defining one canonical version of your domain name in Google's system. The third option on this page is to select the crawl rate. If you just added your site, you probably won't have the option to change this just yet. But once you get some traffic, you can return to this page to define a suggested crawl frequency for Google's spiders to re-index your site. Of course, this is just a suggestion to Google - there's no guarantee they'll actually follow your instructions.
-					&lt;p&gt;In Google Webmaster tools, you can also upload an XML sitemap. You can perform this task in the Optimization &amp;gt; Sitemaps section of your account. We'll go into this a little bit more in the sitemaps part of this post.
+					&lt;p&gt;Once your site is verified, you will have access to a set of tools that will help you diagnose SEO issues with your site, track inbound links and search queries, and create ways to help Google index your site. I won&amp;#39;t get into all the ins and outs of Google Webmaster Tools here (that would take a whole series of posts), but I do want to cover a few settings that will help get your site indexed initially.
+					&lt;p&gt;Click on the Configuration section in the navigation, and select &amp;quot;Settings.&amp;quot;  You have a few options on this page. You can select your geographic target here. This will help Google understand what your local language is in, and which international Google search engines should give your site priority. Also on this page, you can choose a preferred domain. You can state that you prefer your domain with or without &amp;quot;www.&amp;quot;  This will help prevent duplicate content issues by defining one canonical version of your domain name in Google&amp;#39;s system. The third option on this page is to select the crawl rate. If you just added your site, you probably won&amp;#39;t have the option to change this just yet. But once you get some traffic, you can return to this page to define a suggested crawl frequency for Google&amp;#39;s spiders to re-index your site. Of course, this is just a suggestion to Google - there&amp;#39;s no guarantee they&amp;#39;ll actually follow your instructions.
+					&lt;p&gt;In Google Webmaster tools, you can also upload an XML sitemap. You can perform this task in the Optimization &amp;gt; Sitemaps section of your account. We&amp;#39;ll go into this a little bit more in the sitemaps part of this post.
 					&lt;h3&gt;Bing Webmaster Tools&lt;/h3&gt;
 					&lt;p&gt;Bing may not be as popular as Google, but it still gets enough user traffic where it makes sense to have your site indexed by them. Fortunately, they also have a webmaster tools account where you can show Bing how to index your content.
 					&lt;ol&gt;
@@ -473,19 +498,19 @@
 						&lt;li&gt;Once you save your info, your site will appear on your Bing Webmaster Tools dashboard. But, you still need to verify it. Click on the &amp;quot;Verify Now&amp;quot; link next to the site URL.&lt;/li&gt;
 						&lt;li&gt;Bing offers you three verification methods: you can upload a special Bing XML file to your root folder in your hosting account, you can verify via a special META tag on your homepage &lt;code&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section, or you can add a unique CNAME record to your DNS.&lt;/li&gt;
 					&lt;/ol&gt;
-					&lt;div class='callout'&gt;
+					&lt;figure&gt;
 						&lt;img src='/img/blog/posts/post-14-10-bing-verify-site-options.jpg' alt='Bing Webmaster Tools: Verify Site Ownership'&gt;
-						&lt;span class='citation'&gt;Bing Webmaster Tools: Verify Site Ownership Options&lt;/span&gt;
-					&lt;/div&gt;
+						&lt;figcaption&gt;Bing Webmaster Tools: Verify Site Ownership Options&lt;/figcaption&gt;
+					&lt;/figure&gt;
 
 					&lt;p&gt;Bing Webmaster Tools also has a lot of options to help your site get crawled. You can submit sitemaps, submit individual URLs, and define the crawl rate of your site. All of these options help your new site become more findable by search engine spiders.
 					&lt;h3&gt;Creating an XML Sitemap&lt;/h3&gt;
 					&lt;p&gt;As I mentioned above, creating a sitemap is an important part of getting a website crawled by search engine spiders. First, some clarification: just adding a sitemap will not make your site more findable. What a sitemap does is provide a roadmap for crawlers that arrive on your site, helping them find all of the pages within your domain. A crawler has to reach your domain in the first place for a sitemap to help, and uploading that sitemap will not help anything find your domain. But, the sitemap does play an important role in assisting web crawlers with finding all of the obscure, deeply-buried pages within your site. And the more pages on your site that get found, the more pages that have the potential to show up on a web search.
 					&lt;p&gt;If you have a small (&amp;lt; 500 page) site, you can create a sitemap for free using the tool at &lt;a href='http://www.xml-sitemaps.com/' target='_blank' rel='nofollow'&gt;xml-sitemaps.com&lt;/a&gt;. Just follow the instructions on the page and you should be good to go. If you have a larger site, you may need to run a program on your web server to index and create all the entries on the sitemap. Google has a tool for this (in beta, of course) at this URL: &lt;a href='http://code.google.com/p/googlesitemapgenerator/' target='_blank' rel='nofollow'&gt;code.google.com/p/googlesitemapgenerator/&lt;/a&gt;. There are also dozens of other tools out there to create sitemaps, so finding an easy way to make one is only a Google search away.
-					&lt;p&gt;Once you have a sitemap, you'll need to upload it to your web server. It must reside at this address: &lt;em&gt;www.your-site-name-here.com&lt;/em&gt;/sitemap.xml. If you have to gzip your sitemap due to size, the URL of &lt;em&gt;www.your-site-name-here.com&lt;/em&gt;/sitemap.xml.gz is also acceptable. Whichever URL you go with, make sure to enter this URL in your robots.txt file to ensure that the search engines know where it is. And just to be extra sure, submit that sitemap to both Google Webmaster Tools and Bing Webmaster Tools.
+					&lt;p&gt;Once you have a sitemap, you&amp;#39;ll need to upload it to your web server. It must reside at this address: &lt;em&gt;www.your-site-name-here.com&lt;/em&gt;/sitemap.xml. If you have to gzip your sitemap due to size, the URL of &lt;em&gt;www.your-site-name-here.com&lt;/em&gt;/sitemap.xml.gz is also acceptable. Whichever URL you go with, make sure to enter this URL in your robots.txt file to ensure that the search engines know where it is. And just to be extra sure, submit that sitemap to both Google Webmaster Tools and Bing Webmaster Tools.
 					&lt;h3&gt;Getting An Influential Link&lt;/h3&gt;
-					&lt;p&gt;Even after all this work, it may take a while for the search engines to find your site to speed up this process, it helps to get a strong initial link to get the ball rolling. You'll want to get a link from a site that gets cached frequently. If crawlers return to a site frequently to check for new links, the link to your site should be found quickly, meaning that the crawler will reach your site via the link and add it to the search engine's index as soon as the page with your link is cached. Also, you should make sure that the link you get is dofollow - a crawler will not pass through a nofollow link, negating the benefit of indexation.
-					&lt;p&gt;Getting links isn't exactly easy. But, maybe you have an established site that gets decent search traffic. Or maybe you know a friend who has one. You can even reach out to an influential blogger that you admire and ask them nicely to give you a link to this new project you're working on. Be creative in your linkbuilding, and you will be rewarded.
+					&lt;p&gt;Even after all this work, it may take a while for the search engines to find your site to speed up this process, it helps to get a strong initial link to get the ball rolling. You&amp;#39;ll want to get a link from a site that gets cached frequently. If crawlers return to a site frequently to check for new links, the link to your site should be found quickly, meaning that the crawler will reach your site via the link and add it to the search engine&amp;#39;s index as soon as the page with your link is cached. Also, you should make sure that the link you get is dofollow - a crawler will not pass through a nofollow link, negating the benefit of indexation.
+					&lt;p&gt;Getting links isn&amp;#39;t exactly easy. But, maybe you have an established site that gets decent search traffic. Or maybe you know a friend who has one. You can even reach out to an influential blogger that you admire and ask them nicely to give you a link to this new project you&amp;#39;re working on. Be creative in your linkbuilding, and you will be rewarded.
 					&lt;p&gt;To check on when a page was last cached by Google, you can use this tool: &lt;a href='http://www.searchenginegenie.com/tools/google-bot-last-accessed-date.php' target='_blank' rel='nofollow'&gt;searchenginegenie.com/tools/google-bot-last-accessed-date.php&lt;/a&gt;. Or, the SEOBook toolbar has this functionality within their browser extension. You can download it here: &lt;a href='http://tools.seobook.com/seo-toolbar/' target='_blank' rel='nofollow'&gt;tools.seobook.com/seo-toolbar/&lt;/a&gt;. Remember to check the cache date of the page where your link will appear. Homepages tend to get cached pretty frequently, while individual post and category pages do not.
 					&lt;p&gt;-&lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt;
 				&lt;/div&gt;
@@ -499,20 +524,20 @@
             <title>Post 13: Image Thumbnails</title>
             <description>
 				&lt;p&gt;Way back in &lt;a href='#blog-post-8'&gt;Post 8&lt;/a&gt; I mentioned 2 ways to reduce the impact of images on bandwidth. The method I tackled then was to automatically compress the png images in the build script. In this post, I will show you how to further reduce the impact by creating and displaying thumbnails instead of scaling down the original image using HTML (&lt;code&gt;&amp;lt;img ... &lt;strong&gt;width=100&lt;/strong&gt; /&amp;gt;&lt;/code&gt;).
-				&lt;div class='callout'&gt;
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-13-request-payload-before-thumbnails-chart.png' alt='Request payload before thumbnails'&gt;
-					&lt;span class='citation'&gt;Request payload before using thumbnails (inspected using Firefox, &lt;a href='http://getfirebug.com/' target='_blank' rel='nofollow'&gt;FireBug&lt;/a&gt;, and &lt;a href='http://developer.yahoo.com/yslow/' target='_blank' rel='nofollow'&gt;YSlow&lt;/a&gt; plugin)&lt;/span&gt;
-				&lt;/div&gt;
+					&lt;figcaption&gt;Request payload before using thumbnails (inspected using Firefox, &lt;a href='http://getfirebug.com/' target='_blank' rel='nofollow'&gt;FireBug&lt;/a&gt;, and &lt;a href='http://developer.yahoo.com/yslow/' target='_blank' rel='nofollow'&gt;YSlow&lt;/a&gt; plugin)&lt;/figcaption&gt;
+				&lt;/figure&gt;
 				&lt;p&gt;As you can see from the chart, fully 98% of the data that users have to download from the site is for images. Of those 24 images, 12 were fullsize blog post screenshots, which weighed in at a portly 1.17MB. Those 12 little screenshot previews accounted 77% of the size for the entire page - and that is after we compressed the images to reduce about one-third of the filesize.
 				&lt;p&gt;I made a sample thumbnail by resizing the image down to 100 pixels wide produced a new preview image that was 90% smaller than the original. The prospect of reducing 77% of the entire request payload by 90% got me excited. 
-				&lt;p&gt;Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don't want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt; so I knew that I wanted to tie into that step. 
+				&lt;p&gt;Given that I still despise the copy/paste portion of creating new blog posts, and knowing that I don&amp;#39;t want to make it harder on myself to release a blog post, I wanted a solution that was 100% automated. There already exists a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt; so I knew that I wanted to tie into that step. 
 				&lt;div id='wrapper-gist-3739310'&gt;loading gist...&lt;/div&gt;
 				&lt;p&gt;Notes on the batch file:
 				&lt;ul&gt;
-					&lt;li&gt;The &lt;code&gt;FOR&lt;/code&gt; loop gets a list of all of the screenshot files that don't have &amp;quot;thumb&amp;quot; in the name&lt;/li&gt;
+					&lt;li&gt;The &lt;code&gt;FOR&lt;/code&gt; loop gets a list of all of the screenshot files that don&amp;#39;t have &amp;quot;thumb&amp;quot; in the name&lt;/li&gt;
 					&lt;li&gt;&lt;code&gt;SETLOCAL ENABLEDELAYEDEXPANSION&lt;/code&gt; is special inside of loops so that variables can be set with each iteration&lt;/li&gt;
 					&lt;li&gt;A new thumbnail file is only created if one does not exist already&lt;/li&gt;
-					&lt;li&gt;&lt;code&gt;convert.exe&lt;/code&gt; file comes from the free image utility library &lt;a href='http://www.imagemagick.org'&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;convert.exe&lt;/code&gt; file comes from the free image utility library &lt;a href='http://www.imagemagick.org' target='_blank' rel='nofollow'&gt;ImageMagick&lt;/a&gt;&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;p&gt;The result is that the sum total filesize of the first 12 post thumbnail images is 111KB (a savings of over 1 megabyte). I also removed the &lt;code&gt;width=100&lt;/code&gt; attributes from the previews as they are no longer necessary. Not too shabby for a few lines of code added to the build script.
 			</description>
@@ -526,30 +551,30 @@
             <description>
 				&lt;p&gt;Alrighty. Today's post is simple - but something that is very visible to users. The Favicon.
 				&lt;p&gt;A Favicon is the little icon that appears in the browser tab/address bar. 
-				&lt;div class='callout'&gt;
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-12-favico-browser-comparo.png' alt='Favicon browser comparison'&gt;
-					&lt;span class='citation'&gt;Favicons as they are shown in Firefox 14, Chrome 21, and Internet Explorer 9&lt;/span&gt;
-				&lt;/div&gt;
+					&lt;figcaption&gt;Favicons as they are shown in Firefox 14, Chrome 21, and Internet Explorer 9&lt;/figcaption&gt;
+				&lt;/figure&gt;
 				&lt;p&gt;In 1999, Microsoft introduced Favicons for the purpose of having an icon to display in the Favorites (bookmarks) menu on Internet Explorer. 2 things were done that (nowadays) goes against some web principles:
 				&lt;ol&gt;
 					&lt;li&gt;Use of the Windows .ico file format
 						&lt;ul&gt;&lt;li&gt;example: favicon.ico instead of favicon.jpg&lt;/li&gt;&lt;/ul&gt;
 					&lt;/li&gt;
-					&lt;li&gt;Default convention for the file location off the root of the site's domain URL, which meant the location didn't have to be specified in HTML
+					&lt;li&gt;Default convention for the file location off the root of the site&amp;#39;s domain URL, which meant the location didn&amp;#39;t have to be specified in HTML
 						&lt;ul&gt;
 							&lt;li&gt;www.aaronkmurray.com/favicon.ico&lt;/li&gt;
-							&lt;li&gt;This limits the webmaster's ability to place the file anywhere, or even on a different server, without mapping OS folders or making URL-rewrite rules (we'll cover those later)&lt;/li&gt;
+							&lt;li&gt;This limits the webmaster&amp;#39;s ability to place the file anywhere, or even on a different server, without mapping OS folders or making URL-rewrite rules (we&amp;#39;ll cover those later)&lt;/li&gt;
 						&lt;/ul&gt;
 					&lt;/li&gt;
 				&lt;/ol&gt;
 				&lt;p&gt;As a result, even though you can now specify any location and filetype that you want for your favicon, I still recommend serving an actual favicon.ico from your root for 2 reasons:
 				&lt;ol&gt;
 					&lt;li&gt;Many browsers and RSS readers will still make requests to this location looking for an icon&lt;/li&gt;
-					&lt;li&gt;You'll cut down on the 404 (File Not Found) error noise that will show up in your hit logging&lt;/li&gt;
+					&lt;li&gt;You&amp;#39;ll cut down on the 404 (File Not Found) error noise that will show up in your hit logging&lt;/li&gt;
 				&lt;/ol&gt;
-				&lt;p&gt;Adding a modern Favicon is simple: &lt;code&gt;&amp;lt;link rel='icon' href='/favicon.png' type='image/png' /&amp;gt;&lt;/code&gt;
+				&lt;p&gt;Adding a modern Favicon is simple: &lt;code&gt;&amp;lt;link rel=&amp;#39;icon&amp;#39; href=&amp;#39;/favicon.png&amp;#39; type=&amp;#39;image/png&amp;#39; /&amp;gt;&lt;/code&gt;
 				&lt;p&gt;But you should still slap a &lt;a href='/favicon.ico' target='_blank' rel='nofollow'&gt;favicon.ico&lt;/a&gt; in your root.
-				&lt;p&gt;If you don't know how to make a &lt;a href='http://en.wikipedia.org/wiki/ICO_(file_format)' target='_blank' rel='nofollow'&gt;.ico file&lt;/a&gt;, you can use a free site like &lt;a href='http://www.convertico.com/' target='_blank' rel='nofollow'&gt;convertico.com&lt;/a&gt; to upload an image and get an .ico file back.
+				&lt;p&gt;If you don&amp;#39;t know how to make a &lt;a href='http://en.wikipedia.org/wiki/ICO_(file_format)' target='_blank' rel='nofollow'&gt;.ico file&lt;/a&gt;, you can use a free site like &lt;a href='http://www.convertico.com/' target='_blank' rel='nofollow'&gt;convertico.com&lt;/a&gt; to upload an image and get an .ico file back.
 			</description>
             <pubDate>Fri, 14 Sep 2012 16:51:00 -0500</pubDate>
             <a10:updated>2012-09-14T16:51:00-05:00</a10:updated>
@@ -562,13 +587,13 @@
 				&lt;p&gt;Bugs! Already there are bugs :) 
 				&lt;p&gt;A colleague of mine mentioned to me that whenever I release a new post, his reader fills shows that &lt;em&gt;all&lt;/em&gt; of the posts appear as new posts.
 				&lt;p&gt;&lt;img src='/img/blog/posts/post-11-google-reader.png' alt='Google Reader showing multiple new posts with each post'&gt;
-				&lt;p&gt;This is an interesting problem caused by the fact that I wasn't defining a &lt;code&gt;&amp;lt;guid&amp;gt;&lt;/code&gt; element in the RSS feed, nor a corresponding &lt;code&gt;&amp;lt;id&amp;gt;&lt;/code&gt; element in the atom feed. These elements are what feed readers (like Google Reader) use to determine if a post/entry is new or not. If the entry doesn't have an ID, it'll always be treated as new. Obviously I need to add these Ids.
-				&lt;p&gt;So, how should I choose a unique Id for each post? Some say that a &lt;a href='http://www.taguri.org/' target='_blank' rel='nofollow'&gt;TAG Uri&lt;/a&gt; should be used. While that seems like a nice way to ensure the creation of a unique id, I don't really want to put a lot of effort into building these Ids by hand (since we're still not using a DB yet). Additionally, I don't care what the Ids are because they are only going to be used by machines, so they don't need to be fancy. 
+				&lt;p&gt;This is an interesting problem caused by the fact that I wasn&amp;#39;t defining a &lt;code&gt;&amp;lt;guid&amp;gt;&lt;/code&gt; element in the RSS feed, nor a corresponding &lt;code&gt;&amp;lt;id&amp;gt;&lt;/code&gt; element in the atom feed. These elements are what feed readers (like Google Reader) use to determine if a post/entry is new or not. If the entry doesn&amp;#39;t have an ID, it&amp;#39;ll always be treated as new. Obviously I need to add these Ids.
+				&lt;p&gt;So, how should I choose a unique Id for each post? Some say that a &lt;a href='http://www.taguri.org/' target='_blank' rel='nofollow'&gt;TAG Uri&lt;/a&gt; should be used. While that seems like a nice way to ensure the creation of a unique id, I don&amp;#39;t really want to put a lot of effort into building these Ids by hand (since we're still not using a DB yet). Additionally, I don&amp;#39;t care what the Ids are because they are only going to be used by machines, so they don&amp;#39;t need to be fancy. 
 				&lt;p&gt;I think this solution calls for a &lt;a href='http://en.wikipedia.org/wiki/Globally_unique_identifier' target='_blank' rel='nofollow'&gt;Guid&lt;/a&gt;. In fact, RSS feeds explicitly have an element for it. Bingo.
-				&lt;p&gt;The next step was realizing that I didn't want to have another manual step in the process of releaing a new post. I don't want to &lt;a href='http://www.guidgenerator.com/online-guid-generator.aspx' target='_blank' rel='nofollow'&gt;generate&lt;/a&gt; &lt;a href='http://msdn.microsoft.com/en-us/library/system.guid.newguid.aspx' target='_blank' rel='nofollow'&gt;a&lt;/a&gt; &lt;a href='http://docs.oracle.com/javase/1.5.0/docs/api/java/util/UUID.html#randomUUID()' target='_blank' rel='nofollow'&gt;guid&lt;/a&gt; by hand each time. I also didn't want to store a list of guids that are mapped to blog posts in some external file. 
-				&lt;p&gt;My solution for now while we're still in hand-coding mode is to add a step to rssgen that will search for a guid in each post, and if it doesn't find one, it adds it. 
+				&lt;p&gt;The next step was realizing that I didn&amp;#39;t want to have another manual step in the process of releaing a new post. I don&amp;#39;t want to &lt;a href='http://www.guidgenerator.com/online-guid-generator.aspx' target='_blank' rel='nofollow'&gt;generate&lt;/a&gt; &lt;a href='http://msdn.microsoft.com/en-us/library/system.guid.newguid.aspx' target='_blank' rel='nofollow'&gt;a&lt;/a&gt; &lt;a href='http://docs.oracle.com/javase/1.5.0/docs/api/java/util/UUID.html#randomUUID()' target='_blank' rel='nofollow'&gt;guid&lt;/a&gt; by hand each time. I also didn&amp;#39;t want to store a list of guids that are mapped to blog posts in some external file. 
+				&lt;p&gt;My solution for now while we&amp;#39;re still in hand-coding mode is to add a step to rssgen that will search for a guid in each post, and if it doesn&amp;#39;t find one, it adds it. 
 				&lt;p&gt;That means that as a write a post, in the post html I have this empty stub:
-				&lt;ul&gt;&lt;li&gt;&lt;code&gt;&amp;lt;div class='blog-post-guid'&amp;gt;&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;
+				&lt;ul&gt;&lt;li&gt;&lt;code&gt;&amp;lt;div class=&amp;#39;blog-post-guid&amp;#39;&amp;gt;&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;
 				&lt;p&gt;I &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/commit/70f220e27e750a3f7b339b7bcb7310e0e63620d6' target='_blank'&gt;updated rssgen&lt;/a&gt; to add the guids inside those stubs, and then re-save the index.html file during the build process. And if I ever want to resend an update out for an old post, I can simply update the guid.
 				&lt;p&gt;This project is pretty interesting for me so far. These solutions are not the way I normally operate because I typically stand on the shoulders of giants and leverage frameworks that handle many of the details like this. My hope is that the readers learn a few things along the way, though I have a feeling that this project just may radically challenge many of my standard processes and assumptions about web development.
 				&lt;p&gt;&lt;strong&gt;UPDATE&lt;/strong&gt; September 14, 2012:
@@ -584,9 +609,9 @@
             <description>
 				&lt;p&gt;As outlined in &lt;a href='#blog-post-1'&gt;The Plan&lt;/a&gt;, a major goal for this site is to provide an inside view on creating a website from the ground up. Large parts of that inside-out view is a visual history as well as full source code with revision history. While that captures the technical aspects of the site, there are other components that go into making a site. 
 				&lt;p&gt;I hinted at this in &lt;a href='#blog-post-4'&gt;Post 4: For the Machines&lt;/a&gt;. Another major component for creating a site is the plan to go from simply being &amp;quot;out there on the Internet&amp;quot; to being easy to find from any major search engine. Much of the steps that need to be taken are lumped into the phrase &lt;a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target='_blank' rel='nofollow'&gt;Search Engine Optimization&lt;/a&gt;, or SEO for short.
-				&lt;p&gt;This is probably the most overlooked part of developing a site. Next week I'm going to start a 4-part series on SEO, in collaboration with guest author &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;Shawn Livengood who runs the blog ppcwithoutpity.com&lt;/a&gt;.
-				&lt;p&gt;The prep for that series, it is prudent to start tracking some key SEO metrics as soon as possible. That way we'll be able to see how the changes affect those metrics over time.
-				&lt;p&gt;I won't go into too much detail know about each of these metrics, but here they are captured for historical purposes:
+				&lt;p&gt;This is probably the most overlooked part of developing a site. Next week I&amp;#39;m going to start a 4-part series on SEO, in collaboration with guest author &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;Shawn Livengood who runs the blog ppcwithoutpity.com&lt;/a&gt;.
+				&lt;p&gt;The prep for that series, it is prudent to start tracking some key SEO metrics as soon as possible. That way we&amp;#39;ll be able to see how the changes affect those metrics over time.
+				&lt;p&gt;I won&amp;#39;t go into too much detail know about each of these metrics, but here they are captured for historical purposes:
 				&lt;ul&gt;
 					&lt;li&gt;From Google:
 						&lt;ul&gt;
@@ -611,21 +636,21 @@
                 isPermaLink="false">5f6842bd-df6f-402d-b451-a7447d247db5</guid>
             <title>Post 9: IIS Static File Compression in web.config</title>
             <description>
-				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I'm making 2 changes that will save some bandwidth:
+				&lt;p&gt;Quick post here, while we're on the topic of saving a few bytes. I&amp;#39;m making 2 changes that will save some bandwidth:
 				&lt;ol&gt;
 					&lt;li&gt;Removing the useless Response Header &amp;quot;X-Powered-By&amp;quot; that gets added by IIS&lt;/li&gt;
-					&lt;li&gt;Configure text (html, css) and javascript (js, json) files to be gzip'd automatically when the browser can handle it (ex: Accept-Encoding:gzip)&lt;/li&gt;
+					&lt;li&gt;Configure text (html, css) and javascript (js, json) files to be gzip&amp;#39;d automatically when the browser can handle it (ex: Accept-Encoding:gzip)&lt;/li&gt;
 				&lt;/ol&gt;
-				&lt;div class='callout'&gt;
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-9-request-sniff-1.png' alt='Request details before web.config changes'&gt;
-					&lt;span class='citation'&gt;Request details before web.config changes (inspected using Chrome Developer Tools)&lt;/span&gt;
-				&lt;/div&gt;
+					&lt;figcaption&gt;Request details before web.config changes (inspected using Chrome Developer Tools)&lt;/figcaption&gt;
+				&lt;/figure&gt;
 				&lt;p&gt;First of all - the Response Header &amp;quot;X-Powered-By&amp;quot; is a waste of 20 incompressible bytes (because they are in the header and the older HTTP protocol &lt;a href='http://stackoverflow.com/questions/5333367/http-header-compression' target='_blank' rel='nofollow'&gt;does not support header compression&lt;/a&gt; like the &lt;a href='http://en.wikipedia.org/wiki/SPDY' target='_blank' rel='nofollow'&gt;SPDY protocol&lt;/a&gt; does). From now on, every response sent from webserver will be 20 bytes lighter. Sweet!
-				&lt;p&gt;Secondly, we want to make sure that text files get compressed before they are sent to the client. Typically you can expect gzip'd files to be fully 2/3rds smaller than their uncompressed bretheren. In the case of this home page (index.html), the payload went from a hearty 39.67KB to a relatively svelte 12.83KB - a 67.7% savings!
-				&lt;div class='callout'&gt;
+				&lt;p&gt;Secondly, we want to make sure that text files get compressed before they are sent to the client. Typically you can expect gzip&amp;#39;d files to be fully 2/3rds smaller than their uncompressed bretheren. In the case of this home page (index.html), the payload went from a hearty 39.67KB to a relatively svelte 12.83KB - a 67.7% savings!
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-9-request-sniff-2.png' alt='Request details after web.config changes'&gt;
-					&lt;span class='citation'&gt;Request details after web.config changes: gzip'd index.html payload is 67.7% smaller&lt;/span&gt;
-				&lt;/div&gt;
+					&lt;figcaption&gt;Request details after web.config changes: gzip&amp;#39;d index.html payload is 67.7% smaller&lt;/figcaption&gt;
+				&lt;/figure&gt;
 				&lt;p&gt;Put this code in your web.config file and enjoy.
 				&lt;div id='wrapper-gist-3694724'&gt;loading gist...&lt;/div&gt;
 			</description>
@@ -637,12 +662,12 @@
                 isPermaLink="false">9d61cdb5-c803-43cf-a5d8-644839b870a9</guid>
             <title>Post 8: Automatic Image Compression</title>
             <description>
-				&lt;p&gt;Alrighty, let's talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
-				&lt;p&gt;These images are saved as &lt;a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target='_blank' rel='nofollow'&gt;PNG&lt;/a&gt; files, which is a lossless image format meaning that all of the original image data is still intact. Unlike &lt;a href='http://en.wikipedia.org/wiki/JPEG' target='_blank' rel='nofollow'&gt;JPEG&lt;/a&gt; files, PNG files won't mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
-				&lt;div class='callout'&gt;
+				&lt;p&gt;Alrighty, let&amp;#39;s talk about bandwidth for a moment. Two and a half weeks ago, this site was started as a single HTML page and no external file includes aside from a screenshot. The purpose of the screenshot was to capture a visual change history of the blog so that readers could easily see how the site changed with each post without having to get the &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;code from github&lt;/a&gt; at a certain point in time and view the site locally.
+				&lt;p&gt;These images are saved as &lt;a href='http://en.wikipedia.org/wiki/Portable_Network_Graphics' target='_blank' rel='nofollow'&gt;PNG&lt;/a&gt; files, which is a lossless image format meaning that all of the original image data is still intact. Unlike &lt;a href='http://en.wikipedia.org/wiki/JPEG' target='_blank' rel='nofollow'&gt;JPEG&lt;/a&gt; files, PNG files won&amp;#39;t mess with the fine details of your image in order to make the file size smaller. This is both good and bad.
+				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-8-png-vs-jpg.png' alt='PNG vs JPEG visual comparison. Source: jonmiles.co.uk'&gt;
-					&lt;span class='citation'&gt;Image comparing PNG (left) vs JPEG (right) detail&lt;/span&gt;
-				&lt;/div&gt;
+					&lt;figcaption&gt;Image comparing PNG (left) vs JPEG (right) detail&lt;/figcaption&gt;
+				&lt;/figure&gt;
 				&lt;p&gt;The upside is that the screenshots look just like my screen did when I took them. The downside is that the files are bigger than a comparative jpeg file.
 				&lt;p&gt;So there are two main actions that should be taken here:
 				&lt;ol&gt;
@@ -656,9 +681,9 @@
 					&lt;li&gt;Batch process entire folders full of images to compress them&lt;/li&gt;
 					&lt;li&gt;Not waste time try to recompress images that have already been compressed (because compression can take a long time)&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;I've checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
+				&lt;p&gt;I&amp;#39;ve checked in the tool so that you can look through the source code, but effectively just digs through a folder (and subfolders) looking for PNG files, and then trying to compress them. It keeps track of the files that it has compressed so that subsequent runs are only working on new/changed files. Using it is fairly simple:
 				&lt;p&gt;&lt;code&gt;imgsqz.exe -s=c:\FolderWithImages&lt;/code&gt;
-				&lt;p&gt;It's now part of the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt;, so that all PNG images from now on will be optimized before they hit the Internet for consumption.
+				&lt;p&gt;it&amp;#39;s now part of the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt;, so that all PNG images from now on will be optimized before they hit the Internet for consumption.
 				&lt;p&gt;Here are the results for some of the files on this site:
 				&lt;table id='table-png-compression-results'&gt;
 					&lt;tr&gt;&lt;th&gt;File&lt;/th&gt;&lt;th&gt;Original Size&lt;/th&gt;&lt;th&gt;New Size&lt;/th&gt;&lt;th&gt;% Saved&lt;/th&gt;&lt;/tr&gt;
@@ -681,7 +706,7 @@
                 isPermaLink="false">6825317b-ba31-4a4c-acba-67d52dfc44ca</guid>
             <title>Post 7: Links to GitHub</title>
             <description>
-				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target='_blank'&gt;each Post's main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target='_blank'&gt;&lt;img src='/img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
+				&lt;p&gt;Quick post here - I just added links to &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master' target='_blank'&gt;each Post&amp;#39;s main commit on github&lt;/a&gt; in the post header. Just click on the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commit/b734038a5587fcbae1e8d3e317d7c06c48e18cd7' target='_blank'&gt;&lt;img src='/img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'&gt;&lt;/a&gt; icon to see what was changed.
 				&lt;p&gt;The purpose is to make it easy to see what changed with each post, but it causes an interesting flow change for &amp;quot;releasing&amp;quot; a post because I need to make a post, and then commit the change, but then edit the post to add the new link to the change on GitHub. 
 			</description>
             <pubDate>Sat, 08 Sep 2012 14:00:00 -0500</pubDate>
@@ -692,7 +717,7 @@
                 isPermaLink="false">1497a7a5-638d-4fb2-b51c-94d67f6cc9f2</guid>
             <title>Post 6: Traffic Analytics</title>
             <description>
-				&lt;p&gt;Now that we've got a way for visitors to subscribe to the site to get notified when new posts happen, let's start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target='_blank' rel='nofollow'&gt;Quantcast&lt;/a&gt;. 
+				&lt;p&gt;Now that we&amp;#39;ve got a way for visitors to subscribe to the site to get notified when new posts happen, let&amp;#39;s start capturing traffic stats using &lt;a href='https://www.quantcast.com/aaronkmurray.com' target='_blank' rel='nofollow'&gt;Quantcast&lt;/a&gt;. 
 				&lt;p&gt;After you sign up for a free/basic Quantcast account, you can &amp;quot;start quantifying&amp;quot; your traffic by entering your domain name and generating a snippet of html/js that will ping their servers each time someone loads up your page. Simply slap that down at the bottom of your page for now, and we can start getting a rough idea of traffic stats. 
 				&lt;p&gt;That snippet is polite because it does 2 things:
 				&lt;ul&gt;
@@ -711,10 +736,10 @@
                 isPermaLink="false">b4932981-4707-45e9-baff-adb57e36e1d6</guid>
             <title>Post 5: RSS, Atom, and Build Tools</title>
             <description>
-				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target='_blank' rel='nofollow'&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target='_blank' rel='nofollow'&gt;Atom&lt;/a&gt; feed so that readers can 'subscribe' and get notified when new posts are made. I don't even follow blogs that lack such a basic service feature. 
+				&lt;p&gt;Alrighty - creating a new blog these days pratically assumes that readers will be provided with an &lt;a href='http://en.wikipedia.org/wiki/RSS' target='_blank' rel='nofollow'&gt;RSS&lt;/a&gt; or &lt;a href='http://en.wikipedia.org/wiki/Atom_(standard)' target='_blank' rel='nofollow'&gt;Atom&lt;/a&gt; feed so that readers can &amp;quot;subscribe&amp;quot; and get notified when new posts are made. I don&amp;#39;t even follow blogs that lack such a basic service feature. 
 				&lt;p&gt;Ironically, in the interest of starting from absolute square 1, this blog lacked an &lt;a href='http://aaronkmurray.com/feeds/feed-rss.xml' target='_blank' rel='nofollow'&gt;RSS feed&lt;/a&gt;. That was one of the more challenging pieces that I had to get over mentally when considering doing a blog this way. Fortunately, the thought of losing potential followers was ultimately outweighed by the principle of the project.
 				&lt;p&gt;That said, getting an RSS feed up ASAP was &lt;em&gt;very important&lt;/em&gt; to me...even more important than other basics like choosing a database. This leads to an interesting chicken/egg problem however. How will I provide an RSS feed without a database? Am I going to copy/paste even more HTML into an XML file for a RSS feed? What about the Atom feed? Should that be another set of copying/pasting/formatting? Should I just buck up, pick a db, but not mention it until later? 
-				&lt;p&gt;Well, given that this site is a fairly unique project, I'm open to fairly unique solutions as we trod down this path. So what is the solution to the feed problem? Parsing.
+				&lt;p&gt;Well, given that this site is a fairly unique project, I&amp;#39;m open to fairly unique solutions as we trod down this path. So what is the solution to the feed problem? Parsing.
 				&lt;p&gt;Considering my disdain for copying and pasting, and the lack of a database to draw from, I wrote a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen/rssgen' target='_blank'&gt;little parser&lt;/a&gt; that would read the HTML from this site and produce &lt;a href='http://aaronkmurray.com/feeds/feed-rss.xml' target='_blank'&gt;RSS&lt;/a&gt; and &lt;a href='http://aaronkmurray.com/feeds/feed-atom.xml' target='_blank' rel='nofollow'&gt;Atom&lt;/a&gt; feeds automatically.
 				&lt;p&gt;Running that tool now becomes the first step in the &amp;quot;build&amp;quot; process for this site. That means that the current process for making and releasing a change to this site is now:
 				&lt;ul&gt;
@@ -724,7 +749,7 @@
 					&lt;li&gt;Remote into the webserver hosting this site&lt;/li&gt;
 					&lt;li&gt;Run my new &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/release/release-aaronkmurray-site.bat'&gt;release script&lt;/a&gt;&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we'll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
+				&lt;p&gt;While still far from ideal, this is better than &lt;a href='#blog-post-1'&gt;the original&lt;/a&gt; process, and it highlights the important phases in the make/build/release process. In upcoming posts, we&amp;#39;ll rely more heavily on these automation points and add many steps to them that handle many of the problems that still need to be solved.
 			</description>
             <pubDate>Fri, 07 Sep 2012 16:40:00 -0500</pubDate>
             <a10:updated>2012-09-07T16:40:00-05:00</a10:updated>
@@ -740,43 +765,43 @@
 					&lt;li&gt;Create a &lt;a href='http://www.robotstxt.org/robotstxt.html' target='_blank' rel='nofollow'&gt;robots.txt&lt;/a&gt; file for communicating instructions with web crawlers&lt;/li&gt;
 					&lt;li&gt;Add &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; tags to help browsers and search engines&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;You'll notice that this site's &lt;a href='robots.txt' target='_blank' rel='nofollow'&gt;robots.txt file&lt;/a&gt; is fairly empty. One interesting note is the line &lt;code&gt;Disallow: /BadBotHoneyPot/&lt;/code&gt;
-				&lt;p&gt;I'll go over that in the future, but for now, I'll just say that we'll use that as a trap to identify &amp;quot;bad&amp;quot; crawlers so that we can automatically block them should we choose.
+				&lt;p&gt;You&amp;#39;ll notice that this site&amp;#39;s &lt;a href='robots.txt' target='_blank' rel='nofollow'&gt;robots.txt file&lt;/a&gt; is fairly empty. One interesting note is the line &lt;code&gt;Disallow: /BadBotHoneyPot/&lt;/code&gt;
+				&lt;p&gt;I&amp;#39;ll go over that in the future, but for now, I&amp;#39;ll just say that we&amp;#39;ll use that as a trap to identify &amp;quot;bad&amp;quot; crawlers so that we can automatically block them should we choose.
 				&lt;p&gt;As for the &lt;code&gt;&amp;lt;meta&amp;gt;&lt;/code&gt; tags:
 				&lt;ul&gt;
-					&lt;li&gt;&lt;code&gt;&amp;lt;meta charset='utf-8'&amp;gt;&lt;/code&gt;
+					&lt;li&gt;&lt;code&gt;&amp;lt;meta charset=&amp;#39;utf-8&amp;#39;&amp;gt;&lt;/code&gt;
 						&lt;ul&gt;
 							&lt;li&gt;This meta tag needs to be near the top of the HTML file (before any text).&lt;/li&gt;
-							&lt;li&gt;If it is not, or it is missing, then the browser will just try to figure out the character encoding set on it's own.&lt;/li&gt;
+							&lt;li&gt;If it is not, or it is missing, then the browser will just try to figure out the character encoding set on it&amp;#39;s own.&lt;/li&gt;
 							&lt;li&gt;You will typically only run across the need to include this once you start dealing with localization of your site.&lt;/li&gt;
 							&lt;li&gt;More info &lt;a href='http://code.google.com/p/doctype-mirror/wiki/MetaCharsetAttribute' target='_blank' rel='nofollow'&gt;here&lt;/a&gt;&lt;/li&gt;
 						&lt;/ul&gt;
 					&lt;/li&gt;
-					&lt;li&gt;&lt;code&gt;&amp;lt;meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'&amp;gt;&lt;/code&gt;
+					&lt;li&gt;&lt;code&gt;&amp;lt;meta http-equiv=&amp;#39;X-UA-Compatible&amp;#39; content=&amp;#39;IE=edge,chrome=1&amp;#39;&amp;gt;&lt;/code&gt;
 						&lt;ul&gt;
 							&lt;li&gt;This tag basically does two things.&lt;/li&gt;
-							&lt;li&gt;#1: Tell Internet Explorer to use it's &lt;a href='http://msdn.microsoft.com/en-us/library/cc288325(v=vs.85).aspx' target='_blank' rel='nofollow'&gt;most modern mode available&lt;/a&gt; (as opposed to IE trying to determine which mode it should run in for best compatibility)&lt;/li&gt;
+							&lt;li&gt;#1: Tell Internet Explorer to use it&amp;#39;s &lt;a href='http://msdn.microsoft.com/en-us/library/cc288325(v=vs.85).aspx' target='_blank' rel='nofollow'&gt;most modern mode available&lt;/a&gt; (as opposed to IE trying to determine which mode it should run in for best compatibility)&lt;/li&gt;
 							&lt;li&gt;#2: Tells browsers with &lt;a href='http://www.chromium.org/developers/how-tos/chrome-frame-getting-started' target='_blank' rel='nofollow'&gt;Google Chrome Frame&lt;/a&gt; installed to render using GCF instead of their native renderer (Uncommon, mostly to help old slow browsers)&lt;/li&gt;
 						&lt;/ul&gt;
 					&lt;/li&gt;
-					&lt;li&gt;&lt;code&gt;&amp;lt;meta name='author' content='Aaron Murray, akmurray@gmail.com'&amp;gt;&lt;/code&gt;
+					&lt;li&gt;&lt;code&gt;&amp;lt;meta name=&amp;#39;author&amp;#39; content=&amp;#39;Aaron Murray, akmurray@gmail.com&amp;#39;&amp;gt;&lt;/code&gt;
 						&lt;ul&gt;
 							&lt;li&gt;Tell the crawler who authored this page&lt;/li&gt;
 							&lt;li&gt;Tell any users who view your source how to contact you if needed&lt;/li&gt;
 							&lt;li&gt;This is more uncommon for sites that have multiple contributors&lt;/li&gt;
 						&lt;/ul&gt;
 					&lt;/li&gt;
-					&lt;li&gt;&lt;code&gt;&amp;lt;meta name='description' content='...'&amp;gt;&lt;/code&gt;
+					&lt;li&gt;&lt;code&gt;&amp;lt;meta name=&amp;#39;description&amp;#39; content=&amp;#39;...&amp;#39;&amp;gt;&lt;/code&gt;
 						&lt;ul&gt;
 							&lt;li&gt;This is a spot where you can describe your site&lt;/li&gt;
 							&lt;li&gt;Some search engines will use this text as preview content&lt;/li&gt;
 							&lt;li&gt;Adds some &lt;a href='http://en.wikipedia.org/wiki/Search_engine_optimization' target='_blank' rel='nofollow'&gt;SEO&lt;/a&gt; value to your site&lt;/li&gt;
 						&lt;/ul&gt;
 					&lt;/li&gt;
-					&lt;li&gt;&lt;code&gt;&amp;lt;meta name='viewport' content='width=device-width'&amp;gt;&lt;/code&gt;
+					&lt;li&gt;&lt;code&gt;&amp;lt;meta name=&amp;#39;viewport&amp;#39; content=&amp;#39;width=device-width&amp;#39;&amp;gt;&lt;/code&gt;
 						&lt;ul&gt;
 							&lt;li&gt;&lt;a href='https://developer.apple.com/library/safari/#documentation/AppleApplications/Reference/SafariWebContent/UsingtheViewport/UsingtheViewport.html' target='_blank' rel='nofollow'&gt;This tag&lt;/a&gt; is largely useful once you start wanting to have your site look nice on &lt;a href='http://www.nokia.com/gb-en/products/phone/700/' target='_blank' rel='nofollow'&gt;small handheld&lt;/a&gt; or &lt;a href='http://arstechnica.com/gadgets/2011/11/microsofts-table-sized-tablet-surfaces-in-pre-order/' target='_blank' rel='nofollow'&gt;giant surface devices&lt;/a&gt;&lt;/li&gt;
-							&lt;li&gt;We'll dive deeper into this in the future, but we've got too many bigger fish to fry at the moment&lt;/li&gt;
+							&lt;li&gt;We&amp;#39;ll dive deeper into this in the future, but we&amp;#39;ve got too many bigger fish to fry at the moment&lt;/li&gt;
 						&lt;/ul&gt;
 					&lt;/li&gt;
 				&lt;/ul&gt;
@@ -789,10 +814,10 @@
                 isPermaLink="false">95f8c883-3c79-4f4c-87e0-71fd7c631a62</guid>
             <title>Post 3: Basic Visual Cleanup</title>
             <description>
-				&lt;p&gt;Alrighty, so we have a plan, we've got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
+				&lt;p&gt;Alrighty, so we have a plan, we&amp;#39;ve got the code up on &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;github&lt;/a&gt; for the world to see, and we have made a couple small changes to make publishing *slightly* less painful via some scripts to automate a couple of steps.
 				&lt;p&gt;Despite my guts screaming out for functionality, something has to be done about the visuals around here. The look is way too 1994, and not in a cool 1994 sort of way.
-				&lt;p&gt;I'm going to start attaching a screenshot of the site with each post so that in the future we can easily view the visual progress that is being made. This will be easier than checking out snapshot from the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master/' target='_blank'&gt;github commit history&lt;/a&gt; and running the site locally. In the future this will be harder for folks to do once we get distributed and have various databases powering the content. Fun stuff!
-				&lt;p&gt;Back to reality - let's spruce this place up. For all of the newbs out there, the best way to fancy up the visuals on a web page is to sprinkle a little &lt;a href='http://www.w3schools.com/css/' target='_blank' rel='nofollow'&gt;CSS&lt;/a&gt; love around. Quickly you'll learn about one of the most loved (hated) aspects of web development: browser differences. Luckily there are &lt;a href='http://www.alistapart.com/' target='_blank' rel='nofollow'&gt;resources&lt;/a&gt; out there to help. For now we won't get into the weeds, but let's just say that for nearly 2 decades we've been struggling with browser differences and there is no end in sight, but at least there is a lot of &lt;a href='http://html5.org/' target='_blank' rel='nofollow'&gt;hope&lt;/a&gt; that things will get better over the next decade as &lt;a href='http://www.ie6countdown.com/' target='_blank' rel='nofollow'&gt;older browsers start to die off&lt;/a&gt;.
+				&lt;p&gt;I&amp;#39;m going to start attaching a screenshot of the site with each post so that in the future we can easily view the visual progress that is being made. This will be easier than checking out snapshot from the &lt;a href='https://github.com/akmurray/aaronkmurray-blog/commits/master/' target='_blank'&gt;github commit history&lt;/a&gt; and running the site locally. In the future this will be harder for folks to do once we get distributed and have various databases powering the content. Fun stuff!
+				&lt;p&gt;Back to reality - let&amp;#39;s spruce this place up. For all of the newbs out there, the best way to fancy up the visuals on a web page is to sprinkle a little &lt;a href='http://www.w3schools.com/css/' target='_blank' rel='nofollow'&gt;CSS&lt;/a&gt; love around. Quickly you&amp;#39;ll learn about one of the most loved (hated) aspects of web development: browser differences. Luckily there are &lt;a href='http://www.alistapart.com/' target='_blank' rel='nofollow'&gt;resources&lt;/a&gt; out there to help. For now we won&amp;#39;t get into the weeds, but let&amp;#39;s just say that for nearly 2 decades we&amp;#39;ve been struggling with browser differences and there is no end in sight, but at least there is a lot of &lt;a href='http://html5.org/' target='_blank' rel='nofollow'&gt;hope&lt;/a&gt; that things will get better over the next decade as &lt;a href='http://www.ie6countdown.com/' target='_blank' rel='nofollow'&gt;older browsers start to die off&lt;/a&gt;.
 				&lt;p&gt;Step 1: very basic &lt;a href='http://en.wikipedia.org/wiki/User_interface' target='_blank' rel='nofollow'&gt;UI&lt;/a&gt;/&lt;a href='http://en.wikipedia.org/wiki/User_experience_design' target='_blank' rel='nofollow'&gt;UX&lt;/a&gt; stuff:
 				&lt;ul&gt;
 					&lt;li&gt;Visually split up the site header from the posts&lt;/li&gt;
@@ -801,12 +826,12 @@
 					&lt;li&gt;Enable a way to link directly to a specific post&lt;/li&gt;
 					&lt;li&gt;Add some content to the footer area of the page&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;Let's assume that we'll use &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; tags for HTML structure/grouping, and that text should be in either a &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; or a &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tag.
+				&lt;p&gt;Let&amp;#39;s assume that we&amp;#39;ll use &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; tags for HTML structure/grouping, and that text should be in either a &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; or a &lt;code&gt;&amp;lt;p&amp;gt;&lt;/code&gt; tag.
 				&lt;p&gt;Using css, we can add some a style for blog posts that have a &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; tag with a css class of &lt;code&gt;&amp;lt;code&amp;gt;&lt;/code&gt;. These matching tags will be in a different monospace font to make look them more computery. Easy.
 				&lt;ul&gt;
 					&lt;li&gt;&lt;code&gt;&amp;lt;style&amp;gt; .blog-post-body span.code {font-family: monospace, Courier, Lucidatypewriter; } &amp;lt;/style&amp;gt;&lt;/code&gt;&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;To enabling linking directly to a post, we're going to use the old-school method of using &lt;code&gt;name&lt;/code&gt; attributes and &lt;code&gt;#&lt;/code&gt; links. I know this is absurd in the days of &lt;a href='http://www.bloggingbasics101.com/2008/11/what-is-a-permalink/' target='_blank' rel='nofollow'&gt;permalinks&lt;/a&gt; and SEO friendliness, but we haven't written the permalink code yet, so we suffer for now. I'm doing this for your own benefit here folks - it's my &lt;a href='http://en.wikipedia.org/wiki/PageRank' target='_blank' rel='nofollow'&gt;PageRank&lt;/a&gt; that will suffer. When we fix this later, it'll also be a great time to talk about the joys of &lt;a href='http://en.wikipedia.org/wiki/Code_refactoring' target='_blank' rel='nofollow'&gt;refactoring&lt;/a&gt; and &lt;a href='http://en.wikipedia.org/wiki/Brownfield_(software_development)' target='_blank' rel='nofollow'&gt;brown-field&lt;/a&gt; upgrades.
+				&lt;p&gt;To enabling linking directly to a post, we&amp;#39;re going to use the old-school method of using &lt;code&gt;name&lt;/code&gt; attributes and &lt;code&gt;#&lt;/code&gt; links. I know this is absurd in the days of &lt;a href='http://www.bloggingbasics101.com/2008/11/what-is-a-permalink/' target='_blank' rel='nofollow'&gt;permalinks&lt;/a&gt; and SEO friendliness, but we haven&amp;#39;t written the permalink code yet, so we suffer for now. I&amp;#39;m doing this for your own benefit here folks - it&amp;#39;s my &lt;a href='http://en.wikipedia.org/wiki/PageRank' target='_blank' rel='nofollow'&gt;PageRank&lt;/a&gt; that will suffer. When we fix this later, it&amp;#39;ll also be a great time to talk about the joys of &lt;a href='http://en.wikipedia.org/wiki/Code_refactoring' target='_blank' rel='nofollow'&gt;refactoring&lt;/a&gt; and &lt;a href='http://en.wikipedia.org/wiki/Brownfield_(software_development)' target='_blank' rel='nofollow'&gt;brown-field&lt;/a&gt; upgrades.
 
 
 			</description>
@@ -831,7 +856,7 @@
 						&lt;li&gt;Pull the changes from github to a local folder&lt;/li&gt;
 						&lt;li&gt;Copy the files to the IIS folder hosting the site&lt;/li&gt;
 					&lt;/ul&gt;
-				&lt;p&gt;Ugh. No fun already. I know we can do better than that. First up, let's automate a couple of those steps.
+				&lt;p&gt;Ugh. No fun already. I know we can do better than that. First up, let&amp;#39;s automate a couple of those steps.
 				&lt;ul&gt;
 					&lt;li&gt;Install &lt;a href='http://msysgit.github.com/' target='_blank' rel='nofollow'&gt;Git for Windows&lt;/a&gt; (&lt;a href='http://www.thegeekstuff.com/2012/02/git-for-windows/' target='_blank' rel='nofollow'&gt;how-to&lt;/a&gt;)&lt;/li&gt;
 					&lt;li&gt;Select the option for &amp;quot;Run Git from the Windows Command Prompt&amp;quot; so that we can write scripts to do our work&lt;/li&gt;
@@ -846,9 +871,9 @@
 						&lt;/ul&gt;
 					&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;Now we can just run that file on the webserver and it'll fetch the latest source from github and push it to the website's folder. 
-				&lt;p&gt;Next up, let's take out the step of entering a username/password each time when doing the &lt;code&gt;git push&lt;/code&gt;. &lt;a href='http://www.programmoria.com/2012/02/saving-tortoisegit-password.html' target='_blank' rel='nofollow'&gt;Here is an article&lt;/a&gt; that describes the simple step of creating a batch file, and then running it, enter your username and password, and it creates the file that TortoiseGit needs so that you don't have to enter those manually anymore.
-				&lt;p&gt;Far from perfect, but we're taking baby steps here ;)
+				&lt;p&gt;Now we can just run that file on the webserver and it&amp;#39;ll fetch the latest source from github and push it to the website&amp;#39;s folder. 
+				&lt;p&gt;Next up, let&amp;#39;s take out the step of entering a username/password each time when doing the &lt;code&gt;git push&lt;/code&gt;. &lt;a href='http://www.programmoria.com/2012/02/saving-tortoisegit-password.html' target='_blank' rel='nofollow'&gt;Here is an article&lt;/a&gt; that describes the simple step of creating a batch file, and then running it, enter your username and password, and it creates the file that TortoiseGit needs so that you don&amp;#39;t have to enter those manually anymore.
+				&lt;p&gt;Far from perfect, but we&amp;#39;re taking baby steps here ;)
 				&lt;p&gt;Article on &lt;a href='http://longair.net/blog/2009/04/16/git-fetch-and-merge/' target='_blank' rel='nofollow'&gt;git fetch vs pull&lt;/a&gt;
 
 			</description>
@@ -871,10 +896,10 @@
 					&lt;li&gt;Content: Is this going to be a personal activity log? Professional journal? Or just another tech experiement?&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;p&gt;As I poured through ideas and wrote down reams of notes, one thing was apparent: &lt;span class='callout'&gt;I was spending a lot of time and effort on the blog but not actually blogging.&lt;/span&gt;
-				&lt;p&gt;Last night I couldn't sleep. The kid's toy keyboard was &amp;quot;cleaned up&amp;quot; in a way that a key was being pressed repeatedly whenever the air conditioning changed the pressure in the play room. I finally got up to address the situation, and then found myself unable to fall back to sleep. 
+				&lt;p&gt;Last night I couldn&amp;#39;t sleep. The kid&amp;#39;s toy keyboard was &amp;quot;cleaned up&amp;quot; in a way that a key was being pressed repeatedly whenever the air conditioning changed the pressure in the play room. I finally got up to address the situation, and then found myself unable to fall back to sleep. 
 				&lt;p&gt;After laying in bed for a couple of hours thinking about the blog, I finally got up to write down my ideas on paper so that I could actually fall asleep. This is common for me: the fear of forgetting an idea keeping me from drifting off into sleepytown.
-				&lt;p&gt;This morning I get into work and checked on my RSS feed folder for .NET development. It's been a few days since I checked it, but &lt;a href='http://www.hanselman.com/blog/YourWordsAreWasted.aspx' target='_blank'&gt;this call-to-action from Scott Hanselman&lt;/a&gt; was the final straw. The answer is simply to start blogging now and sort out the details later.
-				&lt;p&gt;So what's the plan? Well, the plan is:
+				&lt;p&gt;This morning I get into work and checked on my RSS feed folder for .NET development. it&amp;#39;s been a few days since I checked it, but &lt;a href='http://www.hanselman.com/blog/YourWordsAreWasted.aspx' target='_blank'&gt;this call-to-action from Scott Hanselman&lt;/a&gt; was the final straw. The answer is simply to start blogging now and sort out the details later.
+				&lt;p&gt;So what&amp;#39;s the plan? Well, the plan is:
 				&lt;ul&gt;
 					&lt;li&gt;Roll my own site/blog from the ground up&lt;/li&gt;
 					&lt;li&gt;Hosted at my house in my server rack&lt;/li&gt;
@@ -882,9 +907,9 @@
 					&lt;li&gt;Make this site &lt;a href='https://github.com/akmurray/aaronkmurray-blog' target='_blank'&gt;publicly available on github&lt;/a&gt; so that everyone can see how it works and see it progress&lt;/li&gt;
 					&lt;li&gt;Start with a single index.html file and advance the site it all the way through to a scalable, distributed system, from the ground up&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;Ultimately, I'd like to think that someone new to the web development craft will be able to use this site, the posts, and the source code history as a guide to seeing what goes on behind the scenes for how to create modern web software. I'm going to start at absolute step 1, and advance steadily through the growth of a real application. 
-				&lt;p&gt;I'd love it if you followed me on this journey. It'd be great if you could sign up for an RSS feed to get auto-notifications when I make new posts, but since this is just an index.html file at the moment, you can't. Looks like we've got a lot of work to do. Get ready for a fun ride.
-				&lt;p&gt;For now, you can reach me on &lt;a href='https://twitter.com/aaronkmurray' target='_blank'&gt;Twitter @aaronkmurray&lt;/a&gt;. Let me know what you think about this project and what features you'd like to see implemented. Here's a sample of what I have planned already:
+				&lt;p&gt;Ultimately, I&amp;#39;d like to think that someone new to the web development craft will be able to use this site, the posts, and the source code history as a guide to seeing what goes on behind the scenes for how to create modern web software. I&amp;#39;m going to start at absolute step 1, and advance steadily through the growth of a real application. 
+				&lt;p&gt;I&amp;#39;d love it if you followed me on this journey. It&amp;#39;d be great if you could sign up for an RSS feed to get auto-notifications when I make new posts, but since this is just an index.html file at the moment, you can&amp;#39;t. Looks like we&amp;#39;ve got a lot of work to do. Get ready for a fun ride.
+				&lt;p&gt;For now, you can reach me on &lt;a href='https://twitter.com/aaronkmurray' target='_blank'&gt;Twitter @aaronkmurray&lt;/a&gt;. Let me know what you think about this project and what features you&amp;#39;d like to see implemented. Here&amp;#39;s a sample of what I have planned already:
 				&lt;ul&gt;
 					&lt;li&gt;Basics: CSS reset, JS framework, Cloud/CDN hosting&lt;/li&gt;
 					&lt;li&gt;Javascript: organizing your JS files (custom and 3rd-party), creating your own framework patterns, debugging&lt;/li&gt;
@@ -898,7 +923,7 @@
 					&lt;li&gt;Social: integration with the Majors (Facebook, Twitter, Instagram, Pinterest, etc.), API usage, tracking&lt;/li&gt;
 					&lt;li&gt;Advanced: client-side MVC, new JS paradigms and protocols for server communication, custom DBMS!&lt;/li&gt;
 				&lt;/ul&gt;
-				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we're starting with a single HTML page and no code. Let's get cracking!
+				&lt;p&gt;As you can see, that is a reasonably ambitious sampling of goals since we&amp;#39;re starting with a single HTML page and no code. Let&amp;#39;s get cracking!
 
 			</description>
             <pubDate>Wed, 22 Aug 2012 15:00:00 -0500</pubDate>

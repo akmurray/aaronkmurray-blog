@@ -1,26 +1,80 @@
+/*
+	Aaron K. Murray
+	@aaronkmurray
+
+	Blog-related CSS styles for aaronkmurray.com
+
+	Excellent CSS notes, guidelines, and examples: https://github.com/csswizardry/CSS-Guidelines
+
+
+*/
+
+
+/* 
+	Fonts and Text Sizing. See: http://csswizardry.com/2012/02/pragmatic-practical-font-sizing-in-css/ and http://jsfiddle.net/csswizardry/8nYqN/
+	Base font-size here since most elements will inherit this 
+*/
+html {
+    font-size:1em;      /* 1em=16px by default.  see See: http://www.informationarchitects.jp/en/100e2r/  */
+	line-height:1.5; /* 16x1.5=24px (This is now our magic number; all subsequent margin-bottoms and line-heights want to be a multiple of this number in order to maintain vertical rhythm.) */
+}
+
 body {
-	margin:0;
-	padding:0;
-	font-size:100%;
-	color:#333;
 	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
-	line-height:1.25em; /* 16x1.25=20px */
+	color:#333;
+}
+
+/* Common margin-bottom for vertical rhythm. */
+h1,h2,h3,h4,h5,h6,
+ul,ol,dl,
+fieldset,
+p,
+table,
+pre,
+hr{
+    margin-bottom:24px;
+    margin-bottom:1.5rem;
 }
 
 
-h1 {font-size:1.3125em;/* 16x1.3125=21px */}
-h2 {font-size:1.25em;}
-h3 {font-size:1.1875em; }
-h4 {font-size:1.125em; /* 16x1.125=18px */}
-h5 {font-size:1.0625em;}
-h6 {font-size:1.0em;/* 16px=1em */}
 
-img {border:0px;}
+/* Links */
+a:link {
+	color:#333;
+}
+a:visited {
+	color:#333;
+}
+a:active {
+	color:#c00;
+}
+a:hover, a:focus {
+  color:#c00;
+  opacity: .75;
+}
 
-#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu, #wrapper-logo {padding:10px;}
-#wrapper-site-header, #wrapper-site-footer, #wrapper-logo {clear:both;}
 
-#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:5em;}
+
+/* 
+	Special case overrides for external ShareThis styles that I cannot control 
+*/
+#wrapper-site-footer .stButton .chicklets {
+	font-size:150%;
+	font-family:'lucida grande',tahoma,verdana,arial,sans-serif;
+	color:#333;
+}
+#wrapper-site-footer .stButton .chicklets:hover {color:#c00;}
+
+
+
+/*
+	Begin real specific styling for the blog
+*/
+
+#wrapper-site-header, #wrapper-site-footer, #wrapper-blog-posts, #wrapper-blog-post-menu {padding:10px;}
+#wrapper-site-header, #wrapper-site-footer {clear:both;}
+
+#wrapper-site-header {border-bottom:1px solid #bcc;background-color:#dee;min-height:10em;}
 #wrapper-site-footer {border-top:1px solid #bcc;background-color:#dee;min-height:20em;}
 
 #wrapper-site-header-words {float:left;max-width:600px;clear:both;}
@@ -29,12 +83,10 @@ img {border:0px;}
 
 #wrapper-site-header-icons {float:right;}
 
-#wrapper-site-footer a {text-decoration:none;}
-#wrapper-site-footer a:hover {opacity: .75;}
 
 #wrapper-site-footer section {float:left;width:13em;}
 #wrapper-site-footer section h3 {margin-left:0em;}
-
+#wrapper-site-footer section a {text-decoration:none;}
 #wrapper-site-footer section ul {list-style: disc inside;margin:0;padding:0;}
 #wrapper-site-footer section ul li {list-style: none;line-height:2em;}
 #wrapper-site-footer section.share ul {margin-left:-0.45em;}
@@ -56,8 +108,8 @@ div.copyright span {display:block;width:20em;margin-left:auto;margin-right:auto;
 
 .blog-post-body {padding:10px;}
 .blog-post-body span.code, pre.code, code {font-family: monospace, Courier, Lucidatypewriter; }
-.blog-post-body div.callout {margin:10px;text-align:center;}
-.blog-post-body div.callout span.citation {text-align:center;color:#555;clear:both;display:block;font-size:smaller;}
+.blog-post-body figure {margin:10px;text-align:center;}
+.blog-post-body figcaption {text-align:center;color:#555;font-size:smaller;}
 .blog-post-guid {display:none;}
 
 .blog-post-body .guest-post-content {margin:10px;}
@@ -68,16 +120,12 @@ div.copyright span {display:block;width:20em;margin-left:auto;margin-right:auto;
 .post-screenshot img {border:0;margin:10px;}
 
 
-#wrapper-logo .logo {display: block;margin-left: auto;margin-right: auto;}
 
 #wrapper-blog-post-menu .menu-header {}
 
 /* START post-specific styles */
 
 /* START POST 8 */
-#table-png-compression-results {
-	border-collapse:collapse;
-}
 #table-png-compression-results th, #table-png-compression-results td {
 	padding:10px;
 	border:1px solid #888;
