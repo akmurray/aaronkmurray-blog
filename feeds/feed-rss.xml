@@ -8,13 +8,68 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">534624f3-3d1a-4aac-b72c-6dad9d400f27</guid>
+            <title>Post 24: SEO Part 4/4: Tracking SEO Results</title>
+            <description>
+				&lt;p&gt;&lt;em&gt;This post is the last post in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt;, &lt;a href='#blog-post-18'&gt;Part 2: Optimizing Code Tags For SEO&lt;/a&gt;, and &lt;a href='#blog-post-21' target='_blank' rel='nofollow'&gt;Part 3: Linkbuilding&lt;/a&gt;.&lt;/em&gt;
+				 
+				&lt;div class='guest-post-content'&gt;
+
+					&lt;h3&gt;Tracking SEO Results&lt;/h3&gt;
+					&lt;p&gt;Now that you know the basics of how to improve your organic search ranking, you&amp;#39;ll need a way to track your site&amp;#39;s results in the search engine results pages (SERPs). There are many tools that perform this function. Some are free, and some cost money. First, let&amp;#39;s cover the free tools.
+					&lt;h3&gt;Google Analytics&lt;/h3&gt;
+					&lt;p&gt;You should already be using &lt;a href='www.google.com/analytics/' target='_blank' rel='nofollow'&gt;Google Analytics&lt;/a&gt; to track your site traffic. And you should already have created a &lt;a href='https://www.google.com/webmasters/tools/' target='_blank' rel='nofollow'&gt;Google Webmaster Tools&lt;/a&gt; account (covered in SEO Post #1). If you have both of these enabled, you can track organic search queries and ranking to your site.
+					&lt;p&gt;To view your SEO ranking, just log in to your Google Analytics account and go to Traffic Sources &amp;gt; Search Engine Optimization &amp;gt; Queries:
+					&lt;figure&gt;
+						&lt;img src='/img/blog/posts/post-24-pic-1.jpg' alt='Google Analytics Menu: Search Engine Optimization, Queries'&gt;
+						&lt;figcaption&gt;Google Analytics Menu: Search Engine Optimization, Queries&lt;/figcaption&gt;
+					&lt;/figure&gt;
+					&lt;p&gt;Note: if this is your first time looking at this report, you may be prompted to link your Google Analytics and Google Webmaster tools accounts. Try to do this as soon as you have both accounts so that you can start collecting historical data on your SEO performance.
+					&lt;p&gt;In this report, you can view specific queries that users typed in to reach your site, the average position on Google that your result appeared, and total clicks, impressions, and click-through rate of the traffic driven by that query in the date range of your report.
+					&lt;figure&gt;
+						&lt;img src='/img/blog/posts/post-24-pic-2.jpg' alt='Google Analytics SEO Query report example'&gt;
+						&lt;figcaption&gt;Google Analytics SEO Query report example&lt;/figcaption&gt;
+					&lt;/figure&gt;
+					&lt;p&gt;This report is pretty handy, but has two major drawbacks. One, it only shows ranking for searches on Google. You could be ranking well on Bing, Ask, or another search engine and you would never know it. And two, it only shows you stats on keywords you&amp;#39;re already ranking for. This could be a problem if you have some specific keywords that you&amp;#39;re not currently ranking for, and you need to keep tabs on them.
+					&lt;h3&gt;SEO Book&amp;#39;s Rank Checker&lt;/h3&gt;
+					&lt;p&gt;This next tool is my favorite free rank checking tool. It&amp;#39;s put out by SEO Book, who also makes the super-handy SEO Book toolbar I mentioned in the last SEO post. Rank Checker is a Firefox extension that you can download here: &lt;a href='http://tools.seobook.com/firefox/rank-checker/' target='_blank' rel='nofollow'&gt;http://tools.seobook.com/firefox/rank-checker/&lt;/a&gt;.
+					&lt;p&gt;Once you install this tool, you can click on the icon in your Firefox browser to get started. You&amp;#39;ll get a pop-up screen where you can enter your domain and the keywords you want to track:
+					&lt;figure&gt;
+						&lt;img src='/img/blog/posts/post-24-pic-3.jpg' alt='SEO Book Rank Checker'&gt;
+						&lt;figcaption&gt;SEO Book Rank Checker&lt;/figcaption&gt;
+					&lt;/figure&gt;
+					&lt;p&gt;Then, hit "Start" to run the analysis. You&amp;#39;ll get data on your keyword ranking in whatever search engines you have selected.
+					&lt;figure&gt;
+						&lt;img src='/img/blog/posts/post-24-pic-4.jpg' alt=''&gt;
+						&lt;figcaption&gt;SEO Book Rank Checker: Keyword Rankings&lt;/figcaption&gt;
+					&lt;/figure&gt;
+					&lt;p&gt;Once you have a set of target keywords you want to track, you can click on the "Save" icon next to the domain field to save your keyword set for future reference. Just give it a name, and it will be saved in the application. Then, the next time you want to run that same set of keywords, you can click "Open" and choose your saved list of keywords to run again:
+					&lt;figure&gt;
+						&lt;img src='/img/blog/posts/post-24-pic-5.jpg' alt=''&gt;
+						&lt;figcaption&gt;SEO Book Rank Checker: Saved Keyword Groups&lt;/figcaption&gt;
+					&lt;/figure&gt;
+					&lt;p&gt;If you want to keep a running tab on your keyword rankings, just set a reminder to yourself to run your saved set of keywords every week. Export the list as a CSV and enter it into a spreadsheet. This is a pretty reliable way for very small websites to keep track of their SEO ranking with no cost, and just a little bit of effort. 
+					&lt;p&gt;These free tools are pretty good for basic SEO rank tracking, but if you run a larger website with many keywords (and more money at stake), it&amp;#39;s probably in your best interest to invest in a more comprehensive paid SEO tool. Here are two great ones that get the job done at a reasonable price.
+					&lt;h3&gt;SEOMoz&lt;/h3&gt;
+					&lt;p&gt;&lt;a href='http://www.seomoz.org/' target='_blank' rel='nofollow'&gt;SEOMoz&lt;/a&gt; costs $99 a month and up, but comes with a lot of resources that make it worth it. For rank tracking, they have some simple recurring reports that will deliver weekly rank changes right to your inbox. They also have a whole suite of tools that provide SEO diagnostics, and have perhaps the most active and experienced communities of SEO pros out there. An SEOMoz membership is not only worth it for the tools, but for the community and learning opportunities as well. If you&amp;#39;re serious about SEO, and you need powerful tools to get your website ranking, taking a free 30-day SEOMoz trial would be a great next step after you finish these posts. Reading through their forums and blog posts will give you the advanced education you need, and using their diagnostic tools will help you ensure that your site is on the right track.
+					&lt;h3&gt;Raven Tools&lt;/h3&gt;
+					&lt;p&gt;&lt;a href='http://raventools.com/seo-tools/' target='_blank' rel='nofollow'&gt;Raven Tools&lt;/a&gt; is another great paid option that is about $99 a month and has a free 30-day trial. Raven has an extraordinarily good rank tracking tool that allows you to view the historical rank of any keyword by week (after you&amp;#39;ve added it in to the tool, of course). I haven&amp;#39;t seen any other tool at this price level that does that. It&amp;#39;s super convenient if you have a lot of keywords you need to monitor.
+					&lt;p&gt;Besides the rank tracking, Raven allows you to aggregate your link building contacts, Google Analytics data, and Google AdWords data all in one place. Their reporting is top-notch, and their user interface is fairly intuitive. You don&amp;#39;t get the wide variety of diagnostic tools or the community of SEOMoz though, so these tools are best used in tandem if you can afford it.
+					&lt;p&gt;That about covers it for SEO tools and results tracking. There are many, many, other SEO tools out there, but these just happen to be my favorites. If you use all of these tools (or at least most of them), you should have all the tools at your disposal that 90% of SEO folks use. Now, you&amp;#39;re armed with the strategy and the tools for SEO success. So go out there, create some great content and great links and get ranking!
+				&lt;/div&gt;
+			</description>
+            <pubDate>Mon, 15 Oct 2012 10:15:00 -0500</pubDate>
+            <a10:updated>2012-10-15T10:15:00-05:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">5586da29-52bf-477b-b9b6-4db339b0b3ad</guid>
             <title>Post 23: CSS Resets and Organization</title>
             <description>
 				&lt;p&gt;CSS, which stands for Cascading Style Sheets, is something that nearly everyone has heard of, most people have used, and few people understand. 
 				&lt;p&gt;The first experience many people have with CSS is to do something simple, like set the background color on a page. Many folks stop learning once they are done applying colors and borders to html elements.
 				&lt;p&gt;The next big step for many folks is learning about affecting layout by &amp;quot;floating &lt;code&gt;DIV&lt;/code&gt;s&amp;quot; or pursuing a &amp;quot;tableless&amp;quot; &lt;a href='http://www.w3.org/2002/03/csslayout-howto' target='_blank' rel='nofollow'&gt;layout&lt;/a&gt;.
-				&lt;p&gt;While these are pratical steps in learning about CSS, I think it is important to call out the intention for CSS. Simply put, that purpose is to help separate the page content from the page visuals.
+				&lt;p&gt;While these are pratical steps in learning about CSS, I think it is important to first call out the intention for CSS. Simply put, that purpose is to help separate the page content from the page visuals.
 
 				&lt;h3&gt;Inline styles are valid, but bad practice&lt;/h3&gt;
 				&lt;p&gt;In HTML, it is perfectly valid to apply inline styles to an element, along with the rest of the attributes for that element, using the &lt;code&gt;style&lt;/code&gt; property. Example: 
@@ -69,12 +124,12 @@
                 isPermaLink="false">4d900633-dc8d-4827-a1fe-5e5add783b86</guid>
             <title>Post 21: SEO Part 3/4: Linkbuilding</title>
             <description>
-				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the third in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt; and &lt;a href='#blog-post-18'&gt;Part 2: Optimizing Code Tags For SEO&lt;/a&gt;&lt;/em&gt;.
+				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the third in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt; and &lt;a href='#blog-post-18'&gt;Part 2: Optimizing Code Tags For SEO&lt;/a&gt;.&lt;/em&gt;
 				 
 				&lt;div class='guest-post-content'&gt;
 					
 					&lt;h3&gt;SEO Part 3: Linkbuilding&lt;/h3&gt;
-					&lt;p&gt;Now that we&amp;#39;ve covered most of the basics of SEO, it&amp;#39;s time to talk about the most time consuming, yet most potentially rewarding aspect of SEO: linkbuilding.  Linkbuilding is the process of obtaining links from other sites to your site. These links act as a &amp;quot;vote&amp;quot; for your site when search engines are evaluating your credibility. If an external site links to your site using specific anchor text in the link, that sends a signal to search engine crawlers that your site is relevant to the keywords that appear in that anchor text. Repeat the link process dozens, hundreds, or even thousands of times, and your site starts to rank higher in the search engine results for the keyword.
+					&lt;p&gt;Now that we&amp;#39;ve covered most of the basics of SEO, it&amp;#39;s time to talk about the most time consuming, yet most potentially rewarding aspect of SEO: linkbuilding. Linkbuilding is the process of obtaining links from other sites to your site. These links act as a &amp;quot;vote&amp;quot; for your site when search engines are evaluating your credibility. If an external site links to your site using specific anchor text in the link, that sends a signal to search engine crawlers that your site is relevant to the keywords that appear in that anchor text. Repeat the link process dozens, hundreds, or even thousands of times, and your site starts to rank higher in the search engine results for the keyword.
 					&lt;p&gt;Of course, this process is highly abused precisely because it is so effective. Unethical SEO practitioners use &amp;quot;black hat&amp;quot; tactics like buying links from webmasters, using bots to make thousands of spam comments on blogs with keyword-rich anchor text, or even hacking sites to sneak in a link or two. These tactics work well in the short term, but they&amp;#39;re almost always discovered by search engines in a matter of months, leading to a complete de-indexation of the offending site.
 					&lt;p&gt;But, you don&amp;#39;t have to resort to black hat tactics to have success. There are many legitimate ways to obtain links. Here are a few:
 					&lt;ol&gt;
@@ -212,7 +267,7 @@
                 isPermaLink="false">f403007e-6f72-4364-8539-18e1adbd6508</guid>
             <title>Post 18: SEO Part 2/4: Optimizing Code Tags For SEO</title>
             <description>
-				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the second in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt;&lt;/em&gt;. And after you finish reading this post, have a look at the code changes for this post in GitHub to see Shawn's suggestions at work on this site, as well as some &lt;a href='http://www.w3schools.com/html5/html5_reference.asp' target='_blank' rel='nofollow'&gt;html tag&lt;/a&gt; changes to move towards cleaner, &lt;a href='http://en.wikipedia.org/wiki/Semantic_HTML' target='_blank' rel='nofollow'&gt;semantic markup&lt;/a&gt;.
+				&lt;p&gt;&lt;em&gt;As I mentioned in &lt;a href='#blog-post-10'&gt;Post 10: The SEO Plan&lt;/a&gt;, this post is the second in a 4-part series on SEO written by guest author &lt;a href='https://twitter.com/slivengood' target='_blank'&gt;Shawn Livengood&lt;/a&gt; who runs the blog &lt;a href='http://ppcwithoutpity.com/' target='_blank'&gt;ppcwithoutpity.com&lt;/a&gt;. If you haven&amp;#39;t already, check out &lt;a href='#blog-post-14'&gt;Part 1: Getting Indexed&lt;/a&gt;. And after you finish reading this post, have a look at the code changes for this post in GitHub to see Shawn's suggestions at work on this site, as well as some &lt;a href='http://www.w3schools.com/html5/html5_reference.asp' target='_blank' rel='nofollow'&gt;html tag&lt;/a&gt; changes to move towards cleaner, &lt;a href='http://en.wikipedia.org/wiki/Semantic_HTML' target='_blank' rel='nofollow'&gt;semantic markup&lt;/a&gt;.&lt;/em&gt;
 				&lt;div class='guest-post-content'&gt;
 					
 					&lt;h3&gt;SEO Part 2: Optimizing Code Tags For SEO&lt;/h3&gt;

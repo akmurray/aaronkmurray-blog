@@ -14,9 +14,14 @@
 })();
 
 
-//Global variables required by external scripts
-var _qevents = _qevents || []; //quantcast
-var switchTo5x=true; //ShareThis
+//	Global variables required by external scripts
+var _qevents = _qevents || [];	//quantcast
+var switchTo5x=true;			//ShareThis
+
+var _gaq = _gaq || [];			//Google Analytics
+_gaq.push(['_setAccount', 'UA-35522056-1']);
+_gaq.push(['_trackPageview']); 
+
 
 
 // 'akm' is the base object that I will use like a namespace so that it's easy to navigate the js I write (and so that global space doesn't get too cluttered because that is frowned upon these days)
@@ -59,6 +64,11 @@ akm.blog._initDeferred = function() {
 	//...every few seconds
 	var intervalLogo = self.setInterval(logoRotate, 3000);
   
+
+    //Google Analytics
+	var gaSrc = (akm.util.isSecure ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	akm.util.loadScript(gaSrc, true, (function(){ _qevents.push({ qacct:'p-M_hV8wgLbE9k_' }); })	);
+
 
     //ShareThis
 	akm.util.loadScript('http://w.sharethis.com/button/buttons.js', true, (function(){ stLight.options({publisher: "3be7e6b2-8565-4c3c-bbdc-a3de5fdd1bc3"}); })	);
