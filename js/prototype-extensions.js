@@ -7,7 +7,7 @@
 	Aaron K. Murray, akmurray@gmail.com, @aaronkmurray, www.aaronkmurray.com
 
 */
-})();
+}());
 
 
 if (!Element.prototype.hasClassName) Element.prototype.hasClassName = function (c) {

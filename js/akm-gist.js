@@ -10,7 +10,7 @@
 	Aaron K. Murray, akmurray@gmail.com, @aaronkmurray, www.aaronkmurray.com
 
 */
-})();
+}());
 
 // 'akm' is the base object that I will use like a namespace so that it's easy to navigate the js I write (and so that global space doesn't get too cluttered because that is frowned upon these days)
 var akm = akm || {};
@@ -23,18 +23,34 @@ akm.gist.renderGist = function(pGistId, pContainerElementId) {
     /// <param name='pContainerElementId'>string. DOM element id being rendered into</param>
     ///</summary>
 
+	var el = document.getElementById(pContainerElementId);
+	if (!el)
+		return false;
+	
+	return akm.gist.renderGistToElement(pGistId, el);
+};
+
+akm.gist.renderGistToElement = function(pGistId, pElement) {
+    /// <summary>
+    /// Draw the gist html for a given gist id inside a specific dom element
+    /// <param name='pGistId'>int. Gist id to render</param>
+    /// <param name='pElement'>DOM element. DOM element being rendered into</param>
+    ///</summary>
+
 	var gist = akm.gist.gists[pGistId];
 	if (!gist)
 		return false;
 
-	var el = document.getElementById(pContainerElementId);
-	if (!el)
+	if (!pElement)
 		return false;
 
-	if (el.innerHTML)
-		el.innerHTML = gist.html;
-	else
-		el.innerText = gist.html;
+	if (pElement.innerHTML)
+		pElement.innerHTML = gist.html;
+	else if (pElement.innerText)
+		pElement.innerText = gist.html;
+	else 
+		pElement.textContent = gist.html;
+	return true;
 };
 
 akm.gist.gists = {}; //kvp object. key=gist id (ex: 3811888), value=object. {html:'',querystring:''} optional querystring params used originally

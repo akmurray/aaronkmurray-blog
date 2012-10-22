@@ -10,7 +10,7 @@
 	Aaron K. Murray, akmurray@gmail.com, @aaronkmurray, www.aaronkmurray.com
 
 */
-})();
+}());
 
 // 'akm' is the base object that I will use like a namespace so that it's easy to navigate the js I write (and so that global space doesn't get too cluttered because that is frowned upon these days)
 var akm = akm || {};
@@ -49,7 +49,7 @@ akm.util.loadScript = function (pUrl, pLoadAsync, pOnLoadCallback) {
 
 	akm.util.log('akm.util.loadScript start', [pUrl, pLoadAsync, async, akm.util.isPageLoaded, akm.util.pageLoadDate]);
 
-	if (!async && akm.util.isPageLoaded) {
+	if (!async && akm.util.isPageLoaded && location.protocol != 'file:') {
 		//after the page load event all javascript includes are async by default...so we have to handle that case specially
 
 		//need to create a syncronous ajax request to load the file

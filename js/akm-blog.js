@@ -10,13 +10,15 @@
 
 	Aaron K. Murray, akmurray@gmail.com, @aaronkmurray, www.aaronkmurray.com
 
+
+
 */
-})();
+}());
 
 
 //	Global variables required by external scripts
 var _qevents = _qevents || [];	//quantcast
-var switchTo5x=true;			//ShareThis
+var switchTo5x = true;			//ShareThis
 
 var _gaq = _gaq || [];			//Google Analytics
 _gaq.push(['_setAccount', 'UA-35522056-1']);
@@ -27,6 +29,7 @@ _gaq.push(['_trackPageview']);
 // 'akm' is the base object that I will use like a namespace so that it's easy to navigate the js I write (and so that global space doesn't get too cluttered because that is frowned upon these days)
 var akm = akm || {};
 akm.blog = akm.blog || {}; //'akm.blog' is the root object for blog-related functions
+akm.blog.intervalRefLogo = null; //variable set by 'setInterval(logoRotate, 3000)' in akm.blog._initDeferred()
 
 akm.blog._init = function() {
 	///<summary>
@@ -39,8 +42,9 @@ akm.blog._init = function() {
 
 	
 	var gistIds = [3811888,3811934,3739310,3694724,3678669];
-	for (var i=0;i<gistIds.length;i++)
+	for (var i=0;i<gistIds.length;i++) {
 		akm.gist.renderGist(gistIds[i], 'wrapper-gist-' + gistIds[i]);
+	}
 
 	setTimeout(akm.blog._initDeferred, 250);
 
@@ -56,13 +60,17 @@ akm.blog._initDeferred = function() {
 	//rotate the logo cube...
 	var logoRotate = function() {
 		var cube = document.getElementById('logo-cube');
-		for (var i=1;i<=6;i++)
+		if (!cube)
+			return;
+		for (var i=1;i<=6;i++) {
 			cube.removeClassName('show-side-' + i);
+		}
 		var num = Math.ceil(Math.random()*6);
 		cube.addClassName('show-side-' + num);
 	};
 	//...every few seconds
-	var intervalLogo = self.setInterval(logoRotate, 3000);
+	if (document.getElementById('logo-cube'))
+		akm.blog.intervalRefLogo = setInterval(logoRotate, 3000);
   
 
     //Google Analytics
@@ -71,7 +79,7 @@ akm.blog._initDeferred = function() {
 
 
     //ShareThis
-	akm.util.loadScript('http://w.sharethis.com/button/buttons.js', true, (function(){ stLight.options({publisher: "3be7e6b2-8565-4c3c-bbdc-a3de5fdd1bc3"}); })	);
+	akm.util.loadScript('http://w.sharethis.com/button/buttons.js', true, (function(){ var stLight = stLight || false; if (stLight) { stLight.options({publisher: "3be7e6b2-8565-4c3c-bbdc-a3de5fdd1bc3"}); } }) );
 
 
 	//quantcast
