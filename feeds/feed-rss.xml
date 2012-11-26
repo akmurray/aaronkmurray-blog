@@ -8,6 +8,52 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">22badcaa-5d89-4976-affe-4fa8c2cd25b8</guid>
+            <title>Post 25: Automated Javascript Unit Tests</title>
+            <description>
+				&lt;p&gt;First order of business - apologies for such a long time between posts. I did the code changes for this post 5 weeks ago and then got hammered by a 2-week flu, and tons of work getting &lt;a href='http://www.buildasign.com' target='_blank'&gt;BuildASign&lt;/a&gt; prepared to finish out the holiday season.
+				&lt;p&gt;In modern websites, more and more of the &amp;quot;logic and code&amp;quot; of a site is being moved to the client. There are 2 primary benefits to doing this:
+				&lt;ul&gt;
+					&lt;li&gt;Improve responsiveness for users&lt;/li&gt;
+					&lt;li&gt;Reduce load on servers&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;As this code moves from the servers to the client, we run into greater risk with respect to ensuring that our sites work the way they are intended to. 
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-25-unit-testing-comic-jesuswasrasta.jpg' alt='Unit Testing can be scary and hard'&gt;
+					&lt;figcaption&gt;Unit Testing can be scary and hard&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;h3&gt;Unit Testing&lt;/h3&gt;
+				&lt;p&gt;For the server code, &lt;a href='http://en.wikipedia.org/wiki/Unit_testing' target='_blank' rel='nofollow'&gt;unit testing&lt;/a&gt; is a common way to execute code automatically to reassure humans that it is behaving properly. 
+				&lt;p&gt;This is much trickier on the client side for a few reasons:
+				&lt;ul&gt;
+					&lt;li&gt;&lt;a href='http://javascript.info/tutorial/browser-environment' target='_blank' rel='nofollow'&gt;Browser environments&lt;/a&gt; differ from each other&lt;/li&gt;
+					&lt;li&gt;Browser &lt;a href='http://en.wikipedia.org/wiki/JavaScript_engine#JavaScript_engines' target='_blank' rel='nofollow'&gt;Javascript engines&lt;/a&gt; differ from each other&lt;/li&gt;
+					&lt;li&gt;Instrumenting a browser to automatically &amp;quot;do stuff&amp;quot; is harder than it sounds&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;h3&gt;qUnit, Selenium, Test Project ... not 100% reliable&lt;/h3&gt;
+				&lt;p&gt;In the past, I've used various means of unit testing my javascript code to make sure that it works as I say it does. My goto combo was using a &lt;a href='http://msdn.microsoft.com/en-us/library/ms182470(v=vs.100).aspx' target='_blank' rel='nofollow'&gt;Visual Studio.NET test project&lt;/a&gt; that fired up different versions of the browsers that I wanted to test using &lt;a href='http://seleniumhq.org/' target='_blank' rel='nofollow'&gt;Selenium&lt;/a&gt;, and then have those instances run though a series of test webpages that used &lt;a href='http://qunitjs.com/' target='_blank' rel='nofollow'&gt;qUnit&lt;/a&gt; to run the javascript code. Selenium would check to see if all of the tests ran successfully, and either pass or fail the test. 
+				&lt;p&gt;While this approach worked fairly well from the test project and qUnit perspective, having Selenium reliably control all of the browsers was slightly painful. There is a helpful &lt;a href='http://seleniumhq.org/projects/ide/' target='_blank' rel='nofollow'&gt;browser plugin for Firefox&lt;/a&gt; that assists in creating the tests, but that ended up being the least of the challenges. Things like Alert and Confirm promts, SSL cert warning pages, and unreliable event triggers made false test failures common enough to not trust the fail results. And the tests took quite a while to run.
+				&lt;h3&gt;PhantomJS, Jasmine, command line ... fast, but limited&lt;/h3&gt;
+				&lt;p&gt;A &lt;a href='http://loremipsumfoobar.com/' target='_blank' rel='nofollow'&gt;colleague of mine&lt;/a&gt; mentioned liking &lt;a href='http://pivotal.github.com/jasmine/' target='_blank' rel='nofollow'&gt;Jasmine&lt;/a&gt; and &lt;a href='http://phantomjs.org/' target='_blank' rel='nofollow'&gt;PhantomJS&lt;/a&gt; to run javascript tests from the command line. There are pros and cons to this approach, but the combination of running a headless browser (no visual component - just the engine) from the command line meant that many of the &amp;quot;random&amp;quot; behavior that broke my Selenium tests could potential go away. 
+				&lt;p&gt;In practice, the promise of reliable tests using a headless browser seems fulfilled by PhantomJs. The major downside is that we're only testing the Javascript in 1 browser/engine combination (&lt;a href='http://www.webkit.org/projects/javascript/index.html' target='_blank' rel='nofollow'&gt;WebKit&lt;/a&gt;/&lt;a href='http://trac.webkit.org/wiki/JavaScriptCore' target='_blank' rel='nofollow'&gt;JavaScriptCore&lt;/a&gt;). Until we get headless browsers that reflect the mainstream browser usage, this approach won't be ideal. We'll still need to use tools (like &lt;a href='http://www.telerik.com/automated-testing-tools/html-testing.aspx' target='_blank' rel='nofollow'&gt;Telerik's Test Studio&lt;/a&gt; and &lt;a href='http://www.browserstack.com/' target='_blank' rel='nofollow'&gt;BrowserStack&lt;/a&gt;) for robust cross-browser automated testing, but for now on a small project, we can get near-instant feedback on broken javascript tests during our build process, which is much better than nothing.
+				&lt;h3&gt;Setting it up&lt;/h3&gt;
+				&lt;ol&gt;
+					&lt;li&gt;&lt;a href='http://phantomjs.org/download.html' target='_blank' rel='nofollow'&gt;Download PhantomJS&lt;/a&gt; and &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/build' target='_blank' rel='nofollow'&gt;place it in the build folder&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;&lt;a href='https://github.com/pivotal/jasmine/downloads' target='_blank' rel='nofollow'&gt;Download Jasmine&lt;/a&gt; and &lt;a href='https://github.com/akmurray/aaronkmurray-blog/tree/master/test/jasmine-standalone-1.2.0' target='_blank' rel='nofollow'&gt;place it in the web site test folder&lt;/a&gt;&lt;/li&gt;
+					&lt;li&gt;Edit the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/commit/e56a5f4e25b41fa531845e8f545e25956219b962' target='_blank' rel='nofollow'&gt;build script to call PhantomJS&lt;/a&gt;, pointing at tests we want to run&lt;/li&gt;
+					&lt;li&gt;&lt;a href='https://github.com/akmurray/aaronkmurray-blog/tree/master/test/jasmine-standalone-1.2.0/spec' target='_blank' rel='nofollow'&gt;Write some tests&lt;/a&gt; (aka specs)&lt;/li&gt;
+					&lt;li&gt;Run the build script and it will halt if there are errors&lt;/li&gt;
+				&lt;/ol&gt;
+				&lt;h3&gt;What this means&lt;/h3&gt;
+				&lt;p&gt;Now that we have some basic code coverage, editing the javascript code for the site can be done with a little less worry about breaking something else (aka &lt;a href='http://en.wikipedia.org/wiki/Regression_testing' target='_blank' rel='nofollow'&gt;regression&lt;/a&gt; errors). This will be much more important as the site starts to break up into many pieces. Most people like the time and fortitude to go back over every piece of functionality ever written after each change. Luckily we have computers that can do that for us...we simply have to tell them how to do it.
+				&lt;p&gt;
+				&lt;p&gt;
+			</description>
+            <pubDate>Mon, 26 Nov 2012 12:15:00 -0600</pubDate>
+            <a10:updated>2012-11-26T12:15:00-06:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">534624f3-3d1a-4aac-b72c-6dad9d400f27</guid>
             <title>Post 24: SEO Part 4/4: Tracking SEO Results</title>
             <description>
