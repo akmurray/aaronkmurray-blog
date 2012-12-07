@@ -41,7 +41,7 @@ akm.blog._init = function() {
 	akm.util.log('akm.blog._init start', [new Date()]);
 
 	
-	var gistIds = [3811888,3811934,3739310,3694724,3678669];
+	var gistIds = [3811888,3811934,3739310,3694724,3678669]; //TODO This will need to be passed in or grabbed from outer scope once we split the posts up into diff pages/views
 	for (var i=0;i<gistIds.length;i++) {
 		akm.gist.renderGist(gistIds[i], 'wrapper-gist-' + gistIds[i]);
 	}

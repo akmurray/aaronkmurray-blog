@@ -8,6 +8,78 @@
         <language>en-us</language>
         <item>
             <guid
+                isPermaLink="false">d73b6264-7bbf-4baa-98c8-f227afffb444</guid>
+            <title>Post 26: Reduce HTTP Requests</title>
+            <description>
+				&lt;p&gt;The performance lesson in this post gets to the very core of creating sites that feel snappy for the user.
+				&lt;h3&gt;Background&lt;/h3&gt;
+				&lt;p&gt;Each time a user hits a web page to view it, the server will typically send back a response in HTML. This initial HTML response almost never contains then complete &amp;quot;page&amp;quot; content as the user thinks of it. 
+				&lt;p&gt;Instead, a subset of content is sent back, along with a lot of other information that tells the browser where to find the rest of the data needed to display the page. This linked data is for things like:
+				&lt;ul&gt;
+					&lt;li&gt;Images&lt;/li&gt;
+					&lt;li&gt;CSS Files&lt;/li&gt;
+					&lt;li&gt;Javascript Files&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;There can be a lot of these file linked from the HTML. As an example, I hit the Amazon homepage and saw a whopping 220 requests accounting for 1.97MB of data, and 3.31 seconds of load time. 
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-26-amazon-requests.png' alt='Chrome developer tools view of Amazon homepage requests'&gt;
+					&lt;figcaption&gt;Amazon homepage requests as seen in Chrome Developer Tools&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;Of those 220 requests, the breakdown is as follows:
+				&lt;ul&gt;
+					&lt;li&gt;175 Images&lt;/li&gt;
+					&lt;li&gt;9 CSS Files&lt;/li&gt;
+					&lt;li&gt;11 Javascript Files&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Despite a staggering 175 image requests, they are actually using quite a few &lt;a href='#blog-post-20'&gt;CSS Sprites&lt;/a&gt;. Without these efforts, they'd probably have closer to 500 http requests on the home page.
+				&lt;h3&gt;The Test: Measuring Request Overhead as Experienced by the User&lt;/h3&gt;
+				&lt;p&gt;I made 2 simple test pages to compare the effect of http requests. One page has 100 small images included individually, and the other page has 1 CSS Sprite that is used 100 times to show the same 100 images (created using my &lt;a href='#blog-post-20'&gt;imgsprite&lt;/a&gt; tool).
+				&lt;p&gt;Here are the request summaries for each test page as see in Chrome:
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-26-100-images-without-sprite.png' alt='100 separate image requests'&gt;
+					&lt;figcaption&gt;100 separate image requests&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-26-100-images-with-sprite.png' alt='1 big CSS sprite for 100 images'&gt;
+					&lt;figcaption&gt;1 big CSS sprite for 100 images&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;In the test you can see that using 1 big sprite for 100 images dropped the request count by 98 (1 image for the sprite, 1 image for the clear.gif vs 100 unique images).
+				&lt;p&gt;The sprite html size was 26KB compared to 4KB for the page with individual images, due to the extra css required to make the sprites work.
+				&lt;p&gt;The page with the sprite loaded in 132ms compared to 384ms on the page with individual images. That is a massive difference in time for equivalent content implemented differently.
+				&lt;h3&gt;Reduce HTTP Requests (even at the expense of bandwidth)&lt;/h3&gt;
+				&lt;p&gt;Why such a big difference? Well, the simple answers is that each HTTP request has a lot of components that take time. Once the request is agreed upon by the browser and the server, sending the data down to the client can commence at speed.
+				&lt;p&gt;I want to illustrate this a different way. For example, take this snippet of request timing from my homepage:
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-26-image-request-timeline.png' alt='Time spent receiving images of various sizes'&gt;
+					&lt;figcaption&gt;Time spent receiving images of various sizes&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;There are a variety of image sizes being downloaded in this snapshot, but the interesting part is comparing the actual time spent downloading the data for images of various sizes. I drew arrows pointing to the largest and smallest image in the snapshot: 83KB vs 3KB. The time spend receiving the 83KB image was 30ms, whereas the time spent receiving the 3KB image was 20ms. You can partly see from that figure that the other images all took a relatively similar amount of time to download. 
+				&lt;p&gt;This further shows the relative impact of the &lt;a href='http://stackoverflow.com/questions/3613989/what-of-traffic-is-network-overhead-on-top-of-http-s-requests' target='_blank' rel='nofollow'&gt;HTTP request overhead&lt;/a&gt; and the data delivered. Unless you are serving very large data files (high resolution images, movies, eBook PDFs, etc), a sizeable percentage of request time will be in simply getting the request prepared and negotiated between the two end computers. 
+				&lt;p&gt;For most sites, the takeaway here is that continuous effort should be given to reducing the number of requests that are made, especially as sites grow and get new features added.
+				&lt;h3&gt;And Finally, an Example&lt;/h3&gt;
+				&lt;p&gt;In &lt;a href='#post-19'&gt;Post 19&lt;/a&gt; I added a little flair to the site in the form of a rotating cube of various avatar images. That was originally done using 6 different images. Here is how I used my &lt;a href='#blog-post-20'&gt;imgsprite&lt;/a&gt; tool to make a single sprite and shave 5 HTTP requests. 
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-26-cmd-imgsprite-logo.png' alt='Command line commands for creating and compressing the site logo sprite'&gt;
+					&lt;figcaption&gt;Command line commands for creating and compressing the site logo sprite&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;First, from the build directory (for convenience), create the sprite out of the 6 images ending in &amp;quot;-128.png&amp;quot;, and set the relative path for the sprite image based on where it will end up in the web project (paths like this will be better in the future):
+				&lt;p&gt;&lt;code&gt;imgsprite.exe&lt;br&gt;&amp;nbsp;-in:..\..\aaronkmurray-blog\img\blog\logo\*-128.png&lt;br&gt;&amp;nbsp;-img-out:sprite-logo.png&lt;br&gt;&amp;nbsp;-css-out:sprite-logo.css&lt;br&gt;&amp;nbsp;-css-class-name-prefix:img- &lt;br&gt;&amp;nbsp;-image-deploy-url-base:../../blog/sprites/&lt;/code&gt;
+				&lt;p&gt;Then simply run the image compressor. Since it is in the build directory and the only image in there is the new sprite...no command line args are necessary:
+				&lt;p&gt;&lt;code&gt;imgsqz.exe&lt;/code&gt;
+				&lt;h3&gt;In Closing&lt;/h3&gt;
+				&lt;p&gt;Some of you already knew that reducing HTTP requests &lt;a href='http://www.die.net/musings/page_load_time/' target='_blank' rel='nofollow'&gt;was&lt;/a&gt; &lt;a href='https://developers.google.com/speed/docs/best-practices/request' target='_blank' rel='nofollow'&gt;beneficial&lt;/a&gt;, but now you know what kind of an impact these changes can have.
+				&lt;p&gt;Summary:
+				&lt;ul&gt;
+					&lt;li&gt;Favor eliminating an http request over reducing filesize (do not be afraid of sprites that have filesizes larger than the sum of each image)&lt;/li&gt;
+					&lt;li&gt;Pack images, javascript, and css into sprites/bundles where possible&lt;/li&gt;
+					&lt;li&gt;Stay tuned for a post that shows how to bundle files, along with the pitfalls to watch out for when doing so&lt;/li&gt;
+				&lt;/ul&gt;
+			</description>
+            <pubDate>Fri, 07 Dec 2012 16:37:00 -0600</pubDate>
+            <a10:updated>2012-12-07T16:37:00-06:00</a10:updated>
+        </item>
+        <item>
+            <guid
                 isPermaLink="false">22badcaa-5d89-4976-affe-4fa8c2cd25b8</guid>
             <title>Post 25: Automated Javascript Unit Tests</title>
             <description>
@@ -46,8 +118,6 @@
 				&lt;/ol&gt;
 				&lt;h3&gt;What this means&lt;/h3&gt;
 				&lt;p&gt;Now that we have some basic code coverage, editing the javascript code for the site can be done with a little less worry about breaking something else (aka &lt;a href='http://en.wikipedia.org/wiki/Regression_testing' target='_blank' rel='nofollow'&gt;regression&lt;/a&gt; errors). This will be much more important as the site starts to break up into many pieces. Most people like the time and fortitude to go back over every piece of functionality ever written after each change. Luckily we have computers that can do that for us...we simply have to tell them how to do it.
-				&lt;p&gt;
-				&lt;p&gt;
 			</description>
             <pubDate>Mon, 26 Nov 2012 12:15:00 -0600</pubDate>
             <a10:updated>2012-11-26T12:15:00-06:00</a10:updated>
@@ -127,7 +197,7 @@
 				&lt;p&gt;Search for &lt;a href='https://www.google.com/search?q=css+reset' target='_blank' rel='nofollow'&gt;css reset&lt;/a&gt; and you will find a ton of examples, tips, and flame wars surrounding their use. Basically, the problem that css resets are trying to solve is this: Different browsers (and version of those browsers) have different default values for various styles. 
 				&lt;p&gt;These differences in default values lead to many of the headaches that you will experience when trying to get a similar look across many browsers. Shooting for an exact duplicate experience is very tough and likely futile, but using a basic CSS reset and then applying your custom styles after the reset will help save a ton of time debugging subtle differences (especially with &lt;code&gt;margin&lt;/code&gt; and &lt;code&gt;padding&lt;/code&gt;).
 				&lt;p&gt;Have a look at the source code for this post to see what I changed. There are comments in the CSS as well as urls to some &lt;a href='https://github.com/csswizardry/CSS-Guidelines' target='_blank' rel='nofollow'&gt;more&lt;/a&gt; &lt;a href='http://fvsch.com/code/base-stylesheet/full.css' target='_blank' rel='nofollow'&gt;useful&lt;/a&gt; &lt;a href='http://html5doctor.com/html-5-reset-stylesheet/' target='_blank' rel='nofollow'&gt;reads&lt;/a&gt;. 
-				&lt;p&gt;I also split up the styles into multiple CSS files. This is bad from the standpoint of http requests, and flies in the wind of &lt;a href='#blog-post-22' target='_blank' rel='nofollow'&gt;previous tuning efforts&lt;/a&gt; that I&amp;#39;ve done, but do not fear. Soon I&amp;#39;ll show you one way to bundle your files together for performance, and still retain the development benefits of managing separate files over giant monoliths.
+				&lt;p&gt;I also split up the styles into multiple CSS files. This is bad from the standpoint of http requests, and flies in the face of &lt;a href='#blog-post-22' target='_blank' rel='nofollow'&gt;previous tuning efforts&lt;/a&gt; that I&amp;#39;ve done, but do not fear. Soon I&amp;#39;ll show you one way to bundle your files together for performance, and still retain the development benefits of managing separate files over giant monoliths.
 			</description>
             <pubDate>Thu, 11 Oct 2012 18:20:00 -0500</pubDate>
             <a10:updated>2012-10-11T18:20:00-05:00</a10:updated>

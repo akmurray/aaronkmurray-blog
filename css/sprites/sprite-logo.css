@@ -1,0 +1,60 @@
+.img-logo-1-128
+{
+    width: 128px;
+    height: 128px;
+    background-image: url(../../img/blog/sprites/sprite-logo.png);
+    background-position: 0px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-logo-2-128
+{
+    width: 128px;
+    height: 128px;
+    background-image: url(../../img/blog/sprites/sprite-logo.png);
+    background-position: -128px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-logo-3-128
+{
+    width: 128px;
+    height: 128px;
+    background-image: url(../../img/blog/sprites/sprite-logo.png);
+    background-position: -256px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-logo-4-128
+{
+    width: 128px;
+    height: 128px;
+    background-image: url(../../img/blog/sprites/sprite-logo.png);
+    background-position: -384px 0px;
+    background-repeat:no-repeat;
+}
+
+
+.img-logo-5-128
+{
+    width: 128px;
+    height: 128px;
+    background-image: url(../../img/blog/sprites/sprite-logo.png);
+    background-position: 0px -128px;
+    background-repeat:no-repeat;
+}
+
+
+.img-logo-6-128
+{
+    width: 128px;
+    height: 128px;
+    background-image: url(../../img/blog/sprites/sprite-logo.png);
+    background-position: -128px -128px;
+    background-repeat:no-repeat;
+}
+
+
