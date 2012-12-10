@@ -88,6 +88,58 @@
 		????? REMINDER for Mr. No Database: Add an entry to the Posts section of the menu on the right
 -->
 
+		<article class='blog-post' id='blog-post-27'>
+			<div class='blog-post-header'>
+				<h2>Post 27: Build-time CSS Validation</h2>
+				<span class='commit-link'><a href='#' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>One of the nice things about working with <a href='http://en.wikipedia.org/wiki/Compiled_language' target='_blank' rel='nofollow'>compiled programming languages</a> like C# or C++, compared to an <a href='http://en.wikipedia.org/wiki/Interpreted_language' target='_blank' rel='nofollow'>interpreted language</a> like Javascript, is the benefit of having the compiler automatically notify the programmer when there are glaring syntactical errors in the code. Similarly, most compilers can also notify the programmer when there are potential errors or suspect code; these notifications are called <a href='http://www.cprogramming.com/tutorial/compiler_warnings.html' target='_blank' rel='nofollow'>warnings</a>. 
+				<p>This benefit of having a compiler act as a second set of eyes on the code that you write is great. Little things like gross typos can be caught immediately, as well as more subtle warnings, can be corrected before your code ever gets out into the wild. 
+				<h3>That is great...but I work on the web</h3>
+				<p>So what use are these fancy compilers when web pages are made up of markup and script? The nature of web browsers since the very beginning has been to &quot;just figure it out&quot; when it comes to parsing malformed HTML and CSS. Because HTML was largely hand-written in the old days it was often filled with a variety of errors. Browsers were vying to provide the best user experience, so they started trying to parse the &quot;intent&quot; of the HTML in addition to taking it character-for-character. Some examples of subtle typocs with potentially major rendering impacts:
+				<ol>
+					<li><code>&lt;div&gt;Just some &lt;span&gt;simple&lt;/div&gt;text here&lt;/span&gt;</code></li>
+					<li><code>&lt;ul&gt;&lt;li&gt;item 1&lt;/li&gt;&lt;/ul&gt;&lt;li&gt;item 2&lt;/li&gt;</code></li>
+				</ol>
+				<p>In example #1, it looks like the <code>DIV</code> and <code>SPAN</code> were accidentally swapped. The effect is that the <code>DIV</code> is closed in the middle of the the <code>SPAN</code>. What should the browser do?
+				<p>In example #2, it appears the programmer closed that <code>UL</code> too early, or added the second <code>LI</code> later and in the wrong place. Should the browser still show that <code>LI</code> in normal bullet formatting?
+				<p>These are contrived examples, but they are some of the simplest and illustrate the point that parsing can be tricky. Even the mighty Yahoo with so much focus on browser-related technology has trouble getting it right. Simply running the <a href='http://validator.w3.org/check?uri=www.yahoo.com' target='_blank' rel='nofollow'>yahoo.com homepage through the w3c markup validation service</a> exposes 200 errors. Many of these errors are considered &quot;acceptable&quot; by web developers today, but it further proves the point that our human instincts and the strict rules that computer parsers follow often disagree.
+				<h3>Another pair of eyes: CSSLint</h3>
+				<p>In previous posts I&#39;ve shown how to get some build-time validation on <a href='#post-16'>HTML</a> and <a href='#post-25'>Javascript</a>, so now I will show you how to use <a href='http://csslint.net/' target='_blank' rel='nofollow'>CSSLint</a> to add an automated validation step for CSS. 
+				<p>By default CSSLint is a little too overzealous in my opinion. The rules it applies when parsing your CSS blur the line between coding practices that should be avoided, and political opinions for how CSS should be structured. I won&#39;t go into detail about each rule that CSSLint evaluates, but you can take a look at my build script parameters to see which rules I think are completely bogus, as well as which rules are worthy of noting, but not worthy of failing a build over (warnings). 
+				<p>To run CSSLint from the command line or in a batch file, you need to hava <a href='http://www.java.com/en/download/index.jsp' target='_blank' rel='nofollow'>Java</a> installed, and download Rhino and css-lint for Rhino. I recommend you <a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/build' target='_blank'>download those from my GitHub repository</a> because the latest Rhino build (<a href='https://developer.mozilla.org/en-US/docs/Rhino' target='_blank' rel='nofollow'>1.7R4</a>) has a bug that will keep this example from working properly. Here is an example command line that you can run from the build directory (assuming you have Java 7 in the same location that I do):
+				<p><code>"C:\Program Files (x86)\Java\jre7\bin\java" -jar rhino.jar csslint-rhino.js --ignore=ids ../../aaronkmurray-blog/css/</code>
+				<p>What that code does is:
+				<ul>
+					<li>Tell Java to execute the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/rhino.jar' target='_blank' rel='nofollow'></a>rhino.jar file</li>
+					<li>Tell Rhino to execute the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/csslint-rhino.js' target='_blank' rel='nofollow'>csslint-rhino.js</a> file</li>
+					<li>Tell Rhino to <a href='https://github.com/stubbornella/csslint/wiki/Command-line-interface' target='_blank' rel='nofollow'>ignore the id rules</a></li>
+				</ul>
+				<figure>
+					<img src='img/blog/posts/post-27-csslint-output.png' alt='Example CSSLint output shown in a text file'>
+					<figcaption>Example CSSLint output shown in a text file</figcaption>
+				</figure>
+				<p>Take a look at my <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank' rel='nofollow'>build script</a> for a more detailed example.
+				<h3>The Takeaway</h3>
+				<p>You may have noticed by now that my blog posts cycle between practial web development advice, automated developer tooling, technical implementations, and performance tuning. My goal in this is to provide a well rounded look at the major components necessary in creating software. 
+				<p>It is important for the developer:
+				<ul>
+					<li>to understand the software technology they are using (theory)</li>
+					<li>to understand how that software works at the machine level (practice)</li>
+					<li>to leverage to test and prove that their software works (test/reliability)</li>
+					<li>to ensure that software doesn&#39;t waste the time of humans (performance)</li>
+					<li>to automate repetitive tasks in order to save time and reduce errors (consistency)</li>
+				</ul>
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>css</span>, <span class='post-tag'>csslint</span>, <span class='post-tag'>build</span>, <span class='post-tag'>java</span>, <span class='post-tag'>rhino</span></span>
+				<span class='post-timestamp'>Posted on December 10, 2012 @ 10:30AM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-27.png' target='_blank' rel='nofollow'><img src='img/blog/clear.gif' class='img-post-27-thumb-100' alt='Screenshot of site after post #27'></a></span>
+			</div>
+			<div class='blog-post-guid'>43c3c727-4b18-44be-b1e8-0119485bb5d7</div>
+		</article>
+
 		<article class='blog-post' id='blog-post-26'>
 			<div class='blog-post-header'>
 				<h2>Post 26: Reduce HTTP Requests</h2>
@@ -192,7 +244,7 @@
 					<li>Instrumenting a browser to automatically &quot;do stuff&quot; is harder than it sounds</li>
 				</ul>
 				<h3>qUnit, Selenium, Test Project ... not 100% reliable</h3>
-				<p>In the past, I've used various means of unit testing my javascript code to make sure that it works as I say it does. My goto combo was using a <a href='http://msdn.microsoft.com/en-us/library/ms182470(v=vs.100).aspx' target='_blank' rel='nofollow'>Visual Studio.NET test project</a> that fired up different versions of the browsers that I wanted to test using <a href='http://seleniumhq.org/' target='_blank' rel='nofollow'>Selenium</a>, and then have those instances run though a series of test webpages that used <a href='http://qunitjs.com/' target='_blank' rel='nofollow'>qUnit</a> to run the javascript code. Selenium would check to see if all of the tests ran successfully, and either pass or fail the test. 
+				<p>In the past, I&#39;ve used various means of unit testing my javascript code to make sure that it works as I say it does. My goto combo was using a <a href='http://msdn.microsoft.com/en-us/library/ms182470(v=vs.100).aspx' target='_blank' rel='nofollow'>Visual Studio.NET test project</a> that fired up different versions of the browsers that I wanted to test using <a href='http://seleniumhq.org/' target='_blank' rel='nofollow'>Selenium</a>, and then have those instances run though a series of test webpages that used <a href='http://qunitjs.com/' target='_blank' rel='nofollow'>qUnit</a> to run the javascript code. Selenium would check to see if all of the tests ran successfully, and either pass or fail the test. 
 				<p>While this approach worked fairly well from the test project and qUnit perspective, having Selenium reliably control all of the browsers was slightly painful. There is a helpful <a href='http://seleniumhq.org/projects/ide/' target='_blank' rel='nofollow'>browser plugin for Firefox</a> that assists in creating the tests, but that ended up being the least of the challenges. Things like Alert and Confirm promts, SSL cert warning pages, and unreliable event triggers made false test failures common enough to not trust the fail results. And the tests took quite a while to run.
 				<h3>PhantomJS, Jasmine, command line ... fast, but limited</h3>
 				<p>A <a href='http://loremipsumfoobar.com/' target='_blank' rel='nofollow'>colleague of mine</a> mentioned liking <a href='http://pivotal.github.com/jasmine/' target='_blank' rel='nofollow'>Jasmine</a> and <a href='http://phantomjs.org/' target='_blank' rel='nofollow'>PhantomJS</a> to run javascript tests from the command line. There are pros and cons to this approach, but the combination of running a headless browser (no visual component - just the engine) from the command line meant that many of the &quot;random&quot; behavior that broke my Selenium tests could potential go away. 
@@ -251,12 +303,12 @@
 					</figure>
 					<p>Then, hit "Start" to run the analysis. You&#39;ll get data on your keyword ranking in whatever search engines you have selected.
 					<figure>
-						<img src='img/blog/posts/post-24-pic-4.jpg' alt=''>
+						<img src='img/blog/posts/post-24-pic-4.jpg' alt='SEO Book Rank Checker: Keyword Rankings'>
 						<figcaption>SEO Book Rank Checker: Keyword Rankings</figcaption>
 					</figure>
 					<p>Once you have a set of target keywords you want to track, you can click on the "Save" icon next to the domain field to save your keyword set for future reference. Just give it a name, and it will be saved in the application. Then, the next time you want to run that same set of keywords, you can click "Open" and choose your saved list of keywords to run again:
 					<figure>
-						<img src='img/blog/posts/post-24-pic-5.jpg' alt=''>
+						<img src='img/blog/posts/post-24-pic-5.jpg' alt='SEO Book Rank Checker: Saved Keyword Groups'>
 						<figcaption>SEO Book Rank Checker: Saved Keyword Groups</figcaption>
 					</figure>
 					<p>If you want to keep a running tab on your keyword rankings, just set a reminder to yourself to run your saved set of keywords every week. Export the list as a CSV and enter it into a spreadsheet. This is a pretty reliable way for very small websites to keep track of their SEO ranking with no cost, and just a little bit of effort. 
@@ -573,7 +625,7 @@
 				<h3>What Went Right</h3>
 				<ul>
 					<li>Lots of posts. I was worried that I wouldn't find enough minutes in each day to construct a decent post.</li>
-					<li>Variety of posts. I've covered various topics, from entry-level HTML and CSS, to build scripts and tools.</li>
+					<li>Variety of posts. I&#39;ve covered various topics, from entry-level HTML and CSS, to build scripts and tools.</li>
 					<li>RSS Feed. Not getting one up quickly was my biggest fear when doing a blog project from scratch.</li>
 				</ul>
 
@@ -589,16 +641,16 @@
 				<ul>
 					<li>Not having a traditional database feels yucky/scary</li>
 					<li>Copying and Pasting my post template with each post feels wrong and is prone to error</li>
-					<li>Not using code that I've already written to achieve things that I want to do feels wasteful</li>
+					<li>Not using code that I&#39;ve already written to achieve things that I want to do feels wasteful</li>
 					<li>Writing everything from scratch feels tedious (yet liberating) at times</li>
 					<li>My Build/Release process still has a couple manual steps</li>
 				</ul>
 
 				<h3>Realizations</h3>
 				<ul>
-					<li>Different is okay. I was so used to doing sites a certain way with a wealth of frameworks that I've built up and leveraged over the years, it was scary and foreign to go back to a single HTML page as a starting point. Now I am embracing the process. With each post I challenge myself to achieve the intended end result in a way that I have not done before.</li>
+					<li>Different is okay. I was so used to doing sites a certain way with a wealth of frameworks that I&#39;ve built up and leveraged over the years, it was scary and foreign to go back to a single HTML page as a starting point. Now I am embracing the process. With each post I challenge myself to achieve the intended end result in a way that I have not done before.</li>
 					<li>Database != DBMS. Thinking about the term &quot;database&quot; without meaning mySQL, SQL Server, or Raven is really odd. Currently, the database for this site is <a href='https://github.com/akmurray/aaronkmurray-blog/blob/master/index.html' target='_blank'>index.html</a>. That is a new paradigm of thinking for me, and it has led to some radical thoughts that I plan on exploring in the future.</li>
-					<li>New process is hard. It actually isn't the process that is difficult as much as challenging my brain to be willing to do things that I've done a dozen times in a new and different way.</li>
+					<li>New process is hard. It actually isn't the process that is difficult as much as challenging my brain to be willing to do things that I&#39;ve done a dozen times in a new and different way.</li>
 				</ul>
 
 				<h3>What Is Next?</h3>
@@ -722,7 +774,7 @@
 				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/7d59ad24082cc8f8b43b873e22ec2cd031ea9063' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
-				<p>Back to basics. I've blogged a couple of times already about the importance of reducing the amount of data that has to be downloaded. Some of you have noticed that up until now, the CSS styles for this blog were still imbedded in the HTML markup. 
+				<p>Back to basics. I&#39;ve blogged a couple of times already about the importance of reducing the amount of data that has to be downloaded. Some of you have noticed that up until now, the CSS styles for this blog were still imbedded in the HTML markup. 
 				<p>First, let me explain why the seemingly odd order. There was less that 2KB of CSS in the page, as compared to hundreds of KB in images. I also wanted to have a history right in the index.html for a while so that it was easily apparent to learners looking through the GitHub commit history which CSS changes were causing the visual differences with the first few posts.
 				<p>In the big picture of site performance, including CSS styles in separate files provides the following benefits:
 				<ul>
@@ -1293,7 +1345,7 @@
 			</div>
 			<div class='blog-post-body'>
 				<p>This has been a long time coming. 
-				<p>I've been wanting to start blogging for about a year now, but have been struggling with figuring out where to start.
+				<p>I&#39;ve been wanting to start blogging for about a year now, but have been struggling with figuring out where to start.
 				<p>There have been tons of questions swirling around in my head, like: 
 				<ul>
 					<li>Blog: Roll my <a href='http://www.tandemgames.com/' target='_blank'>own</a> <a href='http://www.domainofheroes.com/' target='_blank'>site</a> <a href='http://www.aliensandrobots.com/' target='_blank'>again</a>? or use seasoned blog <a href='http://dasblog.codeplex.com/' target='_blank'>software</a> with <a href='http://wordpress.org/' target='_blank' rel='nofollow'>heavy community support</a>?</li>

@@ -44,14 +44,14 @@ font-size: 100%;
 
 .gist .gist-file .gist-data pre {
 font-family: 'Bitstream Vera Sans Mono', 'Courier', monospace;
-background: transparent !important;
-margin: 0 !important;
-border: none !important;
-padding: .25em .5em .5em .5em !important;
+background: transparent ;
+margin: 0 ;
+border: none ;
+padding: .25em .5em .5em .5em ;
 }
 
 .gist .gist-file .gist-data .gist-highlight {
-background: transparent !important;
+background: transparent ;
 }
 
 .gist .gist-file .gist-data .gist-line-numbers {
