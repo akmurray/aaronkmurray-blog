@@ -13,7 +13,7 @@
 
 
 */
-}());
+})();
 
 
 //	Global variables required by external scripts

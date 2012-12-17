@@ -10,7 +10,7 @@
 	Aaron K. Murray, akmurray@gmail.com, @aaronkmurray, www.aaronkmurray.com
 
 */
-}());
+})();
 
 // 'akm' is the base object that I will use like a namespace so that it's easy to navigate the js I write (and so that global space doesn't get too cluttered because that is frowned upon these days)
 var akm = akm || {};
