@@ -4,8 +4,8 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:fcdc268f-4fb7-476b-8bbc-92602715f1b1;id=1</id>
-    <updated>2013-03-07T23:16:15Z</updated>
+    <id>uuid:a214f973-2f24-47f9-b329-2efa5ec15970;id=1</id>
+    <updated>2013-03-07T23:23:26Z</updated>
     <entry>
         <id>5a5f7a07-b185-494f-b5cb-38dc0ec758ad</id>
         <title
@@ -39,6 +39,12 @@
 				&lt;p&gt;In order to keep up with expanding requirements, we need to get out of the code weeds and outsource some of our efforts to the machines at our fingertips. Ideally we would use some sort of higher level language or tool across our entire web development chain so that we can gain access to new language features while reducing our efforts. This will also help us bring a great experience to all of our users instead of endlessly shovelling the lowest common denominator at them.
 				&lt;h3&gt;Other ways to use preprocessors&lt;/h3&gt;
 				&lt;p&gt;If you have a fairly simple static content site, and you don&amp;#39;t have or want a build step to run between modifying your CSS and viewing it in a browser, look into setting up &lt;a href='https://github.com/krschmidt/SassWatcher' target='_blank' rel='nofollow'&gt;file&lt;/a&gt; &lt;a href='http://www.sublimetext.com/forum/viewtopic.php?f=2&amp;t=8975#p36442' target='_blank' rel='nofollow'&gt;system&lt;/a&gt; &lt;a href='http://stackoverflow.com/questions/11901067/auto-compile-scss-files-in-sublime-text-2' target='_blank' rel='nofollow'&gt;watchers&lt;/a&gt; that can run the preprocessing step every time to modify a file.
+				&lt;p&gt;You can also check out the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/js-css/preprocessor' target='_blank' rel='nofollow'&gt;SASS preprocessor&lt;/a&gt; tool that I wrote for this post. I wanted something that:
+				&lt;ul&gt;
+					&lt;li&gt;could be run from the command line&lt;/li&gt;
+					&lt;li&gt;didn&amp;#39;t require Ruby to be installed&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;It is simple and gets the job done. I will add to it later as we start preprocessing more than just CSS.
 			</content>
     </entry>
     <entry>
