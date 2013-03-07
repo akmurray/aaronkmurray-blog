@@ -4,8 +4,43 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:52656c14-17f1-48b8-b479-9f46b2d1c622;id=1</id>
-    <updated>2012-12-10T16:28:23Z</updated>
+    <id>uuid:fdc47897-f6e8-4649-855e-654af21a2bc2;id=1</id>
+    <updated>2013-03-07T23:13:51Z</updated>
+    <entry>
+        <id>5a5f7a07-b185-494f-b5cb-38dc0ec758ad</id>
+        <title
+            type="text">Post 28: CSS Preprocessing using SASS</title>
+        <published>2013-03-07T17:12:00-06:00</published>
+        <updated>2013-03-07T17:12:00-06:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;It feels like it has been an eternity since I posted last. Turns out that 3 months have gone by - wow! Let&amp;#39;s get to it.
+				&lt;p&gt;This post is on a topic that has been on my mind for a while to talk about here: &lt;a href='http://en.wikipedia.org/wiki/Preprocessor' target='_blank' rel='nofollow'&gt;Preprocessing&lt;/a&gt;. Specifically for this post, I will cover CSS Preprocessing using &lt;a href='http://sass-lang.com/' target='_blank' rel='nofollow'&gt;SASS&lt;/a&gt;, but the concept can and should be applied to much more than just CSS.
+				&lt;h3&gt;What is CSS Preprocessing?&lt;/h3&gt;
+				&lt;p&gt;Put simply, CSS preprocessing is a way that we can write css-like code, run it through a converter, and then get actual css output. Doing this adds an extra step between writing css, and seeing the results in a browser, but there are some excellent benefits.
+				&lt;h3&gt;What are the benefits?&lt;/h3&gt;
+				&lt;p&gt;In my view, there are a couple of major benefits to using a preprocessor over writing the raw code: convenience and abstraction.
+				&lt;p&gt;On the convenience front, simple things like the ability to use variables for colors and fonts is worth the cost of admission on big projects. This is available now without having to wait for the W3C to figure out the final spec and then rely on your target audience to update their browsers to the latest versions.
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-28-sass-variables.png' alt='Example using SASS variables'&gt;
+					&lt;figcaption&gt;Example using SASS variables&lt;/figcaption&gt;
+				&lt;/figure&gt;
+				&lt;p&gt;More powerful though is the ability to deal with an abstraction layer that better enables you to express your &lt;em&gt;intentions&lt;/em&gt; instead of the solely functional bits that make browsers do your bidding.
+				&lt;h3&gt;Ugh, still not convinced. Can you give me an example?&lt;/h3&gt;
+				&lt;p&gt;Computers run by processing &lt;a href='http://en.wikipedia.org/wiki/Binary_code' target='_blank' rel='nofollow'&gt;binary code&lt;/a&gt;. Only 1s and 0s. Writing anything beyond simple math equations is madness. Quickly humans realized they needed a way to write code more efficiently, thus &lt;a href='http://en.wikipedia.org/wiki/Assembly_language' target='_blank' rel='nofollow'&gt;assembly language&lt;/a&gt; is born. Instead of figuring out the exact binary code that a processor needs to run, we could write code that looked slightly less cryptic. Code that captured the intent of the programmer better.
+				&lt;p&gt;This pattern continues and we get &lt;a href='http://en.wikipedia.org/wiki/C_(programming_language)' target='_blank' rel='nofollow'&gt;higher&lt;/a&gt; &lt;a href='http://en.wikipedia.org/wiki/C%2B%2B' target='_blank' rel='nofollow'&gt;level&lt;/a&gt; &lt;a href='http://en.wikipedia.org/wiki/C_Sharp_(programming_language)' target='_blank' rel='nofollow'&gt;languages&lt;/a&gt; as a result. The code gets more abstracted from how it actually runs on the processor, and programmers become more efficient and can express themselves more easily. Another benefit is that compilers are created and most of the time that higher level code can be run on many different processors instead of having to write code specific to each one, like the old days.
+				&lt;figure&gt;
+					&lt;img src='/img/blog/posts/post-28-binary-wormhole.jpg' alt='Binary wormhole'&gt;
+				&lt;/figure&gt;
+				&lt;h3&gt;Writing raw CSS is like writing binary code for styling&lt;/h3&gt;
+				&lt;p&gt;15 years ago, the simple act of using a stylesheet in a website was an advanced technique. Windows accounted for nearly all of the browser-based web traffic. Most users had a &lt;a href='img/blog/posts/post-28-monitor-resolutions.png' target='_blank' rel='nofollow'&gt;monitor that had 4:3 aspect ratio&lt;/a&gt; so we simply targeted a &amp;quot;safe&amp;quot; width for our sites. We primarily struggled with two very different browsers and got used to hacking our styles in order to get our sites looking decent in both browsers. Folks were only using our site from computers that had a keyboard and mouse. People still used modems to tie up their phone lines in order to connect to the internet. Dev life was simpler.
+				&lt;p&gt;As new browsers gained favor with the masses, our stylesheets were amended to accomodate the newcomers. Sadly we were so heads-down focused on getting work done that we missed the massive wrong turn we were taking. We just got used to making specific hacks that addressed some issue in some combination of os-browser-resolution-bandwidth-input. We tried so hard to make every single page work for all combinations that we just ended up chasing the wrong paradigm. The paradigm that said we should be able to keep up with the ever-growing matrix of ways users could use our sites; that a good developer should be able to learn every hack for every bug that the collective developer &amp;quot;we&amp;quot; ran across.
+				&lt;h3&gt;It is time to level-up&lt;/h3&gt;
+				&lt;p&gt;In order to keep up with expanding requirements, we need to get out of the code weeds and outsource some of our efforts to the machines at our fingertips. Ideally we would use some sort of higher level language or tool across our entire web development chain so that we can gain access to new language features while reducing our efforts. This will also help us bring a great experience to all of our users instead of endlessly shovelling the lowest common denominator at them.
+				&lt;h3&gt;Other ways to use preprocessors&lt;/h3&gt;
+				&lt;p&gt;If you have a fairly simple static content site, and you don&amp;#39;t have or want a build step to run between modifying your CSS and viewing it in a browser, look into setting up &lt;a href='https://github.com/krschmidt/SassWatcher' target='_blank' rel='nofollow'&gt;file&lt;/a&gt; &lt;a href='http://www.sublimetext.com/forum/viewtopic.php?f=2&amp;t=8975#p36442' target='_blank' rel='nofollow'&gt;system&lt;/a&gt; &lt;a href='http://stackoverflow.com/questions/11901067/auto-compile-scss-files-in-sublime-text-2' target='_blank' rel='nofollow'&gt;watchers&lt;/a&gt; that can run the preprocessing step every time to modify a file.
+			</content>
+    </entry>
     <entry>
         <id>43c3c727-4b18-44be-b1e8-0119485bb5d7</id>
         <title
@@ -17,7 +52,7 @@
 				&lt;p&gt;One of the nice things about working with &lt;a href='http://en.wikipedia.org/wiki/Compiled_language' target='_blank' rel='nofollow'&gt;compiled programming languages&lt;/a&gt; like C# or C++, compared to an &lt;a href='http://en.wikipedia.org/wiki/Interpreted_language' target='_blank' rel='nofollow'&gt;interpreted language&lt;/a&gt; like Javascript, is the benefit of having the compiler automatically notify the programmer when there are glaring syntactical errors in the code. Similarly, most compilers can also notify the programmer when there are potential errors or suspect code; these notifications are called &lt;a href='http://www.cprogramming.com/tutorial/compiler_warnings.html' target='_blank' rel='nofollow'&gt;warnings&lt;/a&gt;. 
 				&lt;p&gt;This benefit of having a compiler act as a second set of eyes on the code that you write is great. Little things like gross typos can be caught immediately, as well as more subtle warnings, can be corrected before your code ever gets out into the wild. 
 				&lt;h3&gt;That is great...but I work on the web&lt;/h3&gt;
-				&lt;p&gt;So what use are these fancy compilers when web pages are made up of markup and script? The nature of web browsers since the very beginning has been to &amp;quot;just figure it out&amp;quot; when it comes to parsing malformed HTML and CSS. Because HTML was largely hand-written in the old days it was often filled with a variety of errors. Browsers were vying to provide the best user experience, so they started trying to parse the &amp;quot;intent&amp;quot; of the HTML in addition to taking it character-for-character. Some examples of subtle typocs with potentially major rendering impacts:
+				&lt;p&gt;So what use are these fancy compilers when web pages are made up of markup and script? The nature of web browsers since the very beginning has been to &amp;quot;just figure it out&amp;quot; when it comes to parsing malformed HTML and CSS. Because HTML was largely hand-written in the old days it was often filled with a variety of errors. Browsers were vying to provide the best user experience, so they started trying to parse the &amp;quot;intent&amp;quot; of the HTML in addition to taking it character-for-character. Some examples of subtle typos with potentially major rendering impacts:
 				&lt;ol&gt;
 					&lt;li&gt;&lt;code&gt;&amp;lt;div&amp;gt;Just some &amp;lt;span&amp;gt;simple&amp;lt;/div&amp;gt;text here&amp;lt;/span&amp;gt;&lt;/code&gt;&lt;/li&gt;
 					&lt;li&gt;&lt;code&gt;&amp;lt;ul&amp;gt;&amp;lt;li&amp;gt;item 1&amp;lt;/li&amp;gt;&amp;lt;/ul&amp;gt;&amp;lt;li&amp;gt;item 2&amp;lt;/li&amp;gt;&lt;/code&gt;&lt;/li&gt;

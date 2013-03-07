@@ -1,7 +1,11 @@
-/* 
+/*! 
 	downloaded on oct 4, 2012 from 
 		https://gist.github.com/stylesheets/gist/embed.css
 	so that it could be included/packed without making extra trips to the gist servers
+
+	Update March 7, 2013: looks like GitHub is now serving special css for each gist, so this file may need to be updated periodically
+		ex: https://gist.github.com/assets/embed-0af287a4b5c981db301049e56f06e5d3.css
+
 */
 .gist {
 color: #000;
