@@ -214,7 +214,7 @@
 				</ul>
 				<p>Despite a staggering 175 image requests, they are actually using quite a few <a href='#blog-post-20'>CSS Sprites</a>. Without these efforts, they'd probably have closer to 500 http requests on the home page.
 				<h3>The Test: Measuring Request Overhead as Experienced by the User</h3>
-				<p>I made 2 simple test pages to compare the effect of http requests. One page has 100 small images included individually, and the other page has 1 CSS Sprite that is used 100 times to show the same 100 images (created using my <a href='#blog-post-20'>imgsprite</a> tool).
+				<p>I made 2 simple test pages to compare the effect of http requests. <a href='sandbox/test-http-request/test-http-request-without-sprite.html' target='_blank' rel='nofollow'>One page has 100 small images included individually</a>, and <a href='sandbox/test-http-request/test-http-request-with-sprite.html' target='_blank' rel='nofollow'>the other page has 1 CSS Sprite</a> that is used 100 times to show the same 100 images (created using my <a href='#blog-post-20'>imgsprite</a> tool).
 				<p>Here are the request summaries for each test page as see in Chrome:
 				<figure>
 					<img src='img/blog/posts/post-26-100-images-without-sprite.png' alt='100 separate image requests'>
@@ -234,7 +234,7 @@
 					<img src='img/blog/posts/post-26-image-request-timeline.png' alt='Time spent receiving images of various sizes'>
 					<figcaption>Time spent receiving images of various sizes</figcaption>
 				</figure>
-				<p>There are a variety of image sizes being downloaded in this snapshot, but the interesting part is comparing the actual time spent downloading the data for images of various sizes. I drew arrows pointing to the largest and smallest image in the snapshot: 83KB vs 3KB. The time spend receiving the 83KB image was 30ms, whereas the time spent receiving the 3KB image was 20ms. You can partly see from that figure that the other images all took a relatively similar amount of time to download. 
+				<p>There are a variety of image sizes being downloaded in this snapshot, but the interesting part is comparing the actual time spent downloading the data for images of various sizes. I drew arrows pointing to the largest and smallest image in the snapshot: 83KB vs 3KB. The time spent receiving the 83KB image was 30ms, whereas the time spent receiving the 3KB image was 20ms. You can partly see from that figure that the other images all took a relatively similar amount of time to download. 
 				<p>This further shows the relative impact of the <a href='http://stackoverflow.com/questions/3613989/what-of-traffic-is-network-overhead-on-top-of-http-s-requests' target='_blank' rel='nofollow'>HTTP request overhead</a> and the data delivered. Unless you are serving very large data files (high resolution images, movies, eBook PDFs, etc), a sizeable percentage of request time will be in simply getting the request prepared and negotiated between the two end computers. 
 				<p>For most sites, the takeaway here is that continuous effort should be given to reducing the number of requests that are made, especially as sites grow and get new features added.
 				<h3>And Finally, an Example</h3>
@@ -1497,10 +1497,10 @@
 			<section class='tools'>
 				<h3>Code &amp; Tools</h3>
 				<ul>
+					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/js-css/preprocessor' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> sass preprocessor</a></li>
 					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> imgsprite</a></li>
 					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsqz/imgsqz' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> imgsqz</a></li>
-					<li><a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/rss/rssgen' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> rssgen</a></li>
-					<li><a href='https://gist.github.com/akmurray' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> My Gists</a></li>
+					<li><a href='https://gist.github.com/akmurray' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='GitHub icon'> Aaron&#39;s Gists</a></li>
 				</ul>
 			</section>
 			
@@ -1532,7 +1532,7 @@
 				</ul>
 			</section>
 
-			<div class='copyright'><span>&copy; Copyright 2012 - 2013, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron Murray</a></span></div>
+			<div class='copyright'><span>&copy; Copyright 2012 - 2013, <a href='https://twitter.com/aaronkmurray' target='_blank'>Aaron K. Murray</a></span></div>
 		</div>
 	</div>
 
