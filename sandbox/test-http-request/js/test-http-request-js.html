@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+ 
+<head>
+	<meta charset='utf-8'>
+	<title>Aaron K. Murray's Blog: Test JS</title>
+	<meta name='author' content='Aaron K. Murray, akmurray@gmail.com, @aaronkmurray'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+
+
+
+
+<!--
+
+	<script src='js/LAB.min.js?1'></script>
+
+	<script src='js/some-script-01.js'></script>
+	<script src='js/some-script-02.js'></script>
+	<script src='js/some-script-03.js'></script>
+	<script src='js/some-script-04.js'></script>
+	<script src='js/some-script-05.js'></script>
+	<script src='js/some-script-06.js'></script>
+
+	<script src='js/some-script-01-06.js'></script>
+
+-->
+
+</head>
+
+<body>
+<div id='wrapper-body'>
+	<ul id='list-links'><ul>
+</div>
+
+<script>
+(function() {
+	function getQsParameterByName(name)
+	{
+	  name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+	  var regexS = "[\\?&]" + name + "=([^&#]*)";
+	  var regex = new RegExp(regexS);
+	  var results = regex.exec(window.location.search);
+	  if(results == null)
+		return null;
+	  else
+		return decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+
+	function addScript(src, root, onLoadCallback) {
+		var s = document.createElement('script');
+		s.type = 'text/javascript';
+		s.src = src;
+		if (onLoadCallback)
+			s.onload = onLoadCallback;
+		root = root || document.getElementsByTagName('script')[0];
+		root.parentNode.insertBefore(s, root);
+	}
+	
+	var _version = getQsParameterByName('v') || Math.random();
+
+	var _useLoader = ((getQsParameterByName('ul') || "false") + " ")[0].toLowerCase(); //get first char
+	var _urlLoader = getQsParameterByName('l') || 'js/LAB.min.js?' + _version;
+
+	var root = document.getElementsByTagName('script')[0]; //for speed to reduce test variables
+
+	//modifying these requires updating test files
+	var _otherScript = getQsParameterByName('o');		//url to concat'd script that is the sum of all (_scriptCount) test files 
+	var _scriptCount = getQsParameterByName('c') || 6;	//needs to match number of test files
+
+	if (_useLoader == "1" || _useLoader == "t" || _useLoader == "y")
+	{
+		var onLoadCallback = function () {
+			for (var i=1;i<=_scriptCount;i++) {
+				var src = "js/some-script-0"+i+".js?"+_version;
+				$LAB.script(src).wait();
+			}		
+		};
+
+		addScript(_urlLoader, root, onLoadCallback);
+	} 
+	else 
+	{
+		//not using a script loader
+
+		if (_otherScript)
+		{
+			//special case - using concat'd script probably
+			addScript(_otherScript + '?' + _version, root);
+		} 
+		else 
+		{
+			//normal path...one at a time
+
+			for (var i=1;i<=_scriptCount;i++) {
+				var src = "js/some-script-0"+i+".js?"+_version;
+				addScript(src, root);
+			}
+		}
+	}
+
+
+	var linkHtml = '<ul>';
+	linkHtml += '<li><a href="?ul=false">No Loader</a></li>';
+	linkHtml += '<li><a href="?ul=true">Loader</a></li>';
+	linkHtml += '<li><a href="?o=js/some-script-01-06.js">Concat</a></li>';
+	linkHtml += '</ul>';
+	
+	document.getElementById('list-links').innerHTML = linkHtml;
+
+})();
+
+</script>
+	<footer>
+		<a href='http://www.AaronKMurray.com'>Back to AaronKMurray.com</a>
+	</footer>
+</body>
+</html>
