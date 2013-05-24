@@ -72,6 +72,9 @@ akm.blog._initDeferred = function() {
 	if (document.getElementById('logo-cube'))
 		akm.blog.intervalRefLogo = setInterval(logoRotate, 3000);
   
+	//post 29 grid
+	post29RenderOutputToElement(document.getElementById('blog-post-29-output'));
+
 
     //Google Analytics
 	var gaSrc = (akm.util.isSecure ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';

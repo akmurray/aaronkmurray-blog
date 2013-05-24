@@ -20,9 +20,11 @@
 
 	<script defer='true' type='text/javascript' src='js/XMLHttpRequest.2012.09.02.js'></script> 
 	<script defer='true' type='text/javascript' src='js/prototype-extensions.js'></script> 
+	<script defer='true' type='text/javascript' src='js/akm-math.js'></script> 
 	<script defer='true' type='text/javascript' src='js/akm-util.js'></script> 
 	<script defer='true' type='text/javascript' src='js/akm-gist.js'></script>
 	<script defer='true' type='text/javascript' src='js/akm-blog.js'></script>
+	<script defer='true' type='text/javascript' src='js/akm-blog-post-29.js'></script>
 </head>
 
 <body>
@@ -31,7 +33,7 @@
 	<div id='wrapper-site-header'>
 		<div id='wrapper-site-header-words'>
 			<h1>Aaron K. Murray's Blog</h1>
-			<h2>Purpose: Show the world how to build a complete site from index.html onward</h2>
+			<h2>Purpose: Show the world how to build a complete website starting with a single index.html page</h2>
 		</div>
 
 		<div id='wrapper-site-header-icons'>
@@ -52,6 +54,14 @@
 		</div>
 
 	</div>
+
+<!-- 
+	images for future posts:
+		/img/blog/posts/post-x-dev-tools-http-req-js-one-by-one.jpg
+		/img/blog/posts/post-x-dev-tools-http-req-js-loader.jpg
+		/img/blog/posts/post-x-dev-tools-http-req-js-concat.jpg
+-->
+
 
 	<div id='wrapper-blog-posts'>
 		
@@ -87,6 +97,80 @@
 		</article>
 		????? REMINDER for Mr. No Database: Add an entry to the Posts section of the menu on the right
 -->
+
+		<article class='blog-post' id='blog-post-29'>
+			<div class='blog-post-header'>
+				<h2>Post 29: Understanding Javascript Numbers</h2>
+				<span class='commit-link'><a href='#' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'></a></span>
+			</div>
+			<div class='blog-post-body'>
+				<p>Javascript is a great scripting language. It is simple to learn, (obviously) runs in a browser for quick development tests, and is flexible enough to allow for some powerful code to be created. That flexibility does come at a cost however. 
+				<p>One of the confusing aspects of Javascript is type coercion and what that means with respect to dealing with numbers. The problem is not that Javascript is flaky, it is that there are more rules to understand when dealing with a loosly-typed scripting language than a compiled language like C.
+				<h3>Enough horseplay, show me examples</h3>
+				<p>Let&#39;s make a simple function that takes a string and left-pads it with zeroes to a certain number of places.
+				<p><pre class='code'>
+	function zeropad(text, numPlaces) {
+		while(text.length < numplaces)
+			text = &quot;0&quot; + text;
+		return text;
+	}			</pre>
+				<p>Here is the output with various inputs:
+				<p><pre class='code'>
+	//Output that I expected
+	zeropad(&quot;foo&quot;, 5);           //returns <span style='color:green'>&quot;00foo&quot;</span>
+	zeropad(&quot;foo&quot;, 1);           //returns <span style='color:green'>&quot;foo&quot;</span>
+	zeropad(&quot;123&quot;, 7);           //returns <span style='color:green'>0000123</span>
+	zeropad(&quot;$19.99&quot;, 7);        //returns <span style='color:green'>&quot;0$19.99&quot;</span>
+
+	//Output that I might not have expected, or that is a case that I did not plan for
+	zeropad(123, 7);             //returns <span style='color:orange'>123</span>
+	zeropad(234.56, 7);          //returns <span style='color:orange'>234.56</span>
+	zeropad(false, 7);           //returns <span style='color:orange'>false</span>
+	zeropad([], 7);              //returns <span style='color:orange'>&quot;0000000&quot;</span>
+	zeropad([1], 7);             //returns <span style='color:orange'>&quot;0000001&quot;</span>
+	zeropad([1,2,3], 7);         //returns <span style='color:orange'>&quot;001,2,3&quot;</span>
+	zeropad({}, 7);              //returns <span style='color:orange'>&quot;Object {}&quot;</span>
+	zeropad(new Function(), 7);  //returns <span style='color:orange'>&quot;0function anonymous() { }&quot;</span>
+
+	//Exceptions thrown
+	zeropad(null, 7);            //returns <span style='color:red'>TypeError: Cannot read property &quot;length&quot; of null</span>
+	zeropad(undefined, 7);       //returns <span style='color:red'>TypeError: Cannot read property &quot;length&quot; of undefined</span>
+				</pre>
+				<p>This illustrates type coercion in action. You can see from the results that the <code>text</code> argument can actually be any type, and the way that variable gets handled when being added to a string is different.
+				<p>Strings behave as expected with zeroes simply being prepended. Numbers will actually coerce the &#39;0&#39; into a Number however, and result in the value of <code>text</code> never actually changing. Other types behave more-or-less as expected with the exception perhaps being arrays. Since the coercion process will call <code>.toString()</code> on the object, arrays will return a comma-delimited string when this happens, and an empty array will return an empty string, which will then have zeroes prepended to it.
+				<h3>Rounding Numbers</h3>
+				<p>There are many times when whole numbers are needed to be parsed from user input. Tax forms are a good example of this. The government does not care much about pennies on tax forms so they want everything in whole dollars. There are many ways to do this in Javascript. Given a number <code>x</code>, we could use: 
+				<ul>
+					<li><code>Math.round(x)</code> //round to closest whole number</li>
+					<li><code>Math.ceil(x)</code> //round up</li>
+					<li><code>Math.floor(x)</code> //round down</li>
+					<li><code>parseInt(x)</code> //parse an int from any type</li>
+					<li><code>x.toFixed(0)</code> //trim the fractional portion from a known number type</li>
+					<li><code>x|0</code> //bitwise OR with 0 which converts x to an int first and returns x</li>
+					<li><code>x.toString()</code> with substring math...the list goes on and on</li>
+				</ul>
+				<p>Here is a grid showing the results of these methods applied to various types and values as inputs, as well as a few custom toInt() methods I wrote for the <code>akm.math</code> lib:
+				<p id='blog-post-29-output'>
+				<p>As you can see from the grid, the results from using these different methods varies based on the data type of the input. The only (built-in) reliable method that will return an actual Number type with a useful (non-NaN) value is &quot;bitwise OR zero&quot; (x|0).
+				<p>The <code>akm.math</code> functions I solve the problem of both always wanting to return a useful Number, and also have somewhat intelligent parsing of values that include spaces, commas, and dollar signs. Unlike the results returned by parseInt, ex: <code>parseInt('123,456') === 123</code>
+				<p>Other important notes that may not be obvious:
+				<ul>
+					<li><code>typeof NaN === 'number'</code>	//NaN is a numeric type...just not a known number</li>
+					<li><code>(NaN != NaN) === true</code>	//one NaN may not be equal to another NaN...even itself. NaN is basically an unknown number</li>
+					<li><code>isNaN(parseInt(Infinity)) === true</code>	//parseInt(Infinity) returns NaN, not Infinity</li>
+					<li>Not all browsers render these results the same. Especially <code>parseInt()</code>. The default &#39;base&#39; value is changing from 8 to 10</li>
+				</ul>
+
+				<p>Working with numbers in Javascript can be frustrating at times. Understanding the data types that you will be working with and what options you have for conversion will help you make good decisions up front and reduce the headache from seemingly random input bugs months after you developed that webform (or game engine).
+			</div>
+			<div class='blog-post-footer'>
+				<span class='post-tags'>Tags: <span class='post-tag'>javascript</span>, <span class='post-tag'>math</span>, <span class='post-tag'>rounding</span></span>
+				<span class='post-timestamp'>Posted on May 24, 2013 @ 12:30PM</span>
+				<span class='post-screenshot'><a href='img/blog/screenshots/post-29.png' target='_blank' rel='nofollow'><img src='img/blog/clear.gif' class='img-post-29-thumb-100' alt='Screenshot of site after post #29'></a></span>
+			</div>
+			<div class='blog-post-guid'>db9dbec9-4f04-4357-808e-2a0a71709eaa</div>
+		</article>
+
 
 		<article class='blog-post' id='blog-post-28'>
 			<div class='blog-post-header'>
@@ -530,7 +614,8 @@
 }</pre>
 				<p>Naturally, I made a <a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'>command-line tool</a> to make sprites for me because doing them by hand is tedious and error prone. Plus it will generate the css so I don&#39;t have to write that either. I also put in the option for limiting the color bit depth to 8 bits. After testing that functionality with ImageMagick, I decided to use a custom <a href='http://msdn2.microsoft.com/en-us/library/aa479306.aspx' target='_blank' rel='nofollow'>quantization</a> alogrithm which resulted in a smaller filesize and a much better looking image.
 				<p>The next step was to update the <a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'>build script for this site</a>. Example:  
-				<pre class='code'>imgsprite.exe 
+				<pre class='code'>
+imgsprite.exe 
 	-in:../../aaronkmurray-blog/img/blog/icons/*.png 
 	-img-out:../../aaronkmurray-blog/img/blog/sprites/blog-icons-all.png 
 	-css-out:../../aaronkmurray-blog/css/sprites/blog-icons-all.css 
@@ -1474,6 +1559,7 @@
 					<li><a href='#blog-post-26'>Post 26: Reduce HTTP Requests</a></li>
 					<li><a href='#blog-post-27'>Post 27: Build-time CSS Validation</a></li>
 					<li><a href='#blog-post-28'>Post 28: CSS Preprocessing using SASS</a></li>
+					<li><a href='#blog-post-28'>Post 29: Understanding Javascript Numbers</a></li>
 				</ul>
 			</div>
 	</div>

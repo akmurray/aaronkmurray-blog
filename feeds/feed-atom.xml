@@ -4,8 +4,73 @@
     xml:base="http://aaronkmurray.com/" xmlns="http://www.w3.org/2005/Atom">
     <title
         type="text">aaronkmurray.com | Aaron Murray's Blog Feed</title>
-    <id>uuid:a214f973-2f24-47f9-b329-2efa5ec15970;id=1</id>
-    <updated>2013-03-07T23:23:26Z</updated>
+    <id>uuid:61b516ab-7dbf-4ef8-9f8f-408682d04a78;id=1</id>
+    <updated>2013-05-24T17:25:37Z</updated>
+    <entry>
+        <id>db9dbec9-4f04-4357-808e-2a0a71709eaa</id>
+        <title
+            type="text">Post 29: Understanding Javascript Numbers</title>
+        <published>2013-05-24T12:30:00-05:00</published>
+        <updated>2013-05-24T12:30:00-05:00</updated>
+        <content
+            type="text">
+				&lt;p&gt;Javascript is a great scripting language. It is simple to learn, (obviously) runs in a browser for quick development tests, and is flexible enough to allow for some powerful code to be created. That flexibility does come at a cost however. 
+				&lt;p&gt;One of the confusing aspects of Javascript is type coercion and what that means with respect to dealing with numbers. The problem is not that Javascript is flaky, it is that there are more rules to understand when dealing with a loosly-typed scripting language than a compiled language like C.
+				&lt;h3&gt;Enough horseplay, show me examples&lt;/h3&gt;
+				&lt;p&gt;Let&amp;#39;s make a simple function that takes a string and left-pads it with zeroes to a certain number of places.
+				&lt;p&gt;&lt;pre class='code'&gt;
+	function zeropad(text, numPlaces) {
+		while(text.length &lt; numplaces)="" text="&amp;quot;0&amp;quot;" +="" text;="" return="" text;="" }=""&gt;&lt;/pre&gt;
+				&lt;p&gt;Here is the output with various inputs:
+				&lt;p&gt;&lt;pre class='code'&gt;
+	//Output that I expected
+	zeropad(&amp;quot;foo&amp;quot;, 5);           //returns &lt;span style='color:green'&gt;&amp;quot;00foo&amp;quot;&lt;/span&gt;
+	zeropad(&amp;quot;foo&amp;quot;, 1);           //returns &lt;span style='color:green'&gt;&amp;quot;foo&amp;quot;&lt;/span&gt;
+	zeropad(&amp;quot;123&amp;quot;, 7);           //returns &lt;span style='color:green'&gt;0000123&lt;/span&gt;
+	zeropad(&amp;quot;$19.99&amp;quot;, 7);        //returns &lt;span style='color:green'&gt;&amp;quot;0$19.99&amp;quot;&lt;/span&gt;
+
+	//Output that I might not have expected, or that is a case that I did not plan for
+	zeropad(123, 7);             //returns &lt;span style='color:orange'&gt;123&lt;/span&gt;
+	zeropad(234.56, 7);          //returns &lt;span style='color:orange'&gt;234.56&lt;/span&gt;
+	zeropad(false, 7);           //returns &lt;span style='color:orange'&gt;false&lt;/span&gt;
+	zeropad([], 7);              //returns &lt;span style='color:orange'&gt;&amp;quot;0000000&amp;quot;&lt;/span&gt;
+	zeropad([1], 7);             //returns &lt;span style='color:orange'&gt;&amp;quot;0000001&amp;quot;&lt;/span&gt;
+	zeropad([1,2,3], 7);         //returns &lt;span style='color:orange'&gt;&amp;quot;001,2,3&amp;quot;&lt;/span&gt;
+	zeropad({}, 7);              //returns &lt;span style='color:orange'&gt;&amp;quot;Object {}&amp;quot;&lt;/span&gt;
+	zeropad(new Function(), 7);  //returns &lt;span style='color:orange'&gt;&amp;quot;0function anonymous() { }&amp;quot;&lt;/span&gt;
+
+	//Exceptions thrown
+	zeropad(null, 7);            //returns &lt;span style='color:red'&gt;TypeError: Cannot read property &amp;quot;length&amp;quot; of null&lt;/span&gt;
+	zeropad(undefined, 7);       //returns &lt;span style='color:red'&gt;TypeError: Cannot read property &amp;quot;length&amp;quot; of undefined&lt;/span&gt;
+				&lt;/pre&gt;
+				&lt;p&gt;This illustrates type coercion in action. You can see from the results that the &lt;code&gt;text&lt;/code&gt; argument can actually be any type, and the way that variable gets handled when being added to a string is different.
+				&lt;p&gt;Strings behave as expected with zeroes simply being prepended. Numbers will actually coerce the &amp;#39;0&amp;#39; into a Number however, and result in the value of &lt;code&gt;text&lt;/code&gt; never actually changing. Other types behave more-or-less as expected with the exception perhaps being arrays. Since the coercion process will call &lt;code&gt;.toString()&lt;/code&gt; on the object, arrays will return a comma-delimited string when this happens, and an empty array will return an empty string, which will then have zeroes prepended to it.
+				&lt;h3&gt;Rounding Numbers&lt;/h3&gt;
+				&lt;p&gt;There are many times when whole numbers are needed to be parsed from user input. Tax forms are a good example of this. The government does not care much about pennies on tax forms so they want everything in whole dollars. There are many ways to do this in Javascript. Given a number &lt;code&gt;x&lt;/code&gt;, we could use: 
+				&lt;ul&gt;
+					&lt;li&gt;&lt;code&gt;Math.round(x)&lt;/code&gt; //round to closest whole number&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;Math.ceil(x)&lt;/code&gt; //round up&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;Math.floor(x)&lt;/code&gt; //round down&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;parseInt(x)&lt;/code&gt; //parse an int from any type&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;x.toFixed(0)&lt;/code&gt; //trim the fractional portion from a known number type&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;x|0&lt;/code&gt; //bitwise OR with 0 which converts x to an int first and returns x&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;x.toString()&lt;/code&gt; with substring math...the list goes on and on&lt;/li&gt;
+				&lt;/ul&gt;
+				&lt;p&gt;Here is a grid showing the results of these methods applied to various types and values as inputs, as well as a few custom toInt() methods I wrote for the &lt;code&gt;akm.math&lt;/code&gt; lib:
+				&lt;p id='blog-post-29-output'&gt;
+				&lt;p&gt;As you can see from the grid, the results from using these different methods varies based on the data type of the input. The only (built-in) reliable method that will return an actual Number type with a useful (non-NaN) value is &amp;quot;bitwise OR zero&amp;quot; (x|0).
+				&lt;p&gt;The &lt;code&gt;akm.math&lt;/code&gt; functions I solve the problem of both always wanting to return a useful Number, and also have somewhat intelligent parsing of values that include spaces, commas, and dollar signs. Unlike the results returned by parseInt, ex: &lt;code&gt;parseInt('123,456') === 123&lt;/code&gt;
+				&lt;p&gt;Other important notes that may not be obvious:
+				&lt;ul&gt;
+					&lt;li&gt;&lt;code&gt;typeof NaN === 'number'&lt;/code&gt;	//NaN is a numeric type...just not a known number&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;(NaN != NaN) === true&lt;/code&gt;	//one NaN may not be equal to another NaN...even itself. NaN is basically an unknown number&lt;/li&gt;
+					&lt;li&gt;&lt;code&gt;isNaN(parseInt(Infinity)) === true&lt;/code&gt;	//parseInt(Infinity) returns NaN, not Infinity&lt;/li&gt;
+					&lt;li&gt;Not all browsers render these results the same. Especially &lt;code&gt;parseInt()&lt;/code&gt;. The default &amp;#39;base&amp;#39; value is changing from 8 to 10&lt;/li&gt;
+				&lt;/ul&gt;
+
+				&lt;p&gt;Working with numbers in Javascript can be frustrating at times. Understanding the data types that you will be working with and what options you have for conversion will help you make good decisions up front and reduce the headache from seemingly random input bugs months after you developed that webform (or game engine).
+			</content>
+    </entry>
     <entry>
         <id>5a5f7a07-b185-494f-b5cb-38dc0ec758ad</id>
         <title
@@ -124,7 +189,7 @@
 				&lt;/ul&gt;
 				&lt;p&gt;Despite a staggering 175 image requests, they are actually using quite a few &lt;a href='#blog-post-20'&gt;CSS Sprites&lt;/a&gt;. Without these efforts, they'd probably have closer to 500 http requests on the home page.
 				&lt;h3&gt;The Test: Measuring Request Overhead as Experienced by the User&lt;/h3&gt;
-				&lt;p&gt;I made 2 simple test pages to compare the effect of http requests. One page has 100 small images included individually, and the other page has 1 CSS Sprite that is used 100 times to show the same 100 images (created using my &lt;a href='#blog-post-20'&gt;imgsprite&lt;/a&gt; tool).
+				&lt;p&gt;I made 2 simple test pages to compare the effect of http requests. &lt;a href='sandbox/test-http-request/test-http-request-without-sprite.html' target='_blank' rel='nofollow'&gt;One page has 100 small images included individually&lt;/a&gt;, and &lt;a href='sandbox/test-http-request/test-http-request-with-sprite.html' target='_blank' rel='nofollow'&gt;the other page has 1 CSS Sprite&lt;/a&gt; that is used 100 times to show the same 100 images (created using my &lt;a href='#blog-post-20'&gt;imgsprite&lt;/a&gt; tool).
 				&lt;p&gt;Here are the request summaries for each test page as see in Chrome:
 				&lt;figure&gt;
 					&lt;img src='/img/blog/posts/post-26-100-images-without-sprite.png' alt='100 separate image requests'&gt;
@@ -144,7 +209,7 @@
 					&lt;img src='/img/blog/posts/post-26-image-request-timeline.png' alt='Time spent receiving images of various sizes'&gt;
 					&lt;figcaption&gt;Time spent receiving images of various sizes&lt;/figcaption&gt;
 				&lt;/figure&gt;
-				&lt;p&gt;There are a variety of image sizes being downloaded in this snapshot, but the interesting part is comparing the actual time spent downloading the data for images of various sizes. I drew arrows pointing to the largest and smallest image in the snapshot: 83KB vs 3KB. The time spend receiving the 83KB image was 30ms, whereas the time spent receiving the 3KB image was 20ms. You can partly see from that figure that the other images all took a relatively similar amount of time to download. 
+				&lt;p&gt;There are a variety of image sizes being downloaded in this snapshot, but the interesting part is comparing the actual time spent downloading the data for images of various sizes. I drew arrows pointing to the largest and smallest image in the snapshot: 83KB vs 3KB. The time spent receiving the 83KB image was 30ms, whereas the time spent receiving the 3KB image was 20ms. You can partly see from that figure that the other images all took a relatively similar amount of time to download. 
 				&lt;p&gt;This further shows the relative impact of the &lt;a href='http://stackoverflow.com/questions/3613989/what-of-traffic-is-network-overhead-on-top-of-http-s-requests' target='_blank' rel='nofollow'&gt;HTTP request overhead&lt;/a&gt; and the data delivered. Unless you are serving very large data files (high resolution images, movies, eBook PDFs, etc), a sizeable percentage of request time will be in simply getting the request prepared and negotiated between the two end computers. 
 				&lt;p&gt;For most sites, the takeaway here is that continuous effort should be given to reducing the number of requests that are made, especially as sites grow and get new features added.
 				&lt;h3&gt;And Finally, an Example&lt;/h3&gt;
@@ -410,7 +475,8 @@
 }&lt;/pre&gt;
 				&lt;p&gt;Naturally, I made a &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/tree/master/img/imgsprite/imgsprite' target='_blank'&gt;command-line tool&lt;/a&gt; to make sprites for me because doing them by hand is tedious and error prone. Plus it will generate the css so I don&amp;#39;t have to write that either. I also put in the option for limiting the color bit depth to 8 bits. After testing that functionality with ImageMagick, I decided to use a custom &lt;a href='http://msdn2.microsoft.com/en-us/library/aa479306.aspx' target='_blank' rel='nofollow'&gt;quantization&lt;/a&gt; alogrithm which resulted in a smaller filesize and a much better looking image.
 				&lt;p&gt;The next step was to update the &lt;a href='https://github.com/akmurray/aaronkmurray-blog-tools/blob/master/build/build-aaronkmurray-site.bat' target='_blank'&gt;build script for this site&lt;/a&gt;. Example:  
-				&lt;pre class='code'&gt;imgsprite.exe 
+				&lt;pre class='code'&gt;
+imgsprite.exe 
 	-in:../../aaronkmurray-blog/img/blog/icons/*.png 
 	-img-out:../../aaronkmurray-blog/img/blog/sprites/blog-icons-all.png 
 	-css-out:../../aaronkmurray-blog/css/sprites/blog-icons-all.css 
