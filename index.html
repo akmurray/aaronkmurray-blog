@@ -150,7 +150,7 @@
 					<li><code>x.toString()</code> with substring math...the list goes on and on</li>
 				</ul>
 				<p>Here is a grid showing the results of these methods applied to various types and values as inputs, as well as a few custom toInt() methods I wrote for the <code>akm.math</code> lib:
-				<p><div id='blog-post-29-output'></div>
+				<p><div id='blog-post-29-output'></div> 
 				<p>As you can see from the grid, the results from using these different methods varies based on the data type of the input. The only (built-in) reliable method that will return an actual Number type with a useful (non-NaN) value is &quot;bitwise OR zero&quot; (x|0).
 				<p>The <code>akm.math</code> functions I solve the problem of both always wanting to return a useful Number, and also have somewhat intelligent parsing of values that include spaces, commas, and dollar signs. Unlike the results returned by parseInt, ex: <code>parseInt('123,456') === 123</code>
 				<p>Other important notes that may not be obvious:
