@@ -101,7 +101,7 @@
 		<article class='blog-post' id='blog-post-29'>
 			<div class='blog-post-header'>
 				<h2>Post 29: Understanding Javascript Numbers</h2>
-				<span class='commit-link'><a href='#' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'></a></span>
+				<span class='commit-link'><a href='https://github.com/akmurray/aaronkmurray-blog/commit/170f2a329d50c8b7559f88cdafdf54da5cb99838' target='_blank'><img src='img/blog/clear.gif' class='img-icon-github-16' alt='View the code changes related to this post on github'></a></span>
 			</div>
 			<div class='blog-post-body'>
 				<p>Javascript is a great scripting language. It is simple to learn, (obviously) runs in a browser for quick development tests, and is flexible enough to allow for some powerful code to be created. That flexibility does come at a cost however. 
@@ -150,7 +150,7 @@
 					<li><code>x.toString()</code> with substring math...the list goes on and on</li>
 				</ul>
 				<p>Here is a grid showing the results of these methods applied to various types and values as inputs, as well as a few custom toInt() methods I wrote for the <code>akm.math</code> lib:
-				<p id='blog-post-29-output'>
+				<p><div id='blog-post-29-output'></div>
 				<p>As you can see from the grid, the results from using these different methods varies based on the data type of the input. The only (built-in) reliable method that will return an actual Number type with a useful (non-NaN) value is &quot;bitwise OR zero&quot; (x|0).
 				<p>The <code>akm.math</code> functions I solve the problem of both always wanting to return a useful Number, and also have somewhat intelligent parsing of values that include spaces, commas, and dollar signs. Unlike the results returned by parseInt, ex: <code>parseInt('123,456') === 123</code>
 				<p>Other important notes that may not be obvious:
