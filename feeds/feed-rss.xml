@@ -54,7 +54,7 @@
 					&lt;li&gt;&lt;code&gt;x.toString()&lt;/code&gt; with substring math...the list goes on and on&lt;/li&gt;
 				&lt;/ul&gt;
 				&lt;p&gt;Here is a grid showing the results of these methods applied to various types and values as inputs, as well as a few custom toInt() methods I wrote for the &lt;code&gt;akm.math&lt;/code&gt; lib:
-				&lt;p&gt;&lt;div id='blog-post-29-output'&gt;&lt;/div&gt;
+				&lt;p&gt;&lt;div id='blog-post-29-output'&gt;&lt;/div&gt; 
 				&lt;p&gt;As you can see from the grid, the results from using these different methods varies based on the data type of the input. The only (built-in) reliable method that will return an actual Number type with a useful (non-NaN) value is &amp;quot;bitwise OR zero&amp;quot; (x|0).
 				&lt;p&gt;The &lt;code&gt;akm.math&lt;/code&gt; functions I solve the problem of both always wanting to return a useful Number, and also have somewhat intelligent parsing of values that include spaces, commas, and dollar signs. Unlike the results returned by parseInt, ex: &lt;code&gt;parseInt('123,456') === 123&lt;/code&gt;
 				&lt;p&gt;Other important notes that may not be obvious:
